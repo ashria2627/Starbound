@@ -7,7 +7,7 @@ interface InterviewChatProps {
   dark?: boolean;
 }
 
-// Each speaker gets their own voice and colour
+
 const SPEAKERS: Record<string, { voice: CharacterVoice; bubble: string }> = {
   Orbit: { voice: 'orbit', bubble: 'bg-sky-600 border-sky-300' },
   Sojourner: { voice: 'sojourner', bubble: 'bg-amber-600 border-amber-300' },
@@ -26,7 +26,7 @@ const SPEAKERS: Record<string, { voice: CharacterVoice; bubble: string }> = {
   'Pioneer 11': { voice: 'pioneer11', bubble: 'bg-cyan-600 border-cyan-300' },
   'Voyager 1': { voice: 'voyager', bubble: 'bg-violet-600 border-violet-300' },
 };
-// {{term|shown text}} markup -> glossary word in bubble, plain text when spoken
+
 const plain = (t: string) => t.replace(/\{\{\w+\|([^}]+)\}\}/g, '$1');
 const renderText = (t: string) =>
   t.split(/(\{\{\w+\|[^}]+\}\})/g).map((part, k) => {

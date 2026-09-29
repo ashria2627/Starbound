@@ -105,9 +105,7 @@ export const Page4MarsPath: React.FC<Page4Props> = ({ autoSpeak = true }) => {
     ] as [string, string][],
   },
 
-  // =========================
-  // VIKING 1
-  // =========================
+
   {
     id: 'mars-viking-1',
     pageNumber: 16,
@@ -142,7 +140,7 @@ export const Page4MarsPath: React.FC<Page4Props> = ({ autoSpeak = true }) => {
   },
   ], []);
 
-  // FIX: Auto-voice on arrival when moving to this story
+
   useEffect(() => {
     playSceneMusic('mars');
 
@@ -160,7 +158,7 @@ export const Page4MarsPath: React.FC<Page4Props> = ({ autoSpeak = true }) => {
     speakDialogue(beat.speaker, beat.speechText, { manualTrigger: true });
   }, [beats]);
 
-  // Debounced scroll listener
+
   useEffect(() => {
     const handleScroll = () => {
       const beatElements = document.querySelectorAll('.mars-beat');
@@ -252,7 +250,7 @@ export const Page4MarsPath: React.FC<Page4Props> = ({ autoSpeak = true }) => {
       </div>
 
       <div className="relative z-10 w-full flex flex-col items-center">
-        {/* Header with Larger Font */}
+     
         <div className="pt-4 pb-12 px-4 text-center max-w-4xl mx-auto">
          
           <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black text-amber-950 mt-3 tracking-tight drop-shadow-md">
@@ -288,7 +286,7 @@ export const Page4MarsPath: React.FC<Page4Props> = ({ autoSpeak = true }) => {
                     </div>
 
                     <div className="w-full flex flex-row items-center justify-around gap-4 sm:gap-12 py-4">
-                      {/* Left: Orbit */}
+                  
                       <div className="flex flex-col items-center opacity-85 hover:opacity-100 transition-opacity">
                         <OrbitCharacter
                           mood="curious"
@@ -302,7 +300,7 @@ export const Page4MarsPath: React.FC<Page4Props> = ({ autoSpeak = true }) => {
                         <span>🏎️ ~ ~ ~ 🛰️</span>
                       </div>
 
-                      {/* Right: Sojourner Speaking */}
+                    
                       <div className="flex flex-col items-center scale-105 filter drop-shadow-[0_0_20px_rgba(249,115,22,0.5)]">
                         <SojournerIllustration
                           isSpeaking={isActive}

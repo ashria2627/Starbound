@@ -43,7 +43,7 @@ export const DiscoveryCard: React.FC<DiscoveryCardProps> = ({ discovery, onClose
               exit={{ scale: 0.9, opacity: 0, y: 20 }}
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Top row with badge, Kids/Grown-Up toggle & close button */}
+           
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <div className="flex flex-wrap items-center gap-2">
                   <span className="text-xs sm:text-sm font-black px-3 py-1 rounded-full uppercase tracking-wider bg-amber-400 text-black shadow-sm flex items-center gap-1.5 animate-pulse">
@@ -62,7 +62,7 @@ export const DiscoveryCard: React.FC<DiscoveryCardProps> = ({ discovery, onClose
                 </div>
 
                 <div className="flex items-center gap-2">
-                  {/* Quick Kids / Grown-Up switch inside Discovery Card */}
+                 
                   <div className="flex items-center bg-[#3E1306] p-0.5 rounded-xl border border-amber-300/35">
                     <button
                       type="button"
@@ -98,14 +98,14 @@ export const DiscoveryCard: React.FC<DiscoveryCardProps> = ({ discovery, onClose
                 </div>
               </div>
 
-              {/* Title */}
+             
               <div>
                 <h2 className="text-2xl sm:text-3xl font-bold font-['Fraunces'] text-[#EFE7D8]">
                   {discovery.title}
                 </h2>
               </div>
 
-              {/* Actual NASA Discovery Photo Frame */}
+             
               {currentPhoto && (
                 <div className="w-full rounded-2xl border-2 border-amber-200/40 bg-[#2B0D05] overflow-hidden flex flex-col">
                   <div className="relative w-full h-48 sm:h-60 bg-[#1B0703] flex items-center justify-center overflow-hidden">
@@ -132,7 +132,7 @@ export const DiscoveryCard: React.FC<DiscoveryCardProps> = ({ discovery, onClose
                     </span>
                   </div>
 
-                  {/* Grown-Up Photo Caption & Multi-Photo Switcher */}
+                 
                   {!isKids && (
                     <div className="p-3 bg-[#3E1306] border-t border-amber-200/20 flex flex-col gap-2">
                       <p className="text-xs sm:text-sm text-amber-100 leading-snug">
@@ -161,7 +161,7 @@ export const DiscoveryCard: React.FC<DiscoveryCardProps> = ({ discovery, onClose
                 </div>
               )}
 
-              {/* KIDS VERSION: Simple 4-5 word sentences */}
+              
               {isKids ? (
                 <div className="bg-[#4D1909]/90 border border-amber-300/40 rounded-2xl p-4">
                   <p className="text-lg sm:text-xl font-bold text-[#FFF8EB] leading-relaxed font-['Plus_Jakarta_Sans']">
@@ -169,9 +169,9 @@ export const DiscoveryCard: React.FC<DiscoveryCardProps> = ({ discovery, onClose
                   </p>
                 </div>
               ) : (
-                /* GROWN-UP VERSION: Detailed scientific discovery, difficulties faced, and actual NASA video */
+               
                 <div className="flex flex-col gap-4">
-                  {/* Scientific Context */}
+                  
                   <div className="bg-[#4D1909]/90 border border-amber-300/35 rounded-2xl p-4">
                     <div className="text-xs font-extrabold uppercase tracking-wider text-amber-300 mb-1.5 flex items-center gap-1.5">
                       <span>🔬</span>
@@ -182,7 +182,7 @@ export const DiscoveryCard: React.FC<DiscoveryCardProps> = ({ discovery, onClose
                     </p>
                   </div>
 
-                  {/* Difficulties Faced While Discovering */}
+                  
                   {discovery.difficultiesFaced && discovery.difficultiesFaced.length > 0 && (
                     <div className="bg-[#3E1306]/95 border border-orange-400/45 rounded-2xl p-4">
                       <div className="text-xs sm:text-sm font-extrabold uppercase tracking-wider text-orange-300 mb-2 flex items-center gap-1.5">
@@ -197,7 +197,7 @@ export const DiscoveryCard: React.FC<DiscoveryCardProps> = ({ discovery, onClose
                     </div>
                   )}
 
-                  {/* Actual NASA Mission Video */}
+                  
                   {discovery.videoEmbedUrl && (
                     <div className="bg-[#381105] border border-amber-300/35 rounded-2xl p-3.5 flex flex-col gap-2.5">
                       <div className="flex items-center justify-between gap-2">
@@ -230,7 +230,7 @@ export const DiscoveryCard: React.FC<DiscoveryCardProps> = ({ discovery, onClose
                 </div>
               )}
 
-              {/* 3D Model button if Sketchfab embed exists */}
+              
               {discovery.sketchfab && (
                 <button
                   onClick={() => setShow3dModal(true)}
@@ -240,7 +240,7 @@ export const DiscoveryCard: React.FC<DiscoveryCardProps> = ({ discovery, onClose
                 </button>
               )}
 
-              {/* Primary Dismiss & Continue Button */}
+             
               <button
                 onClick={onClose}
                 className="w-full py-3.5 px-5 rounded-2xl bg-gradient-to-r from-amber-500 via-amber-600 to-orange-600 hover:brightness-110 text-white font-extrabold text-base shadow-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer border border-amber-300/40"
@@ -250,7 +250,7 @@ export const DiscoveryCard: React.FC<DiscoveryCardProps> = ({ discovery, onClose
                 <span>📖</span>
               </button>
 
-              {/* Source credit */}
+             
               <div className="pt-2 border-t border-amber-200/25 flex items-center justify-between text-xs sm:text-sm text-amber-100">
                 <span>Source: {discovery.source}</span>
                 <span className="text-xs text-amber-200 font-mono">NASA JPL</span>
@@ -260,7 +260,7 @@ export const DiscoveryCard: React.FC<DiscoveryCardProps> = ({ discovery, onClose
         </motion.div>
       </AnimatePresence>
 
-      {/* 3D viewer modal */}
+     
       {show3dModal && discovery.sketchfab && (
         <SketchfabViewer
           config={discovery.sketchfab}

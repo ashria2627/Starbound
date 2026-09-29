@@ -10,10 +10,10 @@ export interface MarsCrater {
   rimHeight: number;
 }
 
-// 26 Martian impact craters of varying sizes across the exploration plains and valley trail
+
 export const MARS_CRATERS: MarsCrater[] = [
-  // Primary Mission 1-4 exploration basin craters
-  { x: 16, z: -40, radius: 14.5, depth: 2.9, rimHeight: 0.85 }, // Eagle Crater
+  
+  { x: 16, z: -40, radius: 14.5, depth: 2.9, rimHeight: 0.85 }, 
   { x: -12, z: -12, radius: 7.5, depth: 1.6, rimHeight: 0.5 },
   { x: 18, z: -18, radius: 8.5, depth: 1.8, rimHeight: 0.55 },
   { x: -25, z: -34, radius: 12.0, depth: 2.5, rimHeight: 0.75 },
@@ -29,7 +29,7 @@ export const MARS_CRATERS: MarsCrater[] = [
   { x: 0, z: -64, radius: 16.0, depth: 3.2, rimHeight: 0.95 },
   { x: -38, z: 28, radius: 12.5, depth: 2.5, rimHeight: 0.75 },
   { x: 36, z: 30, radius: 11.5, depth: 2.3, rimHeight: 0.7 },
-  // Craters along Mission 5 Perseverance Valley trail (z: 35 to 195)
+ 
   { x: -16, z: 45, radius: 10.0, depth: 2.1, rimHeight: 0.65 },
   { x: 18, z: 58, radius: 11.5, depth: 2.4, rimHeight: 0.72 },
   { x: -22, z: 76, radius: 13.5, depth: 2.8, rimHeight: 0.8 },
@@ -42,16 +42,16 @@ export const MARS_CRATERS: MarsCrater[] = [
   { x: 26, z: 192, radius: 13.0, depth: 2.7, rimHeight: 0.78 },
 ];
 
-// Procedural multi-octave height function for Mars terrain with rich impact craters
+
 export function getMarsHeight(x: number, z: number): number {
-  // Broad rolling Martian hills
+  
   const h1 = Math.sin(x * 0.04) * Math.cos(z * 0.04) * 2.2;
-  // Finer dunes & ripples
+  
   const h2 = Math.sin(x * 0.12 + 1.2) * Math.sin(z * 0.14) * 0.8;
-  // Micro rockiness
+  
   const h3 = Math.sin(x * 0.3) * Math.cos(z * 0.25) * 0.3;
 
-  // Accumulate all Martian impact craters (smooth bowl depression + raised ejecta rim)
+
   let cratersOffset = 0;
   for (let i = 0; i < MARS_CRATERS.length; i++) {
     const c = MARS_CRATERS[i];
@@ -74,22 +74,22 @@ export function getMarsHeight(x: number, z: number): number {
     }
   }
 
-  // Sunny ridge for Mission 4 near (-16, -18)
+
   const distRidge = Math.hypot(x + 16, z + 18);
   const ridge = distRidge < 16 ? Math.cos((distRidge / 16) * Math.PI * 0.5) * 3.2 : 0;
 
-  // Transverse rolling ridges along the Mission 5 trail (hiding Oppy behind ridges)
+  
   let trailRidges = 0;
   if (z > 30 && z < 165) {
     trailRidges = Math.sin((z - 30) * 0.09) * 1.8;
-    // Protective crest ridge just before Perseverance Valley (around z = 142)
+    
     const distRim = Math.abs(z - 142);
     if (distRim < 18) {
       trailRidges += Math.cos((distRim / 18) * Math.PI * 0.5) * 2.8;
     }
   }
 
-  // Perseverance Valley gentle resting bowl for Mission 5 around oppyPosition
+ 
   const distValley = Math.hypot(x - oppyPosition[0], z - oppyPosition[2]);
   const valley =
     distValley < 24 ? -Math.cos((distValley / 24) * Math.PI * 0.5) * 2.0 : 0;
@@ -97,18 +97,18 @@ export function getMarsHeight(x: number, z: number): number {
   return h1 + h2 + h3 + cratersOffset + ridge + trailRidges + valley;
 }
 
-// Generate procedural Mars dirt canvas texture (#c1440e Martian land)
+
 function createProceduralMarsTexture(): THREE.CanvasTexture {
   const canvas = document.createElement('canvas');
   canvas.width = 512;
   canvas.height = 512;
   const ctx = canvas.getContext('2d')!;
 
-  // Exact #c1440e Martian land base
+  
   ctx.fillStyle = '#c1440e';
   ctx.fillRect(0, 0, 512, 512);
 
-  // Subtle Martian soil grains balanced around #c1440e (rgb 193, 68, 14)
+  
   for (let i = 0; i < 24000; i++) {
     const x = Math.random() * 512;
     const y = Math.random() * 512;
@@ -116,16 +116,16 @@ function createProceduralMarsTexture(): THREE.CanvasTexture {
     const tone = Math.random();
     ctx.fillStyle =
       tone > 0.65
-        ? 'rgba(214, 82, 22, 0.24)' // slightly sunlit #c1440e grain
+        ? 'rgba(214, 82, 22, 0.24)' 
         : tone > 0.3
-        ? 'rgba(193, 68, 14, 0.28)' // exact #c1440e grain
-        : 'rgba(162, 52, 10, 0.26)'; // subtle shadow grain
+        ? 'rgba(193, 68, 14, 0.28)' 
+        : 'rgba(162, 52, 10, 0.26)'; 
     ctx.beginPath();
     ctx.arc(x, y, radius, 0, Math.PI * 2);
     ctx.fill();
   }
 
-  // Subtle micro-crater rings in the procedural soil texture
+
   for (let i = 0; i < 45; i++) {
     const cx = Math.random() * 512;
     const cy = Math.random() * 512;
@@ -137,7 +137,7 @@ function createProceduralMarsTexture(): THREE.CanvasTexture {
     ctx.stroke();
   }
 
-  // Subtle dune bands centered around #c1440e
+
   const grad = ctx.createLinearGradient(0, 0, 512, 512);
   grad.addColorStop(0, 'rgba(206, 76, 18, 0.14)');
   grad.addColorStop(0.5, 'rgba(176, 58, 11, 0.16)');
@@ -174,16 +174,16 @@ export const TERRAIN_ROCKS: TerrainRock[] = (() => {
     let rz: number;
 
     if (i < 130) {
-      // Central missions 1-4 region
+     
       rx = Math.sin(seed) * 70;
       rz = Math.cos(seed * 1.7) * 70;
-      // Keep immediate spawn area around (0,0) clear so rover doesn't spawn on a rock
+    
       if (Math.hypot(rx, rz) < 5.0) {
         rx += rx >= 0 ? 6.0 : -6.0;
         rz += rz >= 0 ? 6.0 : -6.0;
       }
     } else {
-      // Scattered along the Mission 5 valley trail (z from 15 to 205) avoiding the immediate track corridor
+     
       const side = i % 2 === 0 ? 1 : -1;
       rx = side * (12 + Math.abs(Math.sin(seed * 1.3)) * 38);
       rz = 15 + ((i - 130) / (ROCK_COUNT - 130)) * 190;
@@ -223,10 +223,10 @@ export const MarsTerrain: React.FC<MarsTerrainProps> = ({ lastRockHitRef }) => {
   const activeHitRef = useRef<{ index: number; elapsed: number; dirX: number; dirZ: number } | null>(null);
   const lastProcessedHitTimeRef = useRef<number>(0);
 
-  // Procedural canvas texture
+ 
   const marsTexture = useMemo(() => createProceduralMarsTexture(), []);
 
-  // Large plane geometry deformed with world-space heightmap covering all missions & Perseverance Valley
+
   const terrainGeometry = useMemo(() => {
     const size = 600;
     const segments = 260;
@@ -280,7 +280,7 @@ export const MarsTerrain: React.FC<MarsTerrainProps> = ({ lastRockHitRef }) => {
     instancedRocksRef.current.instanceMatrix.needsUpdate = true;
   }, []);
 
-  // Animate rock jolt when hit by the rover
+
   useEffect(() => {
     if (!lastRockHitRef) return;
     let animFrameId: number;
@@ -337,7 +337,7 @@ export const MarsTerrain: React.FC<MarsTerrainProps> = ({ lastRockHitRef }) => {
     return () => cancelAnimationFrame(animFrameId);
   }, [lastRockHitRef]);
 
-  // Clean up texture & geometry on unmount
+ 
   useEffect(() => {
     return () => {
       marsTexture.dispose();
@@ -349,7 +349,7 @@ export const MarsTerrain: React.FC<MarsTerrainProps> = ({ lastRockHitRef }) => {
 
   return (
     <group>
-      {/* Main Ground Mesh (#c1440e Martian terrain) */}
+     
       <mesh geometry={terrainGeometry} receiveShadow>
         <meshStandardMaterial
           map={marsTexture}
@@ -361,7 +361,7 @@ export const MarsTerrain: React.FC<MarsTerrainProps> = ({ lastRockHitRef }) => {
         />
       </mesh>
 
-      {/* Instanced Rocks */}
+     
       <instancedMesh
         ref={instancedRocksRef}
         args={[rockGeometry, rockMaterial, ROCK_COUNT]}

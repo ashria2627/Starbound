@@ -47,7 +47,7 @@ export const RoverIllustration: React.FC<RoverIllustrationProps> = ({
       title={`Click ${name} to say beep!`}
       className={`relative inline-flex flex-col items-center select-none cursor-pointer group transition-transform duration-300 hover:scale-[1.02] focus:outline-none focus-visible:ring-4 focus-visible:ring-amber-400 rounded-3xl p-2 ${className}`}
     >
-      {/* Speech Bubble */}
+   
       {speechBubble && (
         <div className={`mb-2 max-w-xs sm:max-w-sm px-4 py-2.5 bg-white/95 backdrop-blur-xs border-2 ${
           isSpeaking ? 'border-amber-400 ring-4 ring-amber-300/40 shadow-md' : 'border-amber-300'
@@ -57,7 +57,7 @@ export const RoverIllustration: React.FC<RoverIllustrationProps> = ({
         </div>
       )}
 
-      {/* Rover SVG */}
+   
       <svg
         viewBox="0 0 240 200"
         className={`${sizeClasses} overflow-visible drop-shadow-md`}
@@ -77,7 +77,7 @@ export const RoverIllustration: React.FC<RoverIllustrationProps> = ({
           </linearGradient>
         </defs>
 
-        {/* Ground shadow / Martian Dust */}
+    
         <ellipse
           cx="120"
           cy={isResting ? '180' : '185'}
@@ -87,19 +87,19 @@ export const RoverIllustration: React.FC<RoverIllustrationProps> = ({
           fillOpacity={isResting ? '0.35' : '0.2'}
         />
 
-        {/* Rocker-Bogie Legs & 6 Wheels */}
+      
         <g stroke="#475569" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
-          {/* Main bogie suspension struts */}
+        
           <path d="M 80 135 L 50 165 L 35 178" />
           <path d="M 80 135 L 90 178" />
           <path d="M 160 135 L 190 165 L 205 178" />
           <path d="M 160 135 L 150 178" />
-          {/* Rocker link */}
+    
           <path d="M 50 165 L 90 165" />
           <path d="M 150 165 L 190 165" />
         </g>
 
-        {/* 6 Wheels with treads */}
+  
         {[
           { cx: 35, cy: 178 },
           { cx: 90, cy: 178 },
@@ -110,7 +110,7 @@ export const RoverIllustration: React.FC<RoverIllustrationProps> = ({
           <g key={idx} className={bounced ? 'animate-spin' : ''} style={{ transformOrigin: `${wheel.cx}px ${wheel.cy}px` }}>
             <circle cx={wheel.cx} cy={wheel.cy} r="12" fill="#334155" stroke="#1e293b" strokeWidth="2.5" />
             <circle cx={wheel.cx} cy={wheel.cy} r="6" fill="#94a3b8" />
-            {/* Wheel treads */}
+           
             <line x1={wheel.cx - 10} y1={wheel.cy} x2={wheel.cx - 6} y2={wheel.cy} stroke="#64748b" strokeWidth="2" />
             <line x1={wheel.cx + 6} y1={wheel.cy} x2={wheel.cx + 10} y2={wheel.cy} stroke="#64748b" strokeWidth="2" />
             <line x1={wheel.cx} y1={wheel.cy - 10} x2={wheel.cx} y2={wheel.cy - 6} stroke="#64748b" strokeWidth="2" />
@@ -118,18 +118,17 @@ export const RoverIllustration: React.FC<RoverIllustrationProps> = ({
           </g>
         ))}
 
-        {/* Solar Panel Wing Deck */}
         <polygon
           points="40,135 70,122 170,122 200,135 180,145 60,145"
           fill={`url(#${name}-solar)`}
           stroke="#0f172a"
           strokeWidth="2.5"
         />
-        {/* Solar grid lines */}
+      
         <line x1="100" y1="123" x2="95" y2="145" stroke="#7dd3fc" strokeWidth="1.5" strokeOpacity="0.7" />
         <line x1="140" y1="123" x2="145" y2="145" stroke="#7dd3fc" strokeWidth="1.5" strokeOpacity="0.7" />
 
-        {/* Rover Main Body Box */}
+      
         <rect
           x="75"
           y="126"
@@ -141,7 +140,7 @@ export const RoverIllustration: React.FC<RoverIllustrationProps> = ({
           strokeWidth="2.5"
         />
 
-        {/* Name Badge on Body */}
+       
         <rect x="98" y="136" width="44" height="12" rx="3" fill="#ffffff" stroke={themeColor} strokeWidth="1.5" />
         <text
           x="120"
@@ -155,30 +154,29 @@ export const RoverIllustration: React.FC<RoverIllustrationProps> = ({
           {name.toUpperCase()}
         </text>
 
-        {/* Robotic Arm (Front) */}
+      
         <g stroke="#64748b" strokeWidth="3" strokeLinecap="round">
           <path d="M 165 142 L 185 148 L 195 160" />
           <circle cx="195" cy="160" r="4" fill="#f59e0b" stroke="#b45309" strokeWidth="1" />
         </g>
 
-        {/* Mast Stem (Pancam Mast) */}
         <line x1="110" y1="126" x2="110" y2="70" stroke="#475569" strokeWidth="4.5" strokeLinecap="round" />
-        {/* Mast wires/joints */}
+      
         <circle cx="110" cy="100" r="3" fill="#94a3b8" />
         <circle cx="110" cy="74" r="4" fill="#64748b" />
 
-        {/* High Gain Antenna dish (mini) */}
+      
         <path d="M 136 125 L 144 105" stroke="#64748b" strokeWidth="3" strokeLinecap="round" />
         <ellipse cx="144" cy="105" rx="8" ry="4" fill="#e2e8f0" stroke="#475569" strokeWidth="1.5" />
 
-        {/* Pancam Head / Face */}
+       
         <g
           className={`transition-transform duration-300 ${
             isResting ? 'rotate-[-8deg] translate-y-1' : 'hover:scale-105'
           }`}
           style={{ transformOrigin: '110px 70px' }}
         >
-          {/* Head Box */}
+         
           <rect
             x="85"
             y="48"
@@ -190,32 +188,32 @@ export const RoverIllustration: React.FC<RoverIllustrationProps> = ({
             strokeWidth="2.5"
           />
 
-          {/* Sun Visor / Cap */}
+         
           <path d="M 83 49 C 83 45, 137 45, 137 49 Z" fill={themeColor} />
 
-          {/* Friendly Eyes (Stereo Cameras) */}
+         
           {isResting ? (
-            // Soft peaceful closed eyes
+           
             <g stroke="#38bdf8" strokeWidth="2.5" strokeLinecap="round" fill="none">
               <path d="M 94 62 Q 99 66 104 62" />
               <path d="M 116 62 Q 121 66 126 62" />
             </g>
           ) : (
-            // Bright cheerful round camera eyes
+            
             <g>
-              {/* Left eye */}
+             
               <circle cx="99" cy="61" r="7" fill="#0f172a" stroke="#38bdf8" strokeWidth="1.5" />
               <circle cx="99" cy="61" r="5" fill="#38bdf8" />
               <circle cx="97" cy="59" r="2" fill="#ffffff" />
 
-              {/* Right eye */}
+           
               <circle cx="121" cy="61" r="7" fill="#0f172a" stroke="#38bdf8" strokeWidth="1.5" />
               <circle cx="121" cy="61" r="5" fill="#38bdf8" />
               <circle cx="119" cy="59" r="2" fill="#ffffff" />
             </g>
           )}
 
-          {/* Cute Smile / Sensor bar */}
+       
           <path
             d={isResting ? 'M 105 69 Q 110 71 115 69' : 'M 103 68 Q 110 73 117 68'}
             stroke={isResting ? '#94a3b8' : '#fbbf24'}
@@ -224,12 +222,12 @@ export const RoverIllustration: React.FC<RoverIllustrationProps> = ({
             fill="none"
           />
 
-          {/* Rosy Cheeks */}
+        
           <ellipse cx="91" cy="65" rx="3" ry="2" fill="#f43f5e" fillOpacity="0.6" />
           <ellipse cx="129" cy="65" rx="3" ry="2" fill="#f43f5e" fillOpacity="0.6" />
         </g>
 
-        {/* Gentle resting stardust / zzz if resting */}
+       
         {isResting && (
           <g className="animate-pulse">
             <text x="145" y="45" fill="#fef08a" fontSize="14" fontWeight="bold" fontFamily="system-ui">
@@ -245,7 +243,7 @@ export const RoverIllustration: React.FC<RoverIllustrationProps> = ({
         )}
       </svg>
 
-      {/* Name Label */}
+  
       <span className={`mt-1 text-xs font-bold px-3 py-1 rounded-full shadow-xs ${badgeColor}`}>
         {name}
       </span>

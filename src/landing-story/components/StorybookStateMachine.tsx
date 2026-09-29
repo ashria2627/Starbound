@@ -25,7 +25,7 @@ export const StorybookStateMachine: React.FC<StateMachineProps> = ({
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const lastSpokenIdRef = useRef<string | null>(null);
 
-  // Dynamic 8 chapters based on selectedDestination
+
   const chapters: ChapterItem[] = useMemo(() => {
     const commonStart: ChapterItem[] = [
       {
@@ -60,7 +60,7 @@ export const StorybookStateMachine: React.FC<StateMachineProps> = ({
     let destinationChapters: ChapterItem[] = [];
 
     if (selectedDestination === null) {
-      // No destination chosen yet — don't fabricate chapters or auto-speak text for one.
+     
       destinationChapters = [];
     } else if (selectedDestination === 'mars') {
       destinationChapters = [
@@ -177,19 +177,19 @@ export const StorybookStateMachine: React.FC<StateMachineProps> = ({
     return [...commonStart, ...destinationChapters, ...commonEnd];
   }, [selectedDestination]);
 
-  // Active Chapter Object
+
   const currentChapter = useMemo(() => {
     return chapters.find((c) => c.id === activeChapterId) || chapters[0];
   }, [chapters, activeChapterId]);
 
-  // Set up IntersectionObserver on all chapter elements
+ 
   useEffect(() => {
     const handleIntersect: IntersectionObserverCallback = (entries) => {
-      // Find the entry that has the largest intersection ratio and is intersecting
+     
       const visibleEntries = entries.filter((e) => e.isIntersecting);
       if (visibleEntries.length === 0) return;
 
-      // Pick the entry closest to viewport vertical center
+    
       let closestEntry = visibleEntries[0];
       let minDistanceToCenter = Infinity;
       const vCenter = window.innerHeight / 2;
@@ -228,7 +228,7 @@ export const StorybookStateMachine: React.FC<StateMachineProps> = ({
     return () => observer.disconnect();
   }, [chapters, activeChapterId, autoSpeak]);
 
-  // Close dropdown on click outside
+ 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
@@ -241,7 +241,7 @@ export const StorybookStateMachine: React.FC<StateMachineProps> = ({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isOpen]);
 
-  // Scroll to a specific chapter smoothly
+  
   const handleScrollToChapter = (chapterId: string) => {
     playBloop(580);
     setIsOpen(false);
@@ -259,7 +259,7 @@ export const StorybookStateMachine: React.FC<StateMachineProps> = ({
     }
   };
 
-  // Switch destination (Mars, Moon, Solar System)
+  
   const handleSwitchDestination = (dest: DestinationChoice) => {
     playPageTurn();
     onSelectDestination(dest);
@@ -276,7 +276,7 @@ export const StorybookStateMachine: React.FC<StateMachineProps> = ({
       speakDialogue('orbit', destIntro, { manualTrigger: true });
     }
 
-    // Scroll to page 4 of the new destination after DOM mount
+
     setTimeout(() => {
       const targetId = dest === 'mars' ? 'mars-p4' : dest === 'moon' ? 'moon-p4' : 'deep-space-p4';
       const el = document.getElementById(targetId) || document.getElementById('chosen-destination-story');
@@ -286,7 +286,7 @@ export const StorybookStateMachine: React.FC<StateMachineProps> = ({
     }, 250);
   };
 
-  // Truncated title for header button
+ 
   const truncatedTitle = useMemo(() => {
     if (currentChapter.title.length > 28) {
       return currentChapter.title.slice(0, 24) + '...';
@@ -296,10 +296,7 @@ export const StorybookStateMachine: React.FC<StateMachineProps> = ({
 
   return (
     <div ref={dropdownRef} className="relative z-50">
-      {/* 
-        The Collapsible Button exactly matching Image 1:
-        📖 Solar System: Pioneer & Mariner · Page 4 ⌵
-      */}
+    
       <button
         onClick={() => {
           playBloop(500);
@@ -320,13 +317,13 @@ export const StorybookStateMachine: React.FC<StateMachineProps> = ({
       
       {isOpen && (
         <div className="absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl border border-yellow-700 bg-[#fff1dc]/95 backdrop-blur-2xl shadow-2xl p-3 text-amber-900 animate-in fade-in zoom-in-95 duration-150">
-          {/* Header */}
+       
           <div className="flex items-center justify-between px-2 pt-1 pb-2 border-b border-yellow-900/50">
             <span className="text-[10px] font-mono font-bold tracking-widest text-yellow-800 uppercase">
               Storybook Chapters:
             </span>
             <div className="flex items-center gap-2">
-              {/* Auto-speak toggle */}
+              
               <button
                 onClick={(e) => {
                   e.stopPropagation();
@@ -344,7 +341,7 @@ export const StorybookStateMachine: React.FC<StateMachineProps> = ({
             </div>
           </div>
 
-          {/* Chapters List */}
+         
           <div className="mt-2 space-y-1 max-h-[58vh] overflow-y-auto pr-1">
             {chapters.map((chap) => {
               const isActive = chap.id === activeChapterId;
@@ -367,13 +364,13 @@ export const StorybookStateMachine: React.FC<StateMachineProps> = ({
             })}
           </div>
 
-          {/* Footer: Switch Destination */}
+         
           <div className="mt-3 pt-2.5 border-t border-yellow-900/60">
             <div className="text-[10px] font-mono font-bold tracking-wider text-amber-400/90 uppercase px-2 mb-1.5">
               Switch Destination:
             </div>
             <div className="grid grid-cols-3 gap-1.5 p-1 bg-black/40 rounded-xl border border-yellow-950">
-              {/* Mars */}
+         
               <button
                 onClick={() => handleSwitchDestination('mars')}
                 className={`px-2 py-1.5 rounded-lg text-xs font-mono font-bold flex items-center justify-center gap-1 transition-all cursor-pointer ${
@@ -386,7 +383,7 @@ export const StorybookStateMachine: React.FC<StateMachineProps> = ({
                 <span>Mars</span>
               </button>
 
-              {/* Moon */}
+            
               <button
                 onClick={() => handleSwitchDestination('moon')}
                 className={`px-2 py-1.5 rounded-lg text-xs font-mono font-bold flex items-center justify-center gap-1 transition-all cursor-pointer ${
@@ -399,7 +396,7 @@ export const StorybookStateMachine: React.FC<StateMachineProps> = ({
                 <span>Moon</span>
               </button>
 
-              {/* Solar System (exact purple pill as in Image 1!) */}
+              
               <button
                 onClick={() => handleSwitchDestination('deep_space')}
                 className={`px-2 py-1.5 rounded-lg text-xs font-mono font-bold flex items-center justify-center gap-1 transition-all cursor-pointer ${

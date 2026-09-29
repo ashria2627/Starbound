@@ -12,7 +12,7 @@ import { DiscoveryCard } from './ui/DiscoveryCard';
 import { DiscoveryJournal } from './ui/DiscoveryJournal';
 import { THEME_COLORS } from './config';
 
-// Loading fallback while Three.js initializes
+
 const LoadingScreen: React.FC = () => (
   <div
     className="w-full h-full flex flex-col items-center justify-center p-6 text-center select-none font-['Plus_Jakarta_Sans']"
@@ -35,11 +35,11 @@ const IDLE_TOUCH_INPUT: TouchInputState = {
   right: false,
 };
 
-// Inner Screen State Machine
+
 const StarboundGameContent: React.FC = () => {
   const { state, dispatch, currentMission } = useGame();
 
-  // Touch control inputs
+
   const [touchInput, setTouchInput] = useState<TouchInputState>(IDLE_TOUCH_INPUT);
 
   const handleTouchInput = (partial: Partial<TouchInputState>) => {
@@ -58,7 +58,7 @@ const StarboundGameContent: React.FC = () => {
       style={{ backgroundColor: THEME_COLORS.bgRust }}
     >
       <Suspense fallback={<LoadingScreen />}>
-        {/* Screen 1: Landing & Zooming */}
+       
         {(state.screen === 'landing' || state.screen === 'zooming') && (
           <LandingScreen
             isZooming={state.screen === 'zooming'}
@@ -67,14 +67,14 @@ const StarboundGameContent: React.FC = () => {
           />
         )}
 
-        {/* Real 3D Mars Surface Viewport - stays mounted during all Mars exploration screens */}
+      
         {hasLanded && (
           <div className="absolute inset-0 z-0">
             <MarsGameScene
               touchInput={state.screen === 'playing' ? touchInput : IDLE_TOUCH_INPUT}
               onNearDiscoveryChange={(targetId) => {
                 dispatch({ type: 'SET_NEAR_SCAN_TARGET', targetId });
-                // Found discoveries pop up automatically during active gameplay
+               
                 if (
                   state.screen === 'playing' &&
                   targetId &&
@@ -87,7 +87,7 @@ const StarboundGameContent: React.FC = () => {
           </div>
         )}
 
-        {/* Screen 2: Mission Intro Overlay */}
+       
         {state.screen === 'intro' && (
           <MissionIntro
             mission={currentMission}
@@ -95,20 +95,20 @@ const StarboundGameContent: React.FC = () => {
           />
         )}
 
-        {/* Screen 3: Active Mars Gameplay */}
+      
         {state.screen === 'playing' && (
           <>
-            {/* Always visible HUD */}
+           
             <Hud />
 
-            {/* Big friendly Touch Controls for tablet/phone */}
+           
             <TouchControls
               onInput={handleTouchInput}
               isStuckMission={currentMission.type === 'stuck'}
               onRock={handleRockRover}
             />
 
-            {/* Discovery Card Modal if a discovery was scanned */}
+           
             {state.activeDiscovery && (
               <DiscoveryCard
                 discovery={state.activeDiscovery}
@@ -116,7 +116,7 @@ const StarboundGameContent: React.FC = () => {
               />
             )}
 
-            {/* Field Journal Modal */}
+           
             {state.isJournalOpen && (
               <DiscoveryJournal
                 discoveredIds={state.discoveredIds}
@@ -126,14 +126,14 @@ const StarboundGameContent: React.FC = () => {
           </>
         )}
 
-        {/* Screen 4: Mission Complete Celebration */}
+       
         {state.screen === 'complete' && (
           <MissionComplete
             onNext={() => dispatch({ type: 'NEXT_MISSION' })}
           />
         )}
 
-        {/* Screen 5: Gentle Touching Finale */}
+        
         {state.screen === 'final' && (
           <FinalScreen
             onRestart={() => dispatch({ type: 'RESTART_GAME' })}

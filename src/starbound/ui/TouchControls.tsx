@@ -21,9 +21,9 @@ export const TouchControls: React.FC<TouchControlsProps> = ({
 }) => {
   return (
     <div className="pointer-events-none fixed inset-x-0 bottom-6 z-30 flex items-end justify-between px-6 md:px-12">
-      {/* Steering & Drive Cluster (Bottom-Left) */}
+     
       <div className="pointer-events-auto flex flex-col items-center gap-2 select-none">
-        {/* Forward */}
+       
         <motion.button
           whileTap={{ scale: 0.9 }}
           onTouchStart={() => {
@@ -43,9 +43,9 @@ export const TouchControls: React.FC<TouchControlsProps> = ({
           ▲
         </motion.button>
 
-        {/* Left / Reverse / Right row */}
+        
         <div className="flex items-center gap-2">
-          {/* Turn Left */}
+          
           <motion.button
             whileTap={{ scale: 0.9 }}
             onTouchStart={() => onInput({ left: true })}
@@ -59,7 +59,7 @@ export const TouchControls: React.FC<TouchControlsProps> = ({
             ◀
           </motion.button>
 
-          {/* Reverse / Rock back */}
+          
           <motion.button
             whileTap={{ scale: 0.9 }}
             onTouchStart={() => {
@@ -79,7 +79,7 @@ export const TouchControls: React.FC<TouchControlsProps> = ({
             ▼
           </motion.button>
 
-          {/* Turn Right */}
+          
           <motion.button
             whileTap={{ scale: 0.9 }}
             onTouchStart={() => onInput({ right: true })}

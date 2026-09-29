@@ -8,6 +8,7 @@ import { Page6DeepSpacePath } from './components/Page6DeepSpacePath';
 import { Page7Finale } from './components/Page7Finale';
 import { StorybookStateMachine } from './components/StorybookStateMachine';
 import { DestinationChoice } from './types';
+import { destinationFromHash, hashForDestination } from '../routes';
 import { setSoundEnabled, playBloop, playPageTurn } from './utils/sound';
 import {
   setSpeechEnabled,
@@ -27,7 +28,10 @@ export const LandingStory: React.FC<StorybookProps> = ({
   initialDestination = null,
   className = '',
 }) => {
-  const [selectedDestination, setSelectedDestination] = useState<DestinationChoice | null>(initialDestination);
+  const [selectedDestination, setSelectedDestination] = useState<DestinationChoice | null>(() => {
+    if (initialDestination != null) return initialDestination;
+    return destinationFromHash(window.location.hash);
+  });
   const [soundOn, setSoundOn] = useState<boolean>(false);
   const [autoSpeak, setAutoSpeak] = useState<boolean>(false);
   const [activeSpeaker, setActiveSpeaker] = useState<{ isSpeaking: boolean; character?: CharacterVoice }>({
@@ -35,8 +39,6 @@ export const LandingStory: React.FC<StorybookProps> = ({
   });
 
   useEffect(() => {
-    // Auto-narration and ambient/scene audio are OFF by default; manual
-    // controls (ReadAloudButton, the sound toggle below) still work.
     setAutoSpeakEnabled(false);
     setSpeechEnabled(true);
     setSoundEnabled(false);
@@ -45,6 +47,29 @@ export const LandingStory: React.FC<StorybookProps> = ({
     });
     return () => unregister();
   }, []);
+
+  useEffect(() => {
+    if (initialDestination != null) {
+      setSelectedDestination(initialDestination);
+    }
+  }, [initialDestination]);
+
+  useEffect(() => {
+    const onHashChange = () => {
+      const dest = destinationFromHash(window.location.hash);
+      if (dest) setSelectedDestination(dest);
+    };
+    window.addEventListener('hashchange', onHashChange);
+    return () => window.removeEventListener('hashchange', onHashChange);
+  }, []);
+
+  useEffect(() => {
+    if (!selectedDestination) return;
+    const hash = hashForDestination(selectedDestination);
+    if (window.location.hash !== hash) {
+      window.history.replaceState(null, '', `${window.location.pathname}${hash}`);
+    }
+  }, [selectedDestination]);
 
   const handleSoundToggle = () => {
     const next = !soundOn;

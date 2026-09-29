@@ -158,7 +158,7 @@ export const Page5MoonPath: React.FC<Page5Props> = ({ autoSpeak = true }) => {
     },
   ], []);
 
-  // FIX: Auto-voice on arrival when moving to this story
+
   useEffect(() => {
     playSceneMusic('moon');
 
@@ -176,7 +176,7 @@ export const Page5MoonPath: React.FC<Page5Props> = ({ autoSpeak = true }) => {
     speakDialogue(beat.speaker, beat.speechText, { manualTrigger: true });
   }, [beats]);
 
-  // Debounced scroll observer
+  
   useEffect(() => {
     const handleScroll = () => {
       const beatElements = document.querySelectorAll('.moon-beat');

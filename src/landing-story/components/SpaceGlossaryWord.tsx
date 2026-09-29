@@ -182,9 +182,9 @@ export const SpaceGlossaryWord: React.FC<GlossaryProps> = ({
 
   const shownText = displayText || data.term;
 
-  // Popup's approximate rendered size, used to pick whichever side of the trigger has room.
+
   const POPUP_HEIGHT = 480;
-  const POPUP_HALF_WIDTH = 192; // half of sm:w-96 (384px)
+  const POPUP_HALF_WIDTH = 192; 
 
   const toggleModal = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -239,7 +239,7 @@ export const SpaceGlossaryWord: React.FC<GlossaryProps> = ({
     };
   }, [isOpen]);
 
-  // Render Illustrated SVG for each term
+
   const renderIllustration = () => {
     switch (data.illustration) {
       case 'ionosphere':
@@ -332,7 +332,7 @@ export const SpaceGlossaryWord: React.FC<GlossaryProps> = ({
 
   return (
     <span className="relative inline-flex items-center mx-1 select-none align-baseline">
-      {/* Clickable Word Button Trigger */}
+    
       <button
         ref={triggerRef}
         type="button"
@@ -349,7 +349,7 @@ export const SpaceGlossaryWord: React.FC<GlossaryProps> = ({
         </span>
       </button>
 
-      {/* Small Illustrated Glossary Modal Popup — opens toward whichever side of the trigger has open space */}
+    
       {isOpen && (
         <div
           ref={popoverRef}
@@ -365,7 +365,7 @@ export const SpaceGlossaryWord: React.FC<GlossaryProps> = ({
               : 'right-0'
           }`}
         >
-          {/* Decorative pointer arrow, flipped/repositioned to match placement */}
+     
           <div
             className={`absolute w-4 h-4 bg-[#ffe0b8] border-amber-400 rotate-45 ${
               placement.v === 'top'

@@ -1,6 +1,8 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Navbar, AppView } from './components/Navbar';
+import { routeFromPathname, pathForView, destinationFromHash } from './routes';
 import { KidsNavbar } from './components/KidsNavbar';
 import { EntryScreen } from './components/EntryScreen';
 import { LandingStory as OppyStory } from './landing-story';
@@ -10,6 +12,7 @@ import { BotDetailPanel } from './components/BotDetailPanel';
 import { ExplorationConsole } from './components/ExplorationConsole';
 import { RoverAnatomy } from './components/RoverAnatomy';
 import { MeetMyParts } from './components/MeetMyParts';
+import {AdminModeration}from './components/AdminModeration';
 import Starbound from './starbound';
 import { FrontierId, BotMission } from './types';
 import { BOT_MISSIONS } from './data/missions';
@@ -17,8 +20,12 @@ import { AbandonedStories } from './components/AbandonedStories';
 import { Mars } from './components/Mars';
 
 export default function App() {
-  
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const [mode, setMode] = useState<'kids' | 'adult'>(() => {
+    const fromUrl = routeFromPathname(window.location.pathname);
+    if (fromUrl) return fromUrl.mode;
     try {
       const saved = localStorage.getItem('abnf_mode');
       return saved === 'adult' ? 'adult' : 'kids';
@@ -28,9 +35,16 @@ export default function App() {
   });
 
  
-  const [currentView, setCurrentView] = useState<AppView>(() =>
-    mode === 'adult' ? 'coldopen' : 'entry'
-  );
+  const [currentView, setCurrentView] = useState<AppView>(() => {
+    const fromUrl = routeFromPathname(window.location.pathname);
+    if (fromUrl) return fromUrl.view;
+    try {
+      const saved = localStorage.getItem('abnf_mode');
+      return saved === 'adult' ? 'coldopen' : 'entry';
+    } catch {
+      return 'entry';
+    }
+  });
   const [selectedFrontier, setSelectedFrontier] = useState<FrontierId | null>(null);
   const [selectedBot, setSelectedBot] = useState<BotMission | null>(null);
   const [isDetailOpen, setIsDetailOpen] = useState<boolean>(false);
@@ -42,6 +56,24 @@ export default function App() {
      
     }
   }, [mode]);
+
+  useEffect(() => {
+    const fromUrl = routeFromPathname(location.pathname);
+    if (!fromUrl) return;
+    setCurrentView((prev) => (prev === fromUrl.view ? prev : fromUrl.view));
+    setMode((prev) => (prev === fromUrl.mode ? prev : fromUrl.mode));
+  }, [location.pathname]);
+
+  const navigateToView = useCallback(
+    (view: AppView) => {
+      setCurrentView(view);
+      const path = pathForView(view);
+      if (path && location.pathname !== path) {
+        navigate(path);
+      }
+    },
+    [location.pathname, navigate]
+  );
 
   const [simulationBot, setSimulationBot] = useState<BotMission>(() => {
     return BOT_MISSIONS.find((b) => b.id === 'opportunity') || BOT_MISSIONS[0];
@@ -117,19 +149,21 @@ export default function App() {
 
   const handleLaunchSimulationForBot = (bot: BotMission) => {
     setSimulationBot(bot);
-    setCurrentView('simulation');
+    navigateToView('simulation');
     setIsDetailOpen(false);
   };
 
   const handleToggleMode = () => {
     if (mode === 'adult') {
       setMode('kids');
-      setCurrentView('oppy-story');
+      navigateToView('oppy-story');
     } else {
       setMode('adult');
-      setCurrentView('coldopen');
+      navigateToView('coldopen');
     }
   };
+
+  const kidsStoryHashDestination = destinationFromHash(location.hash);
 
   const totalBadges = BOT_MISSIONS.length;
 
@@ -149,16 +183,16 @@ export default function App() {
     >
       {!isChromeless && mode === 'kids' && (
         <KidsNavbar
-          onPlay={() => setCurrentView('kids-game')}
-          onMeetParts={() => setCurrentView('meetmyparts')}
+          onPlay={() => navigateToView('kids-game')}
+          onMeetParts={() => navigateToView('meetmyparts')}
           onGrownUp={handleToggleMode}
-          onLogoClick={() => setCurrentView('oppy-story')}
+          onLogoClick={() => navigateToView('oppy-story')}
         />
       )}
       {!isChromeless && mode === 'adult' && (
   <Navbar
     currentView={currentView}
-    onNavigate={setCurrentView}
+    onNavigate={navigateToView}
     unlockedBadgeCount={unlockedBadges.length}
     totalBadges={totalBadges}
     onSwitchToKids={handleToggleMode}
@@ -170,14 +204,14 @@ export default function App() {
           <EntryScreen
             onStart={() => {
               setMode('kids');
-              setCurrentView('oppy-story');
+              navigateToView('oppy-story');
             }}
           />
         )}
 
         {currentView === 'coldopen' && (
   <ColdOpen
-    onBegin={() => setCurrentView('abandoned-stories')}
+    onBegin={() => navigateToView('abandoned-stories')}
     onReturnToKids={handleToggleMode}
   />
 )}
@@ -186,7 +220,7 @@ export default function App() {
           <div className="relative">
             <Starbound />
             <button
-              onClick={() => setCurrentView(mode === 'adult' ? 'coldopen' : 'oppy-story')}
+              onClick={() => navigateToView(mode === 'adult' ? 'coldopen' : 'oppy-story')}
               className="fixed left-3 top-3 z-[60] rounded-full bg-[#fbe4b8] px-4 py-2 text-sm font-semibold text-[#4a2413] shadow"
             >
               ← Back
@@ -195,17 +229,21 @@ export default function App() {
         )}
 
         {currentView === 'oppy-story' && (
-          <OppyStory onComplete={() => setCurrentView('kids-home')} />
+          <OppyStory
+            initialDestination={kidsStoryHashDestination}
+            onComplete={() => setCurrentView('kids-home')}
+          />
         )}
 
         {currentView === 'celestial' && <Mars />}
 
         {currentView === 'simulation' && (
-          <ExplorationConsole onExit={() => setCurrentView('coldopen')} />
+          <ExplorationConsole onExit={() => navigateToView('coldopen')} />
         )}
 
        
 
+        {currentView === 'admin' && <AdminModeration />}
         {currentView === 'anatomy' && <RoverAnatomy />}
         {currentView === 'recovery' && <Recovery />}
         {currentView === 'meetmyparts' && <MeetMyParts />}
@@ -233,7 +271,7 @@ export default function App() {
               <span>NASA JPL & International Science Archive</span>
               <span>·</span>
               <button
-                onClick={() => setCurrentView('live-archive')}
+                onClick={() => navigateToView('live-archive')}
                 className="text-amber-400 font-semibold hover:underline cursor-pointer"
               >
                 Active Telemetry Console

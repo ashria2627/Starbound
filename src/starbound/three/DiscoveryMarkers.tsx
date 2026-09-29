@@ -47,15 +47,14 @@ export const DiscoveryMarkers: React.FC<DiscoveryMarkersProps> = ({
   const prevNearIdRef = useRef<string | null>(null);
   const fallbackRoverVecRef = useRef(new THREE.Vector3());
 
-  // Track whether Oppy is within reveal range (~60 units)
+ 
   const [isOppyRevealed, setIsOppyRevealed] = useState(false);
   const isOppyRevealedRef = useRef(false);
 
-  // Orbit hint flags for Mission 5 ("Find Oppy")
   const hasShownKeepFollowingHintRef = useRef(false);
   const hasShownSeeSomethingHintRef = useRef(false);
 
-  // Reset Mission 5 state when mission changes
+ 
   useEffect(() => {
     setIsOppyRevealed(false);
     isOppyRevealedRef.current = false;
@@ -67,7 +66,7 @@ export const DiscoveryMarkers: React.FC<DiscoveryMarkersProps> = ({
   const oppyCoords = mission.oppyPosition ?? defaultOppyPosition;
   const oppyTriggerRadius = mission.arrivalRadius ?? defaultArrivalRadius;
 
-  // Discovery target coordinates tailored to each mission (all in world space)
+  
   const discoveryTargets = useMemo(
     () => [
       {
@@ -122,7 +121,7 @@ export const DiscoveryMarkers: React.FC<DiscoveryMarkersProps> = ({
     [oppyCoords, oppyTriggerRadius]
   );
 
-  // Build the 6 winding segments of glowing rover tracks leading from startPosition to oppyPosition
+ 
   const trackSteps = useMemo<TrackStep[]>(() => {
     if (mission.type !== 'tracks') return [];
     const steps: TrackStep[] = [];
@@ -139,7 +138,7 @@ export const DiscoveryMarkers: React.FC<DiscoveryMarkersProps> = ({
 
       for (let i = 0; i < numSteps; i++) {
         const t = i / numSteps;
-        // Subtle natural curve weave within each segment
+        
         const curveOffset = Math.sin(t * Math.PI) * (segIdx % 2 === 0 ? 1.4 : -1.4);
         const perpX = Math.cos(angleY) * curveOffset;
         const perpZ = -Math.sin(angleY) * curveOffset;
@@ -170,7 +169,7 @@ export const DiscoveryMarkers: React.FC<DiscoveryMarkersProps> = ({
       ? fallbackRoverVecRef.current.set(...roverPosition)
       : fallbackRoverVecRef.current;
 
-    // Pulse beacon rings
+  
     beaconRingsRef.current.forEach((ring, idx) => {
       if (ring) {
         const s = 1 + Math.sin(t * 3 + idx) * 0.15;
@@ -178,14 +177,14 @@ export const DiscoveryMarkers: React.FC<DiscoveryMarkersProps> = ({
       }
     });
 
-    // Softly pulse the golden glow on the rover tracks
+  
     trackGlowMaterialsRef.current.forEach((mat, idx) => {
       if (mat) {
         mat.emissiveIntensity = 0.85 + Math.sin(t * 2.5 + idx * 0.6) * 0.3;
       }
     });
 
-    // 1. Check checkpoints for Mission 1
+    
     if (mission.type === 'drive' && mission.checkpoints) {
       mission.checkpoints.forEach((cp) => {
         if (!passedCheckpoints.includes(cp.id)) {
@@ -197,7 +196,7 @@ export const DiscoveryMarkers: React.FC<DiscoveryMarkersProps> = ({
       });
     }
 
-    // 2. Mission 5 ("Find Oppy"): check world-space distance to Oppy for reveal and Orbit hints
+    
     if (mission.type === 'tracks') {
       const oppyWorldY = getMarsHeight(oppyCoords[0], oppyCoords[2]);
       const oppyWorldVec = new THREE.Vector3(oppyCoords[0], oppyWorldY, oppyCoords[2]);
@@ -211,14 +210,14 @@ export const DiscoveryMarkers: React.FC<DiscoveryMarkersProps> = ({
       );
       const distFromStart = roverVec.distanceTo(startWorldVec);
 
-      // Reveal Oppy only when rover is within OPPY_REVEAL_DISTANCE (~60 units)
+      
       const shouldReveal = distToOppy <= OPPY_REVEAL_DISTANCE;
       if (shouldReveal !== isOppyRevealedRef.current) {
         isOppyRevealedRef.current = shouldReveal;
         setIsOppyRevealed(shouldReveal);
       }
 
-      // Gentle hint from Orbit while following the tracks
+     
       if (
         !hasShownKeepFollowingHintRef.current &&
         distFromStart > 22 &&
@@ -230,7 +229,7 @@ export const DiscoveryMarkers: React.FC<DiscoveryMarkersProps> = ({
         }
       }
 
-      // Gentle hint from Orbit when close to Oppy
+      
       if (
         !hasShownSeeSomethingHintRef.current &&
         distToOppy <= OPPY_REVEAL_DISTANCE &&
@@ -243,8 +242,7 @@ export const DiscoveryMarkers: React.FC<DiscoveryMarkersProps> = ({
       }
     }
 
-    // 3. Check proximity to relevant mission discovery markers in world space
-    // Require the rover to have moved at least 5 units away from spawn so a rock is never auto-found on level start
+  
     const missionStartVec = new THREE.Vector3(
       mission.startPosition[0],
       getMarsHeight(mission.startPosition[0], mission.startPosition[2]),
@@ -280,7 +278,7 @@ export const DiscoveryMarkers: React.FC<DiscoveryMarkersProps> = ({
 
   return (
     <group>
-      {/* Mission 1 glowing checkpoints */}
+     
       {mission.type === 'drive' &&
         mission.checkpoints?.map((cp, idx) => {
           const isPassed = passedCheckpoints.includes(cp.id);
@@ -288,7 +286,7 @@ export const DiscoveryMarkers: React.FC<DiscoveryMarkersProps> = ({
 
           return (
             <group key={cp.id} position={[cp.x, y, cp.z]}>
-              {/* Glowing vertical arch ring */}
+             
               <mesh
                 ref={(el) => {
                   if (el) beaconRingsRef.current[idx] = el;
@@ -304,14 +302,14 @@ export const DiscoveryMarkers: React.FC<DiscoveryMarkersProps> = ({
                 />
               </mesh>
 
-              {/* Point light in center */}
+             
               <pointLight
                 color={isPassed ? '#34D399' : '#FBBF24'}
                 intensity={2}
                 distance={8}
               />
 
-              {/* Compact label only for unpassed checkpoints */}
+             
               {!isPassed && (
                 <Html position={[0, cp.radius * 0.85, 0]} center distanceFactor={15}>
                   <div className="px-2.5 py-1 rounded-full text-xs font-bold border shadow-md whitespace-nowrap bg-amber-950/90 text-amber-200 border-amber-400/40 pointer-events-none select-none">
@@ -323,12 +321,12 @@ export const DiscoveryMarkers: React.FC<DiscoveryMarkersProps> = ({
           );
         })}
 
-      {/* Discovery Beacons */}
+      
       {discoveryTargets.map((target) => {
         const isMissionRelevant = mission.discoveryIds.includes(target.id);
         if (!isMissionRelevant) return null;
 
-        // Hide Oppy completely until the rover is within ~60 units
+       
         if (target.id === 'oppy-perseverance-valley' && !isOppyRevealed) {
           return null;
         }
@@ -338,7 +336,7 @@ export const DiscoveryMarkers: React.FC<DiscoveryMarkersProps> = ({
 
         return (
           <group key={target.id} position={[target.x, y, target.z]}>
-            {/* Ground beacon circle */}
+          
             <mesh rotation={[-Math.PI / 2, 0, 0]}>
               <ringGeometry args={[1.2, 1.8, 32]} />
               <meshBasicMaterial
@@ -349,7 +347,7 @@ export const DiscoveryMarkers: React.FC<DiscoveryMarkersProps> = ({
               />
             </mesh>
 
-            {/* Pulsing light pillar (subtle once found) */}
+           
             {!isFound && (
               <mesh position={[0, 3, 0]}>
                 <cylinderGeometry args={[0.08, 0.4, 6, 16]} />
@@ -361,7 +359,7 @@ export const DiscoveryMarkers: React.FC<DiscoveryMarkersProps> = ({
               </mesh>
             )}
 
-            {/* Target 3D Feature representation */}
+            
             {target.id === 'martian-blueberries' && (
               <group position={[0, 0.2, 0]}>
                 <mesh position={[0, 0.15, 0]} castShadow>
@@ -399,7 +397,7 @@ export const DiscoveryMarkers: React.FC<DiscoveryMarkersProps> = ({
             )}
 
             {target.id === 'oppy-perseverance-valley' && (
-              /* A resting twin model of Oppy resting gently at Perseverance Valley */
+              
               <group position={[0, 0.3, 0]} rotation={[0.08, 0.4, 0.05]}>
                 <pointLight color="#FDE047" intensity={2.5} distance={14} position={[0, 2.2, 0]} />
                 <mesh position={[0, 0.2, 0]}>
@@ -410,7 +408,7 @@ export const DiscoveryMarkers: React.FC<DiscoveryMarkersProps> = ({
                   <boxGeometry args={[1.6, 0.05, 1.7]} />
                   <meshStandardMaterial color="#2B3A42" metalness={0.7} />
                 </mesh>
-                {/* Mast resting */}
+               
                 <mesh position={[0.2, 0.6, 0.3]} rotation={[-0.2, 0, 0]}>
                   <cylinderGeometry args={[0.04, 0.04, 0.7, 8]} />
                   <meshStandardMaterial color="#A37E2C" />
@@ -418,7 +416,7 @@ export const DiscoveryMarkers: React.FC<DiscoveryMarkersProps> = ({
               </group>
             )}
 
-            {/* Compact Discovery Label Tag only when not yet found */}
+            
             {!isFound && (
               <Html position={[0, 2.6, 0]} center distanceFactor={15}>
                 <div className="px-2.5 py-1 rounded-full text-xs font-bold border shadow-md flex items-center gap-1 whitespace-nowrap bg-[#48170B]/90 text-amber-200 border-amber-400/50 pointer-events-none select-none">
@@ -431,10 +429,10 @@ export const DiscoveryMarkers: React.FC<DiscoveryMarkersProps> = ({
         );
       })}
 
-      {/* Mission 4: Giant Golden Sunbeam Charging Station on the Ridge */}
+      
       {mission.type === 'solar' && (
         <group position={[-16, getMarsHeight(-16, -18), -18]}>
-          {/* Giant vertical sunbeam pouring from the sky */}
+          
           <mesh position={[0, 22, 0]}>
             <cylinderGeometry args={[5.0, 9.5, 44, 32, 1, true]} />
             <meshBasicMaterial
@@ -446,7 +444,7 @@ export const DiscoveryMarkers: React.FC<DiscoveryMarkersProps> = ({
             />
           </mesh>
 
-          {/* Inner intense golden core beam */}
+          
           <mesh position={[0, 20, 0]}>
             <cylinderGeometry args={[2.5, 6.0, 40, 24, 1, true]} />
             <meshBasicMaterial
@@ -458,7 +456,7 @@ export const DiscoveryMarkers: React.FC<DiscoveryMarkersProps> = ({
             />
           </mesh>
 
-          {/* Golden ground recharge zone disc */}
+          
           <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.05, 0]}>
             <circleGeometry args={[9.5, 36]} />
             <meshBasicMaterial
@@ -469,7 +467,7 @@ export const DiscoveryMarkers: React.FC<DiscoveryMarkersProps> = ({
             />
           </mesh>
 
-          {/* Outer glowing pulsing ring */}
+         
           <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.08, 0]}>
             <ringGeometry args={[8.6, 9.5, 36]} />
             <meshBasicMaterial
@@ -480,7 +478,7 @@ export const DiscoveryMarkers: React.FC<DiscoveryMarkersProps> = ({
             />
           </mesh>
 
-          {/* Inner solar symbol ring */}
+          
           <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.1, 0]}>
             <ringGeometry args={[3.2, 3.8, 24]} />
             <meshBasicMaterial
@@ -491,12 +489,12 @@ export const DiscoveryMarkers: React.FC<DiscoveryMarkersProps> = ({
             />
           </mesh>
 
-          {/* Sun point light */}
+          
           <pointLight color="#FDE047" intensity={3.5} distance={24} position={[0, 3, 0]} />
         </group>
       )}
 
-      {/* Winding 6-segment rover tracks for Mission 5 (leading across the plain toward Oppy) */}
+      
       {mission.type === 'tracks' && (
         <group>
           {trackSteps.map((step, idx) => (
@@ -505,7 +503,7 @@ export const DiscoveryMarkers: React.FC<DiscoveryMarkersProps> = ({
               position={[step.x, step.y, step.z]}
               rotation={[0, step.angleY, 0]}
             >
-              {/* Left wheel glowing track imprint */}
+             
               <mesh position={[-0.85, 0, 0]} rotation={[-Math.PI / 2, 0, 0]}>
                 <planeGeometry args={[0.36, 2.5]} />
                 <meshStandardMaterial
@@ -523,7 +521,7 @@ export const DiscoveryMarkers: React.FC<DiscoveryMarkersProps> = ({
                 />
               </mesh>
 
-              {/* Right wheel glowing track imprint */}
+             
               <mesh position={[0.85, 0, 0]} rotation={[-Math.PI / 2, 0, 0]}>
                 <planeGeometry args={[0.36, 2.5]} />
                 <meshStandardMaterial
@@ -536,7 +534,7 @@ export const DiscoveryMarkers: React.FC<DiscoveryMarkersProps> = ({
                 />
               </mesh>
 
-              {/* Soft center trail shimmer strip */}
+              
               <mesh position={[0, -0.02, 0]} rotation={[-Math.PI / 2, 0, 0]}>
                 <planeGeometry args={[1.3, 2.6]} />
                 <meshBasicMaterial
@@ -547,7 +545,7 @@ export const DiscoveryMarkers: React.FC<DiscoveryMarkersProps> = ({
                 />
               </mesh>
 
-              {/* Segment bend soft lantern glow so the winding trail is easy to follow */}
+            
               {step.isWaypointMarker && (
                 <group position={[0, 0.25, 0]}>
                   <pointLight color="#FBBF24" intensity={1.8} distance={16} />

@@ -27,7 +27,7 @@ export const SojournerIllustration: React.FC<SojournerProps> = ({
       title="Sojourner · First wheeled vehicle on Mars (1997)! Tap to hear her roll!"
       className={`relative inline-flex flex-col items-center select-none cursor-pointer group transition-all duration-300 hover:scale-[1.02] focus:outline-none focus-visible:ring-4 focus-visible:ring-amber-400 rounded-3xl p-3 ${className}`}
     >
-      {/* Speech Bubble */}
+    
       {speechBubble && (
         <div
           className={`mb-3 max-w-xs sm:max-w-md px-5 py-3.5 bg-white/95 backdrop-blur-xs border-2 ${
@@ -59,19 +59,19 @@ export const SojournerIllustration: React.FC<SojournerProps> = ({
           </linearGradient>
         </defs>
 
-        {/* Mars red ground shadow */}
+       
         <ellipse cx="120" cy="180" rx="76" ry="10" fill="#c2410c" fillOpacity="0.25" />
 
-        {/* Rocker-Bogie Legs (6 Wheels) */}
+       
         <g stroke="#475569" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
-          {/* Left / Middle / Right suspension links */}
+        
           <path d="M 90 135 L 55 165" />
           <path d="M 90 135 L 90 168" />
           <path d="M 150 135 L 185 165" />
           <path d="M 150 135 L 150 168" />
         </g>
 
-        {/* 6 Cute Wheels */}
+       
         {[
           { cx: 50, cy: 168 },
           { cx: 85, cy: 172 },
@@ -81,13 +81,13 @@ export const SojournerIllustration: React.FC<SojournerProps> = ({
         ].map((w, idx) => (
           <g key={idx}>
             <circle cx={w.cx} cy={w.cy} r="13" fill="#334155" stroke="#94a3b8" strokeWidth="2.5" />
-            {/* Treads */}
+            
             <circle cx={w.cx} cy={w.cy} r="6" fill="#64748b" />
             <circle cx={w.cx} cy={w.cy} r="2.5" fill="#f59e0b" />
           </g>
         ))}
 
-        {/* Microwave-sized Golden Chassis Body */}
+       
         <rect
           x="68"
           y="105"
@@ -99,7 +99,7 @@ export const SojournerIllustration: React.FC<SojournerProps> = ({
           strokeWidth="3"
         />
 
-        {/* Flat Solar Panel Roof */}
+       
         <rect
           x="60"
           y="95"
@@ -110,30 +110,29 @@ export const SojournerIllustration: React.FC<SojournerProps> = ({
           stroke="#075985"
           strokeWidth="2"
         />
-        {/* Solar gridlines */}
+    
         <line x1="84" y1="95" x2="84" y2="109" stroke="#38bdf8" strokeWidth="1.5" />
         <line x1="108" y1="95" x2="108" y2="109" stroke="#38bdf8" strokeWidth="1.5" />
         <line x1="132" y1="95" x2="132" y2="109" stroke="#38bdf8" strokeWidth="1.5" />
         <line x1="156" y1="95" x2="156" y2="109" stroke="#38bdf8" strokeWidth="1.5" />
 
-        {/* Front Camera & Cute Eyes */}
+    
         <g>
-          {/* Sensor box */}
+       
           <rect x="86" y="112" width="68" height="28" rx="8" fill="#1e293b" />
-          {/* Big curious eyes */}
+      
           <ellipse cx="106" cy="125" rx="5.5" ry="6.5" fill="#38bdf8" />
           <ellipse cx="134" cy="125" rx="5.5" ry="6.5" fill="#38bdf8" />
           <circle cx="104" cy="123" r="2" fill="#ffffff" />
           <circle cx="132" cy="123" r="2" fill="#ffffff" />
-          {/* Happy smile */}
+       
           <path d="M 114 132 Q 120 136 126 132" stroke="#38bdf8" strokeWidth="2" strokeLinecap="round" />
         </g>
 
-        {/* APXS scientific probe arm at front */}
+       
         <path d="M 68 135 L 42 145 L 36 158" stroke="#64748b" strokeWidth="3" strokeLinecap="round" />
         <circle cx="36" cy="158" r="4" fill="#ef4444" />
 
-        {/* Antenna whip */}
         <line x1="162" y1="95" x2="175" y2="60" stroke="#78350f" strokeWidth="2" strokeLinecap="round" />
         <circle cx="175" cy="60" r="3" fill="#f59e0b" />
       </svg>

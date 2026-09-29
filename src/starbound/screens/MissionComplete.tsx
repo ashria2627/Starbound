@@ -75,7 +75,7 @@ export const MissionComplete: React.FC<MissionCompleteProps> = ({ onNext }) => {
               </span>
             </div>
 
-            {/* Distance */}
+           
             <div className="bg-[#4B1808] border border-amber-200/35 rounded-2xl p-3.5 flex flex-col items-center">
               <span className="text-xl">🧭</span>
               <span className="text-sm sm:text-base font-medium text-amber-200 mt-1">
@@ -86,7 +86,7 @@ export const MissionComplete: React.FC<MissionCompleteProps> = ({ onNext }) => {
               </span>
             </div>
 
-            {/* Gems */}
+           
             <div className="bg-[#4B1808] border border-amber-200/35 rounded-2xl p-3.5 flex flex-col items-center">
               <span className="text-xl">💎</span>
               <span className="text-sm sm:text-base font-medium text-amber-200 mt-1">Gems</span>
@@ -95,7 +95,7 @@ export const MissionComplete: React.FC<MissionCompleteProps> = ({ onNext }) => {
               </span>
             </div>
 
-            {/* Discoveries */}
+           
             <div className="bg-[#4B1808] border border-amber-200/35 rounded-2xl p-3.5 flex flex-col items-center">
               <span className="text-xl">📜</span>
               <span className="text-sm sm:text-base font-medium text-amber-200 mt-1">
@@ -107,7 +107,7 @@ export const MissionComplete: React.FC<MissionCompleteProps> = ({ onNext }) => {
             </div>
           </div>
 
-          {/* Mission Gem Prize Status Card */}
+          
           {earnedGemPrize && missionPrize ? (
             <motion.div
               initial={prefersReducedMotion ? { opacity: 0 } : { scale: 0.9, opacity: 0 }}

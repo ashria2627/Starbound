@@ -1,10 +1,6 @@
 import React, { useEffect } from 'react';
 
-/**
- * Injects Google Fonts dynamically into document head:
- * - Fraunces: for titles & brand heading
- * - Plus Jakarta Sans: for all body, buttons, cards, and HUD
- */
+
 export const FontLoader: React.FC = () => {
   useEffect(() => {
     const fontLinkId = 'starbound-google-fonts';

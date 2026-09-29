@@ -165,7 +165,7 @@ export const Page1SolarSystem: React.FC<Page1Props> = ({ autoSpeak = true }) => 
       starPositions[i * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta);  
       starPositions[i * 3 + 2] = radius * Math.cos(phi);  
   
-      // Soft warm-tinted "stars" so they read as sparkles on the bright bg
+    
       starColors[i * 3] = 0.95;  
       starColors[i * 3 + 1] = 0.75;  
       starColors[i * 3 + 2] = 0.4;  
@@ -359,7 +359,7 @@ export const Page1SolarSystem: React.FC<Page1Props> = ({ autoSpeak = true }) => 
     >  
       <div className="sticky top-0 left-0 w-full h-screen z-0 pointer-events-none">  
         <canvas ref={canvasRef} className="w-full h-full block" />  
-        {/* Dark overlay removed — bright scene background now stands on its own */}  
+        
       </div>  
   
       <div className="relative z-10 -mt-[100vh] w-full flex flex-col items-center">  

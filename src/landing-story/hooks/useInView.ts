@@ -16,8 +16,6 @@ export function useInView<T extends HTMLElement = HTMLDivElement>(
   useEffect(() => {
     const element = ref.current;
     if (!element) return;
-
-    // Fallback if IntersectionObserver is not available
     if (typeof IntersectionObserver === 'undefined') {
       setIsInView(true);
       return;

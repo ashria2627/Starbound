@@ -46,7 +46,7 @@ const StarSpecs: React.FC = () => {
     dGeo.setAttribute('position', new THREE.Float32BufferAttribute(dimCoords, 3));
     dGeo.setAttribute('color', new THREE.Float32BufferAttribute(dimColors, 3));
 
-    // 320 brighter foreground twinkling stars
+  
     const brightCoords: number[] = [];
     for (let i = 0; i < 320; i++) {
       const u = Math.random();
@@ -194,7 +194,7 @@ const OrbitRing: React.FC<{
   );
 };
 
-// The Sun with concentric pulsing halo discs
+
 const Sun: React.FC = () => {
   const innerHaloRef = useRef<THREE.Mesh>(null);
   const outerHaloRef = useRef<THREE.Mesh>(null);

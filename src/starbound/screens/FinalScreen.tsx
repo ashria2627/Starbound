@@ -29,7 +29,7 @@ export const FinalScreen: React.FC<FinalScreenProps> = ({ onRestart }) => {
   const prefersReducedMotion = useReducedMotion();
   const isKids = state.audienceMode === 'kids';
 
-  // Optional explorer name stays in memory only (never stored or sent anywhere)
+
   const [explorerName, setExplorerName] = useState<string>('');
 
   const totalMin = Math.floor(state.totalTimeSeconds / 60);
@@ -64,7 +64,7 @@ export const FinalScreen: React.FC<FinalScreenProps> = ({ onRestart }) => {
           animate={prefersReducedMotion ? { opacity: 1 } : { y: 0, opacity: 1, scale: 1 }}
           transition={{ duration: 0.4 }}
         >
-          {/* Top Quick-Action Bar (Always visible right at the top) */}
+          
           <div className="px-4 sm:px-6 py-3 bg-[#521B09]/95 border-b border-amber-300/40 rounded-t-3xl flex flex-wrap items-center justify-between gap-2 z-30">
             <span className="text-xs sm:text-sm font-extrabold uppercase tracking-wider text-amber-200 flex items-center gap-1.5">
               <span>🌟</span>
@@ -90,7 +90,7 @@ export const FinalScreen: React.FC<FinalScreenProps> = ({ onRestart }) => {
             </div>
           </div>
 
-          {/* Simple SVG/CSS Confetti (disabled when prefers-reduced-motion is active) */}
+         
           {!prefersReducedMotion && (
             <div className="pointer-events-none absolute inset-x-0 top-12 h-40 overflow-hidden z-20">
               {CONFETTI_PIECES.map((piece) => (
@@ -115,9 +115,9 @@ export const FinalScreen: React.FC<FinalScreenProps> = ({ onRestart }) => {
             </div>
           )}
 
-          {/* Card Content Area */}
+         
           <div className="p-5 sm:p-8 flex flex-col items-center text-center gap-5">
-            {/* Golden Trophy / Badge Reward Moment */}
+           
             <div className="relative flex flex-col items-center">
               <motion.div
                 initial={
@@ -143,7 +143,7 @@ export const FinalScreen: React.FC<FinalScreenProps> = ({ onRestart }) => {
                   </span>
                 </div>
 
-                {/* Sparkle accents */}
+                
                 {!prefersReducedMotion && (
                   <>
                     <motion.span
@@ -164,7 +164,7 @@ export const FinalScreen: React.FC<FinalScreenProps> = ({ onRestart }) => {
                 )}
               </motion.div>
 
-              {/* Awarded Final Tier Pill & Title */}
+              
               <div className="mt-3 flex flex-col items-center gap-1">
                 <span className="px-4 py-1 rounded-full bg-amber-400/30 border border-amber-300 text-amber-100 text-base sm:text-lg font-extrabold uppercase tracking-wider">
                   {finalTier.tierName} ({finalTier.shortLabel})
@@ -178,7 +178,7 @@ export const FinalScreen: React.FC<FinalScreenProps> = ({ onRestart }) => {
               </div>
             </div>
 
-            {/* Reward Tier Ladder */}
+           
             <div className="w-full bg-[#471708]/90 border border-amber-300/35 rounded-2xl p-4 flex flex-col gap-3 shrink-0">
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
                 {FINAL_REWARD_TIERS.map((tier) => {
@@ -218,7 +218,7 @@ export const FinalScreen: React.FC<FinalScreenProps> = ({ onRestart }) => {
               </div>
             </div>
 
-            {/* Prize Shelf: every gem prize earned during the game + the final prize */}
+           
             <div className="w-full bg-[#6A240E]/90 border border-amber-300/45 rounded-2xl p-4 sm:p-5 text-left flex flex-col gap-3 shrink-0">
               <div className="flex items-center justify-between border-b border-amber-200/25 pb-2">
                 <h2 className="text-xl sm:text-2xl font-bold font-['Fraunces'] text-amber-200 flex items-center gap-2">
@@ -232,7 +232,7 @@ export const FinalScreen: React.FC<FinalScreenProps> = ({ onRestart }) => {
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {/* Final Game Prize */}
+               
                 <div className="bg-gradient-to-r from-[#7D2B11] to-[#63210D] border-2 border-amber-300/80 rounded-xl p-3.5 flex items-start gap-3">
                   <div className="w-12 h-12 rounded-xl bg-amber-400/30 border border-amber-300 flex items-center justify-center text-2xl shrink-0">
                     {finalTier.badgeIcon}
@@ -250,7 +250,7 @@ export const FinalScreen: React.FC<FinalScreenProps> = ({ onRestart }) => {
                   </div>
                 </div>
 
-                {/* Earned Mission Gem Prizes */}
+                
                 {earnedGemPrizes.map((prize) => (
                   <div
                     key={prize.id}
@@ -292,7 +292,7 @@ export const FinalScreen: React.FC<FinalScreenProps> = ({ onRestart }) => {
               </div>
             </div>
 
-            {/* Certificate-Style Card: "Oppy Explorer" */}
+          
             <div className="w-full bg-gradient-to-b from-[#732710] to-[#4E1909] border-4 border-double border-amber-300/80 rounded-3xl p-5 sm:p-6 shadow-xl flex flex-col items-center gap-3.5 shrink-0">
               <div className="flex flex-col items-center">
                 <span className="text-xs sm:text-sm uppercase font-extrabold tracking-widest text-amber-300">
@@ -306,7 +306,7 @@ export const FinalScreen: React.FC<FinalScreenProps> = ({ onRestart }) => {
                 </span>
               </div>
 
-              {/* Optional in-memory-only Explorer Name field */}
+              
               <div className="w-full max-w-md flex flex-col sm:flex-row items-center gap-2">
                 <label
                   htmlFor="explorer-name-input"
@@ -345,7 +345,7 @@ export const FinalScreen: React.FC<FinalScreenProps> = ({ onRestart }) => {
                 )}
               </p>
 
-              {/* Certificate Stats Grid (Time, Distance, Gems, Discoveries) */}
+              
               <div className="w-full grid grid-cols-2 sm:grid-cols-4 gap-3">
                 <div className="bg-[#3E1306] border border-amber-200/35 rounded-xl p-3 flex flex-col items-center">
                   <span className="text-xl">⏱️</span>
@@ -389,7 +389,7 @@ export const FinalScreen: React.FC<FinalScreenProps> = ({ onRestart }) => {
               </div>
             </div>
 
-            {/* Touching verified history card */}
+            
             <div className="w-full bg-[#66220D]/85 border border-amber-200/35 rounded-2xl p-4 sm:p-5 text-left text-base sm:text-lg text-[#FFF8EB] leading-relaxed flex flex-col gap-2 shrink-0">
               {isKids ? (
                 <>
@@ -417,7 +417,7 @@ export const FinalScreen: React.FC<FinalScreenProps> = ({ onRestart }) => {
             </div>
           </div>
 
-          {/* Sticky Footer Action Bar */}
+         
           <div className="sticky bottom-0 z-30 rounded-b-3xl px-5 sm:px-8 py-4 bg-[#4A1808]/95 backdrop-blur-md border-t border-amber-300/45 flex flex-col sm:flex-row items-center justify-center gap-3">
             <motion.button
               whileHover={prefersReducedMotion ? undefined : { scale: 1.02 }}

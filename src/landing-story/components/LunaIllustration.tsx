@@ -27,7 +27,7 @@ export const LunaIllustration: React.FC<LunaProps> = ({
       title="Luna 1 · The probe that missed the Moon and discovered the solar wind!"
       className={`relative inline-flex flex-col items-center select-none cursor-pointer group transition-all duration-300 hover:scale-[1.02] focus:outline-none focus-visible:ring-4 focus-visible:ring-amber-400 rounded-3xl p-3 ${className}`}
     >
-      {/* Speech Bubble */}
+
       {speechBubble && (
         <div
           className={`mb-3 max-w-xs sm:max-w-md px-5 py-3.5 bg-white/95 backdrop-blur-xs border-2 ${
@@ -55,21 +55,20 @@ export const LunaIllustration: React.FC<LunaProps> = ({
           </radialGradient>
         </defs>
 
-        {/* Soft shadow */}
         <ellipse cx="120" cy="205" rx="46" ry="8" fill="#4338ca" fillOpacity="0.2" />
 
         <g className="animate-float-slow">
-          {/* Magnetometer boom sticking straight up */}
+   
           <line x1="120" y1="52" x2="120" y2="12" stroke="#6366f1" strokeWidth="3" strokeLinecap="round" />
           <circle cx="120" cy="12" r="5" fill="#a5b4fc" stroke="#4338ca" strokeWidth="2" />
 
-          {/* 4 angled antennas */}
+  
           <line x1="85" y1="65" x2="25" y2="25" stroke="#94a3b8" strokeWidth="2.5" strokeLinecap="round" />
           <line x1="155" y1="65" x2="215" y2="25" stroke="#94a3b8" strokeWidth="2.5" strokeLinecap="round" />
           <line x1="75" y1="125" x2="18" y2="175" stroke="#94a3b8" strokeWidth="2.5" strokeLinecap="round" />
           <line x1="165" y1="125" x2="222" y2="175" stroke="#94a3b8" strokeWidth="2.5" strokeLinecap="round" />
 
-          {/* Solar wind stream particles drifting past */}
+        
           <g opacity="0.6">
             <circle cx="35" cy="85" r="2.5" fill="#fde047" />
             <circle cx="55" cy="100" r="1.5" fill="#fde047" />
@@ -77,7 +76,7 @@ export const LunaIllustration: React.FC<LunaProps> = ({
             <circle cx="210" cy="115" r="2.5" fill="#fde047" />
           </g>
 
-          {/* Spherical body */}
+     
           <circle
             cx="120"
             cy="105"
@@ -87,17 +86,17 @@ export const LunaIllustration: React.FC<LunaProps> = ({
             strokeWidth="3.5"
           />
 
-          {/* Cute face */}
+  
           <g>
-            {/* Playful wink / smiling eyes */}
+        
             <circle cx="106" cy="100" r="6" fill="#1e1b4b" />
             <circle cx="104" cy="98" r="2" fill="#ffffff" />
-            {/* Winking right eye */}
+          
             <path d="M 128 100 Q 134 94 140 100" stroke="#1e1b4b" strokeWidth="3" strokeLinecap="round" fill="none" />
-            {/* Rosy cheeks */}
+        
             <ellipse cx="98" cy="110" rx="4" ry="2.5" fill="#f43f5e" fillOpacity="0.4" />
             <ellipse cx="142" cy="110" rx="4" ry="2.5" fill="#f43f5e" fillOpacity="0.4" />
-            {/* Playful tongue / smile */}
+           
             <path d="M 112 112 Q 120 122 128 112" stroke="#1e1b4b" strokeWidth="2.5" strokeLinecap="round" fill="none" />
           </g>
         </g>

@@ -10,9 +10,9 @@ export interface Mission {
   id: string;
   number: number;
   title: string;
-  goal: string; // One-line goal for kids
+  goal: string; 
   gemCount: number;
-  gemPrizeThreshold: number; // Ratio (e.g. 0.8 for 80%) or exact gem count
+  gemPrizeThreshold: number; 
   discoveryIds: string[];
   startPosition: [number, number, number];
   oppyPosition?: [number, number, number];
@@ -22,27 +22,24 @@ export interface Mission {
   hint: string;
 }
 
-// Easy-to-tune coordinates and radii for Mission 5 ("Find Oppy")
+
 export const startPosition: [number, number, number] = [0, 0, 10];
 export const oppyPosition: [number, number, number] = [0, 0, 175];
 export const arrivalRadius = 5.5;
 export const OPPY_REVEAL_DISTANCE = 60;
 
-// 6 winding track segments leading across the plain and ridges from startPosition to oppyPosition
+
 export const OPPY_TRACK_WAYPOINTS: [number, number][] = [
-  [startPosition[0], startPosition[2]], // Start: [0, 10]
-  [7, 38],                              // End of segment 1
-  [-7, 66],                             // End of segment 2
-  [8, 94],                              // End of segment 3
-  [-7, 122],                            // End of segment 4
-  [5, 148],                             // End of segment 5
-  [oppyPosition[0], oppyPosition[2]],   // End of segment 6: Oppy at [0, 175]
+  [startPosition[0], startPosition[2]], 
+  [7, 38],                              
+  [-7, 66],                             
+  [8, 94],                              
+  [-7, 122],                            
+  [5, 148],                             
+  [oppyPosition[0], oppyPosition[2]],   
 ];
 
-/**
- * Returns the number of gems needed in a mission to unlock its Gem Prize.
- * Supports both a fraction (default 0.8 = 80%) or an explicit gem count (> 1).
- */
+
 export function getRequiredGemsForPrize(mission: Mission): number {
   const threshold = mission.gemPrizeThreshold ?? 0.8;
   if (threshold <= 1) {

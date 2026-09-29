@@ -42,7 +42,7 @@ export const CameraFly: React.FC<CameraFlyProps> = ({
     const elapsed = state.clock.getElapsedTime() - startTimeRef.current;
     const progress = Math.min(1, elapsed / duration);
 
-    // Smooth cubic ease in-out
+   
     const ease =
       progress < 0.5
         ? 4 * progress * progress * progress
@@ -57,7 +57,7 @@ export const CameraFly: React.FC<CameraFlyProps> = ({
 
     if (progress >= 1 && !hasFinishedRef.current) {
       hasFinishedRef.current = true;
-      // Defer unmounting to the next event loop tick so the current R3F frame finishes rendering cleanly
+      
       setTimeout(() => {
         onComplete();
       }, 60);

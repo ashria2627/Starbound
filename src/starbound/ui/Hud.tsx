@@ -20,7 +20,7 @@ export const Hud: React.FC = () => {
     state.discoveredIds.includes(id)
   ).length;
 
-  // Gem prize progress calculation
+ 
   const requiredGemsForPrize = getRequiredGemsForPrize(currentMission);
   const gemsRemainingForPrize = Math.max(0, requiredGemsForPrize - state.gemsCollected);
   const gemPrizeProgressPct = Math.min(
@@ -32,7 +32,7 @@ export const Hud: React.FC = () => {
     ? state.earnedGemPrizeIds.includes(missionGemPrize.id)
     : state.gemsCollected >= requiredGemsForPrize;
 
-  // Auto-dismiss the Gem Prize pop-in badge after 3.5s, cleaning up timer on unmount
+ 
   useEffect(() => {
     if (!state.showGemPrizeCelebration) return;
     const timer = setTimeout(() => {
@@ -68,7 +68,7 @@ export const Hud: React.FC = () => {
     isObjectiveComplete = state.discoveredIds.includes('oppy-perseverance-valley');
   }
 
-  // Distance to Oppy for Mission 5 progress feedback
+
   const oppyCoords = currentMission.oppyPosition ?? defaultOppyPosition;
   const distToOppy = Math.max(
     0,
@@ -82,7 +82,7 @@ export const Hud: React.FC = () => {
 
   return (
     <div className="pointer-events-none fixed inset-0 z-20 flex flex-col justify-between p-3 sm:p-4 select-none font-['Plus_Jakarta_Sans']">
-      {/* Top Area */}
+     
       <motion.div
         initial={{ y: prefersReducedMotion ? 0 : -30, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -90,9 +90,9 @@ export const Hud: React.FC = () => {
         className="flex flex-col gap-2 max-w-6xl mx-auto w-full"
       >
         {isTopBarOpen ? (
-          /* Main Stats & Controls Strip (Closable Top Bar) */
+          
           <div className="pointer-events-auto bg-[#68230D]/90 backdrop-blur-md border border-amber-300/45 rounded-2xl px-3.5 py-2 shadow-xl flex flex-wrap items-center justify-between gap-2 text-[#FFF8EB]">
-            {/* Mission label */}
+            
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-amber-300 shadow-sm shadow-amber-300" />
               <span className="font-extrabold text-sm md:text-base uppercase tracking-wider text-amber-200">
@@ -104,9 +104,9 @@ export const Hud: React.FC = () => {
               </span>
             </div>
 
-            {/* Stats: Time, Distance, Gems + Prize Progress Bar, Discoveries */}
+           
             <div className="flex flex-wrap items-center gap-2.5 md:gap-3.5 text-base font-medium">
-              {/* Time passed */}
+            
               <div className="flex items-center gap-1" title="Time passed">
                 <span className="text-amber-300 text-sm">⏱️</span>
                 <span className="font-mono tabular-nums text-white font-bold text-base">
@@ -114,7 +114,7 @@ export const Hud: React.FC = () => {
                 </span>
               </div>
 
-              {/* Distance */}
+            
               <div className="flex items-center gap-1" title="Distance traveled">
                 <span className="text-amber-300 text-sm">🧭</span>
                 <span className="tabular-nums font-bold text-white text-base">
@@ -122,7 +122,7 @@ export const Hud: React.FC = () => {
                 </span>
               </div>
 
-              {/* Gems + Small Progress Bar toward Gem Prize */}
+             
               <div
                 className="flex items-center gap-2 bg-[#4A1808]/90 border border-cyan-300/45 rounded-xl px-2.5 py-1"
                 title="Martian Gems collected toward Gem Prize"
@@ -137,7 +137,7 @@ export const Hud: React.FC = () => {
                     : '- Prize unlocked! ✨'}
                 </span>
 
-                {/* Small progress bar next to gem counter */}
+             
                 <div
                   className="w-14 sm:w-18 h-2 bg-black/50 rounded-full overflow-hidden border border-cyan-300/45 p-0.5 shrink-0"
                   role="progressbar"
@@ -157,7 +157,7 @@ export const Hud: React.FC = () => {
                 </div>
               </div>
 
-              {/* Discoveries */}
+             
               <div className="hidden lg:flex items-center gap-1" title="Discoveries found">
                 <span className="text-amber-300 text-sm">📜</span>
                 <span className="font-bold text-white text-sm md:text-base">
@@ -166,9 +166,9 @@ export const Hud: React.FC = () => {
               </div>
             </div>
 
-            {/* Action buttons: Kids/Grown-Up Mode, Audio Controller (Ambient & Rover SFX), Camera Toggle, Journal, Restart, End Game, Main Menu, Close Top Bar */}
+           
             <div className="flex flex-wrap items-center gap-1.5">
-              {/* Kids vs Grown-Up Version Toggle */}
+             
               <button
                 onClick={() =>
                   dispatch({
@@ -192,7 +192,7 @@ export const Hud: React.FC = () => {
                 <span>{state.audienceMode === 'kids' ? 'Kids' : 'Grown-Up'}</span>
               </button>
 
-              {/* Ambient Space Sound Toggle */}
+           
               <button
                 onClick={() => dispatch({ type: 'TOGGLE_AMBIENT_SOUND' })}
                 className={`px-2.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center gap-1 active:scale-95 border cursor-pointer ${
@@ -212,7 +212,7 @@ export const Hud: React.FC = () => {
                 <span className="hidden sm:inline">Space</span>
               </button>
 
-              {/* Rover Driving Effects Toggle */}
+             
               <button
                 onClick={() => dispatch({ type: 'TOGGLE_ROVER_SOUND' })}
                 className={`px-2.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center gap-1 active:scale-95 border cursor-pointer ${
@@ -290,7 +290,7 @@ export const Hud: React.FC = () => {
                 <span className="hidden md:inline">Main Menu</span>
               </button>
 
-              {/* Close Top Bar Button */}
+              
               <button
                 onClick={() => setIsTopBarOpen(false)}
                 className="px-2.5 py-1.5 rounded-xl bg-[#3D1306] hover:bg-[#521B0A] border border-amber-200/35 text-amber-200 hover:text-white text-xs sm:text-sm font-extrabold transition-all flex items-center gap-1 active:scale-95 cursor-pointer"
@@ -302,7 +302,7 @@ export const Hud: React.FC = () => {
             </div>
           </div>
         ) : (
-          /* Compact Reopen Pill when Top Bar is closed */
+          
           <div className="self-end pointer-events-auto">
             <button
               onClick={() => setIsTopBarOpen(true)}
@@ -318,7 +318,7 @@ export const Hud: React.FC = () => {
           </div>
         )}
 
-        {/* Compact One-Line Mission Goal & Active Meter (hidden once objective is complete to prevent clutter) */}
+        
         {!isObjectiveComplete && (
           <div className="self-center flex flex-col items-center gap-1.5 max-w-xl w-full">
             <div className="bg-[#5C1F0C]/90 backdrop-blur-sm border border-amber-300/40 rounded-full px-4 py-1 text-sm sm:text-base text-[#FFF8EB] flex items-center gap-2 shadow-md text-center">
@@ -334,7 +334,7 @@ export const Hud: React.FC = () => {
               </span>
             </div>
 
-            {/* Mission 3: Compact Wheel Slip Bar */}
+            
             {currentMission.type === 'stuck' && !state.isFreedFromSand && (
               <div className="pointer-events-auto bg-[#68230D]/95 border border-amber-400/50 rounded-full px-4 py-1.5 shadow-md flex items-center gap-3 text-sm">
                 <span className="font-bold text-amber-200 whitespace-nowrap">
@@ -349,7 +349,7 @@ export const Hud: React.FC = () => {
               </div>
             )}
 
-            {/* Mission 4: Compact Single-Row Solar Battery Bar */}
+           
             {currentMission.type === 'solar' &&
               (() => {
                 const distToSunbeam = Math.max(
@@ -382,7 +382,7 @@ export const Hud: React.FC = () => {
           </div>
         )}
 
-        {/* Gem Prize Celebration Badge Pop-in (Compact toast) */}
+        
         <AnimatePresence>
           {state.showGemPrizeCelebration && missionGemPrize && (
             <motion.div
@@ -455,9 +455,8 @@ export const Hud: React.FC = () => {
         </AnimatePresence>
       </motion.div>
 
-      {/* Bottom Area: Orbit Helper Toast (bottom-right) & Single Finish Mission Button (bottom-center) */}
       <div className="flex flex-col items-center gap-2 w-full">
-        {/* Orbit Helper Robot Hint Bubble (compact, auto-dismissing, tucked out of the center view) */}
+       
         <AnimatePresence>
           {state.showOrbitHint && !state.showGemPrizeCelebration && !isObjectiveComplete && (
             <motion.div
@@ -481,7 +480,7 @@ export const Hud: React.FC = () => {
           )}
         </AnimatePresence>
 
-        {/* Single Medium-sized Finish Mission Button when objective is complete */}
+      
         {isObjectiveComplete && (
           <motion.div
             initial={prefersReducedMotion ? { opacity: 0 } : { scale: 0.92, y: 10, opacity: 0 }}
@@ -507,7 +506,7 @@ export const Hud: React.FC = () => {
         )}
       </div>
 
-      {/* Subtle FPV Viewfinder Corner Brackets */}
+    
       {state.cameraMode === 'fpv' && (
         <div className="pointer-events-none absolute inset-0 z-0 flex flex-col justify-between p-3 sm:p-5 opacity-40">
           <div className="flex justify-between items-start">

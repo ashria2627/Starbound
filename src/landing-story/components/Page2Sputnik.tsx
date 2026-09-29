@@ -13,8 +13,7 @@ export const Page2Sputnik: React.FC<Page2Props> = ({ autoSpeak = true }) => {
   const [activeBeat, setActiveBeat] = useState(0);
   const scrollTimeoutRef = useRef<number | null>(null);
 
-  // NOTE: the speaker key stays 'sputnik' so the existing voice/sound mapping keeps working.
-  // Only the displayed names and the content are Pioneer 1.
+
   const dialogueBeats = [
     {
       pageNumber: 5,
@@ -33,7 +32,7 @@ export const Page2Sputnik: React.FC<Page2Props> = ({ autoSpeak = true }) => {
     },
     {
       pageNumber: 6,
-      layout: 'both', // BOTH Orbit and Pioneer 1 together on screen!
+      layout: 'both', 
       speaker: 'orbit' as const,
       speakerName: 'Orbit',
       isConversation: true,
@@ -48,7 +47,7 @@ export const Page2Sputnik: React.FC<Page2Props> = ({ autoSpeak = true }) => {
     },
     {
       pageNumber: 7,
-      layout: 'both', // BOTH Orbit and Pioneer 1 together on screen! Pioneer 1 speaking!
+      layout: 'both', 
       speaker: 'sputnik' as const,
       speakerName: 'Pioneer 1',
       isConversation: true,
@@ -63,7 +62,7 @@ export const Page2Sputnik: React.FC<Page2Props> = ({ autoSpeak = true }) => {
     },
     {
       pageNumber: 8,
-      layout: 'center', // Centered together in the middle!
+      layout: 'center', 
       speaker: 'sputnik' as const,
       speakerName: 'Pioneer 1 & Orbit',
       isConversation: true,
@@ -78,7 +77,7 @@ export const Page2Sputnik: React.FC<Page2Props> = ({ autoSpeak = true }) => {
     },
     {
       pageNumber: 9,
-      layout: 'center', // Bridge into the abandoned-object chapters
+      layout: 'center', 
       speaker: 'orbit' as const,
       speakerName: 'Orbit',
       isConversation: false,
@@ -102,7 +101,7 @@ export const Page2Sputnik: React.FC<Page2Props> = ({ autoSpeak = true }) => {
     speakDialogue(beat.speaker, beat.speechText, { manualTrigger: true });
   }, [dialogueBeats]);
 
-  // Debounced scroll observer
+  
   useEffect(() => {
     const handleScroll = () => {
       const beatElements = document.querySelectorAll('.sputnik-beat');
@@ -205,7 +204,7 @@ export const Page2Sputnik: React.FC<Page2Props> = ({ autoSpeak = true }) => {
                     </div>
 
                     <div className="w-full flex flex-row items-center justify-around gap-4 sm:gap-12 py-4">
-                      {/* Left: Orbit */}
+                     
                       <div className={`flex flex-col items-center transition-all duration-300 ${!isSputnikTalking ? 'scale-105 filter drop-shadow-[0_0_20px_rgba(56,189,248,0.5)]' : 'scale-90 opacity-75'}`}>
                         <OrbitCharacter
                           mood="curious"
@@ -224,7 +223,7 @@ export const Page2Sputnik: React.FC<Page2Props> = ({ autoSpeak = true }) => {
                         <span className="text-[11px]">Radio Waves</span>
                       </div>
 
-                      {/* Right: Pioneer 1 */}
+                   
                       <div className={`flex flex-col items-center transition-all duration-300 ${isSputnikTalking ? 'scale-105 filter drop-shadow-[0_0_20px_rgba(245,158,11,0.5)]' : 'scale-90 opacity-75'}`}>
                         <SputnikIllustration
                           isSpeaking={isActive && isSputnikTalking}

@@ -27,7 +27,7 @@ export const FirstSpacecraftIllustration: React.FC<FirstSpacecraftProps> = ({
       title="Click me to wave back!"
       className={`relative inline-flex flex-col items-center select-none cursor-pointer group transition-transform duration-300 hover:scale-105 active:scale-95 focus:outline-none focus-visible:ring-4 focus-visible:ring-amber-400 rounded-3xl p-3 ${className}`}
     >
-      {/* Speech bubble */}
+
       <div className="mb-3 px-4 py-2 bg-white/95 backdrop-blur-xs border-2 border-amber-300 rounded-2xl shadow-md text-amber-950 font-bold text-sm sm:text-base animate-float-slow text-center">
         <span>"Beep-beep! Hi friend! I am Explorer 1!"</span>
         <div className="absolute -bottom-2.5 left-1/2 -translate-x-1/2 w-0 h-0 border-x-6 border-x-transparent border-t-6 border-t-amber-300" />
@@ -55,7 +55,7 @@ export const FirstSpacecraftIllustration: React.FC<FirstSpacecraftProps> = ({
           </linearGradient>
         </defs>
 
-        {/* Orbit starlight sparkles */}
+     
         <g className="animate-pulse">
           <circle cx="28" cy="45" r="3" fill="#fde047" />
           <circle cx="190" cy="35" r="4" fill="#fde047" />
@@ -63,12 +63,11 @@ export const FirstSpacecraftIllustration: React.FC<FirstSpacecraftProps> = ({
           <circle cx="195" cy="165" r="3.5" fill="#fde047" />
         </g>
 
-        {/* Soft shadow */}
+        
         <ellipse cx="110" cy="205" rx="45" ry="8" fill="#d97706" fillOpacity="0.2" />
 
-        {/* Main Sleek Pencil Rocket Body (Explorer 1 iconic shape) */}
         <g className="animate-float-slow">
-          {/* Long slender cylinder body */}
+    
           <rect
             x="88"
             y="65"
@@ -80,7 +79,7 @@ export const FirstSpacecraftIllustration: React.FC<FirstSpacecraftProps> = ({
             strokeWidth="3"
           />
 
-          {/* Red Nose Cone Tip */}
+       
           <path
             d="M 88 65 Q 110 20 132 65 Z"
             fill="url(#noseCone)"
@@ -88,15 +87,15 @@ export const FirstSpacecraftIllustration: React.FC<FirstSpacecraftProps> = ({
             strokeWidth="2.5"
           />
 
-          {/* Cute Friendly Cartoon Face on the Upper Rocket Body */}
+        
           <g>
-            {/* Friendly Round Eyes */}
+        
             <circle cx="102" cy="85" r="6" fill="#1e293b" />
             <circle cx="118" cy="85" r="6" fill="#1e293b" />
             <circle cx="100" cy="83" r="2.5" fill="#ffffff" />
             <circle cx="116" cy="83" r="2.5" fill="#ffffff" />
 
-            {/* Happy Smile */}
+        
             <path
               d="M 104 94 Q 110 99 116 94"
               stroke="#1e293b"
@@ -105,48 +104,47 @@ export const FirstSpacecraftIllustration: React.FC<FirstSpacecraftProps> = ({
               fill="none"
             />
 
-            {/* Rosy Cheeks */}
+         
             <ellipse cx="96" cy="90" rx="3.5" ry="2" fill="#f87171" fillOpacity="0.8" />
             <ellipse cx="124" cy="90" rx="3.5" ry="2" fill="#f87171" fillOpacity="0.8" />
           </g>
 
-          {/* Iconic Stripes (American / NASA Explorer 1 bands) */}
+    
           <rect x="88" y="104" width="44" height="12" fill="url(#stripes)" />
           <rect x="88" y="122" width="44" height="12" fill="#1e293b" />
           <rect x="88" y="140" width="44" height="12" fill="url(#stripes)" />
 
-          {/* Tiny Science Sensor Needle on Tip */}
+      
           <line x1="110" y1="20" x2="110" y2="6" stroke="#94a3b8" strokeWidth="2.5" strokeLinecap="round" />
           <circle cx="110" cy="6" r="3" fill="#facc15" className="animate-ping" />
           <circle cx="110" cy="6" r="2.5" fill="#f59e0b" />
 
-          {/* Whip Antennas extending like playful whiskers */}
           <path d="M 88 128 L 52 145" stroke="#64748b" strokeWidth="2.5" strokeLinecap="round" />
           <circle cx="52" cy="145" r="3" fill="#cbd5e1" />
 
           <path d="M 132 128 L 168 145" stroke="#64748b" strokeWidth="2.5" strokeLinecap="round" />
           <circle cx="168" cy="145" r="3" fill="#cbd5e1" />
 
-          {/* Cute Waving Arm Glove on Right Side */}
+       
           <g
             className={`transition-transform duration-300 ${
               waving ? 'animate-wave-arm' : 'origin-bottom-left rotate-[12deg]'
             }`}
             style={{ transformOrigin: '132px 105px' }}
           >
-            {/* White astronaut arm */}
+         
             <path
               d="M 132 105 Q 155 100 165 88"
               stroke="#f8fafc"
               strokeWidth="6"
               strokeLinecap="round"
             />
-            {/* White astronaut mitten glove */}
+      
             <circle cx="165" cy="88" r="7" fill="#ffffff" stroke="#94a3b8" strokeWidth="1.5" />
             <path d="M 160 84 Q 165 78 170 84" stroke="#94a3b8" strokeWidth="1.5" fill="none" />
           </g>
 
-          {/* Small Left Astronaut Hand resting on hip */}
+   
           <path
             d="M 88 105 Q 75 110 78 120"
             stroke="#f8fafc"
@@ -155,10 +153,10 @@ export const FirstSpacecraftIllustration: React.FC<FirstSpacecraftProps> = ({
           />
           <circle cx="78" cy="120" r="5" fill="#ffffff" stroke="#94a3b8" strokeWidth="1" />
 
-          {/* Rocket nozzle base */}
+   
           <polygon points="94,170 126,170 122,180 98,180" fill="#475569" />
 
-          {/* Gentle Rocket Thruster Flame (Cartoonish soft glow) */}
+       
           <g className="animate-pulse">
             <path
               d="M 100 180 Q 110 202 120 180 Z"

@@ -1,8 +1,3 @@
-/**
- * Kid-friendly Web Audio sound and procedural ambient music engine.
- * Synthesizes scene-specific ambient music and sound effects natively.
- * Runs completely in-browser with zero external asset dependencies.
- */
 
 export type StoryScene =
   | 'space'
@@ -16,10 +11,9 @@ export type StoryScene =
   | 'finale';
 
 let audioCtx: AudioContext | null = null;
-let soundEnabled = false; // Auto/ambient audio OFF by default; user must opt in
+let soundEnabled = false; 
 let currentScene: StoryScene = 'space';
 
-// Track active ambient nodes so we can smoothly fade them
 interface AmbientTrackState {
   oscillators: OscillatorNode[];
   gainNodes: GainNode[];
@@ -62,7 +56,7 @@ export const getAudioContext = (): AudioContext | null => {
   return audioCtx;
 };
 
-// Global click/touch/scroll handler to resume AudioContext if suspended
+
 if (typeof window !== 'undefined') {
   const resumeAudio = () => {
     if (audioCtx && audioCtx.state === 'suspended') {
@@ -74,9 +68,7 @@ if (typeof window !== 'undefined') {
   window.addEventListener('touchstart', resumeAudio, { once: false, passive: true });
 }
 
-/**
- * Stop any ongoing ambient music track with smooth fade-out.
- */
+
 export const stopAmbientMusic = (fadeDuration = 0.8) => {
   if (ambientState.intervalId) {
     window.clearInterval(ambientState.intervalId);
@@ -94,7 +86,7 @@ export const stopAmbientMusic = (fadeDuration = 0.8) => {
       ambientState.masterGain.gain.setValueAtTime(ambientState.masterGain.gain.value, currTime);
       ambientState.masterGain.gain.linearRampToValueAtTime(0.0001, currTime + fadeDuration);
     } catch {
-      // Ignore
+    
     }
   }
 
@@ -107,7 +99,7 @@ export const stopAmbientMusic = (fadeDuration = 0.8) => {
         osc.stop();
         osc.disconnect();
       } catch {
-        // Ignore
+   
       }
     });
     if (prevNoise) {
@@ -115,7 +107,7 @@ export const stopAmbientMusic = (fadeDuration = 0.8) => {
         prevNoise.stop();
         prevNoise.disconnect();
       } catch {
-        // Ignore
+    
       }
     }
   }, (fadeDuration + 0.1) * 1000);
@@ -126,9 +118,7 @@ export const stopAmbientMusic = (fadeDuration = 0.8) => {
   ambientState.masterGain = null;
 };
 
-/**
- * Creates subtle filtered noise buffer for atmospheric wind (Mars) or cosmic static (Deep Space / Moon)
- */
+
 const createNoiseBuffer = (ctx: AudioContext, seconds = 3): AudioBuffer => {
   const bufferSize = ctx.sampleRate * seconds;
   const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
@@ -136,16 +126,14 @@ const createNoiseBuffer = (ctx: AudioContext, seconds = 3): AudioBuffer => {
   let lastOut = 0.0;
   for (let i = 0; i < bufferSize; i++) {
     const white = Math.random() * 2 - 1;
-    // Pink noise filtering
+    
     lastOut = (lastOut * 0.95) + (white * 0.05);
     data[i] = lastOut * 1.5;
   }
   return buffer;
 };
 
-/**
- * Plays a soft musical bell / chime note in harmony
- */
+
 const playHarmonicNote = (ctx: AudioContext, freq: number, delaySeconds = 0, volume = 0.04) => {
   if (!soundEnabled) return;
   try {
@@ -166,13 +154,11 @@ const playHarmonicNote = (ctx: AudioContext, freq: number, delaySeconds = 0, vol
     osc.start(startTime);
     osc.stop(startTime + 1.5);
   } catch {
-    // Ignore
+   
   }
 };
 
-/**
- * Switch ambient background music smoothly to fit the specific storybook scene.
- */
+
 export const playSceneMusic = (scene: StoryScene) => {
   currentScene = scene;
   if (!soundEnabled) return;
@@ -180,7 +166,7 @@ export const playSceneMusic = (scene: StoryScene) => {
   const ctx = getAudioContext();
   if (!ctx) return;
 
-  // Stop previous track smoothly
+  
   stopAmbientMusic(0.8);
 
   const masterGain = ctx.createGain();
@@ -188,12 +174,11 @@ export const playSceneMusic = (scene: StoryScene) => {
   masterGain.connect(ctx.destination);
   ambientState.masterGain = masterGain;
 
-  // Fade in master volume gently
+
   const targetVolume = scene === 'opportunity_climax' ? 0.035 : 0.08;
   masterGain.gain.linearRampToValueAtTime(targetVolume, ctx.currentTime + 1.4);
 
   if (scene === 'space') {
-    // Soft ethereal celestial pads with gentle 5th intervals (C3, G3, D4, G4)
     const freqs = [130.81, 196.00, 293.66, 392.00];
     freqs.forEach((freq, idx) => {
       const osc = ctx.createOscillator();
@@ -217,7 +202,7 @@ export const playSceneMusic = (scene: StoryScene) => {
       ambientState.gainNodes.push(gain);
     });
 
-    // Gentle celestial melody notes every 4.8s
+
     const notes = [523.25, 659.25, 783.99, 1046.5, 880.0];
     let noteIdx = 0;
     const chimeTimer = window.setInterval(() => {
@@ -231,7 +216,7 @@ export const playSceneMusic = (scene: StoryScene) => {
     ambientState.arpeggioTimer = chimeTimer;
 
   } else if (scene === 'earth') {
-    // Warm uplifting golden chords (F3, A3, C4, E4)
+ 
     const freqs = [174.61, 220.00, 261.63, 329.63];
     freqs.forEach((freq, idx) => {
       const osc = ctx.createOscillator();
@@ -249,8 +234,8 @@ export const playSceneMusic = (scene: StoryScene) => {
     });
 
   } else if (scene === 'sputnik') {
-    // Gentle retro electronic ambience, warm analog pulse (not scary)
-    const baseFreq = 220; // A3
+  
+    const baseFreq = 220; 
     const osc = ctx.createOscillator();
     const gain = ctx.createGain();
     osc.type = 'sine';
@@ -262,7 +247,7 @@ export const playSceneMusic = (scene: StoryScene) => {
     ambientState.oscillators.push(osc);
     ambientState.gainNodes.push(gain);
 
-    // Subtle friendly radio telemetry pulse every 3s
+
     const pingInterval = window.setInterval(() => {
       if (!soundEnabled || currentScene !== 'sputnik') return;
       playRadioBeep(880, 0.08);
@@ -270,18 +255,18 @@ export const playSceneMusic = (scene: StoryScene) => {
     ambientState.intervalId = pingInterval;
 
   } else if (scene === 'mars') {
-    // Soft atmospheric red planet wind & low warm hum
+
     const osc = ctx.createOscillator();
     const gain = ctx.createGain();
     osc.type = 'sine';
-    osc.frequency.setValueAtTime(98.0, ctx.currentTime); // G2 deep warm tone
+    osc.frequency.setValueAtTime(98.0, ctx.currentTime); 
     gain.gain.setValueAtTime(0.045, ctx.currentTime);
     osc.connect(gain);
     gain.connect(masterGain);
     osc.start();
     ambientState.oscillators.push(osc);
 
-    // Soft wind filter
+  
     try {
       const noiseBuffer = createNoiseBuffer(ctx, 4);
       const noiseSource = ctx.createBufferSource();
@@ -303,10 +288,10 @@ export const playSceneMusic = (scene: StoryScene) => {
 
       ambientState.noiseSource = noiseSource;
     } catch {
-      // Noise fallback
+     
     }
 
-    // Occasional gentle desert marimba note
+   
     const marsNotes = [392.0, 440.0, 523.25, 587.33];
     let mIdx = 0;
     ambientState.arpeggioTimer = window.setInterval(() => {
@@ -316,7 +301,7 @@ export const playSceneMusic = (scene: StoryScene) => {
     }, 5500);
 
   } else if (scene === 'opportunity_climax') {
-    // Very quiet, gentle solemn wind, reduced volume, soft pause
+   
     try {
       const noiseBuffer = createNoiseBuffer(ctx, 4);
       const noiseSource = ctx.createBufferSource();
@@ -337,12 +322,12 @@ export const playSceneMusic = (scene: StoryScene) => {
 
       ambientState.noiseSource = noiseSource;
     } catch {
-      // Fallback
+     
     }
 
   } else if (scene === 'opportunity_hope') {
-    // Hopeful gentle sunrise chords (D major, glowing warm harmonics)
-    const freqs = [146.83, 220.00, 293.66, 369.99]; // D3, A3, D4, F#4
+
+    const freqs = [146.83, 220.00, 293.66, 369.99]; 
     freqs.forEach((freq) => {
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
@@ -357,8 +342,8 @@ export const playSceneMusic = (scene: StoryScene) => {
     });
 
   } else if (scene === 'moon') {
-    // Quiet, spacious ambience, soft peaceful cinematic sine
-    const freqs = [110.00, 164.81, 246.94]; // A2, E3, B3
+
+    const freqs = [110.00, 164.81, 246.94]; 
     freqs.forEach((freq) => {
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
@@ -381,8 +366,8 @@ export const playSceneMusic = (scene: StoryScene) => {
     }, 6000);
 
   } else if (scene === 'deep_space') {
-    // Expansive deep cosmic space drone, subtle low resonance
-    const freqs = [65.41, 130.81, 196.00]; // C2, C3, G3
+   
+    const freqs = [65.41, 130.81, 196.00]; 
     freqs.forEach((freq) => {
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
@@ -405,8 +390,8 @@ export const playSceneMusic = (scene: StoryScene) => {
     }, 6500);
 
   } else if (scene === 'finale') {
-    // Wonder -> discovery -> emotion -> hope: warm uplifting orchestral pad
-    const freqs = [130.81, 196.00, 261.63, 329.63, 392.00]; // C3, G3, C4, E4, G4
+  
+    const freqs = [130.81, 196.00, 261.63, 329.63, 392.00]; 
     freqs.forEach((freq, idx) => {
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
@@ -422,9 +407,7 @@ export const playSceneMusic = (scene: StoryScene) => {
   }
 };
 
-/**
- * Storybook page-turn sound: soft gentle paper flutter
- */
+
 export const playPageTurn = () => {
   if (!soundEnabled) return;
   try {
@@ -451,13 +434,11 @@ export const playPageTurn = () => {
     noise.start();
     noise.stop(ctx.currentTime + 0.23);
   } catch {
-    // Ignore error
+   
   }
 };
 
-/**
- * Friendly warm radio beep for Sputnik and satellite communications
- */
+
 export const playRadioBeep = (frequency = 750, duration = 0.12) => {
   if (!soundEnabled) return;
   try {
@@ -479,13 +460,11 @@ export const playRadioBeep = (frequency = 750, duration = 0.12) => {
     osc.start();
     osc.stop(ctx.currentTime + duration);
   } catch {
-    // Ignore error
+    
   }
 };
 
-/**
- * Warm soft bubble pop / bloop when tapping planets or storybook items
- */
+
 export const playBloop = (frequency = 440) => {
   if (!soundEnabled) return;
   try {
@@ -508,13 +487,11 @@ export const playBloop = (frequency = 440) => {
     osc.start();
     osc.stop(ctx.currentTime + 0.14);
   } catch {
-    // Ignore error
+  
   }
 };
 
-/**
- * Soft rover wheel turning / motion sound
- */
+
 export const playRoverRoll = () => {
   if (!soundEnabled) return;
   try {
@@ -538,20 +515,18 @@ export const playRoverRoll = () => {
     osc.start();
     osc.stop(ctx.currentTime + 0.48);
   } catch {
-    // Ignore error
+ 
   }
 };
 
-/**
- * Orbit's warm signature chime: gentle ascending bell chord
- */
+
 export const playOrbitCue = () => {
   if (!soundEnabled) return;
   try {
     const ctx = getAudioContext();
     if (!ctx) return;
 
-    const notes = [523.25, 659.25, 783.99]; // C5, E5, G5 warm bell
+    const notes = [523.25, 659.25, 783.99]; 
     notes.forEach((freq, idx) => {
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
@@ -569,7 +544,7 @@ export const playOrbitCue = () => {
       osc.stop(ctx.currentTime + idx * 0.08 + 0.38);
     });
   } catch {
-    // Ignore error
+
   }
 };
 
@@ -592,7 +567,7 @@ export const playSpiritCue = () => {
       osc.stop(ctx.currentTime + idx * 0.09 + 0.32);
     });
   } catch {
-    // Ignore error
+   
   }
 };
 
@@ -615,7 +590,7 @@ export const playOppyCue = () => {
       osc.stop(ctx.currentTime + idx * 0.07 + 0.3);
     });
   } catch {
-    // Ignore error
+   
   }
 };
 
@@ -631,16 +606,14 @@ export const playWhoosh = () => {
   playPageTurn();
 };
 
-/**
- * Celebration chime for joining the mission
- */
+
 export const playCheer = () => {
   if (!soundEnabled) return;
   try {
     const ctx = getAudioContext();
     if (!ctx) return;
 
-    const chord = [261.63, 329.63, 392.00, 523.25, 659.25, 783.99]; // C major full chime
+    const chord = [261.63, 329.63, 392.00, 523.25, 659.25, 783.99]; 
     chord.forEach((freq, idx) => {
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
@@ -658,6 +631,6 @@ export const playCheer = () => {
       osc.stop(ctx.currentTime + 1.4 + idx * 0.06);
     });
   } catch {
-    // Ignore error
+
   }
 };

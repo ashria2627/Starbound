@@ -14,12 +14,12 @@ const GameContext = createContext<GameContextType | undefined>(undefined);
 export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [state, dispatch] = useReducer(gameReducer, initialGameState);
 
-  // Sync audio controller state with Web Audio synthesizer
+
   useEffect(() => {
     solarAudio.setAudioSettings(state.ambientSoundEnabled, state.roverSoundEnabled);
   }, [state.ambientSoundEnabled, state.roverSoundEnabled]);
 
-  // Start ambient space audio on first user interaction if enabled
+
   useEffect(() => {
     const handleFirstInteraction = () => {
       if (state.ambientSoundEnabled) {
@@ -34,7 +34,7 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     };
   }, [state.ambientSoundEnabled]);
 
-  // Stop rover drive sound when leaving active gameplay screen
+  
   useEffect(() => {
     if (state.screen !== 'playing') {
       solarAudio.stopRoverDrive();
@@ -42,7 +42,7 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     }
   }, [state.screen]);
 
-  // Clean up all audio on unmount
+ 
   useEffect(() => {
     return () => {
       solarAudio.stopAmbientSpace();
@@ -51,7 +51,7 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     };
   }, []);
 
-  // Time tracker when game is playing
+  
   useEffect(() => {
     if (state.screen !== 'playing') return;
     const timer = setInterval(() => {
@@ -60,7 +60,7 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     return () => clearInterval(timer);
   }, [state.screen]);
 
-  // Orbit helper robot: if idle or playing for > 18s without finding anything, offer a friendly hint
+
   useEffect(() => {
     if (state.screen !== 'playing') return;
     const hintTimer = setTimeout(() => {

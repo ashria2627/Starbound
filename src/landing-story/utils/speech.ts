@@ -1,8 +1,3 @@
-/**
- * Character voice speech synthesis utility.
- * Features warm, friendly, natural storytelling voices for Orbit and the space explorers.
- * Designed to sound like someone sitting beside a child telling an exciting space story.
- */
 
 import {
   playOrbitCue,
@@ -227,7 +222,7 @@ const VOICE_PROFILES: Record<CharacterVoice, VoiceProfile> = {
 };
 
 let speechEnabled = true;
-let autoSpeakEnabled = false; // Auto-voice OFF by default; user must opt in
+let autoSpeakEnabled = false; 
 let activeUtterance: SpeechSynthesisUtterance | null = null;
 let speechListeners: Array<(isSpeaking: boolean, character?: CharacterVoice) => void> = [];
 let resumeInterval: number | null = null;
@@ -266,7 +261,7 @@ const notifyListeners = (isSpeaking: boolean, character?: CharacterVoice) => {
     try {
       l(isSpeaking, character);
     } catch {
-      // Ignore
+     
     }
   });
 };
@@ -280,7 +275,7 @@ const getAvailableVoices = (): SpeechSynthesisVoice[] => {
   return cachedVoices;
 };
 
-// Global audio/speech unlock for Chromium/Safari autoplay policy
+
 export const unlockSpeech = () => {
   if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
   const synth = window.speechSynthesis;
@@ -305,9 +300,7 @@ if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
   window.addEventListener('keydown', onFirstInteraction, { passive: true });
 }
 
-/**
- * Finds the best matching voice for a character profile.
- */
+
 const pickBestVoice = (keywords: string[]): SpeechSynthesisVoice | null => {
   const voices = getAvailableVoices();
   if (voices.length === 0) return null;
@@ -334,9 +327,7 @@ export interface SpeakOptions {
   manualTrigger?: boolean;
 }
 
-/**
- * Cleans text for natural speech synthesis
- */
+
 const cleanSpeechText = (rawText: string): string => {
   return rawText
     .replace(/[“”"']/g, '')
@@ -345,9 +336,7 @@ const cleanSpeechText = (rawText: string): string => {
     .trim();
 };
 
-/**
- * Speaks dialogue using Web Speech API with bug-free queue handling and voice matching.
- */
+
 export const speakDialogue = (
   character: CharacterVoice,
   text: string,
@@ -359,22 +348,22 @@ export const speakDialogue = (
 
   const synth = window.speechSynthesis;
 
-  // Unpause if paused
+
   if (synth.paused) {
     synth.resume();
   }
 
-  // Clear any existing pending speak timer
+
   if (pendingSpeakTimer) {
     window.clearTimeout(pendingSpeakTimer);
     pendingSpeakTimer = null;
   }
 
-  // Cancel ongoing speech cleanly
+
   try {
     synth.cancel();
   } catch {
-    // Ignore
+  
   }
 
   if (resumeInterval) {
@@ -382,7 +371,7 @@ export const speakDialogue = (
     resumeInterval = null;
   }
 
-  // Short delay to allow synth.cancel to complete in browser engine
+
   pendingSpeakTimer = window.setTimeout(() => {
     pendingSpeakTimer = null;
 
@@ -402,7 +391,7 @@ export const speakDialogue = (
     const profile = VOICE_PROFILES[character] || VOICE_PROFILES.orbit;
     const utterance = new SpeechSynthesisUtterance(cleanedText);
     activeUtterance = utterance;
-    // Attach to global window to avoid premature garbage collection bug in Chrome
+  
     (window as unknown as { __activeUtterance?: SpeechSynthesisUtterance }).__activeUtterance = utterance;
 
     utterance.pitch = profile.pitch;
@@ -417,8 +406,6 @@ export const speakDialogue = (
     utterance.onstart = () => {
       notifyListeners(true, character);
       if (options.onStart) options.onStart();
-
-      // Chrome 15s keep-alive interval bugfix
       if (resumeInterval) window.clearInterval(resumeInterval);
       resumeInterval = window.setInterval(() => {
         if (!synth.speaking) {
@@ -446,7 +433,6 @@ export const speakDialogue = (
 
     utterance.onend = handleFinish;
     utterance.onerror = (e) => {
-      // Ignore cancels caused by newer speech so chained callbacks don't misfire
       const err = (e as SpeechSynthesisErrorEvent).error;
       if (err === 'interrupted' || err === 'canceled') return;
       handleFinish();
@@ -479,7 +465,7 @@ export const stopSpeaking = () => {
         window.speechSynthesis.resume();
       }
     } catch {
-      // Ignore
+     
     }
   }
   activeUtterance = null;

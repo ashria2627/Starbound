@@ -195,21 +195,15 @@ export const Page7Finale: React.FC<Page7Props> = ({ onRestartStory }) => {
         </div>
       </section>
 
-      {/* 
-        ========================================================================
-        CHAPTER 8: YOUR MISSION LOG · JOIN THE MISSION (id="chapter-8")
-        EXACT VISUAL REPLICA OF IMAGE 2!
-        STRICT REQUIREMENT: "without a name no commissioning / no badge"
-        ========================================================================
-      */}
+      
       <section
         id="chapter-8"
         className="relative w-full py-16 sm:py-24 bg-gradient-to-b from-[#fff1dc] via-[#ffe0b8] to-[#fff1dc] overflow-hidden"
       >
         <div className="relative z-10 w-full flex flex-col items-center px-4 sm:px-6">
-          {/* Header emblem matching Image 2 */}
+         
           <div className="flex flex-col items-center mb-6 text-center">
-            {/* Cyan Satellite Pixel/Grid Emblem */}
+   
             <div className="flex items-center gap-1.5 mb-3 select-none">
               <div className="grid grid-cols-2 gap-0.5">
                 <div className="w-3.5 h-3.5 rounded-xs border border-orange-400 bg-orange-200/60" />
@@ -238,7 +232,7 @@ export const Page7Finale: React.FC<Page7Props> = ({ onRestartStory }) => {
             </h2>
           </div>
 
-          {/* Mission Log Card matching Image 2 */}
+         
           <div className="w-full max-w-3xl rounded-3xl border border-orange-500/50 bg-[#fff8ee]/95 backdrop-blur-2xl p-6 sm:p-9 shadow-2xl text-amber-900 relative">
             <div className="flex items-start gap-4 mb-4">
               <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-orange-500 to-amber-700 border border-orange-400/60 flex items-center justify-center text-2xl shadow-lg flex-shrink-0">
@@ -260,7 +254,7 @@ export const Page7Finale: React.FC<Page7Props> = ({ onRestartStory }) => {
 
             {!isStamped ? (
               <form onSubmit={handleStampBadge} className="space-y-6">
-                {/* 1. YOUR EXPLORER NAME / CALLSIGN */}
+              
                 <div>
                   <div className="flex items-center justify-between mb-2">
                     <label className="text-xs sm:text-sm font-mono font-bold tracking-widest text-amber-700 uppercase">
@@ -296,7 +290,7 @@ export const Page7Finale: React.FC<Page7Props> = ({ onRestartStory }) => {
                   )}
                 </div>
 
-                {/* 2. YOUR MISSION CALLING */}
+             
                 <div>
                   <label className="block text-xs sm:text-sm font-mono font-bold tracking-widest text-amber-700 uppercase mb-2">
                     Your Mission Calling:
@@ -326,7 +320,7 @@ export const Page7Finale: React.FC<Page7Props> = ({ onRestartStory }) => {
                   </div>
                 </div>
 
-                {/* 3. WHAT BIG QUESTION WILL YOU ASK THE UNIVERSE? */}
+             
                 <div>
                   <label className="block text-xs sm:text-sm font-mono font-bold tracking-widest text-amber-700 uppercase mb-2">
                     What Big Question Will You Ask the Universe?
@@ -362,7 +356,6 @@ export const Page7Finale: React.FC<Page7Props> = ({ onRestartStory }) => {
                     })}
                   </div>
 
-                  {/* Custom question input */}
                   {selectedQuestion === 'Custom question...' && (
                     <div className="mt-2.5 pl-2">
                       <input
@@ -378,7 +371,6 @@ export const Page7Finale: React.FC<Page7Props> = ({ onRestartStory }) => {
                   )}
                 </div>
 
-                {/* Bottom button matching Image 2 with larger size */}
                 <div className="flex justify-end pt-3">
                   <button
                     type="submit"
@@ -390,7 +382,7 @@ export const Page7Finale: React.FC<Page7Props> = ({ onRestartStory }) => {
                 </div>
               </form>
             ) : (
-              /* Stamped Badge State */
+              
               <div className="p-6 sm:p-8 rounded-2xl bg-gradient-to-b from-[#ffe9cf] to-[#fff1dc] border-2 border-orange-400 shadow-[0_0_30px_rgba(249,115,22,0.35)] text-center relative overflow-hidden">
                 <div className="absolute top-3 right-4 px-3 py-1 rounded-full border border-orange-400/80 bg-orange-100 text-[10px] font-mono tracking-widest text-orange-700 font-bold uppercase shadow-sm">
                   ✓ STAMPED & VERIFIED

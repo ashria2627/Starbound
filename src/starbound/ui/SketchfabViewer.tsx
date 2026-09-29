@@ -11,7 +11,7 @@ export const SketchfabViewer: React.FC<SketchfabViewerProps> = ({ config, onClos
   const [hasError, setHasError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Spread non-standard attributes so React + TypeScript compiles smoothly
+  
   const extraIframeProps: Record<string, string | boolean> = {
     'xr-spatial-tracking': 'true',
     'execution-while-out-of-viewport': 'true',
@@ -39,7 +39,7 @@ export const SketchfabViewer: React.FC<SketchfabViewerProps> = ({ config, onClos
           exit={{ scale: 0.94, opacity: 0, y: 15 }}
           onClick={(e) => e.stopPropagation()}
         >
-          {/* Header */}
+      
           <div className="flex items-center justify-between border-b border-[#F2D9A4]/20 pb-3">
             <div>
               <h3 className="text-xl font-bold font-['Fraunces'] text-[#EFE7D8]">
@@ -60,7 +60,8 @@ export const SketchfabViewer: React.FC<SketchfabViewerProps> = ({ config, onClos
             </button>
           </div>
 
-          {/* Viewer area */}
+        
+        
           <div className="relative w-full aspect-video bg-[#1F0803] rounded-xl overflow-hidden border border-[#F2D9A4]/15">
             {isLoading && !hasError && (
               <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 text-center text-[#F2D9A4]/80 text-sm">
@@ -102,7 +103,7 @@ export const SketchfabViewer: React.FC<SketchfabViewerProps> = ({ config, onClos
             )}
           </div>
 
-          {/* Mandatory Attribution */}
+       
           <div className="text-xs text-[#F2D9A4]/80 flex flex-wrap items-center gap-1.5 pt-1">
             <span>3D Model:</span>
             <a

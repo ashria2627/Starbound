@@ -39,13 +39,13 @@ export const MissionIntro: React.FC<MissionIntroProps> = ({ mission, onStart }) 
       exit={{ opacity: 0 }}
       transition={{ duration: 0.4 }}
     >
-      {/* Background warm glow circles */}
+      
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#C44810]/30 rounded-full blur-3xl" />
       </div>
 
       <div className="relative z-10 max-w-xl w-full flex flex-col items-center text-center text-[#EFE7D8]">
-        {/* Mission Pill Number */}
+       
         <motion.span
           className="text-xs uppercase font-extrabold tracking-widest px-4 py-1.5 rounded-full bg-[#591D0E] text-amber-300 border border-amber-400/40 shadow-md mb-3"
           initial={{ y: -20, opacity: 0 }}
@@ -54,7 +54,7 @@ export const MissionIntro: React.FC<MissionIntroProps> = ({ mission, onStart }) 
           Mission {mission.number} of 5
         </motion.span>
 
-        {/* Mission Title */}
+       
         <motion.h1
           className="text-3xl sm:text-5xl font-black font-['Fraunces'] text-[#EFE7D8] drop-shadow-md"
           initial={{ scale: 0.9, opacity: 0 }}
@@ -64,7 +64,7 @@ export const MissionIntro: React.FC<MissionIntroProps> = ({ mission, onStart }) 
           {mission.title}
         </motion.h1>
 
-        {/* One-Line Goal */}
+       
         <motion.p
           className="mt-3 text-base sm:text-lg text-[#F2D9A4] max-w-md font-medium leading-relaxed"
           initial={{ opacity: 0, y: 10 }}
@@ -74,23 +74,23 @@ export const MissionIntro: React.FC<MissionIntroProps> = ({ mission, onStart }) 
           {mission.goal}
         </motion.p>
 
-        {/* Animated SVG Path-Draw of rover trail + Orbit waving */}
+       
         <motion.div
           className="relative my-6 w-full max-w-sm h-36 bg-[#4A180B]/60 rounded-3xl border border-[#F2D9A4]/25 p-4 flex items-center justify-center overflow-hidden"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
         >
-          {/* Animated SVG Path */}
+          
           <svg className="w-full h-full" viewBox="0 0 320 100" fill="none">
-            {/* Crater & hill background sketch */}
+           
             <path
               d="M10 85 Q 80 40, 160 85 T 310 80"
               stroke="rgba(242, 217, 164, 0.25)"
               strokeWidth="2"
               strokeDasharray="4 4"
             />
-            {/* Rover winding trajectory path-draw */}
+            
             <motion.path
               d="M25 80 Q 70 30, 140 70 T 260 45"
               stroke="#FBBF24"
@@ -101,11 +101,11 @@ export const MissionIntro: React.FC<MissionIntroProps> = ({ mission, onStart }) 
               animate={{ pathLength: 1 }}
               transition={{ duration: 2.4, ease: 'easeInOut' }}
             />
-            {/* Target destination star */}
+            
             <circle cx="260" cy="45" r="7" fill="#FBBF24" />
           </svg>
 
-          {/* Orbit Bot Waving */}
+         
           <motion.div
             className="absolute bottom-3 right-4 flex items-center gap-2 bg-[#5A1F10] border border-amber-300/40 px-3 py-1.5 rounded-2xl shadow-lg"
             initial={{ scale: 0 }}
@@ -126,7 +126,7 @@ export const MissionIntro: React.FC<MissionIntroProps> = ({ mission, onStart }) 
           </motion.div>
         </motion.div>
 
-        {/* Countdown: 3, 2, 1, Go! */}
+       
         <div className="h-16 flex items-center justify-center">
           <AnimatePresence mode="wait">
             {!isGo ? (
@@ -154,7 +154,7 @@ export const MissionIntro: React.FC<MissionIntroProps> = ({ mission, onStart }) 
           </AnimatePresence>
         </div>
 
-        {/* Skip button */}
+     
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}

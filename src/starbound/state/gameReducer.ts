@@ -19,15 +19,15 @@ export interface GameState {
   activeDiscovery: Discovery | null;
   isJournalOpen: boolean;
   passedCheckpoints: string[];
-  wheelSlip: number; // 0 to 100
-  rockCounter: number; // for Mission 3 rock back & forth
+  wheelSlip: number; 
+  rockCounter: number; 
   isFreedFromSand: boolean;
-  batteryLevel: number; // 0 to 100 for Mission 4
+  batteryLevel: number; 
   isChargingSolar: boolean;
   showOrbitHint: boolean;
   orbitHintText: string;
   roverPosition: [number, number, number];
-  roverHeading: number; // in radians
+  roverHeading: number; 
   nearScanTargetId: string | null;
   cameraMode: 'fpv' | 'third';
   ambientSoundEnabled: boolean;

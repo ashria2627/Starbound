@@ -32,7 +32,7 @@ export const Page3ChooseDestination: React.FC<Page3Props> = ({
 
     speakDialogue('orbit', destVoiceIntro, { manualTrigger: true });
 
-    // Smooth scroll down to the newly mounted story
+   
     setTimeout(() => {
       const el = document.getElementById('chosen-destination-story');
       if (el) {
@@ -57,7 +57,7 @@ export const Page3ChooseDestination: React.FC<Page3Props> = ({
       </div>
 
       <div className="relative z-10 w-full flex flex-col items-center">
-        {/* Header with Larger Font */}
+       
         <div className="pt-4 pb-10 px-4 text-center max-w-4xl mx-auto">
           
           <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black text-amber-950 mt-3 tracking-tight drop-shadow-md">
@@ -104,7 +104,7 @@ export const Page3ChooseDestination: React.FC<Page3Props> = ({
 
             
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
-              {/* 🔴 MARS */}
+             
               <button
                 onClick={() => handleSelect('mars')}
                 className={`p-4 sm:p-5 rounded-2xl border transition-all text-left flex flex-col cursor-pointer ${
@@ -123,7 +123,7 @@ export const Page3ChooseDestination: React.FC<Page3Props> = ({
                 </span>
               </button>
 
-              {/* 🌕 THE MOON */}
+          
               <button
                 onClick={() => handleSelect('moon')}
                 className={`p-4 sm:p-5 rounded-2xl border transition-all text-left flex flex-col cursor-pointer ${
@@ -142,7 +142,7 @@ export const Page3ChooseDestination: React.FC<Page3Props> = ({
                 </span>
               </button>
 
-              {/* 🌌 DEEP SPACE */}
+             
               <button
                 onClick={() => handleSelect('deep_space')}
                 className={`p-4 sm:p-5 rounded-2xl border transition-all text-left flex flex-col cursor-pointer ${

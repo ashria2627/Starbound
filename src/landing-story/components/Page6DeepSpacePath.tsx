@@ -192,7 +192,7 @@ export const Page6DeepSpacePath: React.FC<Page6Props> = () => {
     },
   ], []);
 
-  // FIX: Auto-voice on arrival when moving to this story
+  
   useEffect(() => {
     playSceneMusic('deep_space');
 
@@ -210,7 +210,7 @@ export const Page6DeepSpacePath: React.FC<Page6Props> = () => {
     speakDialogue(beat.speaker, beat.speechText);
   }, [beats]);
 
-  // Debounced scroll listener
+ 
   useEffect(() => {
     const handleScroll = () => {
       const beatElements = document.querySelectorAll('.deep-space-beat');
@@ -279,7 +279,7 @@ export const Page6DeepSpacePath: React.FC<Page6Props> = () => {
       </div>
 
       <div className="relative z-10 w-full flex flex-col items-center">
-        {/* Header with Larger Font */}
+       
         <div className="pt-4 pb-12 px-4 text-center max-w-4xl mx-auto">
           
           <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black text-amber-950 mt-3 tracking-tight drop-shadow-md">

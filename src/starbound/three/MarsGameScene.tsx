@@ -17,13 +17,13 @@ interface MarsGameSceneProps {
   onNearDiscoveryChange: (targetId: string | null) => void;
 }
 
-// Mission 2 rock discovery coordinates so touching discovery rocks also produces tactile impact
+
 const DISCOVERY_ROCK_COLLIDERS = [
   { x: 10, z: -12, radius: 0.75 },
   { x: 23, z: -4, radius: 0.9 },
 ];
 
-// Controller component that updates rover physics, camera follow, and mission state inside Canvas useFrame
+
 const GamePhysicsController: React.FC<{
   touchInput: TouchInputState;
   onNearDiscoveryChange: (targetId: string | null) => void;
@@ -32,7 +32,7 @@ const GamePhysicsController: React.FC<{
   const { state, dispatch, currentMission } = useGame();
   const { camera } = useThree();
 
-  // Internal rover position & orientation
+ 
   const roverPosRef = useRef<THREE.Vector3>(
     new THREE.Vector3(
       currentMission.startPosition[0],
@@ -67,7 +67,7 @@ const GamePhysicsController: React.FC<{
   const batteryAccRef = useRef<number>(0);
   const lastStateSyncRef = useRef<number>(0);
 
-  // Sync rover start position when mission or missionAttempt changes
+
   useEffect(() => {
     const startX = currentMission.startPosition[0];
     const startZ = currentMission.startPosition[2];
@@ -87,7 +87,7 @@ const GamePhysicsController: React.FC<{
     hasInitThirdCamRef.current = false;
   }, [currentMission, state.missionAttempt]);
 
-  // Allow mouse / touchpad drag to adjust look angle in FPV mode as well
+
   useEffect(() => {
     const onPointerDown = (e: PointerEvent) => {
       if (state.cameraMode !== 'fpv') return;
@@ -119,7 +119,7 @@ const GamePhysicsController: React.FC<{
     };
   }, [state.cameraMode]);
 
-  // Keyboard shortcut to toggle camera mode (key 'C')
+  
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'c' || e.key === 'C') {
@@ -130,7 +130,7 @@ const GamePhysicsController: React.FC<{
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [dispatch]);
 
-  // Track keyboard keys
+ 
   const keysRef = useRef<{ [key: string]: boolean }>({});
   const lastRockDirRef = useRef<'forward' | 'backward' | null>(null);
 
@@ -138,12 +138,12 @@ const GamePhysicsController: React.FC<{
     const handleKeyDown = (e: KeyboardEvent) => {
       keysRef.current[e.key.toLowerCase()] = true;
 
-      // Scan shortcut
+     
       if (e.key.toLowerCase() === 'e' && state.nearScanTargetId) {
         dispatch({ type: 'TRIGGER_SCAN', discoveryId: state.nearScanTargetId });
       }
 
-      // Mission 3 rock detection via keyboard
+     
       if (currentMission.type === 'stuck' && !state.isFreedFromSand) {
         if (e.key.toLowerCase() === 'w' || e.key === 'ArrowUp') {
           if (lastRockDirRef.current !== 'forward') {
@@ -171,7 +171,7 @@ const GamePhysicsController: React.FC<{
     };
   }, [dispatch, state.nearScanTargetId, currentMission.type, state.isFreedFromSand]);
 
-  // Main game loop with Martian surface physics (inertia, slope gravity, crater alignment & suspension)
+
   useFrame((frameState, rawDelta) => {
     const delta = Math.min(rawDelta, 0.05);
     const keys = keysRef.current;
@@ -184,7 +184,7 @@ const GamePhysicsController: React.FC<{
     const maxSpeed = currentMission.type === 'tracks' ? 10.0 : 8.5;
     const turnRate = 2.4;
 
-    // Mission 3: Stuck in sand mechanics
+   
     if (currentMission.type === 'stuck' && !state.isFreedFromSand) {
       if (forwardKey || backwardKey) {
         desiredSpeed = forwardKey ? 0.45 : -0.45;
@@ -194,11 +194,11 @@ const GamePhysicsController: React.FC<{
       else if (backwardKey) desiredSpeed = -maxSpeed * 0.65;
     }
 
-    // Steering
+   
     if (leftKey) roverHeadingRef.current += turnRate * delta;
     if (rightKey) roverHeadingRef.current -= turnRate * delta;
 
-    // Sample terrain heights around the rover to compute 3D slope pitch & roll
+   
     const fwdX = Math.sin(roverHeadingRef.current);
     const fwdZ = Math.cos(roverHeadingRef.current);
     const rightX = Math.cos(roverHeadingRef.current);
@@ -228,7 +228,7 @@ const GamePhysicsController: React.FC<{
     terrainPitchRef.current = slopePitch;
     terrainRollRef.current = slopeRoll;
 
-    // Apply acceleration, braking, rolling friction & Martian slope gravity
+ 
     const currentSpeed = roverSpeedRef.current;
     let nextSpeed = currentSpeed;
 
@@ -242,11 +242,11 @@ const GamePhysicsController: React.FC<{
       const rate = isBraking ? 18.0 : 12.0;
       nextSpeed = moveTowards(currentSpeed, desiredSpeed, rate * delta);
     } else {
-      // Rolling friction coast-down
+      
       nextSpeed = moveTowards(currentSpeed, 0, 6.8 * delta);
     }
 
-    // Gravity pull on crater walls and hills (downhill speeds up, uphill resists)
+   
     if (!(currentMission.type === 'stuck' && !state.isFreedFromSand)) {
       const slopeGravityAccel = - (slopeRise / (sampleDist * 2)) * 8.5;
       if (Math.abs(desiredSpeed) > 0.01 || Math.abs(nextSpeed) > 0.25) {
@@ -261,12 +261,12 @@ const GamePhysicsController: React.FC<{
     roverSpeedRef.current = nextSpeed;
     const isMoving = Math.abs(nextSpeed) > 0.04;
 
-    // Decay rock impact intensity and recoil velocity
+    
     if (impactIntensityRef.current > 0) {
       impactIntensityRef.current = Math.max(0, impactIntensityRef.current - delta * 2.6);
     }
 
-    // Apply recoil velocity from touching rocks
+   
     if (Math.abs(recoilVelRef.current.x) > 0.01 || Math.abs(recoilVelRef.current.z) > 0.01) {
       roverPosRef.current.x += recoilVelRef.current.x * delta;
       roverPosRef.current.z += recoilVelRef.current.z * delta;
@@ -275,7 +275,7 @@ const GamePhysicsController: React.FC<{
       recoilVelRef.current.z *= damp;
     }
 
-    // Update rover driving audio effects
+   
     if (state.screen === 'playing') {
       solarAudio.updateRoverDrive(nextSpeed);
     } else {
@@ -289,7 +289,7 @@ const GamePhysicsController: React.FC<{
       roverPosRef.current.x += fwdX * moveDist;
       roverPosRef.current.z += fwdZ * moveDist;
 
-      // Accumulate distance (scale slightly on open plain trek for believable rover odometer)
+     
       const odometerScale = currentMission.type === 'tracks' ? 2.0 : 1.0;
       distanceAccRef.current += Math.abs(moveDist) * odometerScale;
       if (distanceAccRef.current >= 0.8) {
@@ -298,7 +298,7 @@ const GamePhysicsController: React.FC<{
       }
     }
 
-    // Check collision & impact with scattered terrain rocks
+    
     const roverRadius = 0.82;
     const rx = roverPosRef.current.x;
     const rz = roverPosRef.current.z;
@@ -308,7 +308,7 @@ const GamePhysicsController: React.FC<{
       const dx = rx - rock.x;
       const dz = rz - rock.z;
       const minSep = roverRadius + rock.radius;
-      // Fast bounding box check before hypot
+     
       if (Math.abs(dx) < minSep && Math.abs(dz) < minSep) {
         const dist = Math.hypot(dx, dz);
         if (dist < minSep && dist > 0.0001) {
@@ -316,11 +316,11 @@ const GamePhysicsController: React.FC<{
           const nz = dz / dist;
           const overlap = minSep - dist;
 
-          // Push rover outside the rock
+          
           roverPosRef.current.x += nx * (overlap + 0.04);
           roverPosRef.current.z += nz * (overlap + 0.04);
 
-          // Bounce recoil & impact feedback
+         
           recoilVelRef.current.x = nx * 4.2;
           recoilVelRef.current.z = nz * 4.2;
           roverSpeedRef.current *= -0.35;
@@ -337,7 +337,7 @@ const GamePhysicsController: React.FC<{
       }
     }
 
-    // Also check impact on Mission 2 discovery rocks if relevant
+  
     if (currentMission.number === 2) {
       for (let i = 0; i < DISCOVERY_ROCK_COLLIDERS.length; i++) {
         const dRock = DISCOVERY_ROCK_COLLIDERS[i];
@@ -363,13 +363,13 @@ const GamePhysicsController: React.FC<{
       }
     }
 
-    // Ground height & Martian low-gravity suspension physics over crater rims
+ 
     const newGroundY = getMarsHeight(roverPosRef.current.x, roverPosRef.current.z);
     const groundRate = (newGroundY - oldGroundY) / Math.max(delta, 0.008);
     if (Math.abs(groundRate) > 1.8 && isMoving) {
       verticalVelRef.current += THREE.MathUtils.clamp(groundRate * 0.12, -0.8, 1.1);
     }
-    // Spring-damper suspension in Martian gravity
+   
     const springForce = -suspensionOffsetRef.current * 28.0 - verticalVelRef.current * 8.5;
     verticalVelRef.current += springForce * delta;
     suspensionOffsetRef.current = THREE.MathUtils.clamp(
@@ -379,7 +379,7 @@ const GamePhysicsController: React.FC<{
     );
     roverPosRef.current.y = newGroundY + Math.max(0, suspensionOffsetRef.current);
 
-    // Throttled transform sync for HUD compass / coordinates (4 times a second max)
+   
     const now = state.missionTimeSeconds;
     if (now - lastStateSyncRef.current > 0.25) {
       lastStateSyncRef.current = now;
@@ -400,7 +400,7 @@ const GamePhysicsController: React.FC<{
       }
     }
 
-    // Mission 4: Solar charging check in the Golden Sunbeam on the Ridge (-16, -18)
+    
     if (currentMission.type === 'solar') {
       const distToSunbeam = Math.hypot(roverPosRef.current.x + 16, roverPosRef.current.z + 18);
       const inSunbeam = distToSunbeam < 9.5;
@@ -434,14 +434,14 @@ const GamePhysicsController: React.FC<{
       solarAudio.stopCharging();
     }
 
-    // Camera Control: First Person View (FPV) vs 3rd Person View (Third)
+   
     const isFPV = state.cameraMode === 'fpv';
     const elapsedClock = frameState.clock.getElapsedTime();
     const shakeAmt = impactIntensityRef.current > 0.02 ? impactIntensityRef.current * 0.14 : 0;
     const shakeX = shakeAmt > 0 ? Math.sin(elapsedClock * 55) * shakeAmt : 0;
     const shakeY = shakeAmt > 0 ? Math.cos(elapsedClock * 62) * shakeAmt : 0;
 
-    // Calculate how much the rover moved this frame
+   
     const moveDeltaX = roverPosRef.current.x - prevRoverPosRef.current.x;
     const moveDeltaY = roverPosRef.current.y - prevRoverPosRef.current.y;
     const moveDeltaZ = roverPosRef.current.z - prevRoverPosRef.current.z;
@@ -456,12 +456,12 @@ const GamePhysicsController: React.FC<{
       const forwardX = Math.sin(lookAngle);
       const forwardZ = Math.cos(lookAngle);
 
-      // Pancam masthead sits on front chassis (~1.52m height, 0.42m forward)
+     
       const mastX = roverPosRef.current.x + Math.sin(roverHeadingRef.current) * 0.42 + shakeX;
       const mastY = roverPosRef.current.y + 1.52 + shakeY;
       const mastZ = roverPosRef.current.z + Math.cos(roverHeadingRef.current) * 0.42;
 
-      // Gentle driving suspension vibration
+    
       const t = state.missionTimeSeconds;
       const bobY = isMoving ? Math.sin(t * 14) * 0.018 : Math.sin(t * 2) * 0.003;
 
@@ -473,7 +473,7 @@ const GamePhysicsController: React.FC<{
         camera.position.lerp(targetCamPos, 0.45);
       }
 
-      // Look target: 14m forward along heading + mouse/touchpad look offset
+      
       const lookDist = 14;
       const lookX = targetCamPos.x + forwardX * lookDist;
       const lookY = targetCamPos.y - 0.38 + fpvPitchOffsetRef.current;
@@ -489,13 +489,13 @@ const GamePhysicsController: React.FC<{
 
       camera.lookAt(fpvTargetRef.current);
 
-      // Subtle banking roll tilt when steering
+      
       let targetRoll = 0;
       if (leftKey) targetRoll = 0.035;
       if (rightKey) targetRoll = -0.035;
       camera.rotation.z = THREE.MathUtils.lerp(camera.rotation.z, targetRoll, 0.1);
     } else {
-      // 3rd Person Chase Orbit Camera — fully adjustable by mouse & touchpad (drag to orbit, scroll/pinch to zoom, pan)
+     
       if (controlsRef.current) {
         controlsRef.current.enabled = true;
 
@@ -514,7 +514,7 @@ const GamePhysicsController: React.FC<{
             roverPosRef.current.z
           );
         } else {
-          // Shift both camera and orbit target by the rover's movement delta so user mouse/touchpad adjustments are preserved
+        
           camera.position.x += moveDeltaX;
           camera.position.y += moveDeltaY;
           camera.position.z += moveDeltaZ;
@@ -535,7 +535,7 @@ const GamePhysicsController: React.FC<{
     prevCameraModeRef.current = state.cameraMode;
   });
 
-  // Ensure audio stops if unmounted or mission changes
+  
   useEffect(() => {
     return () => {
       solarAudio.stopCharging();
@@ -545,7 +545,7 @@ const GamePhysicsController: React.FC<{
 
   return (
     <>
-      {/* User-controlled OrbitControls with smooth mouse & touchpad orbit, zoom, and pan */}
+      
       <OrbitControls
         ref={controlsRef}
         enablePan
@@ -562,7 +562,7 @@ const GamePhysicsController: React.FC<{
         enableDamping
       />
 
-      {/* Low-poly Oppy Rover */}
+     
       <Rover
         roverPosRef={roverPosRef}
         roverHeadingRef={roverHeadingRef}
@@ -574,7 +574,7 @@ const GamePhysicsController: React.FC<{
         isFPV={state.cameraMode === 'fpv'}
       />
 
-      {/* Scattered Gems for kid-friendly collecting */}
+      
       <Gems
         key={`gems-${currentMission.number}-${state.missionAttempt}`}
         roverPosRef={roverPosRef}
@@ -586,7 +586,7 @@ const GamePhysicsController: React.FC<{
         }}
       />
 
-      {/* Discovery Markers and Checkpoints */}
+      
       <DiscoveryMarkers
         key={`markers-${currentMission.number}-${state.missionAttempt}`}
         roverPosRef={roverPosRef}
@@ -619,11 +619,11 @@ export const MarsGameScene: React.FC<MarsGameSceneProps> = ({
         gl={{ antialias: true, alpha: false }}
         onCreated={({ gl, scene }) => {
           gl.setClearColor(THEME_COLORS.skyHaze);
-          // Bright orange Martian sky haze
+       
           scene.fog = new THREE.FogExp2(THEME_COLORS.skyHaze, 0.0085);
         }}
       >
-        {/* Balanced neutral lighting so #c1440e land and #FFFAED sky render true to color */}
+       
         <ambientLight intensity={0.95} color="#ffffff" />
         <directionalLight
           position={[-30, 50, -20]}
@@ -631,13 +631,13 @@ export const MarsGameScene: React.FC<MarsGameSceneProps> = ({
           color="#fffaf0"
           castShadow
         />
-        {/* #FFFAED sky light above, #c1440e land bounce below */}
+        
         <hemisphereLight args={['#FFFAED', '#c1440e', 0.5]} />
 
-        {/* Procedural #c1440e Mars terrain with instanced rocks & rock hit wobble */}
+        
         <MarsTerrain lastRockHitRef={lastRockHitRef} />
 
-        {/* Physics, Rover, Gems & Discovery Controller */}
+       
         <GamePhysicsController
           touchInput={touchInput}
           onNearDiscoveryChange={onNearDiscoveryChange}

@@ -19,7 +19,7 @@ export const Gems: React.FC<GemsProps> = ({
   missionNumber,
   gemCount = 5,
 }) => {
-  // Reset collected gems whenever mission changes
+  
   const [collectedIds, setCollectedIds] = useState<number[]>([]);
   useEffect(() => {
     setCollectedIds([]);
@@ -29,7 +29,7 @@ export const Gems: React.FC<GemsProps> = ({
     const list: { id: number; x: number; z: number }[] = [];
 
     if (missionNumber === 5) {
-      // Place gems right along the winding track segments toward Oppy
+      
       for (let i = 0; i < gemCount; i++) {
         const segIdx = Math.min(i, OPPY_TRACK_WAYPOINTS.length - 2);
         const [x0, z0] = OPPY_TRACK_WAYPOINTS[segIdx];
@@ -57,7 +57,7 @@ export const Gems: React.FC<GemsProps> = ({
       return list;
     }
 
-    // Mission-tailored clusters so all mission.gemCount gems are reachable near the mission path
+    
     const centers: Record<number, [number, number]> = {
       1: [4, -18],
       3: [4, -14],
@@ -91,13 +91,13 @@ export const Gems: React.FC<GemsProps> = ({
 
       const group = groupRefs.current[gem.id];
       if (group) {
-        // Floating sparkle bounce
+        
         const baseHeight = getMarsHeight(gem.x, gem.z);
         group.position.y = baseHeight + 1.2 + Math.sin(t * 3.5 + gem.id) * 0.25;
         group.rotation.y = t * 2.2 + gem.id;
         group.rotation.x = Math.sin(t * 1.5 + gem.id) * 0.15;
 
-        // Proximity detection in world space
+       
         const gemVec = new THREE.Vector3(gem.x, group.position.y, gem.z);
         if (gemVec.distanceTo(roverVec) < 3.0) {
           setCollectedIds((prev) => (prev.includes(gem.id) ? prev : [...prev, gem.id]));
@@ -121,7 +121,7 @@ export const Gems: React.FC<GemsProps> = ({
             }}
             position={[gem.x, initialY, gem.z]}
           >
-            {/* Gem Crystal Geometry */}
+           
             <mesh castShadow>
               <octahedronGeometry args={[0.45, 0]} />
               <meshStandardMaterial
@@ -133,10 +133,10 @@ export const Gems: React.FC<GemsProps> = ({
               />
             </mesh>
 
-            {/* Glowing sparkle core */}
+            
             <pointLight color="#5EEAD4" intensity={1.6} distance={5} />
 
-            {/* Sparkle halo ring */}
+            
             <mesh rotation={[Math.PI / 2, 0, 0]}>
               <ringGeometry args={[0.5, 0.68, 16]} />
               <meshBasicMaterial

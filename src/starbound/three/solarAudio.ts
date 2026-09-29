@@ -1,30 +1,25 @@
-/**
- * Starbound Web Audio API Synthesizer & Audio Controller.
- * Manages:
- * 1. Ambient Space Sounds (cosmic pad / gentle Martian wind drone)
- * 2. Rover Driving Effects (motor hum, rock impact crunch, gem pickup chime, solar charging hum)
- */
+
 class StarboundAudioController {
   private ctx: AudioContext | null = null;
 
-  // Audio controller toggle states
+
   private ambientEnabled = true;
   private roverEffectsEnabled = true;
 
-  // Ambient space sound nodes
+ 
   private ambientOsc1: OscillatorNode | null = null;
   private ambientOsc2: OscillatorNode | null = null;
   private ambientFilter: BiquadFilterNode | null = null;
   private ambientGain: GainNode | null = null;
   private isAmbientPlaying = false;
 
-  // Rover driving motor nodes
+  
   private driveOsc: OscillatorNode | null = null;
   private driveSubOsc: OscillatorNode | null = null;
   private driveGain: GainNode | null = null;
   private isDrivePlaying = false;
 
-  // Solar charging nodes
+ 
   private osc1: OscillatorNode | null = null;
   private osc2: OscillatorNode | null = null;
   private lfo: OscillatorNode | null = null;
@@ -84,7 +79,7 @@ class StarboundAudioController {
       this.ambientFilter.type = 'lowpass';
       this.ambientFilter.frequency.setValueAtTime(240, now);
 
-      // Warm cosmic fifth drone (D2 + A2)
+    
       this.ambientOsc1 = this.ctx.createOscillator();
       this.ambientOsc1.type = 'sine';
       this.ambientOsc1.frequency.setValueAtTime(73.42, now);
@@ -102,7 +97,7 @@ class StarboundAudioController {
       this.ambientOsc2.start(now);
       this.isAmbientPlaying = true;
     } catch {
-      // Autoplay policy wait for user gesture
+     
     }
   }
 
@@ -144,7 +139,8 @@ class StarboundAudioController {
       return;
     }
 
-    // Also ensure ambient space sound starts once user interacts by driving if enabled
+    
+
     if (this.ambientEnabled && !this.isAmbientPlaying) {
       this.startAmbientSpace();
     }
@@ -226,7 +222,7 @@ class StarboundAudioController {
 
     try {
       const now = this.ctx.currentTime;
-      const notes = [587.33, 880.0]; // D5 -> A5 sparkle chime
+      const notes = [587.33, 880.0]; 
       notes.forEach((freq, idx) => {
         const osc = this.ctx!.createOscillator();
         const gain = this.ctx!.createGain();
@@ -378,7 +374,7 @@ class StarboundAudioController {
       const now = this.ctx.currentTime;
       const clamped = Math.min(1.2, Math.max(0.35, strength));
 
-      // Low rocky thud oscillator
+   
       const osc = this.ctx.createOscillator();
       const thudGain = this.ctx.createGain();
       osc.type = 'triangle';
@@ -393,7 +389,7 @@ class StarboundAudioController {
       osc.start(now);
       osc.stop(now + 0.19);
 
-      // Crisp gravel/rock crunch burst
+     
       const bufferSize = Math.floor(this.ctx.sampleRate * 0.12);
       const noiseBuffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
       const output = noiseBuffer.getChannelData(0);

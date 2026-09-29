@@ -129,10 +129,7 @@ export function getGemPrizeForMission(missionId: string): GemPrize | undefined {
   return MISSION_GEM_PRIZES.find((prize) => prize.missionId === missionId);
 }
 
-/**
- * Computes the final reward tier from total gems collected + discoveries found.
- * Discoveries count for 2 points each and gems count for 1 point each.
- */
+
 export function getFinalRewardTier(
   totalGemsCollected: number,
   discoveriesFoundCount: number

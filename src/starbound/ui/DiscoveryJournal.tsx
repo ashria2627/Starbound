@@ -39,7 +39,7 @@ export const DiscoveryJournal: React.FC<DiscoveryJournalProps> = ({
             exit={{ scale: 0.92, opacity: 0, y: 20 }}
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Header */}
+           
             <div className="flex flex-wrap items-center justify-between gap-2 border-b border-amber-200/25 pb-4 shrink-0">
               <div>
                 <h2 className="text-2xl font-bold font-['Fraunces'] text-[#FFF8EB]">
@@ -86,7 +86,7 @@ export const DiscoveryJournal: React.FC<DiscoveryJournalProps> = ({
               </div>
             </div>
 
-            {/* Grid of discoveries */}
+            
             <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain pr-1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 py-2">
               {DISCOVERIES.map((item) => {
                 const isFound = discoveredIds.includes(item.id);
@@ -123,7 +123,7 @@ export const DiscoveryJournal: React.FC<DiscoveryJournalProps> = ({
                   );
                 }
 
-                // Unfound silhouette
+               
                 return (
                   <div
                     key={item.id}
@@ -146,7 +146,7 @@ export const DiscoveryJournal: React.FC<DiscoveryJournalProps> = ({
         </motion.div>
       </AnimatePresence>
 
-      {/* Selected discovery modal */}
+     
       {selectedDiscovery && (
         <DiscoveryCard
           discovery={selectedDiscovery}

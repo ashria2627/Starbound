@@ -18,11 +18,11 @@ export interface Discovery {
   title: string;
   badge: 'Real NASA discovery' | 'Simulated mission discovery';
   text: string;
-  kidsText: string; // Simple 4-5 word sentences for Kids Version
-  grownupText: string; // Detailed scientific overview for Grown-Up Version
-  difficultiesFaced: string[]; // Real NASA engineering & environmental difficulties faced
-  photos: DiscoveryPhoto[]; // Actual NASA discovery photos
-  videoEmbedUrl: string; // Actual NASA / JPL mission video embed URL
+  kidsText: string; 
+  grownupText: string; 
+  difficultiesFaced: string[]; 
+  photos: DiscoveryPhoto[]; 
+  videoEmbedUrl: string; 
   videoTitle: string;
   source: string;
   sketchfab?: SketchfabEmbedConfig;

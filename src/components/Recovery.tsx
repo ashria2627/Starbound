@@ -657,13 +657,12 @@ export const Recovery: React.FC = () => {
 
     const unsubscribers = solutions.map((solution) => {
       const commentsQuery = query(
-        collection(db, 'solutions', solution.id, 'comments'),
-        where('status', '==', 'approved'),
-        orderBy('createdAt', 'asc'),
-      );
+  collection(db, 'solutions', solution.id, 'comments'),
+  where('status', '==', 'approved'),
+);
 
-      return onSnapshot(commentsQuery, (snapshot) => {
-        const comments: CommunityComment[] = snapshot.docs.map((docSnap) => {
+return onSnapshot(commentsQuery, (snapshot) => {
+  const comments: CommunityComment[] = snapshot.docs.map((docSnap) => {
           const data = docSnap.data() as Partial<CommunityComment> & {
             createdAt?: { toMillis?: () => number };
           };
@@ -674,11 +673,13 @@ export const Recovery: React.FC = () => {
             isAnonymous: Boolean(data.isAnonymous),
             text: data.text ?? '',
             createdAt: data.createdAt?.toMillis?.() ?? Date.now(),
-            status: (data.status ?? 'pending') as ModerationStatus,
-          };
-        });
+                    status: (data.status ?? 'pending') as ModerationStatus,
+        };
+      });
 
-        setCommentsBySolution((current) => ({
+      comments.sort((a, b) => a.createdAt - b.createdAt);
+
+      setCommentsBySolution((current) => ({
           ...current,
           [solution.id]: comments,
         }));

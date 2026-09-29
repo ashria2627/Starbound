@@ -27,7 +27,7 @@ export const PioneerIllustration: React.FC<PioneerProps> = ({
       title="Pioneer 11 · First to visit Saturn!"
       className={`relative inline-flex flex-col items-center select-none cursor-pointer group transition-all duration-300 hover:scale-[1.02] focus:outline-none focus-visible:ring-4 focus-visible:ring-amber-400 rounded-3xl p-3 ${className}`}
     >
-      {/* Speech Bubble */}
+    
       {speechBubble && (
         <div
           className={`mb-3 max-w-xs sm:max-w-md px-5 py-3.5 bg-white/95 backdrop-blur-xs border-2 ${
@@ -59,18 +59,18 @@ export const PioneerIllustration: React.FC<PioneerProps> = ({
           </linearGradient>
         </defs>
 
-        {/* Soft shadow */}
+       
         <ellipse cx="125" cy="205" rx="55" ry="8" fill="#d97706" fillOpacity="0.2" />
 
         <g className="animate-float-slow">
-          {/* RTG Nuclear Power Booms (left and right) */}
+         
           <line x1="85" y1="135" x2="25" y2="155" stroke="#64748b" strokeWidth="3" strokeLinecap="round" />
           <rect x="15" y="148" width="16" height="14" rx="3" fill="#334155" stroke="#94a3b8" strokeWidth="1.5" />
 
           <line x1="165" y1="135" x2="225" y2="155" stroke="#64748b" strokeWidth="3" strokeLinecap="round" />
           <rect x="220" y="148" width="16" height="14" rx="3" fill="#334155" stroke="#94a3b8" strokeWidth="1.5" />
 
-          {/* Large 2.74-meter Parabolic Dish Antenna */}
+       
           <ellipse
             cx="125"
             cy="80"
@@ -80,15 +80,15 @@ export const PioneerIllustration: React.FC<PioneerProps> = ({
             stroke="#475569"
             strokeWidth="3"
           />
-          {/* Dish inner ring */}
+        
           <ellipse cx="125" cy="80" rx="48" ry="22" fill="#f8fafc" stroke="#94a3b8" strokeWidth="1.5" />
 
-          {/* Subreflector feed tripod */}
+        
           <line x1="85" y1="80" x2="125" y2="40" stroke="#475569" strokeWidth="2" />
           <line x1="165" y1="80" x2="125" y2="40" stroke="#475569" strokeWidth="2" />
           <circle cx="125" cy="40" r="5" fill="#f59e0b" />
 
-          {/* Hexagonal Equipment Body below the dish */}
+       
           <polygon
             points="95,115 155,115 170,150 155,175 95,175 80,150"
             fill="#e2e8f0"
@@ -96,7 +96,7 @@ export const PioneerIllustration: React.FC<PioneerProps> = ({
             strokeWidth="2.5"
           />
 
-          {/* The Famous Golden Pioneer Plaque! */}
+         
           <g>
             <rect
               x="100"
@@ -108,17 +108,17 @@ export const PioneerIllustration: React.FC<PioneerProps> = ({
               stroke="#b45309"
               strokeWidth="2"
             />
-            {/* Plaque stick figure humans & hydrogen line */}
+           
             <circle cx="115" cy="136" r="2.5" fill="#78350f" />
             <line x1="115" y1="139" x2="115" y2="152" stroke="#78350f" strokeWidth="1.5" strokeLinecap="round" />
             <circle cx="132" cy="138" r="2.2" fill="#78350f" />
             <line x1="132" y1="140" x2="132" y2="152" stroke="#78350f" strokeWidth="1.5" strokeLinecap="round" />
-            {/* Pulsar map sun rays */}
+           
             <line x1="124" y1="144" x2="140" y2="132" stroke="#78350f" strokeWidth="1" />
             <line x1="124" y1="144" x2="142" y2="144" stroke="#78350f" strokeWidth="1" />
           </g>
 
-          {/* Cute Friendly Cartoon Visor on upper dish */}
+      
           <g>
             <ellipse cx="112" cy="74" rx="5" ry="6" fill="#1e293b" />
             <ellipse cx="138" cy="74" rx="5" ry="6" fill="#1e293b" />

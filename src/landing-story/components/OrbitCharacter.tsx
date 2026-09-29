@@ -46,7 +46,7 @@ export const OrbitCharacter: React.FC<OrbitCharacterProps> = ({
       title="Click Orbit to say hello!"
       className={`relative inline-flex flex-col items-center select-none cursor-pointer transition-transform duration-300 hover:scale-105 active:scale-95 group focus:outline-none focus-visible:ring-4 focus-visible:ring-amber-400 rounded-3xl p-2 ${className}`}
     >
-      {/* Speech Bubble */}
+     
       {speechBubble && (
         <div className={`mb-3 max-w-xs sm:max-w-md px-5 py-3.5 bg-white/95 backdrop-blur-sm border-2 ${
           isSpeaking ? 'border-amber-400 ring-4 ring-amber-300/40 shadow-xl' : 'border-amber-300 shadow-md'
@@ -57,7 +57,7 @@ export const OrbitCharacter: React.FC<OrbitCharacterProps> = ({
         </div>
       )}
 
-      {/* Orbit SVG Illustration */}
+     
       <svg
         viewBox="0 0 200 220"
         className={`${sizeClasses} overflow-visible drop-shadow-md`}
@@ -86,20 +86,20 @@ export const OrbitCharacter: React.FC<OrbitCharacterProps> = ({
           </filter>
         </defs>
 
-        {/* Orbit Shadow */}
+        
         <ellipse cx="100" cy="208" rx="42" ry="7" fill="#d97706" fillOpacity="0.25" />
 
-        {/* Left Solar Panel Arm (Wing) */}
+     
         <g
           className={`transition-transform duration-300 ${
             isExcited ? 'animate-wave-arm' : 'origin-bottom-right rotate-[-6deg]'
           }`}
           style={{ transformOrigin: '55px 135px' }}
         >
-          {/* Joint */}
+         
           <circle cx="55" cy="135" r="6" fill="#78350f" />
           <rect x="50" y="132" width="10" height="6" rx="2" fill="#92400e" />
-          {/* Panel Arm */}
+         
           <rect
             x="14"
             y="118"
@@ -110,22 +110,21 @@ export const OrbitCharacter: React.FC<OrbitCharacterProps> = ({
             stroke="#1e293b"
             strokeWidth="2"
           />
-          {/* Solar Grid Lines */}
+         
           <line x1="28" y1="118" x2="28" y2="144" stroke="#7dd3fc" strokeWidth="1.5" strokeOpacity="0.8" />
           <line x1="42" y1="118" x2="42" y2="144" stroke="#7dd3fc" strokeWidth="1.5" strokeOpacity="0.8" />
           <line x1="14" y1="131" x2="56" y2="131" stroke="#7dd3fc" strokeWidth="1.5" strokeOpacity="0.8" />
         </g>
 
-        {/* Right Solar Panel Arm (Wing) */}
         <g
           className={`transition-transform duration-300 ${
             isExcited ? 'animate-wave-arm' : 'origin-bottom-left rotate-[6deg]'
           }`}
           style={{ transformOrigin: '145px 135px', animationDirection: 'reverse' }}
         >
-          {/* Joint */}
+         
           <circle cx="145" cy="135" r="6" fill="#78350f" />
-          {/* Panel Arm */}
+         
           <rect
             x="144"
             y="118"
@@ -136,13 +135,13 @@ export const OrbitCharacter: React.FC<OrbitCharacterProps> = ({
             stroke="#1e293b"
             strokeWidth="2"
           />
-          {/* Solar Grid Lines */}
+         
           <line x1="158" y1="118" x2="158" y2="144" stroke="#7dd3fc" strokeWidth="1.5" strokeOpacity="0.8" />
           <line x1="172" y1="118" x2="172" y2="144" stroke="#7dd3fc" strokeWidth="1.5" strokeOpacity="0.8" />
           <line x1="144" y1="131" x2="186" y2="131" stroke="#7dd3fc" strokeWidth="1.5" strokeOpacity="0.8" />
         </g>
 
-        {/* Round Main Body */}
+     
         <g className="animate-float-slow">
           <circle
             cx="100"
@@ -153,7 +152,7 @@ export const OrbitCharacter: React.FC<OrbitCharacterProps> = ({
             strokeWidth="3.5"
           />
 
-          {/* Body Belly Plate / Screen */}
+         
           <rect
             x="76"
             y="126"
@@ -165,25 +164,25 @@ export const OrbitCharacter: React.FC<OrbitCharacterProps> = ({
             strokeWidth="2"
           />
 
-          {/* Friendly LED Eyes */}
+       
           {mood === 'sleepy' ? (
-            // Sleepy curved eyes
+           
             <g stroke="#38bdf8" strokeWidth="3" strokeLinecap="round">
               <path d="M84 142 Q 90 146 96 142" />
               <path d="M104 142 Q 110 146 116 142" />
             </g>
           ) : (
-            // Big bright happy glowing eyes
+          
             <g fill="#38bdf8" filter="url(#glowLight)">
               <ellipse cx="90" cy="141" rx="5.5" ry="6.5" />
               <ellipse cx="110" cy="141" rx="5.5" ry="6.5" />
-              {/* Eye sparkle highlights */}
+             
               <circle cx="88" cy="139" r="2" fill="#ffffff" />
               <circle cx="108" cy="139" r="2" fill="#ffffff" />
             </g>
           )}
 
-          {/* Cute digital smile */}
+    
           <path
             d={mood === 'sleepy' ? 'M94 153 Q 100 155 106 153' : 'M92 151 Q 100 157 108 151'}
             stroke={mood === 'sleepy' ? '#94a3b8' : '#38bdf8'}
@@ -192,36 +191,35 @@ export const OrbitCharacter: React.FC<OrbitCharacterProps> = ({
             fill="none"
           />
 
-          {/* Rosy Cheeks */}
+       
           <ellipse cx="82" cy="146" rx="4" ry="2.5" fill="#f43f5e" fillOpacity="0.5" />
           <ellipse cx="118" cy="146" rx="4" ry="2.5" fill="#f43f5e" fillOpacity="0.5" />
 
-          {/* Small Heart/Star Icon on Chest */}
+         
           <circle cx="100" cy="172" r="4" fill="#ef4444" className="animate-pulse" />
 
-          {/* Neck mount */}
+         
           <rect x="92" y="93" width="16" height="10" rx="3" fill="#b45309" />
           <circle cx="100" cy="98" r="3" fill="#fde047" />
 
-          {/* Tilted Satellite-Dish Head */}
+        
           <g
             className="animate-dish-tilt"
             style={{ transformOrigin: '100px 92px' }}
           >
-            {/* Dish Antenna Stem */}
+        
             <line x1="100" y1="58" x2="100" y2="40" stroke="#78350f" strokeWidth="3" strokeLinecap="round" />
-            {/* Antenna Glowing Beacon Light */}
+           
             <circle cx="100" cy="38" r="6" fill="#f43f5e" filter="url(#glowLight)" className="animate-ping" />
             <circle cx="100" cy="38" r="5" fill="#fb7185" />
 
-            {/* Dish Bowl */}
             <path
               d="M 58 72 C 60 96, 140 96, 142 72 C 142 62, 58 62, 58 72 Z"
               fill="url(#dishGrad)"
               stroke="#b45309"
               strokeWidth="3"
             />
-            {/* Dish Inner Concentric Rings */}
+            
             <ellipse cx="100" cy="72" rx="32" ry="10" fill="#fef9c3" stroke="#f59e0b" strokeWidth="1.5" />
             <ellipse cx="100" cy="72" rx="18" ry="6" fill="#fef08a" stroke="#d97706" strokeWidth="1.5" />
             <circle cx="100" cy="72" r="5" fill="#b45309" />

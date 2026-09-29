@@ -27,7 +27,7 @@ export const ApolloIllustration: React.FC<ApolloProps> = ({
       title="Apollo Lunar Roving Vehicle · The first car driven on the Moon!"
       className={`relative inline-flex flex-col items-center select-none cursor-pointer group transition-all duration-300 hover:scale-[1.02] focus:outline-none focus-visible:ring-4 focus-visible:ring-amber-400 rounded-3xl p-3 ${className}`}
     >
-      {/* Speech Bubble */}
+   
       {speechBubble && (
         <div
           className={`mb-3 max-w-xs sm:max-w-md px-5 py-3.5 bg-white/95 backdrop-blur-xs border-2 ${
@@ -58,14 +58,10 @@ export const ApolloIllustration: React.FC<ApolloProps> = ({
             <stop offset="100%" stopColor="#94a3b8" />
           </linearGradient>
         </defs>
-
-        {/* Lunar grey shadow */}
         <ellipse cx="130" cy="188" rx="90" ry="10" fill="#0f172a" fillOpacity="0.3" />
-
-        {/* High-gain Umbrella Dish Antenna on Front Mast */}
         <g>
           <line x1="68" y1="125" x2="68" y2="45" stroke="#475569" strokeWidth="3" />
-          {/* Umbrella dish */}
+ 
           <path
             d="M 45 42 Q 68 22 91 42 Z"
             fill="#cbd5e1"
@@ -75,43 +71,41 @@ export const ApolloIllustration: React.FC<ApolloProps> = ({
           <circle cx="68" cy="28" r="3.5" fill="#f59e0b" />
         </g>
 
-        {/* Astronaut in Rover Seat */}
+    
         <g>
-          {/* White Spacesuit Body */}
+     
           <rect x="110" y="78" width="46" height="52" rx="12" fill="#f8fafc" stroke="#475569" strokeWidth="2.5" />
-          {/* Backpack PLSS */}
+        
           <rect x="148" y="75" width="16" height="45" rx="6" fill="#cbd5e1" stroke="#475569" strokeWidth="2" />
-          {/* Helmet */}
+      
           <circle cx="132" cy="62" r="22" fill="#f8fafc" stroke="#475569" strokeWidth="2.5" />
-          {/* Golden Visor */}
+      
           <path
             d="M 116 62 Q 132 50 148 62 Q 148 72 132 74 Q 116 72 116 62 Z"
             fill="url(#lunarVisor)"
             stroke="#78350f"
             strokeWidth="1.5"
           />
-          {/* Cheerful reflection highlight */}
+        
           <ellipse cx="126" cy="58" rx="4" ry="2" fill="#ffffff" fillOpacity="0.8" />
-          {/* Astronaut waving arm */}
+       
           <path d="M 152 90 Q 175 75 180 55" stroke="#f8fafc" strokeWidth="10" strokeLinecap="round" />
           <path d="M 152 90 Q 175 75 180 55" stroke="#475569" strokeWidth="10" strokeLinecap="round" strokeDasharray="0 999" />
-          {/* Glove holding a shining lunar rock! */}
+       
           <circle cx="180" cy="55" r="7" fill="#64748b" />
           <polygon points="186,45 194,48 190,56 182,53" fill="#e2e8f0" stroke="#0284c7" strokeWidth="1.5" />
           <circle cx="188" cy="50" r="1.5" fill="#ffffff" />
         </g>
 
-        {/* LRV Chassis & Seats */}
+      
         <g>
           <rect x="58" y="125" width="144" height="24" rx="6" fill="url(#lrvChassis)" stroke="#334155" strokeWidth="2.5" />
-          {/* Seat back */}
+        
           <line x1="152" y1="125" x2="155" y2="95" stroke="#64748b" strokeWidth="4" strokeLinecap="round" />
-          {/* T-bar steering hand controller */}
           <line x1="102" y1="125" x2="108" y2="108" stroke="#ef4444" strokeWidth="3" strokeLinecap="round" />
           <line x1="102" y1="108" x2="114" y2="108" stroke="#ef4444" strokeWidth="3" strokeLinecap="round" />
         </g>
 
-        {/* 4 Iconic Wire-Mesh Wheels with Chevron Treads */}
         {[
           { cx: 70, cy: 168 },
           { cx: 120, cy: 172 },
@@ -121,7 +115,6 @@ export const ApolloIllustration: React.FC<ApolloProps> = ({
             <circle cx={w.cx} cy={w.cy} r="18" fill="#475569" stroke="#94a3b8" strokeWidth="3" />
             <circle cx={w.cx} cy={w.cy} r="10" fill="#1e293b" />
             <circle cx={w.cx} cy={w.cy} r="3" fill="#cbd5e1" />
-            {/* Mesh spokes */}
             <line x1={w.cx - 14} y1={w.cy} x2={w.cx + 14} y2={w.cy} stroke="#cbd5e1" strokeWidth="1.5" strokeOpacity="0.6" />
             <line x1={w.cx} y1={w.cy - 14} x2={w.cx} y2={w.cy + 14} stroke="#cbd5e1" strokeWidth="1.5" strokeOpacity="0.6" />
           </g>
