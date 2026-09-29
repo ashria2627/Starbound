@@ -1,0 +1,493 @@
+/**
+ * Character voice speech synthesis utility.
+ * Features warm, friendly, natural storytelling voices for Orbit and the space explorers.
+ * Designed to sound like someone sitting beside a child telling an exciting space story.
+ */
+
+import {
+  playOrbitCue,
+  playSpiritCue,
+  playOppyCue,
+  playRadioBeep,
+} from './sound';
+
+export type CharacterVoice =
+  | 'orbit'
+  | 'sputnik'
+  | 'sojourner'
+  | 'spirit'
+  | 'oppy'
+  | 'apollo'
+  | 'pioneer'
+  | 'voyager'
+  | 'mariner2'
+  | 'pioneer5'
+  | 'mariner10'
+  | 'pioneer11'
+  | 'narrator';
+
+export interface CharacterVoiceMeta {
+  name: string;
+  avatar: string;
+  role: string;
+  soundCue: string;
+  sampleQuote: string;
+}
+
+export const CHARACTER_META: Record<CharacterVoice, CharacterVoiceMeta> = {
+  orbit: {
+    name: 'Orbit',
+    avatar: '🛰️',
+    role: 'Your Space Guide',
+    soundCue: 'Warm Storybook Bell',
+    sampleQuote: "Hey explorer! Have you ever wondered just how BIG space really is?",
+  },
+  sputnik: {
+    name: 'Sputnik 1',
+    avatar: '📡',
+    role: 'First Earth Satellite (1957)',
+    soundCue: 'Gentle Radio Ping',
+    sampleQuote: "Beep... beep... beep! I helped open the door to space!",
+  },
+  sojourner: {
+    name: 'Sojourner',
+    avatar: '🏎️',
+    role: 'First Mars Rover (1997)',
+    soundCue: 'Adventurous Chime',
+    sampleQuote: "I rolled across the Martian rocks and soil for 83 wonderful days!",
+  },
+  spirit: {
+    name: 'Spirit',
+    avatar: '🤖',
+    role: 'Mars Rover Pioneer',
+    soundCue: 'Brave Horn',
+    sampleQuote: "I climbed high hills and uncovered bright silica rocks under Mars!",
+  },
+  oppy: {
+    name: 'Opportunity',
+    avatar: '✨',
+    role: 'Mars Rover Explorer',
+    soundCue: 'Gentle Music Box',
+    sampleQuote: "I found signs that liquid water had once flowed across ancient Mars!",
+  },
+  apollo: {
+    name: 'Apollo 15 Crew',
+    avatar: '🚙',
+    role: 'Lunar Roving Vehicle',
+    soundCue: 'Radio Transmission',
+    sampleQuote: "We drove the first car on the Moon and collected the ancient Genesis Rock!",
+  },
+  pioneer: {
+    name: 'Pioneer 10',
+    avatar: '🪐',
+    role: 'Outer Solar System Scout',
+    soundCue: 'Cosmic Drone',
+    sampleQuote: "I was the first to cross the asteroid belt and fly past giant Jupiter!",
+  },
+  voyager: {
+    name: 'Voyager 1',
+    avatar: '🌟',
+    role: 'Interstellar Messenger',
+    soundCue: 'Golden Record Chime',
+    sampleQuote: "I carry a golden record into the quiet space between the stars.",
+  },
+  mariner2: {
+    name: 'Mariner 2',
+    avatar: '🟡',
+    role: 'First Venus Flyby (1962)',
+    soundCue: 'Cosmic Drone',
+    sampleQuote: "Hi! I'm Mariner 2!",
+  },
+  pioneer5: {
+    name: 'Pioneer 5',
+    avatar: '☀️',
+    role: 'Sun-Orbit Messenger (1960)',
+    soundCue: 'Cosmic Drone',
+    sampleQuote: "Hi! I'm Pioneer 5!",
+  },
+  mariner10: {
+    name: 'Mariner 10',
+    avatar: '🌑',
+    role: 'Mercury Explorer (1973)',
+    soundCue: 'Cosmic Drone',
+    sampleQuote: "Hi! I'm Mariner 10!",
+  },
+  pioneer11: {
+    name: 'Pioneer 11',
+    avatar: '🪐',
+    role: 'First Saturn Visitor (1979)',
+    soundCue: 'Cosmic Drone',
+    sampleQuote: "Hi! I'm Pioneer 11!",
+  },
+  narrator: {
+    name: 'Storybook Voice',
+    avatar: '📖',
+    role: 'Narrator',
+    soundCue: 'Soft Page Flutter',
+    sampleQuote: "Once upon a time, humanity looked up at the stars and sent little explorers to find answers.",
+  },
+};
+
+interface VoiceProfile {
+  pitch: number;
+  rate: number;
+  volume: number;
+  voiceKeywords: string[];
+}
+
+const VOICE_PROFILES: Record<CharacterVoice, VoiceProfile> = {
+  orbit: {
+    pitch: 1.05,
+    rate: 0.95,
+    volume: 1.0,
+    voiceKeywords: [
+      'natural',
+      'google us english',
+      'jenny',
+      'samantha',
+      'flo',
+      'victoria',
+      'karen',
+      'female',
+      'en-us',
+    ],
+  },
+  sputnik: {
+    pitch: 1.25,
+    rate: 1.0,
+    volume: 0.95,
+    voiceKeywords: ['google', 'alex', 'en-us'],
+  },
+  sojourner: {
+    pitch: 1.15,
+    rate: 1.02,
+    volume: 1.0,
+    voiceKeywords: ['junior', 'natural', 'samantha', 'child', 'en-us'],
+  },
+  spirit: {
+    pitch: 0.95,
+    rate: 0.96,
+    volume: 1.0,
+    voiceKeywords: ['guy', 'daniel', 'alex', 'natural', 'george', 'male'],
+  },
+  oppy: {
+    pitch: 1.08,
+    rate: 0.96,
+    volume: 1.0,
+    voiceKeywords: ['samantha', 'ana', 'natural', 'victoria', 'female'],
+  },
+  apollo: {
+    pitch: 0.96,
+    rate: 0.96,
+    volume: 1.0,
+    voiceKeywords: ['alex', 'daniel', 'david', 'male'],
+  },
+  pioneer: {
+    pitch: 0.92,
+    rate: 0.94,
+    volume: 1.0,
+    voiceKeywords: ['guy', 'natural', 'alex', 'male'],
+  },
+  voyager: {
+    pitch: 0.90,
+    rate: 0.90,
+    volume: 0.95,
+    voiceKeywords: ['natural', 'daniel', 'oliver', 'male'],
+  },
+  mariner2: {
+    pitch: 1.0,
+    rate: 0.94,
+    volume: 1.0,
+    voiceKeywords: ["daniel", "male"],
+  },
+  pioneer5: {
+    pitch: 1.08,
+    rate: 0.96,
+    volume: 1.0,
+    voiceKeywords: ["david", "male"],
+  },
+  mariner10: {
+    pitch: 0.95,
+    rate: 0.93,
+    volume: 1.0,
+    voiceKeywords: ["oliver", "male"],
+  },
+  pioneer11: {
+    pitch: 0.88,
+    rate: 0.92,
+    volume: 1.0,
+    voiceKeywords: ["guy", "natural", "male"],
+  },
+  narrator: {
+    pitch: 1.0,
+    rate: 0.92,
+    volume: 1.0,
+    voiceKeywords: ['natural', 'google us english', 'samantha'],
+  },
+};
+
+let speechEnabled = true;
+let autoSpeakEnabled = false; // Auto-voice OFF by default; user must opt in
+let activeUtterance: SpeechSynthesisUtterance | null = null;
+let speechListeners: Array<(isSpeaking: boolean, character?: CharacterVoice) => void> = [];
+let resumeInterval: number | null = null;
+let pendingSpeakTimer: number | null = null;
+let cachedVoices: SpeechSynthesisVoice[] = [];
+
+export const setSpeechEnabled = (enabled: boolean) => {
+  speechEnabled = enabled;
+  if (!enabled) {
+    stopSpeaking();
+  }
+};
+
+export const getSpeechEnabled = () => speechEnabled;
+
+export const setAutoSpeakEnabled = (enabled: boolean) => {
+  autoSpeakEnabled = enabled;
+  if (!enabled) {
+    stopSpeaking();
+  }
+};
+
+export const getAutoSpeakEnabled = () => autoSpeakEnabled && speechEnabled;
+
+export const registerSpeechListener = (
+  listener: (isSpeaking: boolean, character?: CharacterVoice) => void
+) => {
+  speechListeners.push(listener);
+  return () => {
+    speechListeners = speechListeners.filter((l) => l !== listener);
+  };
+};
+
+const notifyListeners = (isSpeaking: boolean, character?: CharacterVoice) => {
+  speechListeners.forEach((l) => {
+    try {
+      l(isSpeaking, character);
+    } catch {
+      // Ignore
+    }
+  });
+};
+
+const getAvailableVoices = (): SpeechSynthesisVoice[] => {
+  if (typeof window === 'undefined' || !('speechSynthesis' in window)) return [];
+  const fresh = window.speechSynthesis.getVoices();
+  if (fresh && fresh.length > 0) {
+    cachedVoices = fresh;
+  }
+  return cachedVoices;
+};
+
+// Global audio/speech unlock for Chromium/Safari autoplay policy
+export const unlockSpeech = () => {
+  if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
+  const synth = window.speechSynthesis;
+  if (synth.paused) {
+    synth.resume();
+  }
+  getAvailableVoices();
+};
+
+if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+  window.speechSynthesis.onvoiceschanged = () => {
+    cachedVoices = window.speechSynthesis.getVoices() || [];
+  };
+
+  const onFirstInteraction = () => {
+    unlockSpeech();
+  };
+
+  window.addEventListener('click', onFirstInteraction, { passive: true });
+  window.addEventListener('scroll', onFirstInteraction, { passive: true });
+  window.addEventListener('touchstart', onFirstInteraction, { passive: true });
+  window.addEventListener('keydown', onFirstInteraction, { passive: true });
+}
+
+/**
+ * Finds the best matching voice for a character profile.
+ */
+const pickBestVoice = (keywords: string[]): SpeechSynthesisVoice | null => {
+  const voices = getAvailableVoices();
+  if (voices.length === 0) return null;
+
+  for (const kw of keywords) {
+    const matched = voices.find((v) => {
+      const name = v.name.toLowerCase();
+      const lang = v.lang.toLowerCase();
+      return name.includes(kw) || lang.includes(kw);
+    });
+    if (matched) return matched;
+  }
+
+  const english = voices.find((v) => v.lang.startsWith('en'));
+  if (english) return english;
+
+  return voices.find((v) => v.default) || voices[0] || null;
+};
+
+export interface SpeakOptions {
+  onStart?: () => void;
+  onEnd?: () => void;
+  skipSoundCue?: boolean;
+  manualTrigger?: boolean;
+}
+
+/**
+ * Cleans text for natural speech synthesis
+ */
+const cleanSpeechText = (rawText: string): string => {
+  return rawText
+    .replace(/[“”"']/g, '')
+    .replace(/✦|⭐|💎|🚀|📡|🏎️|🤖|✨|🌕|🚙|🪐|🌟|📖|🔴/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+};
+
+/**
+ * Speaks dialogue using Web Speech API with bug-free queue handling and voice matching.
+ */
+export const speakDialogue = (
+  character: CharacterVoice,
+  text: string,
+  options: SpeakOptions = {}
+) => {
+  if (!speechEnabled) return;
+  if (!options.manualTrigger && !autoSpeakEnabled) return;
+  if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
+
+  const synth = window.speechSynthesis;
+
+  // Unpause if paused
+  if (synth.paused) {
+    synth.resume();
+  }
+
+  // Clear any existing pending speak timer
+  if (pendingSpeakTimer) {
+    window.clearTimeout(pendingSpeakTimer);
+    pendingSpeakTimer = null;
+  }
+
+  // Cancel ongoing speech cleanly
+  try {
+    synth.cancel();
+  } catch {
+    // Ignore
+  }
+
+  if (resumeInterval) {
+    window.clearInterval(resumeInterval);
+    resumeInterval = null;
+  }
+
+  // Short delay to allow synth.cancel to complete in browser engine
+  pendingSpeakTimer = window.setTimeout(() => {
+    pendingSpeakTimer = null;
+
+    if (!speechEnabled) return;
+    if (!options.manualTrigger && !autoSpeakEnabled) return;
+
+    if (!options.skipSoundCue) {
+      if (character === 'orbit') playOrbitCue();
+      else if (character === 'spirit') playSpiritCue();
+      else if (character === 'oppy') playOppyCue();
+      else if (character === 'sputnik') playRadioBeep(880, 0.1);
+    }
+
+    const cleanedText = cleanSpeechText(text);
+    if (!cleanedText) return;
+
+    const profile = VOICE_PROFILES[character] || VOICE_PROFILES.orbit;
+    const utterance = new SpeechSynthesisUtterance(cleanedText);
+    activeUtterance = utterance;
+    // Attach to global window to avoid premature garbage collection bug in Chrome
+    (window as unknown as { __activeUtterance?: SpeechSynthesisUtterance }).__activeUtterance = utterance;
+
+    utterance.pitch = profile.pitch;
+    utterance.rate = profile.rate;
+    utterance.volume = profile.volume;
+
+    const chosenVoice = pickBestVoice(profile.voiceKeywords);
+    if (chosenVoice) {
+      utterance.voice = chosenVoice;
+    }
+
+    utterance.onstart = () => {
+      notifyListeners(true, character);
+      if (options.onStart) options.onStart();
+
+      // Chrome 15s keep-alive interval bugfix
+      if (resumeInterval) window.clearInterval(resumeInterval);
+      resumeInterval = window.setInterval(() => {
+        if (!synth.speaking) {
+          if (resumeInterval) {
+            window.clearInterval(resumeInterval);
+            resumeInterval = null;
+          }
+          return;
+        }
+        synth.pause();
+        synth.resume();
+      }, 8000);
+    };
+
+    const handleFinish = () => {
+      if (resumeInterval) {
+        window.clearInterval(resumeInterval);
+        resumeInterval = null;
+      }
+      activeUtterance = null;
+      (window as unknown as { __activeUtterance?: SpeechSynthesisUtterance }).__activeUtterance = undefined;
+      notifyListeners(false);
+      if (options.onEnd) options.onEnd();
+    };
+
+    utterance.onend = handleFinish;
+    utterance.onerror = (e) => {
+      // Ignore cancels caused by newer speech so chained callbacks don't misfire
+      const err = (e as SpeechSynthesisErrorEvent).error;
+      if (err === 'interrupted' || err === 'canceled') return;
+      handleFinish();
+    };
+
+    try {
+      synth.speak(utterance);
+      if (synth.paused) {
+        synth.resume();
+      }
+    } catch {
+      handleFinish();
+    }
+  }, 25);
+};
+
+export const stopSpeaking = () => {
+  if (pendingSpeakTimer) {
+    window.clearTimeout(pendingSpeakTimer);
+    pendingSpeakTimer = null;
+  }
+  if (resumeInterval) {
+    window.clearInterval(resumeInterval);
+    resumeInterval = null;
+  }
+  if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+    try {
+      window.speechSynthesis.cancel();
+      if (window.speechSynthesis.paused) {
+        window.speechSynthesis.resume();
+      }
+    } catch {
+      // Ignore
+    }
+  }
+  activeUtterance = null;
+  (window as unknown as { __activeUtterance?: SpeechSynthesisUtterance }).__activeUtterance = undefined;
+  notifyListeners(false);
+};
+
+export const isSpeakingCurrently = () => {
+  if (typeof window === 'undefined' || !('speechSynthesis' in window)) return false;
+  return window.speechSynthesis.speaking;
+};
