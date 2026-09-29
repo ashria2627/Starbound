@@ -13,13 +13,11 @@ export interface CosmoSiteEnrichment {
     points: number[];
   };
   mineralRatio: MineralProportion[];
+  breakdownLabel?: string;
   wireframeLayers: string[];
 }
 
 export const COSMO_SITE_DATA: Record<string, CosmoSiteEnrichment> = {
-  // ---------------------------------------------------------------------------
-  // OPPORTUNITY
-  // ---------------------------------------------------------------------------
   'oppy-blueberries': {
     plainEnglishTitle: 'Ancient Standing Water & "Blueberries"',
     plainEnglishDiscovery: 'Millions of miniature iron spheres ("blueberries") and sulfate crystals prove that acidic liquid groundwater once soaked this entire Martian plain.',
@@ -34,30 +32,37 @@ export const COSMO_SITE_DATA: Record<string, CosmoSiteEnrichment> = {
     },
     mineralRatio: [
       {
-        name: 'Iron Oxide (Hematite)',
+        name: 'Hematite (of Iron Phases)',
         formula: 'Fe₂O₃',
-        percentage: 52,
+        percentage: 35,
         color: '#f59e0b',
         simpleExplanation: 'Spherules that grew inside wet rock pores over thousands of years.',
       },
       {
-        name: 'Jarosite Crystals',
+        name: 'Jarosite (of Iron Phases)',
         formula: 'KFe₃(SO₄)₂(OH)₆',
-        percentage: 26,
+        percentage: 28,
         color: '#eab308',
         simpleExplanation: 'Water-bearing sulfate salt; impossible to form in dry conditions.',
       },
       {
-        name: 'Volcanic Silicates',
-        formula: 'SiO₂ / Basalt',
-        percentage: 22,
+        name: 'Other Iron Oxide (of Iron Phases)',
+        formula: 'FeO(OH) / mixed',
+        percentage: 19,
+        color: '#fb923c',
+        simpleExplanation: 'A related secondary iron oxide phase identified alongside hematite and jarosite.',
+      },
+      {
+        name: 'Other Non-Iron Phases',
+        formula: 'Basalt / Silicate Matrix',
+        percentage: 18,
         color: '#94a3b8',
-        simpleExplanation: 'Original volcanic rock matrix before water alteration.',
+        simpleExplanation: 'Remaining rock matrix outside the iron-bearing mineral fraction.',
       },
     ],
     wireframeLayers: ['Regolith Sand', 'Hematite Spherules', 'Jarosite Bedrock', 'Basalt Base'],
   },
-  'oppy-crossbedding': {
+  'oppy-jarosite-vugs': {
     plainEnglishTitle: 'Rippled Waves of an Ancient Martian Lake',
     plainEnglishDiscovery: 'Smiling festoon layers in the bedrock prove gentle ripples of liquid water flowed across the surface, rather than wind alone.',
     purityScore: 82,
@@ -71,25 +76,25 @@ export const COSMO_SITE_DATA: Record<string, CosmoSiteEnrichment> = {
     },
     mineralRatio: [
       {
-        name: 'Sulfate Salts',
-        formula: 'MgSO₄ / CaSO₄',
-        percentage: 44,
+        name: 'Sulfate Salts / Alteration Phase',
+        formula: 'Jarosite / MgSO₄ / Fe-Sulfates',
+        percentage: 40,
         color: '#38bdf8',
-        simpleExplanation: 'Dissolved minerals left behind when lake water evaporated.',
+        simpleExplanation: 'Dissolved minerals left behind when acidic water evaporated.',
       },
       {
-        name: 'Quartz / Silica',
-        formula: 'SiO₂',
-        percentage: 36,
+        name: 'Basaltic Silicates (Primary Minerals)',
+        formula: 'Pyroxene / Feldspar',
+        percentage: 50,
         color: '#cbd5e1',
-        simpleExplanation: 'Durable sand grains washed into ancient lake ripples.',
+        simpleExplanation: 'Primary minerals remaining from the parent basalt rock.',
       },
       {
-        name: 'Iron Oxyhydroxide',
-        formula: 'Fe³⁺',
-        percentage: 20,
+        name: 'Iron Oxides / Hematite',
+        formula: 'Fe₂O₃',
+        percentage: 10,
         color: '#f97316',
-        simpleExplanation: 'Rusty mineral cementing the sedimentary layers together.',
+        simpleExplanation: 'Secondary iron oxide phase cementing the sedimentary layers together.',
       },
     ],
     wireframeLayers: ['Eolian Dust', 'Ripple Laminae', 'Evaporite Salts', 'Subsurface Hardpan'],
@@ -112,25 +117,32 @@ export const COSMO_SITE_DATA: Record<string, CosmoSiteEnrichment> = {
     },
     mineralRatio: [
       {
-        name: 'Goethite (Hydrated Rust)',
+        name: 'Goethite (of Iron Phases)',
         formula: 'α-FeO(OH)',
-        percentage: 45,
+        percentage: 12,
         color: '#f59e0b',
         simpleExplanation: 'Direct evidence water soaked into and chemically altered this mountain rock.',
       },
       {
-        name: 'Pyroxene & Olivine',
-        formula: '(Mg,Fe)₂SiO₄',
-        percentage: 38,
+        name: 'Unaltered Basaltic Minerals',
+        formula: '(Mg,Fe)₂SiO₄ (Pyroxene/Olivine)',
+        percentage: 55,
         color: '#64748b',
         simpleExplanation: 'Unaltered basaltic minerals from the original volcano.',
       },
       {
-        name: 'Chlorine & Bromine Salts',
+        name: 'Halogens & Salts (Cl/Br)',
         formula: 'Cl / Br',
-        percentage: 17,
+        percentage: 3,
         color: '#22c55e',
-        simpleExplanation: 'Concentrated by mineral fluids seeping through the hills.',
+        simpleExplanation: 'Trace halogen salts concentrated by mineral fluids seeping through the hills.',
+      },
+      {
+        name: 'Sulfate & Other Secondary Phases',
+        formula: 'SO₃ / Mixed',
+        percentage: 30,
+        color: '#06b6d4',
+        simpleExplanation: 'Remaining secondary alteration minerals and matrix material.',
       },
     ],
     wireframeLayers: ['Columbia Soil', 'Goethite Rind', 'Pitted Basalt', 'Unaltered Core'],
@@ -374,6 +386,7 @@ export const COSMO_SITE_DATA: Record<string, CosmoSiteEnrichment> = {
     plainEnglishDiscovery: 'Passing within 5,995 km of the Moon, Luna 1 proved the Moon lacks an active liquid core dynamo or global magnetic field.',
     purityScore: 92,
     radiationLevelUsSv: 2.1,
+    breakdownLabel: 'Magnetic Field Measurements',
     densityCurve: {
       min: 0.0,
       current: 5.4,
@@ -440,7 +453,7 @@ export const COSMO_SITE_DATA: Record<string, CosmoSiteEnrichment> = {
     ],
     wireframeLayers: ['Inner Belt (2.2 AU)', 'Asteroid Concentration', 'Zodiacal Cloud', 'Outer Belt (3.3 AU)'],
   },
-  'pioneer10-jupiter-flyby': {
+  'pioneer10-radiation-encounter': {
     plainEnglishTitle: 'Jupiter Intense Radiation Environment',
     plainEnglishDiscovery: 'Measured Jupiter colossal magnetic shield—larger than the Sun in our sky—and survived radiation 10,000 times stronger than Earth belts.',
     purityScore: 94,
@@ -518,45 +531,47 @@ export const COSMO_SITE_DATA: Record<string, CosmoSiteEnrichment> = {
     ],
     wireframeLayers: ['Io Surface Frost', 'Pele Volcanic Vent', '300km Plume Canopy', 'Plasma Torus'],
   },
-  'voyager1-saturn-rings': {
-    plainEnglishTitle: 'Spokes & Complexity in Saturn Rings',
-    plainEnglishDiscovery: 'Photographed thousands of razor-thin ringlets, dark electrostatic spokes floating above the rings, and discovered new shepherd moons.',
-    purityScore: 99,
+  'voyager1-jupiter-ring': {
+    plainEnglishTitle: "Jupiter's Faint Dusty Ring",
+    plainEnglishDiscovery: "Voyager 1 discovered that Jupiter, like Saturn, has its own faint ring — a thin sheet of micrometer-sized dust grains kicked up from its inner moons.",
+    purityScore: 90,
     radiationLevelUsSv: 0.8,
+    breakdownLabel: 'Ring Dust Composition & Dynamics',
     densityCurve: {
-      min: 0.92,
-      current: 0.93,
-      max: 0.95,
-      unit: 'g/cm³',
+      min: 0.0,
+      current: 0.4,
+      max: 1.0,
+      unit: 'optical depth (τ)',
       points: [1, 5, 20, 65, 98, 100, 75, 25, 5],
     },
     mineralRatio: [
       {
-        name: 'Water Ice Crystals',
-        formula: 'H₂O Ice',
-        percentage: 99,
-        color: '#38bdf8',
-        simpleExplanation: 'Pure water ice crystals ranging from dust size to house-sized boulders.',
+        name: 'Amorphous Silicate Dust Grains',
+        formula: 'SiO₂ (amorphous)',
+        percentage: 85,
+        color: '#cbd5e1',
+        simpleExplanation: 'Micrometer-sized dust grains continuously blasted off inner moons like Metis and Adrastea.',
       },
       {
-        name: 'Tholin & Silicate Dust',
-        formula: 'Organic Carbon',
-        percentage: 1,
-        color: '#f59e0b',
-        simpleExplanation: 'Trace impurities giving the rings a faint warm golden hue.',
+        name: 'Carbonaceous Dust & Weathered Debris',
+        formula: 'Mixed Carbonaceous',
+        percentage: 15,
+        color: '#475569',
+        simpleExplanation: 'Micrometeorite-processed debris darkened by long exposure to space.',
       },
     ],
-    wireframeLayers: ['C-Ring Crepe', 'B-Ring Massive', 'Cassini Division', 'A-Ring & Encke Gap'],
+    wireframeLayers: ['Halo Ring', 'Main Ring', 'Amalthea Gossamer Ring', 'Thebe Gossamer Ring'],
   },
 
   // ---------------------------------------------------------------------------
   // PIONEER 11
   // ---------------------------------------------------------------------------
-  'pioneer11-saturn-f-ring': {
+  'pioneer11-f-ring': {
     plainEnglishTitle: 'Discovery of Saturn Narrow F Ring',
     plainEnglishDiscovery: 'First spacecraft to visit Saturn; passed within 21,000 km and discovered the narrow outer F Ring and shepherd moon Epimetheus.',
     purityScore: 95,
     radiationLevelUsSv: 0.75,
+    breakdownLabel: 'Ring Composition & Material Phase',
     densityCurve: {
       min: 0.85,
       current: 0.92,
@@ -566,58 +581,52 @@ export const COSMO_SITE_DATA: Record<string, CosmoSiteEnrichment> = {
     },
     mineralRatio: [
       {
-        name: 'Water Ice Grains',
+        name: 'Water Ice',
         formula: 'H₂O',
-        percentage: 95,
+        percentage: 97,
         color: '#7dd3fc',
         simpleExplanation: 'Confined into a narrow ring by gravitational shepherd moons.',
       },
       {
-        name: 'Silicate Micrometeoroid Dust',
+        name: 'Silicate Dust Contaminants',
         formula: 'SiO₂',
-        percentage: 5,
+        percentage: 3,
         color: '#eab308',
         simpleExplanation: 'Debris from collisions between small ring moons.',
       },
     ],
     wireframeLayers: ['Main Ring Outer Edge', 'Pioneer Gap', 'Narrow F-Ring Core', 'Shepherd Moon Orbit'],
   },
-  'pioneer11-titan-flyby': {
-    plainEnglishTitle: 'Titan Smoggy Nitrogen Atmosphere',
-    plainEnglishDiscovery: 'Measured Titan dense orange nitrogen atmosphere and sub-zero temperatures (-180°C), proving it has a prebiotic chemical factory.',
+  'pioneer11-saturn-magnetosphere': {
+    plainEnglishTitle: "Saturn's Near-Perfect Magnetic Axis",
+    plainEnglishDiscovery: "Pioneer 11 found that, unlike Earth and Jupiter, Saturn's magnetic dipole axis is aligned almost perfectly with its rotational axis.",
     purityScore: 92,
     radiationLevelUsSv: 0.5,
+    breakdownLabel: 'Magnetic Field & Plasma Environment',
     densityCurve: {
-      min: 75,
-      current: 94,
-      max: 120,
-      unit: 'Kelvin',
+      min: 0,
+      current: 22,
+      max: 100,
+      unit: 'nanoTesla (nT)',
       points: [5, 15, 40, 80, 100, 85, 45, 15],
     },
     mineralRatio: [
       {
-        name: 'Nitrogen Gas',
-        formula: 'N₂',
-        percentage: 95,
+        name: 'Magnetospheric Protons & Electrons',
+        formula: 'p⁺ / e⁻',
+        percentage: 90,
         color: '#38bdf8',
-        simpleExplanation: 'Thick atmosphere denser than Earth’s.',
+        simpleExplanation: 'Solar wind particles trapped and accelerated by Saturn\'s magnetic field.',
       },
       {
-        name: 'Methane Gas & Clouds',
-        formula: 'CH₄',
-        percentage: 4,
-        color: '#10b981',
-        simpleExplanation: 'Acts like water on Titan, forming clouds, rain, and lakes.',
-      },
-      {
-        name: 'Photochemical Tholin Smog',
-        formula: 'Complex Organics',
-        percentage: 1,
-        color: '#f97316',
-        simpleExplanation: 'Orange organic haze produced by sunlight breaking methane.',
+        name: 'Water-Derived Heavy Plasma Ions',
+        formula: 'O⁺ / OH⁺ / H₂O⁺',
+        percentage: 10,
+        color: '#06b6d4',
+        simpleExplanation: 'Heavy ions sourced from icy ring and moon material, ionized within the magnetosphere.',
       },
     ],
-    wireframeLayers: ['Upper Tholin Haze', 'Methane Cloud Deck', 'Dense N₂ Troposphere', 'Frozen Hydrocarbon Crust'],
+    wireframeLayers: ['Upper Tholin Haze', 'Bow Shock (24 Rs)', 'Dipole Field Lines', 'Titan Encounter'],
   },
 };
 

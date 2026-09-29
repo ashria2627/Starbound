@@ -20,6 +20,15 @@ export const LeftExpeditionCards: React.FC<LeftExpeditionCardsProps> = ({
   onClose,
 }) => {
   const isRover = mission.missionType === 'surface_rover';
+  // Apollo 15's Lunar Roving Vehicle was astronaut-driven, not an autonomous
+  // rover, so it needs its own label rather than falling under "rover".
+  const isCrewed = mission.name.toLowerCase().includes('apollo');
+  const observedLabel = isCrewed
+    ? 'What Astronauts Observed'
+    : isRover
+    ? 'What Rover Observed'
+    : 'What Spacecraft Observed';
+
   const site = activeSite || mission.sites[0];
 
   const discoveryType =
@@ -32,6 +41,8 @@ export const LeftExpeditionCards: React.FC<LeftExpeditionCardsProps> = ({
     'High-resolution cameras and spectrometers observed distinct surface formations, layered bedrock strata, and mineral deposits consistent with historical geological activity.';
 
   const minerals = enrichedSite?.mineralRatio || [];
+ 
+  const breakdownLabel = enrichedSite?.breakdownLabel || 'Chemical & Mineral Breakdown';
 
   return (
     <div className="pointer-events-none flex flex-col gap-3 w-[285px] sm:w-[325px] max-w-[calc(100vw-32px)] max-h-[calc(100vh-130px)] overflow-y-auto pr-1">
@@ -83,12 +94,12 @@ export const LeftExpeditionCards: React.FC<LeftExpeditionCardsProps> = ({
         )}
       </div>
 
-      {/* 2. WHAT ROVER OBSERVED + CHEMICAL & MINERAL BREAKDOWN (Only shown if reached destination) */}
+    
       {hasReachedDestination && (
         <div className="pointer-events-auto rounded-2xl border border-white/15 bg-[#161218]/95 p-4 sm:p-5 backdrop-blur-xl shadow-2xl text-slate-100 transition-all hover:border-white/25">
           <div className="flex items-center justify-between mb-2">
             <span className="font-mono text-xs font-bold uppercase tracking-wider text-cyan-300">
-              {isRover ? 'What Rover Observed' : 'What Spacecraft Observed'}
+              {observedLabel}
             </span>
             <span className="text-[10px] text-slate-400">Archival Evidence</span>
           </div>
@@ -102,7 +113,7 @@ export const LeftExpeditionCards: React.FC<LeftExpeditionCardsProps> = ({
             <div className="mt-3.5 pt-3 border-t border-white/10 space-y-2">
               <div className="flex items-center justify-between">
                 <span className="font-sans text-xs font-bold uppercase tracking-wide text-slate-200">
-                  Chemical & Mineral Breakdown
+                  {breakdownLabel}
                 </span>
                 <span className="font-mono text-[10px] text-amber-400">PDS Analysis</span>
               </div>

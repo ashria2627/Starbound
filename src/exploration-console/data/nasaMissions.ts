@@ -297,7 +297,7 @@ export const NASA_MISSIONS: NasaMission[] = [
         primaryInstrumentId: 'lunar-rake-core',
         media: {
   type: 'photo',
-  url: 'https://assets.science.nasa.gov/dynamicimage/assets/science/psd/lunar-science/2023/08/s71-43477.jpg?w=1200&h=785&fit=crop&crop=faces%2Cfocalpoint',
+  url: '/images/genesis.jpeg',
   caption: 'The Genesis Rock (Sample 15415) photographed on the lunar surface, Aug 1, 1971.',
 },
         observations: {
@@ -359,7 +359,7 @@ export const NASA_MISSIONS: NasaMission[] = [
         primaryInstrumentId: 'lrv-telephoto',
          media: {
   type: 'photo',
-  url: 'https://images-assets.nasa.gov/image/as15-85-11451/as15-85-11451~large.jpg',
+  url: '/images/luna.jpeg',
   caption: 'AS15-85-11451: David Scott at the LRV on the rim of Hadley Rille, taken by James Irwin from St. George Crater, July 31, 1971.',
 },
         observations: {
@@ -723,6 +723,7 @@ export const NASA_MISSIONS: NasaMission[] = [
           chemicalFormulasOrModels: [
             'Goethite Mineral Formula: α-Fe³⁺O(OH) (contains ~10 wt% stoichiometric H₂O)',
             'Aqueous Oxidation: 2 Fe²⁺ + 4 OH⁻ + ½ O₂ → 2 FeO(OH) + H₂O',
+            'Clovis Mineral Breakdown: Goethite ~10–15% (of iron phases), Unaltered Basaltic Minerals (Pyroxene/Olivine) ~50–60%, Halogens & Salts (Cl/Br) ~2–5%',
           ],
         },
         whyItMatters: {
@@ -972,7 +973,7 @@ export const NASA_MISSIONS: NasaMission[] = [
         observations: {
           summary: 'Opportunity investigated the laminated cliff "El Capitan", discovering tabular crystal molds ("vugs") where water-soluble crystals had dissolved, alongside festoon ripple cross-bedding.',
           empiricalPoints: [
-            'Bedrock was composed of up to 40% sulfate salts, dominated by jarosite — an iron-sulfate mineral containing hydroxide.',
+            'Bedrock was composed of approximately 40% sulfate/alteration-phase minerals (dominated by jarosite, magnesium sulfate, and iron sulfates), approximately 40%–50% basaltic silicates (pyroxene and feldspar remaining from the parent basalt), and approximately 10% secondary iron oxides (hematite).',
             'Centimeter-long blade-shaped tabular cavities (vugs) marked locations where soluble crystals dissolved when water levels fluctuated.',
             'Sediment layers showed curving festoon cross-bedding formed by migrating ripples in shallow, flowing surface water.',
           ],
@@ -1114,7 +1115,7 @@ export const NASA_MISSIONS: NasaMission[] = [
         primaryInstrumentId: 'pioneer-vhm',
              media: {
   type: 'photo',
-  url: 'https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/internal_resources/2551/Fuzzy_color_image_of_Jupiter.jpeg?w=640&h=530&fit=clip&crop=faces%2Cfocalpoint',
+  url: 'https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/2023/09/PIA03478.jpg?w=442&h=573&fit=crop&crop=faces%2Cfocalpoint',
   caption: 'One of Pioneer 10\'s close-approach images of Jupiter, Dec 1973.',
 },
         observations: {
@@ -1314,7 +1315,7 @@ export const NASA_MISSIONS: NasaMission[] = [
   caption: 'The actual Voyager 1 frame in which Linda Morabito discovered Io\'s volcanic plume, March 8, 1979. (NASA/JPL, PIA00379)',
 },
         observations: {
-          summary: 'Voyager 1 captured an overexposed optical navigation image of Io’s limb and discovered an enormous 300-km-high crescent plume billowing out from volcano Pele at 1 km/second.',
+          summary: 'Voyager 1 captured an overexposed optical navigation image showing an enormous plume rising ~300 km above volcano Pele, along with activity at Loki, marking the first discovery of active extraterrestrial volcanism.',
           empiricalPoints: [
             'Voyager detected nine simultaneously active explosive volcanic eruption plumes (Pele, Prometheus, Loki, Amirani, etc.).',
             'Io’s surface was devoid of impact craters, proving continuous resurfacing by volcanic lava and sulfur snow.',
@@ -1397,6 +1398,9 @@ export const NASA_MISSIONS: NasaMission[] = [
           keyConclusions: [
             'Planetary rings are dynamic and continuously replenished by satellite collisions.',
             'Discovered moons Metis and Thebe orbiting inside the ring boundaries.',
+          ],
+          chemicalFormulasOrModels: [
+            'Ring Dust Composition: Amorphous Silicate Dust Grains ~80–90%, Micrometer Carbonaceous Dust & Space-Weathered Debris ~10–20%',
           ],
         },
         whyItMatters: {
@@ -1538,7 +1542,7 @@ export const NASA_MISSIONS: NasaMission[] = [
             'Ring particles are almost pure water ice with trace silicates.',
             'Paved the exact trajectory route for Voyager 1 and Voyager 2 to conduct their detailed close encounters.',
           ],
-          chemicalFormulasOrModels: ['Ring Composition: >99% H₂O water-ice grains, density ρ ≈ 0.92 g/cm³'],
+          chemicalFormulasOrModels: ['Ring Composition & Material Phase: Water Ice ~95–99%, Silicate Dust Contaminants ~1–5%'],
         },
         whyItMatters: {
           summary: 'First spacecraft to explore Saturn, proving that human spacecraft could safely explore the outer giant planets and revealing the delicate structure of Saturn’s rings.',
@@ -1593,6 +1597,9 @@ export const NASA_MISSIONS: NasaMission[] = [
           keyConclusions: [
             'Titan possesses a thick, dense atmosphere producing severe greenhouse warming relative to pure vacuum, though its surface remains ultra-cold at 94 K.',
             'Confirmed Titan as a premier prebiotic laboratory for organic chemistry.',
+          ],
+          chemicalFormulasOrModels: [
+            'Magnetic Field & Plasma Environment: Magnetospheric Protons & Electrons ~90%, Water-Derived Heavy Plasma Ions ~10%',
           ],
         },
         whyItMatters: {
