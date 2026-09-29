@@ -1,5 +1,5 @@
 // Web Audio API Synthesizer for authentic NASA telemetry and probe soundscapes
-
+//made wirh ai studio
 class SoundController {
   private ctx: AudioContext | null = null;
   private isMuted: boolean = false;

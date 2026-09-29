@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { EnvironmentType } from '../types';
 
-
+//made with google ai studio
 function hash2D(x: number, z: number): number {
   const s = Math.sin(x * 12.9898 + z * 78.233) * 43758.5453;
   return s - Math.floor(s);

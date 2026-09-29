@@ -15,16 +15,14 @@ export const BottomTelemetryStrip: React.FC<BottomTelemetryStripProps> = ({
   return (
     <div className="pointer-events-auto flex flex-col gap-2 max-w-xl text-slate-200">
       
-      {/* Subsystem Health Gauges (Matching Image 2 bottom-left) */}
+      
       <div className="flex flex-wrap items-center gap-4 rounded-xl border border-white/10 bg-black/50 px-3.5 py-2 backdrop-blur-md shadow-lg text-[10px] font-sans">
         
-        {/* Lights Status */}
         <div className="flex items-center gap-1.5 pr-2 border-r border-white/10">
           <span className="h-2 w-2 rounded-full bg-amber-400" />
           <span className="font-medium text-slate-300">Sensors Active</span>
         </div>
 
-        {/* Lubricant / Drive Actuators */}
         <div className="flex items-center gap-2">
           <span className="text-slate-400">Actuators</span>
           <div className="h-1.5 w-14 rounded-full bg-white/20 overflow-hidden">
@@ -32,7 +30,6 @@ export const BottomTelemetryStrip: React.FC<BottomTelemetryStripProps> = ({
           </div>
         </div>
 
-        {/* Thermal Loop */}
         <div className="flex items-center gap-2">
           <span className="text-slate-400">Thermal</span>
           <div className="h-1.5 w-14 rounded-full bg-white/20 overflow-hidden">
@@ -40,7 +37,6 @@ export const BottomTelemetryStrip: React.FC<BottomTelemetryStripProps> = ({
           </div>
         </div>
 
-        {/* Power Bus Health */}
         <div className="flex items-center gap-2">
           <span className="text-slate-400">Power</span>
           <div className="h-1.5 w-14 rounded-full bg-white/20 overflow-hidden">
@@ -48,8 +44,6 @@ export const BottomTelemetryStrip: React.FC<BottomTelemetryStripProps> = ({
           </div>
         </div>
       </div>
-
-      {/* Primary Telemetry Line (Matching Image 2: Energy, Humidity, Temp, Pressure, Delay) */}
       <div className="flex flex-wrap items-center gap-4 text-xs font-sans text-slate-300 bg-black/40 px-3.5 py-1.5 rounded-lg border border-white/5 backdrop-blur-sm">
         <div>
           <span className="text-[10px] uppercase text-slate-400 block">Distance</span>

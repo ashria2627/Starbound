@@ -45,7 +45,6 @@ export const InstrumentLab: React.FC<InstrumentLabProps> = ({
     }, 120);
   };
 
-  // Spectral chart computation
   const spectra = currentInstrument.referenceSpectra;
   const minX = Math.min(...spectra.points.map((p) => p.x));
   const maxX = Math.max(...spectra.points.map((p) => p.x));
@@ -69,7 +68,6 @@ export const InstrumentLab: React.FC<InstrumentLabProps> = ({
     return chartH - padB - ((val - minY) / (maxY - minY)) * (chartH - padT - padB);
   };
 
-  // SVG polyline path for spectrum curve
   const visibleCount = Math.max(1, Math.round((spectra.points.length * scanProgress) / 100));
   const visiblePoints = spectra.points.slice(0, visibleCount);
   const svgPathData = visiblePoints
@@ -80,7 +78,6 @@ export const InstrumentLab: React.FC<InstrumentLabProps> = ({
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md">
       <div className="relative flex flex-col w-full max-w-4xl max-h-[92vh] overflow-hidden rounded-xl border border-slate-700 bg-[#0b0e17] shadow-2xl text-slate-200">
         
-        {/* Top Header Bar */}
         <div className="flex items-center justify-between border-b border-slate-800 px-6 py-4 bg-[#07090e]">
           <div>
             <div className="flex items-center gap-2 text-xs font-mono text-cyan-400">
@@ -111,11 +108,7 @@ export const InstrumentLab: React.FC<InstrumentLabProps> = ({
             </button>
           </div>
         </div>
-
-        {/* Main Content Area */}
         <div className="flex-1 overflow-y-auto p-6 space-y-6">
-
-          {/* Instrument Selector & Test Runner Bar */}
           <div className="flex flex-wrap items-center justify-between gap-4 rounded-lg border border-slate-800 bg-[#111625] p-4">
             <div className="flex items-center gap-2">
               <span className="text-xs font-mono text-slate-400 uppercase">Instrument:</span>
@@ -152,8 +145,6 @@ export const InstrumentLab: React.FC<InstrumentLabProps> = ({
               {isScanning ? `INTEGRATING SPECTRA (${scanProgress}%)...` : `RUN ${currentInstrument.acronym} TEST`}
             </button>
           </div>
-
-          {/* Scientific Spectrum Visualization Canvas */}
           <div className="rounded-lg border border-slate-800 bg-[#080b13] p-4">
             <div className="flex items-center justify-between border-b border-slate-800/80 pb-2 mb-3">
               <div>
@@ -178,7 +169,6 @@ export const InstrumentLab: React.FC<InstrumentLabProps> = ({
                   </linearGradient>
                 </defs>
 
-                {/* Grid Lines */}
                 {[0, 0.25, 0.5, 0.75, 1].map((pct, i) => {
                   const yVal = minY + (maxY - minY) * (1 - pct);
                   const yPos = getCanvasY(yVal);
@@ -192,13 +182,11 @@ export const InstrumentLab: React.FC<InstrumentLabProps> = ({
                   );
                 })}
 
-                {/* X Axis */}
                 <line x1={padL} y1={chartH - padB} x2={chartW - padR} y2={chartH - padB} stroke="#334155" />
                 <text x={chartW / 2} y={chartH - 8} textAnchor="middle" fill="#94a3b8" className="font-mono text-[11px]">
                   {spectra.xLabel}
                 </text>
 
-                {/* Y Axis Label */}
                 <text
                   x={-chartH / 2}
                   y={16}
@@ -210,7 +198,6 @@ export const InstrumentLab: React.FC<InstrumentLabProps> = ({
                   {spectra.yLabel}
                 </text>
 
-                {/* Area under curve */}
                 {visiblePoints.length > 1 && (
                   <path
                     d={`${svgPathData} L ${getCanvasX(visiblePoints[visiblePoints.length - 1].x)} ${chartH - padB} L ${getCanvasX(visiblePoints[0].x)} ${chartH - padB} Z`}
@@ -218,12 +205,10 @@ export const InstrumentLab: React.FC<InstrumentLabProps> = ({
                   />
                 )}
 
-                {/* Plotted Line */}
                 {visiblePoints.length > 1 && (
                   <path d={svgPathData} fill="none" stroke="#06b6d4" strokeWidth="2.5" strokeLinecap="round" />
                 )}
 
-                {/* Peak Nodes & Labels */}
                 {visiblePoints.map((pt, pIdx) => {
                   const px = getCanvasX(pt.x);
                   const py = getCanvasY(pt.y);
@@ -248,9 +233,7 @@ export const InstrumentLab: React.FC<InstrumentLabProps> = ({
             </div>
           </div>
 
-          {/* 4-Part NASA Scientific Investigation Dossier */}
           <div>
-            {/* Dossier Tabs */}
             <div className="flex border-b border-slate-800">
               <button
                 onClick={() => setActiveTab('empirical')}
@@ -294,7 +277,6 @@ export const InstrumentLab: React.FC<InstrumentLabProps> = ({
               </button>
             </div>
 
-            {/* Tab Panes */}
             <div className="pt-4 text-sm leading-relaxed">
               {activeTab === 'empirical' && (
                 <div className="space-y-3">
@@ -367,8 +349,6 @@ export const InstrumentLab: React.FC<InstrumentLabProps> = ({
                       ))}
                     </ul>
                   </div>
-
-                  {/* NASA Primary Sources Box */}
                   <div className="rounded-lg border border-slate-700/60 bg-[#07090e] p-3">
                     <span className="font-mono text-[11px] uppercase tracking-wider text-slate-400">
                       Official NASA Sources & Archival Records
@@ -387,7 +367,6 @@ export const InstrumentLab: React.FC<InstrumentLabProps> = ({
           </div>
         </div>
 
-        {/* Modal Footer */}
         <div className="flex items-center justify-between border-t border-slate-800 px-6 py-3 bg-[#07090e] text-xs font-mono">
           <span className="text-slate-400">
             Source: {mission.nasaPrimarySource}

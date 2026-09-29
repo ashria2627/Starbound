@@ -215,7 +215,7 @@ export const NASA_MISSIONS: NasaMission[] = [
     missionType: 'surface_rover',
     envType: 'moon',
     specs: {
-      vehicleMassKg: 210, // LRV mass empty
+      vehicleMassKg: 210, 
       powerSource: 'Two 36-Volt Silver-Zinc Non-Rechargeable Batteries (121 A-h each)',
       powerOutputWatts: 400,
       communications: 'Lunar Communications Relay Unit (LCRU) with high-gain color TV camera',
@@ -826,7 +826,7 @@ export const NASA_MISSIONS: NasaMission[] = [
     specs: {
       vehicleMassKg: 185,
       powerSource: '1.3 m² Triple-Junction Solar Array (regularly cleaned by Martian dust devils)',
-      powerOutputWatts: 140, // up to 900 W-hr/sol
+      powerOutputWatts: 140, 
       communications: 'X-band direct-to-Earth High-Gain Antenna & UHF relay to orbiters',
       mobilityOrPropulsion: '6-wheel independent Rocker-Bogie drive; total odometer record: 45.16 km (first marathon on another world)',
     },
@@ -1036,12 +1036,12 @@ export const NASA_MISSIONS: NasaMission[] = [
     specs: {
       vehicleMassKg: 258,
       powerSource: 'Four SNAP-19 Radioisotope Thermoelectric Generators (RTGs, Plutonium-238)',
-      powerOutputWatts: 155, // at launch
+      powerOutputWatts: 155, 
       communications: '2.74-meter High-Gain Parabolic Dish Antenna, 8-watt S-band transmitter',
       mobilityOrPropulsion: 'Spin-stabilized at 4.8 RPM; hydrazine thrusters for trajectory corrections; Jupiter gravity assist',
     },
     environment: {
-      gravityMps2: 24.79, // at Jupiter 1-bar level
+      gravityMps2: 24.79,
       atmosphereDescription: 'Deep Jovian Hydrogen-Helium Atmosphere (90% H₂, 10% He) with ammonia/water clouds',
       ambientTempKelvin: '110 K (-163°C) at cloud tops',
       dayLength: '9 hours, 55 minutes, 30 seconds (Jupiter System III rotation)',
@@ -1228,9 +1228,9 @@ export const NASA_MISSIONS: NasaMission[] = [
     missionType: 'orbital_flyby',
     envType: 'jupiter_system',
     specs: {
-      vehicleMassKg: 773, // 825 kg at launch
+      vehicleMassKg: 773, 
       powerSource: 'Three Multi-Hundred-Watt Radioisotope Thermoelectric Generators (MHW-RTGs)',
-      powerOutputWatts: 470, // at launch
+      powerOutputWatts: 470,
       communications: '3.7-meter High-Gain Parabolic Dish Antenna, 23-watt X-band transmitter',
       mobilityOrPropulsion: 'Hydrazine thrusters for 3-axis attitude control; gravity assist slingshots at Jupiter and Saturn',
     },
@@ -1241,7 +1241,7 @@ export const NASA_MISSIONS: NasaMission[] = [
       dayLength: '42.5 hours (Io orbital period / synchronous rotation)',
       skyColorHex: '#080512',
       fogColorHex: '#140c22',
-      groundColorHex: '#c29738', // Io sulfur yellow/orange
+      groundColorHex: '#c29738', 
       sunIntensity: 0.85,
       sunColorHex: '#fff7ed',
     },
@@ -1437,18 +1437,18 @@ export const NASA_MISSIONS: NasaMission[] = [
     specs: {
       vehicleMassKg: 259,
       powerSource: 'Four SNAP-19 Radioisotope Thermoelectric Generators (RTGs, Plutonium-238)',
-      powerOutputWatts: 155, // at launch
+      powerOutputWatts: 155, 
       communications: '2.74-meter High-Gain Antenna, 8-watt S-band transmitter',
       mobilityOrPropulsion: 'Spin-stabilized at 7.8 RPM; Jupiter gravity assist redirection to Saturn plane',
     },
     environment: {
-      gravityMps2: 10.44, // at 1-bar level
+      gravityMps2: 10.44, 
       atmosphereDescription: 'Saturnian Atmosphere (96% H₂, 3% He) with thick ammonia haze and high-speed jet streams',
       ambientTempKelvin: '95 K (-178°C) at cloud tops; 94 K on Titan',
       dayLength: '10 hours, 33 minutes, 38 seconds (Saturn System III rotation)',
       skyColorHex: '#0a0d18',
       fogColorHex: '#141c2c',
-      groundColorHex: '#c7b280', // Saturn warm golden-beige
+      groundColorHex: '#c7b280', 
       sunIntensity: 0.65,
       sunColorHex: '#fef3c7',
     },

@@ -25,16 +25,9 @@ function saveNotes(siteId: string, notes: SiteNote[]) {
   try {
     localStorage.setItem(notesKey(siteId), JSON.stringify(notes));
   } catch {
-    // storage unavailable, note stays in-memory for this session only
   }
 }
 
-// Client-only sanity check: this project has no backend, so a real NASA
-// lookup would need a server endpoint. As a stand-in, a claim is treated as
-// "verified" only when it substantially overlaps with the site's own NASA
-// sourced text (observations, determinations, why-it-matters, citations).
-// Wire this to a real server call (e.g. fetch('/api/verify-fact', ...)) once
-// one exists — the shape of the function can stay the same.
 function checkClaimAgainstSite(claim: string, site: ScienceSite): boolean {
   const corpus = [
     site.observations.summary,
@@ -87,8 +80,6 @@ export const RightExpeditionCards: React.FC<RightExpeditionCardsProps> = ({
   const [notes, setNotes] = useState<SiteNote[]>([]);
   const [draft, setDraft] = useState('');
 
-  // Load this site's saved notes whenever the active site changes, and
-  // persist them across refresh via localStorage.
   useEffect(() => {
     if (site?.id) setNotes(loadNotes(site.id));
     else setNotes([]);
@@ -107,9 +98,6 @@ export const RightExpeditionCards: React.FC<RightExpeditionCardsProps> = ({
     saveNotes(site.id, withPending);
     setDraft('');
 
-    // Simulated verification pass; garbage (non-matching) notes are dropped,
-    // matching ones are marked verified. Swap checkClaimAgainstSite for a
-    // real server-backed check when one is available.
     window.setTimeout(() => {
       const isReal = checkClaimAgainstSite(note.text, site);
       setNotes((prev) => {
@@ -172,7 +160,6 @@ export const RightExpeditionCards: React.FC<RightExpeditionCardsProps> = ({
           <span className="font-mono text-xs font-bold uppercase tracking-wider text-purple-300">
             What & How Measured
           </span>
-          {/* Close Panel Button */}
           <button
             onClick={onClose}
             className="rounded-full bg-white/10 hover:bg-white/20 h-6 w-6 flex items-center justify-center text-slate-300 hover:text-white transition-colors cursor-pointer text-xs"
@@ -205,8 +192,6 @@ export const RightExpeditionCards: React.FC<RightExpeditionCardsProps> = ({
             <p className="font-sans text-xs sm:text-sm text-slate-200 leading-relaxed font-normal">
               {plainMeasurement}
             </p>
-
-            {/* User-added field notes: persisted per-site, fact-checked against NASA data */}
             <div className="mt-3 pt-3 border-t border-white/10">
               <span className="block font-mono text-[10px] uppercase tracking-wider text-slate-400 mb-1.5">
                 Field Notes
@@ -247,7 +232,6 @@ export const RightExpeditionCards: React.FC<RightExpeditionCardsProps> = ({
               </div>
             </div>
 
-            {/* Clickable Glossary Instrument Chips */}
             <div className="mt-3 pt-3 border-t border-white/10">
               <span className="block font-mono text-[10px] uppercase tracking-wider text-slate-400 mb-1.5">
                 Instruments (Tap for plain explanation):

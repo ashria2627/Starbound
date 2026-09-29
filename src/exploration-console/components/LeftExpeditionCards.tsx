@@ -20,8 +20,6 @@ export const LeftExpeditionCards: React.FC<LeftExpeditionCardsProps> = ({
   onClose,
 }) => {
   const isRover = mission.missionType === 'surface_rover';
-  // Apollo 15's Lunar Roving Vehicle was astronaut-driven, not an autonomous
-  // rover, so it needs its own label rather than falling under "rover".
   const isCrewed = mission.name.toLowerCase().includes('apollo');
   const observedLabel = isCrewed
     ? 'What Astronauts Observed'
@@ -47,13 +45,11 @@ export const LeftExpeditionCards: React.FC<LeftExpeditionCardsProps> = ({
   return (
     <div className="pointer-events-none flex flex-col gap-3 w-[285px] sm:w-[325px] max-w-[calc(100vw-32px)] max-h-[calc(100vh-130px)] overflow-y-auto pr-1">
       
-      {/* 1. TYPE OF DISCOVERY (Responsive card) */}
       <div className="pointer-events-auto rounded-2xl border border-white/15 bg-[#161218]/95 p-4 sm:p-5 backdrop-blur-xl shadow-2xl text-slate-100 transition-all hover:border-white/25">
         <div className="flex items-center justify-between gap-2 mb-1.5">
           <span className="font-mono text-xs font-bold uppercase tracking-wider text-amber-400">
             Type of Discovery
           </span>
-          {/* Close Panel Button */}
           <button
             onClick={onClose}
             className="rounded-full bg-white/10 hover:bg-white/20 h-6 w-6 flex items-center justify-center text-slate-300 hover:text-white transition-colors cursor-pointer text-xs"
@@ -108,7 +104,6 @@ export const LeftExpeditionCards: React.FC<LeftExpeditionCardsProps> = ({
             {plainObservation}
           </p>
 
-          {/* Chemical & Mineral Breakdown */}
           {minerals.length > 0 && (
             <div className="mt-3.5 pt-3 border-t border-white/10 space-y-2">
               <div className="flex items-center justify-between">
@@ -117,8 +112,6 @@ export const LeftExpeditionCards: React.FC<LeftExpeditionCardsProps> = ({
                 </span>
                 <span className="font-mono text-[10px] text-amber-400">PDS Analysis</span>
               </div>
-
-              {/* Proportional color bar */}
               <div className="flex h-2.5 w-full rounded-full overflow-hidden bg-black/50 border border-white/10">
                 {minerals.map((m, i) => (
                   <div
@@ -129,7 +122,6 @@ export const LeftExpeditionCards: React.FC<LeftExpeditionCardsProps> = ({
                 ))}
               </div>
 
-              {/* List of Minerals with responsive text */}
               <div className="space-y-1.5 pt-1">
                 {minerals.map((m, idx) => (
                   <div

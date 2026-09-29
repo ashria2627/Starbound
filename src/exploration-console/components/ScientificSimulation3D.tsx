@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import { NasaMission, ScienceSite, TelemetryData } from '../types';
 import { getMolaLroTerrain, PlanetaryTerrainData } from './molaLroTerrain';
 import { soundFx } from '../utils/audio';
-
+//made with google ai studi
 export interface SimulationHandle {
   rotateCamera: (deltaYaw: number) => void;
   resetCamera: () => void;
@@ -31,7 +31,6 @@ export const ScientificSimulation3D = forwardRef<SimulationHandle, ScientificSim
 }, ref) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Input states stored in a ref so key/touch events never trigger React re-renders or tear down WebGL
   const inputsRef = useRef({
     forward: false,
     backward: false,

@@ -1486,7 +1486,7 @@ export const Recovery: React.FC = () => {
             <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
               <p className="font-mono text-[9px] uppercase tracking-widest text-[#5d5959]">
                 {firebaseEnabled
-                  ? 'No login required · reviewed before publication.'
+                  ? 'reviewed before publication.'
                   : 'Local demo mode · not shared with other visitors.'}
               </p>
               <button

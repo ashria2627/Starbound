@@ -1,6 +1,6 @@
 import JSZip from 'jszip';
 import { NASA_MISSIONS } from '../data/nasaMissions';
-
+//added with ai studio
 export async function generateNasaMissionZip(): Promise<Blob> {
   const zip = new JSZip();
 

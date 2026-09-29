@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { EnvironmentType } from '../types';
-
+//made with google ai studio
 export interface PlanetaryTerrainData {
   locationTitle: string;
   sourceDataset: string;

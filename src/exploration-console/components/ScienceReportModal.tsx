@@ -39,7 +39,6 @@ export const ScienceReportModal: React.FC<ScienceReportModalProps> = ({
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-xl animate-in fade-in duration-200">
       <div className="relative flex flex-col w-full max-w-3xl max-h-[92vh] overflow-hidden rounded-3xl border border-white/20 bg-[#141016] shadow-2xl text-slate-100">
         
-        {/* Top Header */}
         <div className="flex items-start justify-between border-b border-white/10 px-6 py-5 bg-white/5">
           <div>
             <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-amber-400 font-bold">
@@ -91,11 +90,6 @@ export const ScienceReportModal: React.FC<ScienceReportModalProps> = ({
   {!site.media && (
     <p className="text-xs text-slate-500 italic">No NASA image or video on file for this site yet.</p>
   )}
-
-  <p className="text-xs sm:text-sm text-slate-200">
-    Attach your own observation or sample tag to this discovery:
-  </p>
-  {/* your existing upload / userImages / isAddingNote code stays here, unchanged */}
 </div>
 
          
@@ -131,7 +125,6 @@ export const ScienceReportModal: React.FC<ScienceReportModalProps> = ({
               </ul>
             </div>
 
-            {/* Formulas and Models */}
             <div className="mt-4 pt-3.5 border-t border-white/10 space-y-2">
               <span className="font-mono text-xs uppercase tracking-wider text-amber-300 font-bold block">
                 Formulas & Planetary Formation Models:
@@ -149,7 +142,6 @@ export const ScienceReportModal: React.FC<ScienceReportModalProps> = ({
             </div>
           </div>
 
-          {/* 4. Why It Matters to Humanity & Science */}
           <div className="rounded-2xl border border-purple-400/30 bg-purple-500/10 p-5 space-y-3">
             <span className="font-mono text-xs uppercase tracking-wider text-purple-300 font-bold block">
               2. Why Does It Matter?
@@ -171,8 +163,6 @@ export const ScienceReportModal: React.FC<ScienceReportModalProps> = ({
               </ul>
             </div>
           </div>
-
-          {/* 5. Official NASA Citations (Kept intact) */}
           <div className="rounded-2xl border border-white/10 bg-white/5 p-5 space-y-2">
             <span className="font-mono text-xs uppercase tracking-wider text-slate-300 font-bold block">
               Official NASA Archival Citations
@@ -190,8 +180,6 @@ export const ScienceReportModal: React.FC<ScienceReportModalProps> = ({
           </div>
 
         </div>
-
-        {/* Modal Footer (NASA Verified and Zip removed) */}
         <div className="flex flex-wrap items-center justify-between gap-3 border-t border-white/10 px-6 py-4 bg-white/5">
           <span className="font-mono text-xs text-slate-400">
             NASA Planetary Data System (PDS) Archival Record

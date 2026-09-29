@@ -24,26 +24,20 @@ export const CenterTargetReticle: React.FC<CenterTargetReticleProps> = ({
 }) => {
   const displayTitle = currentSite ? currentSite.name.toUpperCase() : 'SURFACE SECTOR / AREA 1';
 
-  // Find next destination in mission site catalog
   const currentIndex = sites.findIndex((s) => s.id === currentSite?.id);
   const nextSite = sites.length > 1 ? sites[(currentIndex + 1) % sites.length] : null;
 
   return (
     <div className="pointer-events-none absolute inset-0 z-20 flex flex-col justify-between items-center py-3 px-3 select-none">
       
-      {/* Top Center Hero Title (Expedition Target) */}
       <div className="flex flex-col items-center text-center mt-0.5 max-w-xl px-2">
         <span className="rounded-full bg-white/10 px-3 py-0.5 font-mono text-[10px] font-bold text-amber-300 border border-white/15 backdrop-blur-md shadow-sm">
           Target Exploration Site · {missionName}
         </span>
         
-        {/* Main Heading */}
         <h1 className="mt-1 font-sans text-xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-white drop-shadow-lg leading-tight">
           {displayTitle}
         </h1>
-        {/* (The small span below the heading is removed as requested) */}
-
-        {/* Clickable Destination Badges */}
         {sites.length > 1 && (
           <div className="pointer-events-auto mt-2 flex items-center justify-center gap-1.5 flex-wrap">
             {sites.map((s) => (
@@ -65,20 +59,17 @@ export const CenterTargetReticle: React.FC<CenterTargetReticleProps> = ({
         )}
       </div>
 
-      {/* Center Target Callout & Compact Action Buttons (Made smaller as requested) */}
       {currentSite && (
         <div className="pointer-events-auto flex flex-col items-center gap-2 my-auto">
-          {/* Subtle Horizontal Reticle Accent */}
           <div className="flex items-center gap-2.5 opacity-80">
             <span className="h-px w-12 sm:w-16 bg-gradient-to-r from-transparent to-amber-400" />
             <span className="h-2 w-2 rounded-full bg-amber-400 shadow-[0_0_8px_#f59e0b] animate-ping" />
             <span className="h-px w-12 sm:w-16 bg-gradient-to-l from-transparent to-amber-400" />
           </div>
 
-          {/* Clean, Compact Action Box with Smaller Buttons */}
-          <div className="overflow-hidden rounded-2xl border border-white/20 bg-[#161218]/95 shadow-[0_0_25px_rgba(0,0,0,0.6)] backdrop-blur-xl p-1.5 text-center">
+ <div className="overflow-hidden rounded-2xl border border-white/20 bg-[#161218]/95 shadow-[0_0_25px_rgba(0,0,0,0.6)] backdrop-blur-xl p-1.5 text-center">
             {hasReachedDestination ? (
-              /* Button to move to the next destination after arriving at first destination */
+             
               <div className="flex flex-col items-center gap-1">
                 <button
                   onClick={() => nextSite && onMoveToNextSite(nextSite)}
@@ -92,7 +83,6 @@ export const CenterTargetReticle: React.FC<CenterTargetReticleProps> = ({
                 </span>
               </div>
             ) : (
-              /* Drive Here Button (Made smaller) */
               <div className="flex flex-col items-center gap-1">
                 <button
                   onClick={onDriveToSite}
@@ -114,7 +104,7 @@ export const CenterTargetReticle: React.FC<CenterTargetReticleProps> = ({
         </div>
       )}
 
-      {/* Empty bottom spacer to maintain flex alignment (bottom button removed) */}
+     
       <div className="h-2" />
     </div>
   );

@@ -23,7 +23,6 @@ export const MissionDossierView: React.FC<MissionDossierViewProps> = ({
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md">
       <div className="relative flex flex-col w-full max-w-5xl max-h-[92vh] overflow-hidden rounded-xl border border-slate-700 bg-[#0b0e17] shadow-2xl text-slate-200">
         
-        {/* Header */}
         <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-800 px-6 py-4 bg-[#07090e]">
           <div>
             <div className="flex items-center gap-2 text-xs font-mono text-cyan-400">
@@ -77,7 +76,6 @@ export const MissionDossierView: React.FC<MissionDossierViewProps> = ({
        
         <div className="flex-1 overflow-y-auto p-6 space-y-6">
           
-          {/* Mission Specifications Grid */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             <div className="rounded-lg border border-slate-800 bg-[#0f1422] p-3">
               <span className="block font-mono text-[10px] uppercase text-slate-400">Launch Date</span>
@@ -99,7 +97,6 @@ export const MissionDossierView: React.FC<MissionDossierViewProps> = ({
             </div>
           </div>
 
-          {/* Overview Prose */}
           <div className="space-y-2">
             <h3 className="font-mono text-xs uppercase tracking-wider text-cyan-400">Mission Overview</h3>
             <p className="text-sm leading-relaxed text-slate-200">
@@ -126,8 +123,6 @@ export const MissionDossierView: React.FC<MissionDossierViewProps> = ({
               ))}
             </div>
           </div>
-
-          {/* Investigation Sites */}
           <div className="space-y-3">
             <h3 className="font-mono text-xs uppercase tracking-wider text-cyan-400">Key Scientific Investigation Sites</h3>
             <div className="space-y-4">
@@ -164,8 +159,6 @@ export const MissionDossierView: React.FC<MissionDossierViewProps> = ({
                       <p className="mt-1 text-slate-300">{site.whyItMatters.summary}</p>
                     </div>
                   </div>
-
-                  {/* Sources */}
                   <div className="pt-2 border-t border-slate-800 text-[11px] font-mono text-slate-400">
                     <span className="text-slate-500 uppercase">NASA Archival Citation: </span>
                     {site.nasaSources.map((s) => s.title).join('; ')}
@@ -175,7 +168,6 @@ export const MissionDossierView: React.FC<MissionDossierViewProps> = ({
             </div>
           </div>
 
-          {/* Historical Significance */}
           <div className="rounded-lg border border-slate-800 bg-[#070a13] p-4 space-y-1">
             <span className="font-mono text-xs uppercase tracking-wider text-amber-400">Historical Significance</span>
             <p className="text-xs text-slate-300 leading-relaxed">
@@ -183,8 +175,6 @@ export const MissionDossierView: React.FC<MissionDossierViewProps> = ({
             </p>
           </div>
         </div>
-
-        {/* Footer */}
         <div className="flex items-center justify-between border-t border-slate-800 px-6 py-3 bg-[#07090e] text-xs font-mono">
           <span className="text-slate-400">
             Primary NASA Source: {currentMission.nasaPrimarySource}

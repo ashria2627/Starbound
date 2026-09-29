@@ -99,10 +99,6 @@ export const COSMO_SITE_DATA: Record<string, CosmoSiteEnrichment> = {
     ],
     wireframeLayers: ['Eolian Dust', 'Ripple Laminae', 'Evaporite Salts', 'Subsurface Hardpan'],
   },
-
-  // ---------------------------------------------------------------------------
-  // SPIRIT
-  // ---------------------------------------------------------------------------
   'spirit-clovis-rock': {
     plainEnglishTitle: 'Water-Soaked Bedrock on Husband Hill',
     plainEnglishDiscovery: 'The Mössbauer spectrometer detected goethite inside the rock—a rust mineral containing chemically bound water molecules.',
@@ -185,9 +181,6 @@ export const COSMO_SITE_DATA: Record<string, CosmoSiteEnrichment> = {
     wireframeLayers: ['Furrow Dust', '90% Opaline Silica', 'Steam Vent Breccia', 'Volcanic Ash'],
   },
 
-  // ---------------------------------------------------------------------------
-  // APOLLO 15
-  // ---------------------------------------------------------------------------
   'apollo15-spur-crater': {
     plainEnglishTitle: 'The Genesis Rock (Primordial Lunar Crust)',
     plainEnglishDiscovery: 'Scott & Irwin discovered a dazzling 4.1-billion-year-old anorthosite rock, proving the newborn Moon was once entirely covered by a molten magma ocean.',
@@ -263,9 +256,6 @@ export const COSMO_SITE_DATA: Record<string, CosmoSiteEnrichment> = {
     wireframeLayers: ['Talus Debris', 'Upper Basalt Unit', 'Columnar Jointing', 'Gorge Base'],
   },
 
-  // ---------------------------------------------------------------------------
-  // SOJOURNER
-  // ---------------------------------------------------------------------------
   'sojourner-barnacle-bill': {
     plainEnglishTitle: 'First Chemical Scan of a Martian Rock',
     plainEnglishDiscovery: 'Sojourner used alpha particles and X-rays to discover high silica andesite, proving Mars had diverse volcanoes and recycled crust.',
@@ -340,10 +330,6 @@ export const COSMO_SITE_DATA: Record<string, CosmoSiteEnrichment> = {
     ],
     wireframeLayers: ['Wind Drift Soil', 'Yogi Boulder', 'Scour Moat Sand', 'Ancient Flood Bed'],
   },
-
-  // ---------------------------------------------------------------------------
-  // LUNA 1
-  // ---------------------------------------------------------------------------
   'luna1-trans-lunar': {
     plainEnglishTitle: 'First Detection of the Solar Wind',
     plainEnglishDiscovery: 'Direct spacecraft sensors confirmed the Sun continuously sends a supersonic stream of charged plasma out into space, shaping the entire Solar System.',
@@ -413,9 +399,6 @@ export const COSMO_SITE_DATA: Record<string, CosmoSiteEnrichment> = {
     wireframeLayers: ['Deep Space Vacuum', 'Lunar Cislunar Path', '5995km Periapsis', 'Unmagnetized Regolith'],
   },
 
-  // ---------------------------------------------------------------------------
-  // PIONEER 10
-  // ---------------------------------------------------------------------------
   'pioneer10-asteroid-belt': {
     plainEnglishTitle: 'Surviving the Asteroid Belt',
     plainEnglishDiscovery: 'First spacecraft to fly through the asteroid belt without colliding with debris, proving safe navigation for future missions to outer planets.',
@@ -491,9 +474,6 @@ export const COSMO_SITE_DATA: Record<string, CosmoSiteEnrichment> = {
     wireframeLayers: ['Bow Shock (108 Rj)', 'Magnetopause', 'Radiation Belt Core', 'Jovian Cloud Deck'],
   },
 
-  // ---------------------------------------------------------------------------
-  // VOYAGER 1
-  // ---------------------------------------------------------------------------
   'voyager1-io-volcanoes': {
     plainEnglishTitle: 'Active Volcanoes on Moon Io',
     plainEnglishDiscovery: 'Discovered that Jupiter moon Io is the most volcanically active world in the Solar System, with explosive fountains shooting sulfur gas 300 km into space.',
@@ -563,9 +543,6 @@ export const COSMO_SITE_DATA: Record<string, CosmoSiteEnrichment> = {
     wireframeLayers: ['Halo Ring', 'Main Ring', 'Amalthea Gossamer Ring', 'Thebe Gossamer Ring'],
   },
 
-  // ---------------------------------------------------------------------------
-  // PIONEER 11
-  // ---------------------------------------------------------------------------
   'pioneer11-f-ring': {
     plainEnglishTitle: 'Discovery of Saturn Narrow F Ring',
     plainEnglishDiscovery: 'First spacecraft to visit Saturn; passed within 21,000 km and discovered the narrow outer F Ring and shepherd moon Epimetheus.',

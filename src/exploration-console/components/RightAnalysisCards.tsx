@@ -34,7 +34,6 @@ export const RightAnalysisCards: React.FC<RightAnalysisCardsProps> = ({
   return (
     <div className="pointer-events-none flex flex-col gap-3 max-w-[270px] sm:max-w-[290px]">
       
-      {/* 1. Quick Stats Card (Matching Image 1 top-right) */}
       <div className="pointer-events-auto rounded-2xl border border-white/10 bg-[#161214]/60 p-4 backdrop-blur-xl shadow-2xl text-slate-100">
         <div className="grid grid-cols-2 divide-x divide-white/10">
           <div className="pr-3">
@@ -67,14 +66,12 @@ export const RightAnalysisCards: React.FC<RightAnalysisCardsProps> = ({
         </div>
       </div>
 
-      {/* 2. "View" Structure / Composition Card (Matching Image 1 middle-right) */}
       <div className="pointer-events-auto rounded-2xl border border-white/10 bg-[#161214]/60 p-4 backdrop-blur-xl shadow-2xl text-slate-100">
         <div className="flex items-center justify-between mb-3">
           <h4 className="font-sans text-sm font-semibold text-white">View</h4>
           <span className="font-mono text-xs text-slate-500">···</span>
         </div>
 
-        {/* Structure / Composition Pill Toggle */}
         <div className="flex rounded-full bg-white/10 p-0.5 border border-white/10 text-xs font-sans mb-3">
           <button
             onClick={() => setViewMode('structure')}
@@ -93,8 +90,6 @@ export const RightAnalysisCards: React.FC<RightAnalysisCardsProps> = ({
             Composition
           </button>
         </div>
-
-        {/* Frequency / Density Distribution Curve SVG */}
         <div className="relative h-20 w-full mb-2">
           <svg viewBox="0 0 200 80" preserveAspectRatio="none" className="h-full w-full">
             <defs>
@@ -104,7 +99,6 @@ export const RightAnalysisCards: React.FC<RightAnalysisCardsProps> = ({
               </linearGradient>
             </defs>
 
-            {/* Vertical needle bars like in Image 1 */}
             {curve.points.map((val, i) => {
               const x = (i / (curve.points.length - 1)) * 180 + 10;
               const h = (val / 100) * 65;
@@ -121,14 +115,11 @@ export const RightAnalysisCards: React.FC<RightAnalysisCardsProps> = ({
                 />
               );
             })}
-
-            {/* Min and Max selector markers */}
             <circle cx="10" cy="72" r="3" fill="#ffffff" />
             <circle cx="150" cy="72" r="3" fill="#ffffff" />
           </svg>
         </div>
 
-        {/* Min / Current / Max Labels */}
         <div className="grid grid-cols-3 text-center border-t border-white/10 pt-2 font-sans text-xs">
           <div>
             <span className="block text-[10px] text-slate-400">Min</span>
@@ -144,12 +135,10 @@ export const RightAnalysisCards: React.FC<RightAnalysisCardsProps> = ({
           </div>
         </div>
 
-        {/* 3. Mineral Ratio Arc Gauge (Matching Image 1 bottom-right) */}
         <div className="mt-4 pt-3 border-t border-white/10">
           <span className="block font-sans text-xs font-semibold text-white mb-2">Mineral Ratio</span>
           
           <div className="relative flex items-center justify-center py-1">
-            {/* SVG Arc Gauge */}
             <svg viewBox="0 0 160 85" className="w-36 h-20">
               <path
                 d="M 20 75 A 60 60 0 0 1 140 75"
@@ -173,15 +162,12 @@ export const RightAnalysisCards: React.FC<RightAnalysisCardsProps> = ({
               </defs>
             </svg>
 
-            {/* Percentage in center */}
             <div className="absolute bottom-1 text-center">
               <span className="font-sans text-sm font-bold text-white tabular-nums">
                 {minerals[0]?.percentage || 78}%
               </span>
             </div>
           </div>
-
-          {/* Mineral Labels Legend */}
           <div className="flex flex-wrap items-center justify-center gap-3 mt-1 text-[11px] font-sans">
             {minerals.slice(0, 2).map((m, idx) => (
               <span key={idx} className="flex items-center gap-1.5 text-slate-300">
@@ -192,7 +178,6 @@ export const RightAnalysisCards: React.FC<RightAnalysisCardsProps> = ({
           </div>
         </div>
 
-        {/* Generate Report Button (Matching Image 1 bottom button) */}
         <button
           onClick={onOpenReport}
           className="mt-4 w-full rounded-xl bg-white/15 hover:bg-white/25 border border-white/10 py-2.5 font-sans text-xs font-semibold text-white transition-all shadow-lg backdrop-blur-md cursor-pointer text-center"

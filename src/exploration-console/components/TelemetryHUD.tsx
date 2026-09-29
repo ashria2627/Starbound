@@ -1,6 +1,6 @@
 import React from 'react';
 import { NasaMission, ScienceSite, TelemetryData } from '../types';
-
+//made with google ai studio
 interface TelemetryHUDProps {
   mission: NasaMission;
   telemetry: TelemetryData;
