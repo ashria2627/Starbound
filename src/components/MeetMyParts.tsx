@@ -109,8 +109,7 @@ const KID_PARTS: KidPart[] = [
 const PartRow: React.FC<{ part: KidPart; index: number }> = ({ part, index }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { amount: 0.6, once: false });
-  const flip = index % 2 === 1; // alternate sides
-
+  const flip = index % 2 === 1; 
   return (
     <div
       ref={ref}
@@ -187,7 +186,7 @@ export const MeetMyParts: React.FC = () => {
         Drag to spin me around! Credit: NASA/JPL-Caltech
       </p>
 
-      {/* Scroll-reveal parts */}
+ 
       <div className="mt-8">
         {KID_PARTS.map((part, i) => (
           <PartRow key={part.id} part={part} index={i} />

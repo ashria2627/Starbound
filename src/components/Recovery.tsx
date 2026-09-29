@@ -588,7 +588,7 @@ export const Recovery: React.FC = () => {
   const [outcome, setOutcome] = useState<Outcome | null>(null);
   const timerRef = useRef<number | null>(null);
 
-  // --- Community solutions ("what should we do with abandoned rovers") ---
+
   const [solutions, setSolutions] = useState<Solution[]>([]);
   const [nameInput, setNameInput] = useState('');
   const [isAnonymous, setIsAnonymous] = useState(false);
@@ -601,7 +601,6 @@ export const Recovery: React.FC = () => {
   const submittingRef = useRef(false);
   const [commentsBySolution, setCommentsBySolution] = useState<Record<string, CommunityComment[]>>({});
 
-  // Shared community feed. Only approved submissions are read publicly.
   useEffect(() => {
     if (firebaseEnabled && db) {
       const q = query(collection(db, 'solutions'), where('status', '==', 'approved'));
@@ -643,13 +642,13 @@ export const Recovery: React.FC = () => {
         setSolutions(parsed.map((item) => ({ ...item, status: item.status ?? 'approved' })));
       }
     } catch {
-      // Ignore malformed local data.
+      
     }
 
     return undefined;
   }, []);
 
-  // Subscribe to approved comments for every visible solution.
+ 
   useEffect(() => {
     if (!firebaseEnabled || !db || solutions.length === 0) {
       setCommentsBySolution({});
@@ -722,7 +721,7 @@ export const Recovery: React.FC = () => {
   const handleSubmitSolution = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    // Synchronous ref lock prevents rapid double-clicks before React updates state.
+   
     if (!ideaInput.trim() || submittingRef.current) return;
 
     submittingRef.current = true;
@@ -770,7 +769,7 @@ export const Recovery: React.FC = () => {
           try {
             window.localStorage.setItem(LOCAL_SOLUTIONS_KEY, JSON.stringify(next));
           } catch {
-            // Storage unavailable — still show it for this session.
+            
           }
           return next;
         });
@@ -1095,7 +1094,6 @@ export const Recovery: React.FC = () => {
         </div>
       </section>
 
-      {/* SIMULATION */}
       <section id="simulation" className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <SectionTitle
           eyebrow="06 / MENDER SIMULATION"
@@ -1231,7 +1229,6 @@ export const Recovery: React.FC = () => {
         </div>
       </section>
 
-      {/* REALITY CHECK */}
       <section className="mx-auto w-full max-w-7xl px-4 pb-20 sm:px-6 lg:px-8">
         <div className="grid gap-5 lg:grid-cols-[1.2fr_.8fr]">
           <div className="rounded-[2rem] border border-[#d57a4b]/20 bg-[#d57a4b]/5 p-7 sm:p-9">
@@ -1268,7 +1265,6 @@ export const Recovery: React.FC = () => {
         </div>
       </section>
 
-      {/* ENGINEERING CHALLENGES */}
       <section className="border-y border-white/10 bg-[#0d0f14]">
         <div className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
           <SectionTitle
@@ -1296,7 +1292,6 @@ export const Recovery: React.FC = () => {
         </div>
       </section>
 
-      {/* ASSESSMENT */}
       <section className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <div className="grid items-center gap-10 lg:grid-cols-[.8fr_1.2fr]">
           <div>
@@ -1340,7 +1335,6 @@ export const Recovery: React.FC = () => {
         </div>
       </section>
 
-      {/* FIRST LIFE → SECOND LIFE */}
       <section className="relative overflow-hidden border-y border-white/10 bg-[#0b0d11]">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(213,122,75,.08),transparent_45%)]" />
         <div className="relative mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
@@ -1390,7 +1384,6 @@ export const Recovery: React.FC = () => {
         </div>
       </section>
 
-      {/* COMMUNITY SOLUTIONS */}
       <section className="border-y border-white/10 bg-[#0d0f14] py-20">
         <style>{`
           @keyframes mender-marquee {

@@ -34,9 +34,8 @@ export const FRONTIERS: Record<string, FrontierInfo> = {
 };
 
 export const BOT_MISSIONS: BotMission[] = [
-  // =========================================================================
-  // --- THE MOON ---
-  // =========================================================================
+  
+
   {
     id: 'luna-9',
     frontierId: 'moon',
@@ -83,7 +82,7 @@ export const BOT_MISSIONS: BotMission[] = [
         scientificDiscovery:
           'Luna 9 proved the lunar surface is solid rock and compressed dust, not a bottomless quicksand swamp as theorists once feared.',
         mediaType: null,
-        mediaUrl: '', // TODO: add verified NASA image/video URL for this discovery
+        mediaUrl: '',
         position: [0, 0, -22],
         beaconColor: '#cbd5e1',
         landmarkLabel: 'Touchdown Spot',
@@ -100,7 +99,7 @@ export const BOT_MISSIONS: BotMission[] = [
           'Its rotating television eye beamed back the first clear close-up images of millimeter-sized lunar pebbles and shallow crater rims.',
         mediaType: 'image',
         mediaUrl:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Luna_9_panorama.jpg/800px-Luna_9_panorama.jpg', // TODO: add verified NASA image/video URL for this discovery
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Luna_9_panorama.jpg/800px-Luna_9_panorama.jpg',
         position: [-16, 0, -45],
         beaconColor: '#94a3b8',
         landmarkLabel: 'Pebble Field',
@@ -116,7 +115,7 @@ export const BOT_MISSIONS: BotMission[] = [
         scientificDiscovery:
           'Measured cosmic ray dosages directly on the lunar surface, showing future Apollo astronauts would not receive lethal bursts on short visits.',
         mediaType: null,
-        mediaUrl: '', // TODO: add verified NASA image/video URL for this discovery
+        mediaUrl: '',
         position: [18, 0, -65],
         beaconColor: '#38bdf8',
         landmarkLabel: 'Radiation Sensor',
@@ -171,7 +170,7 @@ export const BOT_MISSIONS: BotMission[] = [
           'Astronauts drove the rover up Spur Crater to scoop up Sample 15415: an anorthosite white rock that cooled when the young Moon was still an ocean of molten magma.',
         mediaType: 'image',
         mediaUrl:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Genesis_Rock.jpg/800px-Genesis_Rock.jpg', // TODO: add verified NASA image/video URL for this discovery
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Genesis_Rock.jpg/800px-Genesis_Rock.jpg',
         position: [-14, 0, -25],
         beaconColor: '#f1f5f9',
         landmarkLabel: 'Spur Crater Ridge',
@@ -188,7 +187,7 @@ export const BOT_MISSIONS: BotMission[] = [
           'The rover parked right at the edge of a sheer 300-meter-deep canyon, revealing layered basalt flows from ancient lunar volcanic eruptions.',
         mediaType: 'image',
         mediaUrl:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Hadley_Rille_Apollo_15.jpg/800px-Hadley_Rille_Apollo_15.jpg', // TODO: add verified NASA image/video URL for this discovery
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Hadley_Rille_Apollo_15.jpg/800px-Hadley_Rille_Apollo_15.jpg',
         position: [18, 0, -50],
         beaconColor: '#94a3b8',
         landmarkLabel: 'Hadley Rille Gorge',
@@ -204,7 +203,7 @@ export const BOT_MISSIONS: BotMission[] = [
         scientificDiscovery:
           'Positioned 100 meters away with its color TV antenna aimed back at the Apollo Lunar Module, broadcasting the golden blast of liftoff straight to Earth living rooms.',
         mediaType: null,
-        mediaUrl: '', // TODO: add verified NASA image/video URL for this discovery
+        mediaUrl: '',
         position: [0, 0, -80],
         beaconColor: '#fbbf24',
         landmarkLabel: 'Station 10 Overlook',
@@ -259,7 +258,7 @@ export const BOT_MISSIONS: BotMission[] = [
           'When green laser pulses from Earth strike these 100 quartz prisms, they bounce back directly along their exact incoming path with sub-millimeter precision.',
         mediaType: 'image',
         mediaUrl:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Apollo_11_Lunar_Laser_Ranging_Retroreflector.jpg/800px-Apollo_11_Lunar_Laser_Ranging_Retroreflector.jpg', // TODO: add verified NASA image/video URL for this discovery
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Apollo_11_Lunar_Laser_Ranging_Retroreflector.jpg/800px-Apollo_11_Lunar_Laser_Ranging_Retroreflector.jpg',
         position: [0, 0, -22],
         beaconColor: '#22c55e',
         landmarkLabel: 'Apollo 11 Retro-Array',
@@ -275,7 +274,7 @@ export const BOT_MISSIONS: BotMission[] = [
         scientificDiscovery:
           'Decades of return laser bounces proved that tidal friction is steadily accelerating the Moon outward, causing our Moon to slowly spiral away from Earth.',
         mediaType: null,
-        mediaUrl: '', // TODO: add verified NASA image/video URL for this discovery
+        mediaUrl: '',
         position: [-16, 0, -48],
         beaconColor: '#10b981',
         landmarkLabel: 'Tidal Drift Outpost',
@@ -291,7 +290,7 @@ export const BOT_MISSIONS: BotMission[] = [
         scientificDiscovery:
           'Proved the Earth and Moon fall toward the Sun at the exact same gravitational rate, confirming Einstein’s theory of general relativity to unprecedented accuracy.',
         mediaType: null,
-        mediaUrl: '', // TODO: add verified NASA image/video URL for this discovery
+        mediaUrl: '',
         position: [15, 0, -75],
         beaconColor: '#4ade80',
         landmarkLabel: 'General Relativity Point',
@@ -300,9 +299,9 @@ export const BOT_MISSIONS: BotMission[] = [
     ],
   },
 
-  // =========================================================================
-  // --- MARS ---
-  // =========================================================================
+ 
+
+
   {
     id: 'mars-3',
     frontierId: 'mars',
@@ -350,7 +349,7 @@ export const BOT_MISSIONS: BotMission[] = [
           'Proved a spacecraft could decelerate from orbital speed through Mars\' paper-thin carbon dioxide atmosphere using a drogue parachute and braking rockets.',
         mediaType: 'image',
         mediaUrl:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Mars_3_lander_and_parachute.jpg/800px-Mars_3_lander_and_parachute.jpg', // TODO: add verified NASA image/video URL for this discovery
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Mars_3_lander_and_parachute.jpg/800px-Mars_3_lander_and_parachute.jpg',
         position: [-12, 0, -20],
         beaconColor: '#ea580c',
         landmarkLabel: 'Discarded Parachute',
@@ -366,7 +365,7 @@ export const BOT_MISSIONS: BotMission[] = [
         scientificDiscovery:
           'Transmitted seventy lines of raster television signal through a planet-encircling dust storm with winds over 100 meters per second.',
         mediaType: null,
-        mediaUrl: '', // TODO: add verified NASA image/video URL for this discovery
+        mediaUrl: '',
         position: [14, 0, -45],
         beaconColor: '#f97316',
         landmarkLabel: 'Storm Touchdown Site',
@@ -382,7 +381,7 @@ export const BOT_MISSIONS: BotMission[] = [
         scientificDiscovery:
           'Carried a tiny 4.5-kilogram rover on dual skis designed to measure soil density with a mechanical penetrometer while tethered to the main lander.',
         mediaType: null,
-        mediaUrl: '', // TODO: add verified NASA image/video URL for this discovery
+        mediaUrl: '',
         position: [0, 0, -70],
         beaconColor: '#fb923c',
         landmarkLabel: 'Prop-M Ski Platform',
@@ -449,7 +448,7 @@ export const BOT_MISSIONS: BotMission[] = [
           'Discovered tiny millimeter-sized grey spheres of hematite mineral ("blueberries") embedded in rock that could only precipitate inside calm standing water.',
         mediaType: 'image',
         mediaUrl:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Opportunity_blueberries.jpg/800px-Opportunity_blueberries.jpg', // TODO: add verified NASA image/video URL for this discovery
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Opportunity_blueberries.jpg/800px-Opportunity_blueberries.jpg',
         position: [-10, 0, -22],
         beaconColor: '#c1440e',
         landmarkLabel: 'Hematite Blueberry Bed',
@@ -465,7 +464,7 @@ export const BOT_MISSIONS: BotMission[] = [
         scientificDiscovery:
           'Got wheels buried hub-deep in fluffy sulfate powder sand; engineers backward-engineered the slip physics in Earth testbeds to navigate out safely.',
         mediaType: null,
-        mediaUrl: '', // TODO: add verified NASA image/video URL for this discovery
+        mediaUrl: '',
         position: [16, 0, -48],
         beaconColor: '#f59e0b',
         landmarkLabel: 'Troy Sand Trap',
@@ -481,7 +480,7 @@ export const BOT_MISSIONS: BotMission[] = [
         scientificDiscovery:
           'Discovered neutral pH smectite clays at Matijevic Hill, proving Mars once harbored drinkable, non-acidic freshwater lakes.',
         mediaType: null,
-        mediaUrl: '', // TODO: add verified NASA image/video URL for this discovery
+        mediaUrl: '',
         position: [0, 0, -78],
         beaconColor: '#ff8a65',
         landmarkLabel: 'Endeavour Ancient Lakebed',
@@ -536,7 +535,7 @@ export const BOT_MISSIONS: BotMission[] = [
           'Identified layered fine-grained mudstones formed billions of years ago where river water slowed upon entering a prehistoric crater lake.',
         mediaType: 'image',
         mediaUrl:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Jezero_delta_Perseverance_PIA25328.jpg/800px-Jezero_delta_Perseverance_PIA25328.jpg', // TODO: add verified NASA image/video URL for this discovery
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Jezero_delta_Perseverance_PIA25328.jpg/800px-Jezero_delta_Perseverance_PIA25328.jpg',
         position: [-14, 0, -24],
         beaconColor: '#ef4444',
         landmarkLabel: 'River Delta Bed',
@@ -552,7 +551,7 @@ export const BOT_MISSIONS: BotMission[] = [
         scientificDiscovery:
           'Deposited ten hermetically sealed titanium sample tubes on the flat ground to serve as a backup cache for future Earth retrieval.',
         mediaType: null,
-        mediaUrl: '', // TODO: add verified NASA image/video URL for this discovery
+        mediaUrl: '',
         position: [16, 0, -50],
         beaconColor: '#f97316',
         landmarkLabel: 'Three Forks Core Depot',
@@ -569,7 +568,7 @@ export const BOT_MISSIONS: BotMission[] = [
           'Ingenuity demonstrated that counter-rotating carbon fiber blades spinning at 2,400 RPM generate sufficient lift in air that is 99% thinner than Earth’s.',
         mediaType: 'image',
         mediaUrl:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Ingenuity_Flight_24.jpg/800px-Ingenuity_Flight_24.jpg', // TODO: add verified NASA image/video URL for this discovery
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Ingenuity_Flight_24.jpg/800px-Ingenuity_Flight_24.jpg',
         position: [0, 0, -78],
         beaconColor: '#e11d48',
         landmarkLabel: 'Ingenuity Landing Pad',
@@ -578,9 +577,8 @@ export const BOT_MISSIONS: BotMission[] = [
     ],
   },
 
-  // =========================================================================
-  // --- DEEP SPACE ---
-  // =========================================================================
+  
+
   {
     id: 'pioneer-10',
     frontierId: 'deep',
@@ -627,7 +625,7 @@ export const BOT_MISSIONS: BotMission[] = [
         scientificDiscovery:
           'Proved the asteroid belt is mostly empty space rather than an impenetrable debris storm, clearing the route for all future outer solar system probes.',
         mediaType: null,
-        mediaUrl: '', // TODO: add verified NASA image/video URL for this discovery
+        mediaUrl: '',
         position: [-16, 0, -26],
         beaconColor: '#6366f1',
         landmarkLabel: 'Asteroid Belt Crossing',
@@ -643,7 +641,7 @@ export const BOT_MISSIONS: BotMission[] = [
         scientificDiscovery:
           'Discovered Jupiter’s magnetic field is over twenty times stronger than Earth’s and that its intense trapped radiation belts would fry unshielded electronics.',
         mediaType: null,
-        mediaUrl: '', // TODO: add verified NASA image/video URL for this discovery
+        mediaUrl: '',
         position: [18, 0, -55],
         beaconColor: '#818cf8',
         landmarkLabel: 'Jupiter Magnetic Shock',
@@ -659,7 +657,7 @@ export const BOT_MISSIONS: BotMission[] = [
         scientificDiscovery:
           'On June 13, 1983, crossed the orbit of Neptune to become the first human-built craft to venture into the deep cosmic sea beyond the planets.',
         mediaType: null,
-        mediaUrl: '', // TODO: add verified NASA image/video URL for this discovery
+        mediaUrl: '',
         position: [0, 0, -85],
         beaconColor: '#a5b4fc',
         landmarkLabel: 'Trans-Neptunian Perimeter',
@@ -713,7 +711,7 @@ export const BOT_MISSIONS: BotMission[] = [
         scientificDiscovery:
           'Discovered 300-kilometer-high umbrella fountains of molten sulfur on Jupiter’s moon Io, proving planetary moons can generate intense internal tidal heat.',
         mediaType: null,
-        mediaUrl: '', // TODO: add verified NASA image/video URL for this discovery
+        mediaUrl: '',
         position: [-16, 0, -25],
         beaconColor: '#eab308',
         landmarkLabel: 'Io Sulfur Plume',
@@ -729,7 +727,7 @@ export const BOT_MISSIONS: BotMission[] = [
         scientificDiscovery:
           'On August 25, 2012, recorded solar particles plunging to zero as interstellar galactic cosmic rays surged, proving it had entered interstellar space.',
         mediaType: null,
-        mediaUrl: '', // TODO: add verified NASA image/video URL for this discovery
+        mediaUrl: '',
         position: [18, 0, -58],
         beaconColor: '#818cf8',
         landmarkLabel: 'Heliopause Magnetic Border',
@@ -746,7 +744,7 @@ export const BOT_MISSIONS: BotMission[] = [
           'Took the iconic portrait of Earth from 6 billion km as a solitary speck in a sunbeam, carrying greetings in 55 languages into deep galactic time.',
         mediaType: 'image',
         mediaUrl:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Pale_Blue_Dot.png/800px-Pale_Blue_Dot.png', // TODO: add verified NASA image/video URL for this discovery
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Pale_Blue_Dot.png/800px-Pale_Blue_Dot.png',
         position: [0, 0, -88],
         beaconColor: '#c084fc',
         landmarkLabel: 'Pale Blue Dot Vector',
@@ -801,7 +799,7 @@ export const BOT_MISSIONS: BotMission[] = [
           'Revealed that Pluto\'s giant heart-shaped basin is a churning sea of solid nitrogen ice that bubbles up like a slow lava lamp, proving Pluto is geologically alive.',
         mediaType: 'image',
         mediaUrl:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Pluto_in_True_Color_-_High-Res.jpg/800px-Pluto_in_True_Color_-_High-Res.jpg', // TODO: add verified NASA image/video URL for this discovery
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Pluto_in_True_Color_-_High-Res.jpg/800px-Pluto_in_True_Color_-_High-Res.jpg',
         position: [-15, 0, -25],
         beaconColor: '#38bdf8',
         landmarkLabel: 'Sputnik Planitia Ice Heart',
@@ -817,7 +815,7 @@ export const BOT_MISSIONS: BotMission[] = [
         scientificDiscovery:
           'Photographed jagged 3.5-kilometer-high mountain chains composed of water ice that is as hard as granite at minus 230 degrees Celsius.',
         mediaType: null,
-        mediaUrl: '', // TODO: add verified NASA image/video URL for this discovery
+        mediaUrl: '',
         position: [18, 0, -55],
         beaconColor: '#67e8f9',
         landmarkLabel: 'Montes Hillary Peaks',
@@ -833,7 +831,7 @@ export const BOT_MISSIONS: BotMission[] = [
         scientificDiscovery:
           'Encountered the most distant primitive world ever explored, proving planets formed through gentle low-speed pebble mergers rather than violent shattering collisions.',
         mediaType: null,
-        mediaUrl: '', // TODO: add verified NASA image/video URL for this discovery
+        mediaUrl: '',
         position: [0, 0, -86],
         beaconColor: '#06b6d4',
         landmarkLabel: 'Arrokoth Primitive Object',
@@ -843,11 +841,8 @@ export const BOT_MISSIONS: BotMission[] = [
   },
 ];
 
-// =============================================================================
-// LIVE ARCHIVE BOTS (Real tracked positions, key discoveries, and NASA photo notes)
-// =============================================================================
 export const LIVE_ARCHIVE_BOTS: LiveArchiveBot[] = [
-  // --- MOON ARCHIVE ---
+  
   {
     id: 'live-luna9',
     name: 'Luna 9',
@@ -856,7 +851,7 @@ export const LIVE_ARCHIVE_BOTS: LiveArchiveBot[] = [
     activeStatusText: 'Concluded · Silent in Lunar Basalt',
     launchDate: 'Jan 31, 1966',
     operator: 'Lavochkin / Soviet Space Program',
-    // TODO: replace with verified NASA source
+   
     placeholderPhotoNote: '// TODO: replace with verified NASA source (NASA NSSDC ID: 1966-006A / Lavochkin Museum Photo)',
     photoCaption: 'Spherical lander with unfolded petal covers in Oceanus Procellarum',
     keyDiscoveries: [
@@ -881,7 +876,7 @@ export const LIVE_ARCHIVE_BOTS: LiveArchiveBot[] = [
     activeStatusText: 'Concluded · Parked at Apollo Landing Sites',
     launchDate: '1971 - 1972',
     operator: 'NASA Marshall Space Flight Center / Boeing',
-    // TODO: replace with verified NASA source
+
     placeholderPhotoNote: '// TODO: replace with verified NASA source (NASA Apollo 15 Photo AS15-88-11901)',
     photoCaption: 'LRV-1 parked against the backdrop of Mount Hadley Delta',
     keyDiscoveries: [
@@ -906,7 +901,7 @@ export const LIVE_ARCHIVE_BOTS: LiveArchiveBot[] = [
     activeStatusText: 'ACTIVE TODAY · Weekly Laser Measurements',
     launchDate: 'July 21, 1969 - Present',
     operator: 'NASA / Observatoire de la Côte d’Azur / McDonald Obs',
-    // TODO: replace with verified NASA source
+
     placeholderPhotoNote: '// TODO: replace with verified NASA source (NASA Apollo 11 Photo AS11-40-5952)',
     photoCaption: 'Buzz Aldrin placing the 100-prism silica retroreflector array on Mare Tranquillitatis',
     keyDiscoveries: [
@@ -924,7 +919,7 @@ export const LIVE_ARCHIVE_BOTS: LiveArchiveBot[] = [
     },
   },
 
-  // --- MARS ARCHIVE ---
+
   {
     id: 'live-mars3',
     name: 'Mars 3 Lander',
@@ -933,7 +928,7 @@ export const LIVE_ARCHIVE_BOTS: LiveArchiveBot[] = [
     activeStatusText: 'Concluded · Silent in Ptolemaeus Crater',
     launchDate: 'May 28, 1971',
     operator: 'Soviet Space Program',
-    // TODO: replace with verified NASA source
+
     placeholderPhotoNote: '// TODO: replace with verified NASA source (NASA HiRISE Orbiter Image ESP_031069_1350)',
     photoCaption: 'HiRISE satellite reconnaissance showing Mars 3 parachute and lander hardware in 2013',
     keyDiscoveries: [
@@ -958,7 +953,7 @@ export const LIVE_ARCHIVE_BOTS: LiveArchiveBot[] = [
     activeStatusText: 'Concluded · Preserved in Perseverance Valley',
     launchDate: 'July 7, 2003 (Landed Jan 25, 2004)',
     operator: 'NASA Jet Propulsion Laboratory',
-    // TODO: replace with verified NASA source
+
     placeholderPhotoNote: '// TODO: replace with verified NASA source (NASA/JPL-Caltech/Cornell/ASU PIA10214)',
     photoCaption: 'Opportunity Pancam panoramic selfie showing solar arrays over Victoria Crater',
     keyDiscoveries: [
@@ -983,7 +978,7 @@ export const LIVE_ARCHIVE_BOTS: LiveArchiveBot[] = [
     activeStatusText: 'ACTIVE TODAY · Drilling Ancient River Delta',
     launchDate: 'July 30, 2020 (Landed Feb 18, 2021)',
     operator: 'NASA Jet Propulsion Laboratory',
-    // TODO: replace with verified NASA source
+
     placeholderPhotoNote: '// TODO: replace with verified NASA source (NASA/JPL-Caltech/MSSS PIA24424)',
     photoCaption: 'Perseverance high-resolution Mastcam-Z portrait with Ingenuity nearby at Wright Brothers Field',
     keyDiscoveries: [
@@ -1001,7 +996,7 @@ export const LIVE_ARCHIVE_BOTS: LiveArchiveBot[] = [
     },
   },
 
-  // --- DEEP SPACE ARCHIVE ---
+
   {
     id: 'live-pioneer10',
     name: 'Pioneer 10',
@@ -1010,7 +1005,7 @@ export const LIVE_ARCHIVE_BOTS: LiveArchiveBot[] = [
     activeStatusText: 'Concluded · Silent Interstellar Drift',
     launchDate: 'March 2, 1972',
     operator: 'NASA Ames Research Center',
-    // TODO: replace with verified NASA source
+
     placeholderPhotoNote: '// TODO: replace with verified NASA source (NASA Ames Image P-12443 Plaque Engraving)',
     photoCaption: 'Gold-anodized aluminum pictorial greeting plaque mounted to probe antenna struts',
     keyDiscoveries: [
@@ -1035,7 +1030,7 @@ export const LIVE_ARCHIVE_BOTS: LiveArchiveBot[] = [
     activeStatusText: 'ACTIVE TODAY · Transmitting from Interstellar Void',
     launchDate: 'Sept 5, 1977',
     operator: 'NASA Jet Propulsion Laboratory',
-    // TODO: replace with verified NASA source
+
     placeholderPhotoNote: '// TODO: replace with verified NASA source (NASA JPL Image P-22998 Voyager Craft & Golden Record)',
     photoCaption: 'Voyager Golden Record cover showing interstellar pulsars and Earth address diagrams',
     keyDiscoveries: [
@@ -1060,7 +1055,7 @@ export const LIVE_ARCHIVE_BOTS: LiveArchiveBot[] = [
     activeStatusText: 'ACTIVE TODAY · Mapping Deep Kuiper Belt Dust',
     launchDate: 'Jan 19, 2006',
     operator: 'NASA / Johns Hopkins Applied Physics Laboratory',
-    // TODO: replace with verified NASA source
+
     placeholderPhotoNote: '// TODO: replace with verified NASA source (NASA/JHUAPL/SwRI PIA19952 Pluto Heart Portrait)',
     photoCaption: 'High-resolution true color view of Pluto showing Sputnik Planitia nitrogen glacier heart',
     keyDiscoveries: [

@@ -8,10 +8,6 @@ interface ColdOpenProps {
   onReturnToKids?: () => void;
 }
 
-// ---------------------------------------------------------------------------
-// Close-up 3D world previews (Sketchfab). Deep Space has no single "world"
-// to preview this way, so only Mars & Moon get a viewer here.
-// ---------------------------------------------------------------------------
 type PreviewPlanet = 'mars' | 'moon';
 
 const WORLD_PREVIEWS: Record<
@@ -53,7 +49,7 @@ export const ColdOpen: React.FC<ColdOpenProps> = ({ onBegin, onSelectFrontierDir
         </button>
       )}
 
-      {/* Editorial Title & Kicker */}
+     
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -75,7 +71,7 @@ export const ColdOpen: React.FC<ColdOpenProps> = ({ onBegin, onSelectFrontierDir
         </div>
       </motion.div>
 
-      {/* Flagship Framer Motion Animated SVG Scene: Earth with 3 trails drawing outward */}
+      
       <div className="relative my-16 flex h-[580px] w-full  max-w-4xl items-center justify-center  sm:h-[440px]">
         <svg
           viewBox="0 0 1100 500"
@@ -116,7 +112,6 @@ export const ColdOpen: React.FC<ColdOpenProps> = ({ onBegin, onSelectFrontierDir
             </filter>
           </defs>
 
-          {/* Background Stars with subtle motion */}
           <g className="text-[#ece7dc]">
             {[
               { cx: 80, cy: 90, r: 1 },
@@ -143,7 +138,6 @@ export const ColdOpen: React.FC<ColdOpenProps> = ({ onBegin, onSelectFrontierDir
             ))}
           </g>
 
-          {/* FRAMER MOTION TRAIL 1: Earth to Moon */}
           <motion.path
             d="M 220 280 Q 280 180 390 170"
             fill="none"
@@ -155,7 +149,6 @@ export const ColdOpen: React.FC<ColdOpenProps> = ({ onBegin, onSelectFrontierDir
             transition={{ duration: 2.2, ease: 'easeOut', delay: 0.2 }}
           />
 
-          {/* FRAMER MOTION TRAIL 2: Earth to Mars */}
           <motion.path
             d="M 220 280 C 340 370 560 390 690 310"
             fill="none"
@@ -166,8 +159,6 @@ export const ColdOpen: React.FC<ColdOpenProps> = ({ onBegin, onSelectFrontierDir
             animate={{ pathLength: 1, opacity: 0.95 }}
             transition={{ duration: 2.6, ease: 'easeOut', delay: 0.5 }}
           />
-
-          {/* FRAMER MOTION TRAIL 3: Earth into Deep Space */}
           <motion.path
             d="M 220 280 C 350 210 580 140 880 70"
             fill="none"
@@ -180,11 +171,10 @@ export const ColdOpen: React.FC<ColdOpenProps> = ({ onBegin, onSelectFrontierDir
             filter="url(#glowFilter)"
           />
 
-          {/* EARTH: Departure Point */}
           <g transform="translate(220, 280)">
             <circle r="80" fill="#0369a1" fillOpacity="0.15" />
             <circle r="68" fill="url(#earthGlow)" filter="url(#glowFilter)" />
-            {/* Continent shapes */}
+  
             <path
               d="M -16 -10 Q -8 -22 8 -16 Q 18 -10 12 10 Q -2 20 -14 12 Z"
               fill="#065f46"
@@ -217,7 +207,7 @@ export const ColdOpen: React.FC<ColdOpenProps> = ({ onBegin, onSelectFrontierDir
             </text>
           </g>
 
-          {/* DESTINATION 1: THE MOON */}
+         
           <g
             transform="translate(390, 170)"
             className="cursor-pointer transition-transform hover:scale-105"
@@ -247,7 +237,6 @@ export const ColdOpen: React.FC<ColdOpenProps> = ({ onBegin, onSelectFrontierDir
             </text>
           </g>
 
-          {/* DESTINATION 2: MARS */}
           <g
             transform="translate(690, 310)"
             className="cursor-pointer transition-transform hover:scale-102"
@@ -282,7 +271,6 @@ export const ColdOpen: React.FC<ColdOpenProps> = ({ onBegin, onSelectFrontierDir
             </text>
           </g>
 
-          {/* DESTINATION 3: DEEP SPACE */}
           <g
             transform="translate(920, 75)"
             className="cursor-pointer transition-transform hover:scale-101"
@@ -324,8 +312,7 @@ export const ColdOpen: React.FC<ColdOpenProps> = ({ onBegin, onSelectFrontierDir
         )}
       </div>
 
-      {/* Take a closer look: real interactive 3D world preview, between the
-          cosmic map and the CTA — a tactile bridge before "Start Exploring." */}
+    
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -343,7 +330,6 @@ export const ColdOpen: React.FC<ColdOpenProps> = ({ onBegin, onSelectFrontierDir
             </h2>
           </div>
 
-          {/* World toggle */}
           <div className="flex items-center gap-1.5 rounded-2xl border border-white/15 bg-white/5 p-1.5">
             {(Object.keys(WORLD_PREVIEWS) as PreviewPlanet[]).map((key) => (
               <button
@@ -389,7 +375,6 @@ export const ColdOpen: React.FC<ColdOpenProps> = ({ onBegin, onSelectFrontierDir
         </div>
       </motion.div>
 
-      {/* Copy and Begin button */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

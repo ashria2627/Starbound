@@ -39,7 +39,7 @@ export const Mars: React.FC = () => {
   return (
     <div className="min-h-screen bg-[#050816] text-white">
 
-      {/* Hero */}
+     
       <section className="mx-auto max-w-7xl px-6 pt-14 pb-8 text-center">
 
         <p className="text-sm uppercase tracking-[0.4em] text-orange-400">
@@ -55,13 +55,9 @@ export const Mars: React.FC = () => {
         </p>
 
       </section>
-
-      {/* Planet Selector */}
       <section className="mx-auto max-w-4xl px-6">
 
         <div className="grid grid-cols-2 gap-4">
-
-          {/* Mars */}
           <button
             onClick={() => setSelectedPlanet('mars')}
             className={`group rounded-2xl border p-6 text-left transition-all duration-300 ${
@@ -85,7 +81,6 @@ export const Mars: React.FC = () => {
             </div>
           </button>
 
-          {/* Moon */}
           <button
             onClick={() => setSelectedPlanet('moon')}
             className={`group rounded-2xl border p-6 text-left transition-all duration-300 ${
@@ -112,7 +107,6 @@ export const Mars: React.FC = () => {
         </div>
       </section>
 
-      {/* Selected World */}
       <main className="mx-auto max-w-7xl px-6 py-10">
 
         <div className="mb-6">
@@ -139,7 +133,6 @@ export const Mars: React.FC = () => {
 
         </div>
 
-        {/* 3D Model */}
         <div className="overflow-hidden rounded-3xl border border-white/10 bg-black shadow-2xl">
 
           <div className="relative h-[500px] w-full md:h-[650px]">
@@ -158,7 +151,6 @@ export const Mars: React.FC = () => {
 
         </div>
 
-        {/* Model Information */}
         <div className="mt-6 flex flex-col gap-4 rounded-2xl border border-white/10 bg-white/5 p-6 md:flex-row md:items-center md:justify-between">
 
           <div>
@@ -182,7 +174,7 @@ export const Mars: React.FC = () => {
 
         </div>
 
-        {/* Story */}
+
         <section className="mt-10 rounded-3xl border border-white/10 bg-gradient-to-br from-orange-500/10 to-transparent p-8">
 
           <p className="text-sm uppercase tracking-widest text-orange-400">

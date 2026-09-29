@@ -19,7 +19,7 @@ interface BotBook {
   name: string;
   place: string;
   coverImageUrl?: string;
-  pages: [BookPage, BookPage, BookPage, BookPage]; // origin, goals, discoveries, now
+  pages: [BookPage, BookPage, BookPage, BookPage]; 
 }
 
 const BOOKS: BotBook[] = [
@@ -92,7 +92,7 @@ const BOOKS: BotBook[] = [
         </>
       ),
       imageUrl: 'https://www.nasa.gov/wp-content/uploads/2021/12/mars_pathfinder_11_sojourner_apxs_on_yogi_rock_1997.jpg',
-      modelUrl: '', // NASA 3D Resources — Sojourner / Mars Pathfinder model
+      modelUrl: '', 
     },
   ],
 },
@@ -236,7 +236,7 @@ const BOOKS: BotBook[] = [
         </>
       ),
       imageUrl: 'https://assets.science.nasa.gov/dynamicimage/assets/science/cds/3d/resources/model/mars-exploration-rover---spirit-and-opportunity/Mars%20Exploration%20Rover%20-%20Spirit%20and%20Opportunity.png?w=1280&h=720&fit=clip&crop=faces%2Cfocalpoint',
-      modelUrl: '', // NASA MER Spirit/Opportunity 3D model
+      modelUrl: '',
     },
   ],
 },
@@ -878,9 +878,6 @@ const BookModal: React.FC<{ book: BotBook; onClose: () => void }> = ({ book, onC
     }, 550);
   };
 
-  // Touch swipe support (mobile/tablet) — mirrors the wheel behavior above.
-  // A vertical swipe of more than SWIPE_THRESHOLD px turns the page; smaller
-  // moves (e.g. a tap, or scrolling within a long text block) are ignored.
   const SWIPE_THRESHOLD = 45;
 
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -894,8 +891,8 @@ const BookModal: React.FC<{ book: BotBook; onClose: () => void }> = ({ book, onC
     if (Math.abs(deltaY) < SWIPE_THRESHOLD) return;
 
     touchLockRef.current = true;
-    if (deltaY > 0) goTo(pageIndex + 1); // swiped up → next page
-    else goTo(pageIndex - 1); // swiped down → previous page
+    if (deltaY > 0) goTo(pageIndex + 1);
+    else goTo(pageIndex - 1);
     setTimeout(() => {
       touchLockRef.current = false;
     }, 550);
@@ -919,7 +916,7 @@ const BookModal: React.FC<{ book: BotBook; onClose: () => void }> = ({ book, onC
         <X className="h-5 w-5" />
       </button>
 
-      {/* Page-dot navigation */}
+      
       <div className="absolute left-5 top-1/2 z-10 hidden -translate-y-1/2 flex-col gap-3 sm:flex">
         {book.pages.map((p, i) => (
           <button
@@ -938,7 +935,7 @@ const BookModal: React.FC<{ book: BotBook; onClose: () => void }> = ({ book, onC
       </div>
 
       <div className="relative flex h-[85vh] w-full max-w-4xl flex-col overflow-hidden rounded-3xl border border-white/10 bg-[#12151c] shadow-2xl">
-        {/* Book header */}
+      
         <div className="flex items-center justify-between border-b border-white/10 px-6 py-4 sm:px-10">
           <div>
             <p className="font-mono text-[10px] uppercase tracking-wide text-[#9aa0a6]">{book.place}</p>
@@ -949,7 +946,7 @@ const BookModal: React.FC<{ book: BotBook; onClose: () => void }> = ({ book, onC
           </span>
         </div>
 
-        {/* Page content, animated as a page-turn (rotateX flip + fade) */}
+     
         <div className="relative flex-1 overflow-hidden" style={{ perspective: 1400 }}>
           <AnimatePresence mode="wait">
             <motion.div
@@ -985,7 +982,7 @@ const BookModal: React.FC<{ book: BotBook; onClose: () => void }> = ({ book, onC
           </AnimatePresence>
         </div>
 
-        {/* Page-turn controls */}
+       
         <div className="flex items-center justify-center gap-4 border-t border-white/10 py-3">
           <button
             onClick={() => goTo(pageIndex - 1)}

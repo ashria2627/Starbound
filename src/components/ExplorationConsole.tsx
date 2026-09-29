@@ -114,8 +114,6 @@ export const ExplorationConsole: React.FC<ExplorationConsoleProps> = ({ onExit }
     soundFx.playDiscoveryChime();
   }, []);
 
-  // CosmoHeader's "Back" button now exits the console entirely (back to the
-  // main app), rather than just resetting the current mission's state.
   const handleBack = useCallback(() => {
     soundFx.playChirp();
     onExit?.();

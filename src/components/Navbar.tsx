@@ -4,7 +4,6 @@ export type AppView =
   | 'entry'
   | 'kids-home'
   | 'coldopen'
-  | 'frontiers'
   | 'simulation'
   | 'live-archive'
   | 'anatomy'
@@ -45,15 +44,16 @@ export const Navbar: React.FC<NavbarProps> = ({
 
         {/* Nav Links */}
         <nav className="hidden items-center gap-6 lg:flex">
-          <button
-            onClick={() => onNavigate('frontiers')}
+          
+         <button
+            onClick={() => onNavigate('abandoned-stories')}
             className={`whitespace-nowrap text-sm font-medium transition-colors ${
-              currentView === 'frontiers'
+              currentView === 'abandoned-stories'
                 ? 'text-[#ece7dc] border-b-2 border-[#c1440e] pb-1 font-semibold'
                 : 'text-[#9aa0a6] hover:text-[#ece7dc]'
             }`}
           >
-            The Frontiers
+            Abandoned Stories
           </button>
 
           <button
@@ -70,17 +70,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           
 
-          <button
-            onClick={() => onNavigate('abandoned-stories')}
-            className={`whitespace-nowrap text-sm font-medium transition-colors ${
-              currentView === 'abandoned-stories'
-                ? 'text-[#ece7dc] border-b-2 border-[#c1440e] pb-1 font-semibold'
-                : 'text-[#9aa0a6] hover:text-[#ece7dc]'
-            }`}
-          >
-            Abandoned Stories
-          </button>
-
+          
           
 
           <button
@@ -125,10 +115,10 @@ export const Navbar: React.FC<NavbarProps> = ({
       {/* Mobile sub-bar */}
       <div className="flex overflow-x-auto border-t border-white/5 px-4 py-2 text-xs lg:hidden gap-4">
         <button
-          onClick={() => onNavigate('frontiers')}
-          className={`whitespace-nowrap ${currentView === 'frontiers' ? 'text-[#ece7dc] font-semibold' : 'text-[#9aa0a6]'}`}
+          onClick={() => onNavigate('abandoned-stories')}
+          className={`whitespace-nowrap ${currentView === 'abandoned-stories' ? 'text-[#ece7dc] border-b-2 border-[#c1440e] pb-1 font-semibold' : 'text-[#9aa0a6] hover:text-[#ece7dc]'}`}
         >
-          Frontiers
+          Abandoned
         </button>
        
         <button
@@ -136,14 +126,9 @@ export const Navbar: React.FC<NavbarProps> = ({
           className={`whitespace-nowrap flex items-center gap-1 ${currentView === 'simulation' ? 'text-[#ff8a65] font-semibold' : 'text-[#9aa0a6]'}`}
         >
           <Play className="h-3 w-3 fill-current" />
-          <span>3D Simulation</span>
+          <span>Simulation</span>
         </button>
-        <button
-          onClick={() => onNavigate('abandoned-stories')}
-          className={`whitespace-nowrap ${currentView === 'abandoned-stories' ? 'text-[#ece7dc] border-b-2 border-[#c1440e] pb-1 font-semibold' : 'text-[#9aa0a6] hover:text-[#ece7dc]'}`}
-        >
-          Abandoned
-        </button>
+       
         
         <button
           onClick={() => onNavigate('anatomy')}
