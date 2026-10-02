@@ -19,7 +19,6 @@ export interface Discovery {
   badge: 'Real NASA discovery' | 'Simulated mission discovery';
   text: string;
   kidsText: string; 
-  grownupText: string; 
   difficultiesFaced: string[]; 
   photos: DiscoveryPhoto[]; 
   videoEmbedUrl: string; 
@@ -36,8 +35,6 @@ export const DISCOVERIES: Discovery[] = [
     text: 'In 2004, Opportunity spotted millions of tiny grey pebbles shaped like blueberries! They are made of hematite, a mineral that usually forms in liquid water. This proved Mars was once wet and warm!',
     kidsText:
       'Tiny round rocks on Mars. Water made them long ago. Oppy found millions of them!',
-    grownupText:
-      'In February 2004 inside Eagle Crater at Meridiani Planum, Opportunity discovered thousands of millimeter-scale spherical concretions embedded in sulfate-rich sedimentary bedrock. Using its Microscopic Imager and Mössbauer Spectrometer, NASA confirmed the spherules were composed of crystalline gray hematite (Fe₂O₃) precipitated from acidic groundwater permeating porous rock.',
     difficultiesFaced: [
       'Extreme -90°C nighttime temperatures required hours of radioisotope heating before the robotic arm (IDD) actuators could safely move.',
       'Positioning the Mössbauer Spectrometer within millimeters of uneven rock without crashing the contact sensor plate under a 20-minute communication delay.',
@@ -45,12 +42,12 @@ export const DISCOVERIES: Discovery[] = [
     ],
     photos: [
       {
-        url: 'https://images-assets.nasa.gov/image/PIA05476/PIA05476~orig.jpg',
+        url: '/assets/objects/PIA05476-orig-879169a6.jpg',
         caption: 'Microscopic Imager close-up showing spherical hematite concretions ("blueberries") 4–6 mm in diameter in Eagle Crater.',
         credit: 'NASA / JPL-Caltech / USGS',
       },
       {
-        url: 'https://upload.wikimedia.org/wikipedia/commons/8/87/Martian_blueberries.jpg',
+        url: '/assets/objects/Martian-blueberries-423a5a1a.jpg',
         caption: 'False-color Pancam image of hematite "blueberries" weathering out of Eagle Crater outcrop (Sol 28).',
         credit: 'NASA / JPL-Caltech / Cornell',
       },
@@ -66,8 +63,6 @@ export const DISCOVERIES: Discovery[] = [
     text: 'InSight is a robotic Mars lander designed to listen for "marsquakes" deep underground! Its sensitive instruments helped scientists map the rocky crust, mantle, and core of Mars.',
     kidsText:
       'InSight listens to Mars rumble. It feels quakes deep underground. Scientists learned how Mars formed!',
-    grownupText:
-      'Landing at Elysium Planitia in November 2018, NASA’s InSight (Interior Exploration using Seismic Investigations, Geodesy and Heat Transport) deployed the ultra-sensitive SEIS broadband seismometer directly onto the Martian surface. It detected over 1,300 marsquakes and meteoroid impacts, revealing a liquid iron-alloy core ~1,830 km in radius and a multi-layered crust.',
     difficultiesFaced: [
       'The HP³ "Mole" self-hammering heat probe bounced backward out of its hole because cohesive duricrust soil lacked the loose granular friction needed to absorb recoil.',
       'Engineers spent nearly two years commanding the robotic arm scoop to pin the Mole laterally against the hole wall—a delicate maneuver never intended before launch.',
@@ -75,12 +70,12 @@ export const DISCOVERIES: Discovery[] = [
     ],
     photos: [
       {
-        url: 'https://images-assets.nasa.gov/image/PIA22876/PIA22876~medium.jpg',
+        url: '/assets/objects/PIA22876-medium-5561899c.jpg',
         caption: 'InSight’s first complete selfie on Elysium Planitia showing its deployed solar arrays and deck instruments.',
         credit: 'NASA / JPL-Caltech',
       },
       {
-        url: 'https://images-assets.nasa.gov/image/PIA23047/PIA23047~medium.jpg',
+        url: '/assets/objects/PIA23047-medium-812e0cc5.jpg',
         caption: 'The Wind and Thermal Shield (WTS) placed over the SEIS seismometer to block thermal and wind noise.',
         credit: 'NASA / JPL-Caltech',
       },
@@ -89,11 +84,11 @@ export const DISCOVERIES: Discovery[] = [
     videoTitle: 'NASA JPL: InSight Lander — Listening to the Heartbeat of Mars',
     source: 'NASA JPL · InSight Mars Lander Mission',
     sketchfab: {
-      src: 'https://sketchfab.com/models/d6b8096bdd594d408fb738bd9ef5cebe/embed?autostart=1&ui_infos=0&ui_controls=1&ui_stop=0&ui_watermark=0',
+      src: 'https://sketchfab.com/models/ccc5af6f998c4887b30591e13e239390/embed?autostart=1&ui_infos=0&ui_controls=1&ui_stop=0&ui_watermark=0',
       modelTitle: 'NASA InSight Mars Lander',
-      modelPage: 'https://sketchfab.com/3d-models/d6b8096bdd594d408fb738bd9ef5cebe',
-      authorName: 'NASA / JPL-Caltech',
-      authorPage: 'https://sketchfab.com/nasa',
+      modelPage: 'https://sketchfab.com/3d-models/nasa-mars-insight-lander-arm-deployed-ccc5af6f998c4887b30591e13e239390',
+      authorName: 'leoneduardi (from NASA/JPL-Caltech model)',
+      authorPage: 'https://sketchfab.com/leoneduardi',
     },
   },
   {
@@ -103,8 +98,6 @@ export const DISCOVERIES: Discovery[] = [
     text: 'In 2005, Opportunity got its wheels hub-deep in a soft windblown sand dune! Engineers on Earth practiced in a sandbox for five weeks and carefully inched Oppy free to keep exploring.',
     kidsText:
       'Oppy got stuck in sand. Helpers wiggled the wheels free. Soon Oppy drove away happy!',
-    grownupText:
-      'On Sol 446 (April 26, 2005), during a 90-meter blind drive across Meridiani Planum, Opportunity drove into a 30-cm-high transverse aeolian ridge subsequently named "Purgatory Dune." All six aluminum wheels sank up to their hubs in fine, low-bearing-strength basaltic and sulfate dust, reaching nearly 100% wheel slip.',
     difficultiesFaced: [
       'Blind dead-reckoning mode did not have visual odometry active, so the rover kept spinning its wheels for meters after forward progress had completely stalled.',
       'JPL engineers had to mix crushed walnut shells, play sand, and diatomaceous earth in a Pasadena testbed to replicate the exact cohesion and slip angle of Martian dust.',
@@ -112,12 +105,12 @@ export const DISCOVERIES: Discovery[] = [
     ],
     photos: [
       {
-        url: 'https://images-assets.nasa.gov/image/PIA07997/PIA07997~orig.jpg',
+        url: '/assets/objects/PIA07997-orig-45707803.jpg',
         caption: 'Pancam look-back at the deep wheel ruts left in Purgatory Dune after Opportunity finally escaped on Sol 484.',
         credit: 'NASA / JPL-Caltech / Cornell',
       },
       {
-        url: 'https://upload.wikimedia.org/wikipedia/commons/3/3c/Opportunity_in_Purgatory_Dune.jpg',
+        url: '/assets/objects/dune.jpg',
         caption: 'Rear Hazard Camera (Hazcam) view showing Opportunity’s wheels buried hub-deep in Purgatory Dune.',
         credit: 'NASA / JPL-Caltech',
       },
@@ -133,8 +126,6 @@ export const DISCOVERIES: Discovery[] = [
     text: 'During cold Martian winters, Oppy drove onto tilted northern hills called "Lily Pads" so its solar wings could face the low sun and stay warm and charged!',
     kidsText:
       'Mars winters get very cold. Oppy parked on sunny hills. Sunlight kept its batteries warm!',
-    grownupText:
-      'In the southern hemisphere of Mars, winter aphelion reduces solar irradiance while atmospheric dust blocks sunlight. To survive its fifth Martian winter (2011–2012) with heavily dust-coated solar arrays, Opportunity parked on a 15-degree north-facing outcrop named "Greeley Haven" on the rim of Endeavour Crater.',
     difficultiesFaced: [
       'Solar array output dropped below 280 watt-hours per sol (down from 900 Wh at landing), barely enough to keep the core electronics above their -40°C survival limit.',
       'A broken right-front steering actuator and an aging robotic arm shoulder joint heater forced engineers to park at a precise azimuth and tilt angle for 19 weeks without driving.',
@@ -142,7 +133,7 @@ export const DISCOVERIES: Discovery[] = [
     ],
     photos: [
       {
-        url: 'https://images-assets.nasa.gov/image/PIA15689/PIA15689~medium.jpg',
+        url: '/assets/objects/PIA15689-medium-ecb523a2.jpg',
         caption: '360-degree Pancam winter panorama from Greeley Haven showing Opportunity’s dust-covered solar deck tilted north.',
         credit: 'NASA / JPL-Caltech / Cornell / ASU',
       },
@@ -158,8 +149,6 @@ export const DISCOVERIES: Discovery[] = [
     text: 'Everything rovers like Opportunity learn about Martian water, rocks, and weather helps engineers design future solar habitats and greenhouses for human explorers!',
     kidsText:
       'Rovers help future astronauts live. They find water and rocks. Humans will visit Mars someday!',
-    grownupText:
-      'Precursor surface missions like Opportunity, Curiosity, and Perseverance provide critical environmental datasets—groundwater mineral hydration, radiation flux, dust storm opacity, and regolith mechanics—required to engineer In-Situ Resource Utilization (ISRU) plants and pressurized human habitats on Mars.',
     difficultiesFaced: [
       'Martian regolith contains 0.5–1% toxic perchlorates (ClO₄⁻), requiring sealed airlocks and electrostatic dust mitigation before astronauts can enter habitats.',
       'Extracting breathable oxygen from the thin 95% CO₂ atmosphere (6 millibars—less than 1% of Earth sea-level pressure) requires high-temperature solid oxide electrolysis (tested by MOXIE).',
@@ -167,7 +156,7 @@ export const DISCOVERIES: Discovery[] = [
     ],
     photos: [
       {
-        url: 'https://images-assets.nasa.gov/image/PIA20027/PIA20027~medium.jpg',
+        url: '/assets/objects/PIA20027-medium-b0d1bd34.jpg',
         caption: 'NASA Mars human exploration habitat and surface operations concept informed by rover geology datasets.',
         credit: 'NASA / JPL-Caltech',
       },
@@ -183,8 +172,6 @@ export const DISCOVERIES: Discovery[] = [
     text: 'Built for a 90-day mission, Opportunity explored Mars for almost 15 years and drove over 45 kilometers! It rests peacefully here in Perseverance Valley after a giant planet-wide dust storm in 2018.',
     kidsText:
       'Oppy drove for fifteen years! A big dust storm came. Now Oppy rests in peace.',
-    grownupText:
-      'Designed for a 90-sol warranty and a 1,000-meter range, Opportunity operated for 5,352 sols (nearly 15 Earth years) and holds the off-Earth marathon driving record of 45.16 kilometers. On June 10, 2018, while exploring Perseverance Valley on the western rim of Endeavour Crater, a planet-encircling dust storm silenced the rover.',
     difficultiesFaced: [
       'Atmospheric optical depth (tau) surged to an unprecedented τ = 10.8, blocking 99.995% of direct sunlight and plunging solar production to just 22 watt-hours.',
       'Without power to run its mission clock or survival heaters through the freezing night, Opportunity suffered a low-power fault and internal clock loss.',
@@ -192,12 +179,17 @@ export const DISCOVERIES: Discovery[] = [
     ],
     photos: [
       {
-        url: 'https://images-assets.nasa.gov/image/PIA22518/PIA22518~medium.jpg',
+        url: '/assets/objects/PIA22908-medium-e062b11b.jpg',
+        caption: 'Opportunity’s final full 360-degree panorama in Perseverance Valley (PIA22908), taken May–June 2018 just before the global dust storm.',
+        credit: 'NASA / JPL-Caltech / Cornell / ASU',
+      },
+      {
+        url: '/assets/objects/PIA22518-medium-e4be3f04.jpg',
         caption: 'Opportunity’s final full 360-degree panorama in Perseverance Valley just before the June 2018 global dust storm.',
         credit: 'NASA / JPL-Caltech / Cornell / ASU',
       },
       {
-        url: 'https://images-assets.nasa.gov/image/PIA03240/PIA03240~medium.jpg',
+        url: '/assets/objects/PIA03240-medium-4c7c570b.jpg',
         caption: 'Mars Exploration Rover Opportunity on the red plains of Mars.',
         credit: 'NASA / JPL-Caltech / Cornell',
       },

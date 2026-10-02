@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, lazy, Suspense } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Navbar, AppView } from './components/Navbar';
 import { routeFromPathname, pathForView, destinationFromHash } from './routes';
@@ -18,6 +18,8 @@ import { FrontierId, BotMission } from './types';
 import { BOT_MISSIONS } from './data/missions';
 import { AbandonedStories } from './components/AbandonedStories';
 import { Mars } from './components/Mars';
+
+const MapView = lazy(() => import('./map/MapView'));
 
 export default function App() {
   const location = useLocation();
@@ -248,6 +250,11 @@ export default function App() {
         {currentView === 'recovery' && <Recovery />}
         {currentView === 'meetmyparts' && <MeetMyParts />}
         {currentView === 'abandoned-stories' && <AbandonedStories />}
+        {currentView === 'map' && (
+          <Suspense fallback={<p className="p-8 text-center text-[#9aa0a6]">Loading map…</p>}>
+            <MapView onOpenStory={() => navigateToView('abandoned-stories')} />
+          </Suspense>
+        )}
       </main>
 
       <BotDetailPanel

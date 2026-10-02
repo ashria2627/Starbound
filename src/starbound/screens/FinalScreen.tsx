@@ -27,7 +27,6 @@ const CONFETTI_PIECES = [
 export const FinalScreen: React.FC<FinalScreenProps> = ({ onRestart }) => {
   const { state, dispatch } = useGame();
   const prefersReducedMotion = useReducedMotion();
-  const isKids = state.audienceMode === 'kids';
 
 
   const [explorerName, setExplorerName] = useState<string>('');
@@ -213,7 +212,7 @@ export const FinalScreen: React.FC<FinalScreenProps> = ({ onRestart }) => {
                   {finalTier.prizeName}
                 </p>
                 <p className="text-base sm:text-lg text-[#FFF8EB] mt-1 leading-relaxed">
-                  {isKids ? finalTier.kidsDescription : finalTier.description}
+                  {finalTier.kidsDescription}
                 </p>
               </div>
             </div>
@@ -245,7 +244,7 @@ export const FinalScreen: React.FC<FinalScreenProps> = ({ onRestart }) => {
                       {finalTier.prizeName}
                     </h3>
                     <p className="text-base text-amber-100 leading-snug mt-0.5">
-                      {isKids ? finalTier.kidsEncouragement : finalTier.encouragement}
+                      {finalTier.kidsEncouragement}
                     </p>
                   </div>
                 </div>
@@ -273,7 +272,7 @@ export const FinalScreen: React.FC<FinalScreenProps> = ({ onRestart }) => {
                         {prize.name}
                       </h3>
                       <p className="text-base text-amber-100 leading-snug mt-0.5">
-                        {isKids ? prize.kidsDescription : prize.description}
+                        {prize.kidsDescription}
                       </p>
                     </div>
                   </div>
@@ -283,9 +282,7 @@ export const FinalScreen: React.FC<FinalScreenProps> = ({ onRestart }) => {
                   <div className="bg-[#4D1909]/85 border border-amber-200/30 rounded-xl p-3.5 flex items-center gap-3">
                     <span className="text-2xl">💎</span>
                     <p className="text-base text-amber-100 leading-snug">
-                      {isKids
-                        ? 'Find more gems next time! Win shiny gem prizes!'
-                        : 'Collect 80% of the gems in any mission next time to add sparkling Gem Prizes to your shelf!'}
+                      Find more gems next time! Win shiny gem prizes!'
                     </p>
                   </div>
                 )}
@@ -326,23 +323,13 @@ export const FinalScreen: React.FC<FinalScreenProps> = ({ onRestart }) => {
               </div>
 
               <p className="text-base sm:text-lg text-[#FFF8EB] font-medium">
-                {isKids ? (
-                  <>
+                                  <>
                     Great job,{' '}
                     <strong className="text-amber-200 underline decoration-amber-300/70">
                       {explorerName.trim() || 'Mars Rover Pilot'}
                     </strong>
                     ! You found our friend Oppy!
                   </>
-                ) : (
-                  <>
-                    Awarded to{' '}
-                    <strong className="text-amber-200 underline decoration-amber-300/70">
-                      {explorerName.trim() || 'Brave Mars Rover Pilot'}
-                    </strong>{' '}
-                    for completing the journey to Perseverance Valley!
-                  </>
-                )}
               </p>
 
               
@@ -391,25 +378,11 @@ export const FinalScreen: React.FC<FinalScreenProps> = ({ onRestart }) => {
 
             
             <div className="w-full bg-[#66220D]/85 border border-amber-200/35 rounded-2xl p-4 sm:p-5 text-left text-base sm:text-lg text-[#FFF8EB] leading-relaxed flex flex-col gap-2 shrink-0">
-              {isKids ? (
-                <>
+                              <>
                   <p>Oppy landed in 2004. It drove for fifteen years!</p>
                   <p>Oppy found clues of water. A big dust storm came.</p>
                   <p>Now Oppy rests on Mars. Goodnight, brave little rover!</p>
                 </>
-              ) : (
-                <>
-                  <p>
-                    Opportunity landed on Mars in early 2004 and worked for almost 15 years, far beyond its planned 90-day journey.
-                  </p>
-                  <p>
-                    It drove more than 45 kilometers (about 28 miles) across rust-red plains and deep craters, revealing ancient clues of liquid water.
-                  </p>
-                  <p>
-                    In June 2018, a huge dust storm covered the entire planet, blocking the sun. Opportunity stopped talking to Earth, and now rests quietly in Perseverance Valley under the Martian stars.
-                  </p>
-                </>
-              )}
               <div className="pt-2 border-t border-amber-200/25 flex items-center justify-between text-sm text-amber-200">
                 <span>NASA Mars Exploration Rover Mission</span>
                 <span className="text-amber-300 font-bold">2004 — 2018</span>

@@ -258,10 +258,10 @@ export const Page7Finale: React.FC<Page7Props> = ({ onRestartStory }) => {
                 <div>
                   <div className="flex items-center justify-between mb-2">
                     <label className="text-xs sm:text-sm font-mono font-bold tracking-widest text-amber-700 uppercase">
-                      Your Explorer Name / Callsign: <span className="text-amber-400">*</span>
+                      Your Explorer Name / Callsign: <span className="text-red-600">*</span>
                     </label>
                     {nameError && (
-                      <span className="text-xs sm:text-sm font-mono font-bold text-amber-400 animate-pulse">
+                      <span className="text-xs sm:text-sm font-mono font-bold text-red-600 animate-pulse">
                         ⚠️ Explorer name is required!
                       </span>
                     )}
@@ -279,12 +279,12 @@ export const Page7Finale: React.FC<Page7Props> = ({ onRestartStory }) => {
                     maxLength={35}
                     className={`w-full px-4 py-3.5 rounded-2xl border bg-[#ffe0b8] text-amber-950 font-mono text-base sm:text-lg placeholder:text-amber-500/50 focus:outline-none focus:ring-2 focus:ring-orange-400 transition-all shadow-inner ${
                       nameError
-                        ? 'border-amber-400 ring-2 ring-amber-400/50'
+                        ? 'border-red-500 ring-2 ring-red-500/50'
                         : 'border-amber-400/60 focus:border-orange-400'
                     }`}
                   />
                   {nameError && (
-                    <p className="mt-1.5 text-xs sm:text-sm text-amber-300 font-mono">
+                    <p className="mt-1.5 text-xs sm:text-sm text-red-600 font-mono">
                       Please enter your name above to claim your official badge. No nameless badges in our flight log!
                     </p>
                   )}

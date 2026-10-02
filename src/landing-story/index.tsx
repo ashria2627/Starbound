@@ -15,6 +15,10 @@ import {
   setAutoSpeakEnabled,
   registerSpeechListener,
   stopSpeaking,
+  ACCENT_OPTIONS,
+  getAccent,
+  setAccent,
+  Accent,
   CharacterVoice,
 } from './utils/speech';
 
@@ -34,13 +38,14 @@ export const LandingStory: React.FC<StorybookProps> = ({
   });
   const [soundOn, setSoundOn] = useState<boolean>(false);
   const [autoSpeak, setAutoSpeak] = useState<boolean>(false);
+  const [accent, setAccentState] = useState<Accent>(getAccent());
   const [activeSpeaker, setActiveSpeaker] = useState<{ isSpeaking: boolean; character?: CharacterVoice }>({
     isSpeaking: false,
   });
 
   useEffect(() => {
     setAutoSpeakEnabled(false);
-    setSpeechEnabled(true);
+    setSpeechEnabled(false);
     setSoundEnabled(false);
     const unregister = registerSpeechListener((isSpeaking, character) => {
       setActiveSpeaker({ isSpeaking, character });
@@ -134,6 +139,26 @@ export const LandingStory: React.FC<StorybookProps> = ({
           >
             <span>{autoSpeak ? '🗣️ Auto-Voice ON' : '🔇 Auto-Voice OFF'}</span>
           </button>
+
+          <label className="flex items-center gap-1 px-2 py-1 rounded-sm border border-slate-700 bg-slate-900/80 text-[11px] font-mono font-bold text-slate-300 shadow-md">
+            <span aria-hidden="true">🗣️</span>
+            <span className="sr-only">Voice accent</span>
+            <select
+              value={accent}
+              onChange={(e) => {
+                const a = e.target.value as Accent;
+                setAccentState(a);
+                setAccent(a);
+                stopSpeaking();
+              }}
+              className="bg-transparent text-slate-200 outline-none cursor-pointer"
+              title="Voice accent (depends on voices installed in your browser)"
+            >
+              {ACCENT_OPTIONS.map((o) => (
+                <option key={o.value} value={o.value} className="text-black">{o.label}</option>
+              ))}
+            </select>
+          </label>
         </div>
 
         
@@ -178,7 +203,7 @@ export const LandingStory: React.FC<StorybookProps> = ({
       {selectedDestination === 'deep_space' && (
         <Page6DeepSpacePath
           key="deep_space"
-          
+          autoSpeak={autoSpeak}
           onSwitchDestination={(dest) => setSelectedDestination(dest)}
         />
       )}

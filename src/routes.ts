@@ -12,6 +12,7 @@ export const PATH_BY_VIEW: Partial<Record<AppView, string>> = {
   anatomy: '/anatomy',
   recovery: '/recovery',
   admin: '/admin',
+  map: '/map',
 };
 
 const VIEW_BY_PATH: Record<string, { view: AppView; mode: 'kids' | 'adult' }> = {
@@ -25,6 +26,7 @@ const VIEW_BY_PATH: Record<string, { view: AppView; mode: 'kids' | 'adult' }> = 
   '/anatomy': { view: 'anatomy', mode: 'adult' },
   '/recovery': { view: 'recovery', mode: 'adult' },
   '/admin': { view: 'admin', mode: 'adult' }, 
+  '/map': { view: 'map', mode: 'adult' },
 };
 
 export function routeFromPathname(pathname: string): { view: AppView; mode: 'kids' | 'adult' } | null {

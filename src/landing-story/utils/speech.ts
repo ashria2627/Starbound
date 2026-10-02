@@ -1,4 +1,3 @@
-
 import {
   playOrbitCue,
   playSpiritCue,
@@ -12,6 +11,7 @@ export type CharacterVoice =
   | 'sojourner'
   | 'spirit'
   | 'oppy'
+  | 'viking1'
   | 'apollo'
   | 'pioneer'
   | 'voyager'
@@ -64,6 +64,13 @@ export const CHARACTER_META: Record<CharacterVoice, CharacterVoiceMeta> = {
     role: 'Mars Rover Explorer',
     soundCue: 'Gentle Music Box',
     sampleQuote: "I found signs that liquid water had once flowed across ancient Mars!",
+  },
+  viking1: {
+    name: 'Viking 1',
+    avatar: '🛰️',
+    role: 'First Long-Lived Mars Lander (1976)',
+    soundCue: 'Steady Radio Ping',
+    sampleQuote: "I landed on Mars in 1976 and sent home pictures and science!",
   },
   apollo: {
     name: 'Apollo 15 Crew',
@@ -189,6 +196,12 @@ const VOICE_PROFILES: Record<CharacterVoice, VoiceProfile> = {
     volume: 0.95,
     voiceKeywords: ['natural', 'daniel', 'oliver', 'male'],
   },
+  viking1: {
+    pitch: 1.0,
+    rate: 0.95,
+    volume: 1.0,
+    voiceKeywords: ['daniel', 'natural', 'male', 'en-us'],
+  },
   mariner2: {
     pitch: 1.0,
     rate: 0.94,
@@ -221,13 +234,35 @@ const VOICE_PROFILES: Record<CharacterVoice, VoiceProfile> = {
   },
 };
 
-let speechEnabled = true;
+let speechEnabled = false; // master mute: starts muted to match the UI
+let speakId = 0;
 let autoSpeakEnabled = false; 
 let activeUtterance: SpeechSynthesisUtterance | null = null;
 let speechListeners: Array<(isSpeaking: boolean, character?: CharacterVoice) => void> = [];
 let resumeInterval: number | null = null;
 let pendingSpeakTimer: number | null = null;
 let cachedVoices: SpeechSynthesisVoice[] = [];
+
+export type Accent = 'auto' | 'en-US' | 'en-GB' | 'en-AU' | 'en-IN';
+export const ACCENT_OPTIONS: { value: Accent; label: string }[] = [
+  { value: 'auto', label: 'Auto' },
+  { value: 'en-US', label: 'American' },
+  { value: 'en-GB', label: 'British' },
+  { value: 'en-AU', label: 'Australian' },
+  { value: 'en-IN', label: 'Indian' },
+];
+let accent: Accent = 'auto';
+try {
+  const saved = typeof window !== 'undefined' ? window.localStorage.getItem('sb-accent') : null;
+  if (saved && ACCENT_OPTIONS.some((o) => o.value === saved)) accent = saved as Accent;
+} catch {
+  /* storage unavailable */
+}
+export const getAccent = () => accent;
+export const setAccent = (a: Accent) => {
+  accent = a;
+  try { window.localStorage.setItem('sb-accent', a); } catch { /* ignore */ }
+};
 
 export const setSpeechEnabled = (enabled: boolean) => {
   speechEnabled = enabled;
@@ -302,8 +337,16 @@ if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
 
 
 const pickBestVoice = (keywords: string[]): SpeechSynthesisVoice | null => {
-  const voices = getAvailableVoices();
-  if (voices.length === 0) return null;
+  const all = getAvailableVoices();
+  if (all.length === 0) return null;
+
+  const norm = (l: string) => l.toLowerCase().replace('_', '-');
+  let voices = all;
+  if (accent !== 'auto') {
+    const want = accent.toLowerCase();
+    const inAccent = all.filter((v) => norm(v.lang) === want);
+    if (inAccent.length > 0) voices = inAccent;
+  }
 
   for (const kw of keywords) {
     const matched = voices.find((v) => {
@@ -314,7 +357,7 @@ const pickBestVoice = (keywords: string[]): SpeechSynthesisVoice | null => {
     if (matched) return matched;
   }
 
-  const english = voices.find((v) => v.lang.startsWith('en'));
+  const english = voices.find((v) => norm(v.lang).startsWith('en'));
   if (english) return english;
 
   return voices.find((v) => v.default) || voices[0] || null;
@@ -354,6 +397,8 @@ export const speakDialogue = (
   }
 
 
+  const myId = ++speakId;
+
   if (pendingSpeakTimer) {
     window.clearTimeout(pendingSpeakTimer);
     pendingSpeakTimer = null;
@@ -375,6 +420,7 @@ export const speakDialogue = (
   pendingSpeakTimer = window.setTimeout(() => {
     pendingSpeakTimer = null;
 
+    if (myId !== speakId) return;
     if (!speechEnabled) return;
     if (!options.manualTrigger && !autoSpeakEnabled) return;
 
@@ -439,6 +485,7 @@ export const speakDialogue = (
     };
 
     try {
+      synth.cancel(); // make sure nothing else is queued, so two voices never overlap
       synth.speak(utterance);
       if (synth.paused) {
         synth.resume();
@@ -450,6 +497,7 @@ export const speakDialogue = (
 };
 
 export const stopSpeaking = () => {
+  speakId += 1;
   if (pendingSpeakTimer) {
     window.clearTimeout(pendingSpeakTimer);
     pendingSpeakTimer = null;

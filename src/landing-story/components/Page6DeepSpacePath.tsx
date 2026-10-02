@@ -6,13 +6,14 @@ import { VoyagerIllustration } from './VoyagerIllustration';
 import { InterviewChat } from './InterviewChat';
 import { SpaceGlossaryWord } from './SpaceGlossaryWord';
 import { playSceneMusic, playPageTurn, playOrbitCue } from '../utils/sound';
-import { speakDialogue, getSpeechEnabled } from '../utils/speech';
+import { speakDialogue, getAutoSpeakEnabled, stopSpeaking } from '../utils/speech';
 
 interface Page6Props {
+  autoSpeak?: boolean;
   onSwitchDestination?: (dest: 'mars' | 'moon') => void;
 }
 
-export const Page6DeepSpacePath: React.FC<Page6Props> = () => {
+export const Page6DeepSpacePath: React.FC<Page6Props> = ({ autoSpeak = true }) => {
   const [activeBeat, setActiveBeat] = useState(0);
   const scrollTimeoutRef = useRef<number | null>(null);
 
@@ -197,17 +198,20 @@ export const Page6DeepSpacePath: React.FC<Page6Props> = () => {
     playSceneMusic('deep_space');
 
     const arrivalVoiceTimer = window.setTimeout(() => {
-      if (getSpeechEnabled()) {
+      if (autoSpeak && getAutoSpeakEnabled()) {
         speakDialogue(beats[0].speaker, beats[0].speechText, { skipSoundCue: true });
       }
     }, 450);
 
-    return () => window.clearTimeout(arrivalVoiceTimer);
-  }, []);
+    return () => {
+      window.clearTimeout(arrivalVoiceTimer);
+      stopSpeaking();
+    };
+  }, [autoSpeak]);
 
   const handleSpeak = useCallback((beatIdx: number) => {
     const beat = beats[beatIdx];
-    speakDialogue(beat.speaker, beat.speechText);
+    speakDialogue(beat.speaker, beat.speechText, { manualTrigger: true });
   }, [beats]);
 
  
@@ -234,13 +238,11 @@ export const Page6DeepSpacePath: React.FC<Page6Props> = () => {
         playPageTurn();
         const beat = beats[closestIdx];
 
-        if (beat.speaker !== 'orbit') {
-          playOrbitCue();
-        }
+        playOrbitCue();
 
         if (scrollTimeoutRef.current) window.clearTimeout(scrollTimeoutRef.current);
         scrollTimeoutRef.current = window.setTimeout(() => {
-          if (getSpeechEnabled()) {
+          if (autoSpeak && getAutoSpeakEnabled()) {
             speakDialogue(beat.speaker, beat.speechText, { skipSoundCue: true });
           }
         }, 220);
@@ -252,7 +254,7 @@ export const Page6DeepSpacePath: React.FC<Page6Props> = () => {
       window.removeEventListener('scroll', handleScroll);
       if (scrollTimeoutRef.current) window.clearTimeout(scrollTimeoutRef.current);
     };
-  }, [activeBeat, beats]);
+  }, [activeBeat, beats, autoSpeak]);
 
   return (
     <section
@@ -283,7 +285,7 @@ export const Page6DeepSpacePath: React.FC<Page6Props> = () => {
         <div className="pt-4 pb-12 px-4 text-center max-w-4xl mx-auto">
           
           <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black text-amber-950 mt-3 tracking-tight drop-shadow-md">
-            Deep Space: Pioneer, Mariner & Voyager
+            Solar System & Beyond: Pioneer, Mariner & Voyager
           </h2>
           
         </div>

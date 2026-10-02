@@ -11,7 +11,6 @@ interface MissionCompleteProps {
 export const MissionComplete: React.FC<MissionCompleteProps> = ({ onNext }) => {
   const { state, dispatch, currentMission } = useGame();
   const prefersReducedMotion = useReducedMotion();
-  const isKids = state.audienceMode === 'kids';
 
   const minutes = Math.floor(state.missionTimeSeconds / 60);
   const seconds = state.missionTimeSeconds % 60;
@@ -59,9 +58,7 @@ export const MissionComplete: React.FC<MissionCompleteProps> = ({ onNext }) => {
               {currentMission.title}
             </h2>
             <p className="text-base sm:text-lg text-amber-100 mt-1.5 max-w-md">
-              {isKids
-                ? 'Great job driving on Mars! You helped science move forward!'
-                : 'Awesome navigating! You explored the Martian sands and helped planetary science move forward.'}
+              {'Great job driving on Mars! You helped science move forward!'}
             </p>
           </div>
 
@@ -139,7 +136,7 @@ export const MissionComplete: React.FC<MissionCompleteProps> = ({ onNext }) => {
                   {missionPrize.name}
                 </h3>
                 <p className="text-base text-[#FFF8EB] leading-snug mt-1">
-                  {isKids ? missionPrize.kidsDescription : missionPrize.description}
+                  {missionPrize.kidsDescription}
                 </p>
               </div>
             </motion.div>
@@ -153,24 +150,17 @@ export const MissionComplete: React.FC<MissionCompleteProps> = ({ onNext }) => {
                   {state.gemsCollected} of {currentMission.gemCount} Gems Found!
                 </p>
                 <p className="text-base text-[#FFF8EB] leading-snug mt-0.5">
-                  {isKids
-                    ? GEM_PRIZE_TEXT.kidsEncourageTryAgain
-                    : GEM_PRIZE_TEXT.encourageTryAgain}
+                  {GEM_PRIZE_TEXT.kidsEncourageTryAgain}
                 </p>
               </div>
             </div>
           )}
 
-        \
           <div className="w-full bg-[#5C1F0C]/90 border border-amber-300/45 rounded-2xl p-4 flex items-center gap-3.5 text-left">
             <span className="text-2xl shrink-0">🤖</span>
             <p className="text-base text-[#FFF8EB] leading-snug">
               <strong className="text-amber-200">Orbit says:</strong>{' '}
-              {isKids
-                ? '"You are a great pilot! Ready for the next mission?"'
-                : earnedGemPrize
-                ? `"${GEM_PRIZE_TEXT.orbitCelebration} Ready for the next coordinates?"`
-                : '"You are an extraordinary Martian pilot! Ready for the next coordinates?"'}
+              {'You are a great pilot! Ready for the next mission?'}
             </p>
           </div>
 

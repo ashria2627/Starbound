@@ -99,7 +99,7 @@ export const Page3ChooseDestination: React.FC<Page3Props> = ({
             
 
             <p className="text-base sm:text-xl font-bold text-amber-900/90 leading-relaxed mb-6">
-              Pick your destination below. The other paths will step aside so you can immerse yourself completely in this adventure! You can switch anytime using the chapter menu above.
+              Pick your destination and immerse yourself in the adventure.
             </p>
 
             

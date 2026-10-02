@@ -32,7 +32,6 @@ export interface GameState {
   cameraMode: 'fpv' | 'third';
   ambientSoundEnabled: boolean;
   roverSoundEnabled: boolean;
-  audienceMode: 'kids' | 'grownup';
 }
 
 export type GameAction =
@@ -66,7 +65,6 @@ export type GameAction =
   | { type: 'SET_CAMERA_MODE'; mode: 'fpv' | 'third' }
   | { type: 'TOGGLE_AMBIENT_SOUND' }
   | { type: 'TOGGLE_ROVER_SOUND' }
-  | { type: 'SET_AUDIENCE_MODE'; mode: 'kids' | 'grownup' }
   | { type: 'RESTART_GAME' }
   | { type: 'UPDATE_ROVER_TRANSFORM'; position: [number, number, number]; heading: number };
 
@@ -98,7 +96,6 @@ export const initialGameState: GameState = {
   cameraMode: 'third',
   ambientSoundEnabled: true,
   roverSoundEnabled: true,
-  audienceMode: 'kids',
 };
 
 export function gameReducer(state: GameState, action: GameAction): GameState {
@@ -188,7 +185,6 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         missionAttempt: state.missionAttempt + 1,
         ambientSoundEnabled: state.ambientSoundEnabled,
         roverSoundEnabled: state.roverSoundEnabled,
-        audienceMode: state.audienceMode,
       };
 
     case 'TICK_TIME':
@@ -459,12 +455,6 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         roverSoundEnabled: !state.roverSoundEnabled,
       };
 
-    case 'SET_AUDIENCE_MODE':
-      return {
-        ...state,
-        audienceMode: action.mode,
-      };
-
     case 'RESTART_GAME':
       return {
         ...initialGameState,
@@ -474,7 +464,6 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         roverPosition: [...MISSIONS[0].startPosition],
         ambientSoundEnabled: state.ambientSoundEnabled,
         roverSoundEnabled: state.roverSoundEnabled,
-        audienceMode: state.audienceMode,
       };
 
     case 'UPDATE_ROVER_TRANSFORM':

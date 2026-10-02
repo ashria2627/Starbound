@@ -168,29 +168,6 @@ export const Hud: React.FC = () => {
 
            
             <div className="flex flex-wrap items-center gap-1.5">
-             
-              <button
-                onClick={() =>
-                  dispatch({
-                    type: 'SET_AUDIENCE_MODE',
-                    mode: state.audienceMode === 'kids' ? 'grownup' : 'kids',
-                  })
-                }
-                className={`px-2.5 py-1.5 rounded-xl text-xs sm:text-sm font-extrabold transition-all flex items-center gap-1 active:scale-95 border cursor-pointer ${
-                  state.audienceMode === 'kids'
-                    ? 'bg-amber-400 text-[#2B0C04] border-amber-200'
-                    : 'bg-orange-500 text-white border-amber-200/60'
-                }`}
-                title={
-                  state.audienceMode === 'kids'
-                    ? 'Current: Kids Version (Click for Grown-Up Version)'
-                    : 'Current: Grown-Up Version (Click for Kids Version)'
-                }
-                aria-label="Toggle Kids or Grown-Up Version"
-              >
-                <span>{state.audienceMode === 'kids' ? '🎈' : '🔬'}</span>
-                <span>{state.audienceMode === 'kids' ? 'Kids' : 'Grown-Up'}</span>
-              </button>
 
            
               <button

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Discovery } from '../data/discoveries';
 import { SketchfabViewer } from './SketchfabViewer';
-import { useGame } from '../state/GameContext';
 
 interface DiscoveryCardProps {
   discovery: Discovery;
@@ -10,14 +9,13 @@ interface DiscoveryCardProps {
 }
 
 export const DiscoveryCard: React.FC<DiscoveryCardProps> = ({ discovery, onClose }) => {
-  const { state, dispatch } = useGame();
   const [show3dModal, setShow3dModal] = useState(false);
-  const [activePhotoIdx, setActivePhotoIdx] = useState(0);
   const [imgErrors, setImgErrors] = useState<Record<number, boolean>>({});
-  const [showVideo, setShowVideo] = useState(true);
 
-  const isKids = state.audienceMode === 'kids';
   const photos = discovery.photos && discovery.photos.length > 0 ? discovery.photos : [];
+  // Show the first photo that has not failed to load; if all fail, show the text fallback for the first.
+  const firstOk = photos.findIndex((_, i) => !imgErrors[i]);
+  const activePhotoIdx = firstOk === -1 ? 0 : firstOk;
   const currentPhoto = photos[activePhotoIdx] || photos[0];
 
   return (
@@ -35,9 +33,7 @@ export const DiscoveryCard: React.FC<DiscoveryCardProps> = ({ discovery, onClose
         >
           <div className="min-h-full w-full flex items-center justify-center py-4">
             <motion.div
-              className={`relative w-full ${
-                isKids ? 'max-w-lg' : 'max-w-2xl'
-              } bg-[#68230D] border-2 border-amber-300/55 rounded-3xl p-5 sm:p-6 shadow-2xl text-[#FFF8EB] flex flex-col gap-4`}
+              className={`relative w-full max-w-lg bg-[#68230D] border-2 border-amber-300/55 rounded-3xl p-5 sm:p-6 shadow-2xl text-[#FFF8EB] flex flex-col gap-4`}
               initial={{ scale: 0.9, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 20 }}
@@ -62,31 +58,6 @@ export const DiscoveryCard: React.FC<DiscoveryCardProps> = ({ discovery, onClose
                 </div>
 
                 <div className="flex items-center gap-2">
-                 
-                  <div className="flex items-center bg-[#3E1306] p-0.5 rounded-xl border border-amber-300/35">
-                    <button
-                      type="button"
-                      onClick={() => dispatch({ type: 'SET_AUDIENCE_MODE', mode: 'kids' })}
-                      className={`px-2.5 py-1 rounded-lg text-xs font-extrabold transition-all cursor-pointer ${
-                        isKids
-                          ? 'bg-amber-400 text-[#2B0C04]'
-                          : 'text-amber-100/75 hover:text-white'
-                      }`}
-                    >
-                      🎈 Kids
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => dispatch({ type: 'SET_AUDIENCE_MODE', mode: 'grownup' })}
-                      className={`px-2.5 py-1 rounded-lg text-xs font-extrabold transition-all cursor-pointer ${
-                        !isKids
-                          ? 'bg-orange-500 text-white'
-                          : 'text-amber-100/75 hover:text-white'
-                      }`}
-                    >
-                      🔬 Grown-Up
-                    </button>
-                  </div>
 
                   <button
                     onClick={onClose}
@@ -131,104 +102,15 @@ export const DiscoveryCard: React.FC<DiscoveryCardProps> = ({ discovery, onClose
                       📸 {currentPhoto.credit}
                     </span>
                   </div>
-
-                 
-                  {!isKids && (
-                    <div className="p-3 bg-[#3E1306] border-t border-amber-200/20 flex flex-col gap-2">
-                      <p className="text-xs sm:text-sm text-amber-100 leading-snug">
-                        {currentPhoto.caption}
-                      </p>
-                      {photos.length > 1 && (
-                        <div className="flex items-center gap-2 pt-1">
-                          {photos.map((_, idx) => (
-                            <button
-                              key={idx}
-                              type="button"
-                              onClick={() => setActivePhotoIdx(idx)}
-                              className={`px-3 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-                                activePhotoIdx === idx
-                                  ? 'bg-amber-400 text-[#2B0C04]'
-                                  : 'bg-[#571D0B] text-amber-200 hover:bg-[#6E250E]'
-                              }`}
-                            >
-                              Photo {idx + 1}
-                            </button>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  )}
                 </div>
               )}
 
               
-              {isKids ? (
-                <div className="bg-[#4D1909]/90 border border-amber-300/40 rounded-2xl p-4">
+              <div className="bg-[#4D1909]/90 border border-amber-300/40 rounded-2xl p-4">
                   <p className="text-lg sm:text-xl font-bold text-[#FFF8EB] leading-relaxed font-['Plus_Jakarta_Sans']">
                     {discovery.kidsText}
                   </p>
                 </div>
-              ) : (
-               
-                <div className="flex flex-col gap-4">
-                  
-                  <div className="bg-[#4D1909]/90 border border-amber-300/35 rounded-2xl p-4">
-                    <div className="text-xs font-extrabold uppercase tracking-wider text-amber-300 mb-1.5 flex items-center gap-1.5">
-                      <span>🔬</span>
-                      <span>Scientific Discovery Overview</span>
-                    </div>
-                    <p className="text-sm sm:text-base text-[#FFF8EB] leading-relaxed font-['Plus_Jakarta_Sans']">
-                      {discovery.grownupText}
-                    </p>
-                  </div>
-
-                  
-                  {discovery.difficultiesFaced && discovery.difficultiesFaced.length > 0 && (
-                    <div className="bg-[#3E1306]/95 border border-orange-400/45 rounded-2xl p-4">
-                      <div className="text-xs sm:text-sm font-extrabold uppercase tracking-wider text-orange-300 mb-2 flex items-center gap-1.5">
-                        <span>⚠️</span>
-                        <span>Difficulties Faced During Discovery</span>
-                      </div>
-                      <ul className="space-y-2 text-xs sm:text-sm text-amber-100 leading-relaxed list-disc pl-4">
-                        {discovery.difficultiesFaced.map((diff, i) => (
-                          <li key={i}>{diff}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-
-                  
-                  {discovery.videoEmbedUrl && (
-                    <div className="bg-[#381105] border border-amber-300/35 rounded-2xl p-3.5 flex flex-col gap-2.5">
-                      <div className="flex items-center justify-between gap-2">
-                        <div className="text-xs sm:text-sm font-extrabold text-amber-200 flex items-center gap-1.5">
-                          <span>🎬</span>
-                          <span>{discovery.videoTitle}</span>
-                        </div>
-                        <button
-                          type="button"
-                          onClick={() => setShowVideo((prev) => !prev)}
-                          className="px-2.5 py-1 rounded-lg bg-[#591D0E] hover:bg-[#7A2A10] text-xs font-bold text-amber-200 cursor-pointer shrink-0"
-                        >
-                          {showVideo ? 'Hide Video' : 'Show Video'}
-                        </button>
-                      </div>
-
-                      {showVideo && (
-                        <div className="relative w-full aspect-video rounded-xl overflow-hidden bg-black border border-amber-200/25">
-                          <iframe
-                            src={discovery.videoEmbedUrl}
-                            title={discovery.videoTitle}
-                            className="w-full h-full border-0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
-                          />
-                        </div>
-                      )}
-                    </div>
-                  )}
-                </div>
-              )}
 
               
               {discovery.sketchfab && (
@@ -246,7 +128,7 @@ export const DiscoveryCard: React.FC<DiscoveryCardProps> = ({ discovery, onClose
                 className="w-full py-3.5 px-5 rounded-2xl bg-gradient-to-r from-amber-500 via-amber-600 to-orange-600 hover:brightness-110 text-white font-extrabold text-base shadow-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer border border-amber-300/40"
               >
                 <span>✨</span>
-                <span>{isKids ? 'Got It! Keep Driving!' : 'Got It! Saved to Field Journal'}</span>
+                <span>Got It! Keep Driving!</span>
                 <span>📖</span>
               </button>
 

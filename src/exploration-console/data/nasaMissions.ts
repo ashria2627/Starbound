@@ -96,7 +96,7 @@ export const NASA_MISSIONS: NasaMission[] = [
         primaryInstrumentId: 'ion-traps',
         media: {
   type: 'photo',
-  url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Luna_1.jpg/800px-Luna_1.jpg',
+  url: '/assets/objects/800px-Luna-1-b5617193.jpg',
   caption: 'Museum replica of Luna 1, the Soviet probe that made the first in-situ detection of the solar wind, Jan 1959.',
 },
         observations: {
@@ -156,7 +156,7 @@ export const NASA_MISSIONS: NasaMission[] = [
         primaryInstrumentId: 'fluxgate-magnetometer',
         media: {
   type: 'photo',
-  url: 'https://www.nasa.gov/wp-content/uploads/2020/01/source-2.gif',
+  url: '/assets/objects/source-2-4390e8e1.gif',
   caption: 'Luna 1 replica — its magnetometer found no lunar magnetic field during the January 4, 1959 flyby.',
 },
         observations: {
@@ -499,7 +499,7 @@ export const NASA_MISSIONS: NasaMission[] = [
         primaryInstrumentId: 'sojourner-apxs',
         media: {
   type: 'photo',
-   url: 'https://upload.wikimedia.org/wikipedia/commons/f/fc/Yogi_Rock.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled',
+   url: '/assets/objects/Yogi-Rock-63e698de.jpg',
   caption: 'Barnacle Bill (left) and Yogi (upper right), imaged by Sojourner\'s camera on Sol 3, July 7, 1997. (NASA/JPL, PIA00660)',
 },
         observations: {
@@ -556,7 +556,7 @@ export const NASA_MISSIONS: NasaMission[] = [
         primaryInstrumentId: 'sojourner-apxs',
         media: {
   type: 'photo',
-  url: 'https://upload.wikimedia.org/wikipedia/commons/e/e5/Pathfinder01.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled',
+  url: '/assets/objects/Pathfinder01-8c8a84e4.jpg',
   caption: 'Yogi (upper right) and Barnacle Bill (left), imaged by Sojourner\'s camera on Sol 3, July 7, 1997. (NASA/JPL, PIA00660)',
 },
         observations: {
@@ -695,7 +695,7 @@ export const NASA_MISSIONS: NasaMission[] = [
         primaryInstrumentId: 'spirit-mossbauer',
         media: {
   type: 'photo',
-  url: 'https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia07/pia07104/PIA07104.jpg',
+  url: '/assets/objects/PIA07104-331a589b.jpg',
   caption: 'Spirit\'s Mössbauer spectrum from "Clovis," showing the goethite signature, Dec 2004. (NASA/JPL/Uni. Mainz, PIA07104)',
 },
         observations: {
@@ -756,7 +756,7 @@ export const NASA_MISSIONS: NasaMission[] = [
         primaryInstrumentId: 'spirit-rat',
         media: {
   type: 'photo',
-  url: 'https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia11/pia11758/PIA11758.jpg',
+  url: '/assets/objects/PIA11758-ef0b238f.jpg',
   caption: '"Gertrude Weise," the near-pure silica soil Spirit\'s stuck wheel exposed, Sol 1202. (NASA/JPL-Caltech/Cornell, PIA11758)',
 },
         observations: {
@@ -907,7 +907,7 @@ export const NASA_MISSIONS: NasaMission[] = [
         primaryInstrumentId: 'oppy-microscopic-imager',
         media: {
   type: 'photo',
-  url: 'https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia05/pia05634/PIA05634.jpg',
+  url: '/assets/objects/PIA05634-db2e569a.jpg',
   caption: '"Berry Bowl," Eagle Crater — the hematite "blueberries" Opportunity found, March 2004. (NASA/JPL/Cornell, PIA05634)',
 },
         observations: {
@@ -967,7 +967,7 @@ export const NASA_MISSIONS: NasaMission[] = [
         primaryInstrumentId: 'oppy-apxs',
         media: {
   type: 'photo',
-  url: 'https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia05/pia05508/PIA05508.jpg',
+  url: '/assets/objects/PIA05508-1cf07ec3.jpg',
   caption: 'The "El Capitan" outcrop where Opportunity found jarosite, Meridiani Planum. (NASA/JPL/Cornell/Ames, PIA05508)',
 },
         observations: {
@@ -1115,7 +1115,7 @@ export const NASA_MISSIONS: NasaMission[] = [
         primaryInstrumentId: 'pioneer-vhm',
              media: {
   type: 'photo',
-  url: 'https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/2023/09/PIA03478.jpg?w=442&h=573&fit=crop&crop=faces%2Cfocalpoint',
+  url: '/assets/objects/PIA03478-da3f21d1.jpg',
   caption: 'One of Pioneer 10\'s close-approach images of Jupiter, Dec 1973.',
 },
         observations: {
@@ -1168,7 +1168,7 @@ export const NASA_MISSIONS: NasaMission[] = [
         primaryInstrumentId: 'pioneer-cpi',
         media: {
   type: 'photo',
-  url: 'https://upload.wikimedia.org/wikipedia/commons/8/82/PIA02864_Pioneer_10_s_First_Direct_Look_at_Jupiter.jpg',
+  url: '/assets/objects/closest_jupiter.jpeg',
   caption: 'One of Pioneer 10\'s close-approach images of Jupiter, Dec 1973.',
 },
         observations: {
@@ -1311,7 +1311,7 @@ export const NASA_MISSIONS: NasaMission[] = [
         primaryInstrumentId: 'voyager-iss',
         media: {
   type: 'photo',
-  url: 'https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia00/pia00379/PIA00379.jpg',
+  url: '/assets/objects/PIA00379-828d82e3.jpg',
   caption: 'The actual Voyager 1 frame in which Linda Morabito discovered Io\'s volcanic plume, March 8, 1979. (NASA/JPL, PIA00379)',
 },
         observations: {
@@ -1376,7 +1376,7 @@ export const NASA_MISSIONS: NasaMission[] = [
         primaryInstrumentId: 'voyager-iss',
         media: {
   type: 'photo',
-  url: 'https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia01/pia01484/PIA01484.jpg',
+  url: '/assets/objects/PIA01484-bacbf73f.jpg',
   caption: 'The first evidence of Jupiter\'s ring, a faint band across this March 4, 1979 exposure. (NASA/JPL, PIA01484)',
 },
         observations: {
@@ -1517,7 +1517,7 @@ export const NASA_MISSIONS: NasaMission[] = [
         primaryInstrumentId: 'pioneer11-ipp',
          media: {
   type: 'photo',
-  url: 'https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/2023/09/7/739460main_ac79-9107.3.jpg?w=3000&h=2143&fit=clip&crop=faces%2Cfocalpoint',
+  url: '/assets/objects/739460main-ac79-9107-3-b5cd20a4.jpg',
   caption: 'One of Pioneer 11\'s close-approach images of Saturn.',
 },
         observations: {
@@ -1574,7 +1574,7 @@ export const NASA_MISSIONS: NasaMission[] = [
         primaryInstrumentId: 'pioneer11-mag',
          media: {
   type: 'photo',
-  url: 'https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/2023/09/7/739460main_ac79-9107.3.jpg?w=3000&h=2143&fit=clip&crop=faces%2Cfocalpoint',
+  url: '/assets/objects/739460main-ac79-9107-3-b5cd20a4.jpg',
   caption: 'Pioneer 11 measured Saturn’s magnetic field and found a stunning anomal',
 },
         observations: {

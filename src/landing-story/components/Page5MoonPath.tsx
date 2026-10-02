@@ -5,7 +5,7 @@ import { ApolloIllustration } from './ApolloIllustration';
 import { InterviewChat } from './InterviewChat';
 import { SpaceGlossaryWord } from './SpaceGlossaryWord';
 import { playSceneMusic, playPageTurn, playRoverRoll } from '../utils/sound';
-import { speakDialogue, getSpeechEnabled, getAutoSpeakEnabled } from '../utils/speech';
+import { speakDialogue, getAutoSpeakEnabled, stopSpeaking } from '../utils/speech';
 
 interface Page5Props {
   onSwitchDestination?: (dest: 'mars' | 'deep_space') => void;
@@ -168,7 +168,10 @@ export const Page5MoonPath: React.FC<Page5Props> = ({ autoSpeak = true }) => {
       }
     }, 300);
 
-    return () => window.clearTimeout(arrivalVoiceTimer);
+    return () => {
+      window.clearTimeout(arrivalVoiceTimer);
+      stopSpeaking();
+    };
   }, [autoSpeak, beats]);
 
   const handleSpeak = useCallback((beatIdx: number) => {

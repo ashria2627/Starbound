@@ -13,6 +13,7 @@ const SPEAKERS: Record<string, { voice: CharacterVoice; bubble: string }> = {
   Sojourner: { voice: 'sojourner', bubble: 'bg-amber-600 border-amber-300' },
   Oppy: { voice: 'oppy', bubble: 'bg-red-600 border-red-300' },
   Spirit: { voice: 'spirit', bubble: 'bg-pink-600 border-pink-300' },
+  'Viking 1': { voice: 'viking1', bubble: 'bg-orange-700 border-orange-300' },
   'Apollo Rover': { voice: 'apollo', bubble: 'bg-emerald-600 border-emerald-300' },
   'Surveyor 1': { voice: 'narrator', bubble: 'bg-slate-600 border-slate-300' },
   'GRAIL-A (Ebb)': { voice: 'narrator', bubble: 'bg-teal-600 border-teal-300' },

@@ -3,6 +3,7 @@ import { Canvas } from '@react-three/fiber';
 import { useGLTF, OrbitControls } from '@react-three/drei';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ImageIcon, ChevronUp, ChevronDown } from 'lucide-react';
+import { prefersReducedMotion } from '../a11y';
 
 
 interface BookPage {
@@ -11,6 +12,8 @@ interface BookPage {
   text: ReactNode;
   bullets?: ReactNode[];
   imageUrl: string;
+  caption: string;
+  credit: string;
   modelUrl?: string;
 }
 
@@ -27,7 +30,7 @@ const BOOKS: BotBook[] = [
   id: 'sojourner',
   name: 'Sojourner',
   place: 'Mars',
-  coverImageUrl: 'https://assets.science.nasa.gov/dynamicimage/assets/science/psd/mars/resources/detail_files/4/4067_pathfinder_PIA01551_modest-web.jpg?w=800&h=417&fit=clip&crop=faces%2Cfocalpoint',
+  coverImageUrl: '/assets/objects/4067-pathfinder-PIA01551-modest-web-ae16d9b6.jpg',
   pages: [
     {
       label: 'Origin',
@@ -40,7 +43,9 @@ const BOOKS: BotBook[] = [
           operate on another planet.
         </>
       ),
-      imageUrl: 'https://assets.science.nasa.gov/dynamicimage/assets/science/psd/mars/resources/detail_files/4/4067_pathfinder_PIA01551_modest-web.jpg?w=800&h=417&fit=clip&crop=faces%2Cfocalpoint',
+      imageUrl: '/assets/objects/4067-pathfinder-PIA01551-modest-web-ae16d9b6.jpg',
+      caption: "Sojourner rover on Mars",
+      credit: "NASA",
     },
     {
       label: 'Goals',
@@ -52,7 +57,9 @@ const BOOKS: BotBook[] = [
           operate successfully on Mars while being commanded from Earth.
         </>
       ),
-      imageUrl: 'https://www.nasa.gov/wp-content/uploads/2021/12/mars_pathfinder_7_pathfinder_and_sojourner_on_mars.jpg',
+      imageUrl: '/assets/objects/mars-pathfinder-7-pathfinder-and-sojourner-on-ma-e3b04115.jpg',
+      caption: "Sojourner rover on Mars",
+      credit: "NASA",
     },
     {
       label: 'Discoveries',
@@ -78,7 +85,9 @@ const BOOKS: BotBook[] = [
           could successfully navigate the Martian surface.
         </>,
       ],
-      imageUrl: 'https://assets.science.nasa.gov/dynamicimage/assets/science/psd/mars/resources/detail_files/8/8648_PIA01133-full2.jpg?w=288&h=288&fit=clip&crop=faces%2Cfocalpoint',
+      imageUrl: '/assets/objects/8648-PIA01133-full2-d5306e90.jpg',
+      caption: "Martian terrain",
+      credit: "NASA",
     },
     {
       label: 'Now',
@@ -91,7 +100,9 @@ const BOOKS: BotBook[] = [
           on the surface of Mars.
         </>
       ),
-      imageUrl: 'https://www.nasa.gov/wp-content/uploads/2021/12/mars_pathfinder_11_sojourner_apxs_on_yogi_rock_1997.jpg',
+      imageUrl: '/assets/objects/mars-pathfinder-11-sojourner-apxs-on-yogi-rock-1-53e0633a.jpg',
+      caption: "Resting at Ares Vallis",
+      credit: "NASA",
       modelUrl: '', 
     },
   ],
@@ -100,7 +111,7 @@ const BOOKS: BotBook[] = [
   id: 'spirit',
   name: 'Spirit',
   place: 'Mars',
-  coverImageUrl: 'https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/2023/07/rover2-1.jpg?w=1280&h=960&fit=crop&crop=faces%2Cfocalpoint',
+  coverImageUrl: '/assets/objects/rover2-1-df042d60.jpg',
   pages: [
     {
       label: 'Origin',
@@ -113,7 +124,9 @@ const BOOKS: BotBook[] = [
           climate on the Red Planet.
         </>
       ),
-      imageUrl: 'https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/2023/07/rover2-1.jpg?w=1280&h=960&fit=crop&crop=faces%2Cfocalpoint',
+      imageUrl: '/assets/objects/rover2-1-df042d60.jpg',
+      caption: "One of Mars’ Twin Explorers",
+      credit: "NASA",
     },
     {
       label: 'Goals',
@@ -126,7 +139,9 @@ const BOOKS: BotBook[] = [
           by water.
         </>
       ),
-      imageUrl: 'https://science.nasa.gov/wp-content/uploads/2024/03/mer-bythenumbers-infographic-feb2019.jpg?resize=1536,1120',
+      imageUrl: '/assets/objects/mer-bythenumbers-infographic-feb2019-4ce6ccc5.jpg',
+      caption: "Spirit & Opportunity",
+      credit: "NASA",
     },
     {
       label: 'Discoveries',
@@ -151,7 +166,9 @@ const BOOKS: BotBook[] = [
           <strong>Martian journey:</strong> Traveled about 7.7 km across Mars.
         </>,
       ],
-      imageUrl: 'https://science.nasa.gov/wp-content/uploads/2024/03/outofthisworldrecords-updated-2019-02.png?resize=1133,2000',
+      imageUrl: '/assets/objects/outofthisworldrecords-updated-2019-02-b1fd4b22.png',
+      caption: "Spirit Won Marathon",
+      credit: "NASA",
     },
     {
       label: 'Now',
@@ -164,7 +181,9 @@ const BOOKS: BotBook[] = [
           exploration.
         </>
       ),
-      imageUrl: 'https://science.nasa.gov/wp-content/uploads/2024/03/sol016-lander-pan-pia05117.jpg?resize=1536,1083',
+      imageUrl: '/assets/objects/sol016-lander-pan-pia05117-cb29dbe7.jpg',
+      caption: "Spirit & Oppy on Mars",
+      credit: "NASA",
    
     },
   ],
@@ -173,7 +192,7 @@ const BOOKS: BotBook[] = [
   id: 'opportunity',
   name: 'Opportunity',
   place: 'Mars',
-  coverImageUrl: 'https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/internal_resources/3447/solar_panels_on_rover_seen_from_above.jpeg?w=1238&h=968&fit=clip&crop=faces%2Cfocalpoint',
+  coverImageUrl: '/assets/objects/solar-panels-on-rover-seen-from-above-80d811d3.jpeg',
   pages: [
     {
       label: 'Origin',
@@ -185,7 +204,9 @@ const BOOKS: BotBook[] = [
           sent to investigate the Martian surface for evidence of past water.
         </>
       ),
-      imageUrl: 'https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/internal_resources/3447/solar_panels_on_rover_seen_from_above.jpeg?w=1238&h=968&fit=clip&crop=faces%2Cfocalpoint',
+      imageUrl: '/assets/objects/solar-panels-on-rover-seen-from-above-80d811d3.jpeg',
+      caption: "Spirit’s Twin",
+      credit: "NASA",
     },
     {
       label: 'Goals',
@@ -197,7 +218,9 @@ const BOOKS: BotBook[] = [
           <strong> liquid water had once existed</strong> on its surface.
         </>
       ),
-      imageUrl: 'https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/internal_resources/3451/rover_tracks_on_a_hillside_with_a_dust_devil_seen_in_the_distance.jpeg?w=1020&h=1024&fit=clip&crop=faces%2Cfocalpoint',
+      imageUrl: '/assets/objects/rover-tracks-on-a-hillside-with-a-dust-devil-see-1933e031.jpeg',
+      caption: "Martian Valley",
+      credit: "NASA",
     },
     {
       label: 'Discoveries',
@@ -222,7 +245,9 @@ const BOOKS: BotBook[] = [
           craters during its mission.
         </>,
       ],
-      imageUrl: 'https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/internal_resources/3452/rover_casting_a_shadow.jpeg?w=1024&h=1024&fit=clip&crop=faces%2Cfocalpoint',
+      imageUrl: '/assets/objects/rover-casting-a-shadow-a2b3b17d.jpeg',
+      caption: "Alone on Mars",
+      credit: "NASA",
     },
     {
       label: 'Now',
@@ -235,7 +260,9 @@ const BOOKS: BotBook[] = [
           declared the mission complete on February 13, 2019.
         </>
       ),
-      imageUrl: 'https://assets.science.nasa.gov/dynamicimage/assets/science/cds/3d/resources/model/mars-exploration-rover---spirit-and-opportunity/Mars%20Exploration%20Rover%20-%20Spirit%20and%20Opportunity.png?w=1280&h=720&fit=clip&crop=faces%2Cfocalpoint',
+      imageUrl: '/assets/objects/Mars-Exploration-Rover-Spirit-and-Opportunity-3767b584.png',
+      caption: "Oppy 3D Structure",
+      credit: "NASA",
       modelUrl: '',
     },
   ],
@@ -244,7 +271,7 @@ const BOOKS: BotBook[] = [
   id: 'pioneer10',
   name: 'Pioneer 10',
   place: 'Deep Space',
-  coverImageUrl: 'https://science.nasa.gov/wp-content/uploads/2023/04/jupiter_pioneer_10_art-jpg.webp?resize=1200,759',
+  coverImageUrl: '/assets/objects/jupiter-pioneer-10-art-jpg-20ff5cb4.webp',
   pages: [
     {
       label: 'Origin',
@@ -256,7 +283,9 @@ const BOOKS: BotBook[] = [
           asteroid belt and make the first close encounter with Jupiter.
         </>
       ),
-      imageUrl: 'https://science.nasa.gov/wp-content/uploads/2023/04/jupiter_pioneer_10_art-jpg.webp?resize=1200,759',
+      imageUrl: '/assets/objects/jupiter-pioneer-10-art-jpg-20ff5cb4.webp',
+      caption: "First Beyond the Asteroid Belt",
+      credit: "NASA",
     },
     {
       label: 'Goals',
@@ -269,7 +298,9 @@ const BOOKS: BotBook[] = [
           whether spacecraft could safely cross the asteroid belt.
         </>
       ),
-      imageUrl: 'https://www.nasa.gov/wp-content/uploads/2023/12/arc-1974-ac73-9344orig.jpg?resize=2000,1333',
+      imageUrl: '/assets/objects/arc-1974-ac73-9344orig-3d3ee44b.jpg',
+      caption: "Explore Jupiter",
+      credit: "NASA",
     },
     {
       label: 'Discoveries',
@@ -295,7 +326,9 @@ const BOOKS: BotBook[] = [
           <strong>Jupiter:</strong> First spacecraft to fly past Jupiter.
         </>,
       ],
-      imageUrl: 'https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/internal_resources/5211/Pioneer_10_Ganymede-1.jpeg?w=800&h=600&fit=clip&crop=faces%2Cfocalpoint',
+      imageUrl: '/assets/objects/Pioneer-10-Ganymede-1-6213fc43.jpeg',
+      caption: "Photo  of Jupiter taked by Pioneer 10",
+      credit: "NASA",
     },
     {
       label: 'Now',
@@ -308,7 +341,9 @@ const BOOKS: BotBook[] = [
           with a small plaque carrying a message from humanity.
         </>
       ),
-      imageUrl: '/models/Pioneer.glb',
+      imageUrl: '/assets/objects/pioneer-nasa-629e121e.jpg',
+      caption: "Drifting Into Deep Space",
+      credit: "NASA",
       modelUrl: '', 
     },
   ],
@@ -317,7 +352,7 @@ const BOOKS: BotBook[] = [
   id: 'pioneer11',
   name: 'Pioneer 11',
   place: 'Deep Space',
-  coverImageUrl: 'https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/2023/07/Pioneer11_1600.jpg?w=1280&h=720&fit=crop&crop=faces%2Cfocalpoint',
+  coverImageUrl: '/assets/objects/Pioneer11-1600-fb0b5cbf.jpg',
   pages: [
     {
       label: 'Origin',
@@ -329,7 +364,9 @@ const BOOKS: BotBook[] = [
           helped redirect it toward Saturn.
         </>
       ),
-      imageUrl: 'https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/2023/07/Pioneer11_1600.jpg?w=1280&h=720&fit=crop&crop=faces%2Cfocalpoint',
+      imageUrl: '/assets/objects/Pioneer11-1600-fb0b5cbf.jpg',
+      caption: "Pioneer 10’s Sister",
+      credit: "NASA",
     },
     {
       label: 'Goals',
@@ -341,7 +378,9 @@ const BOOKS: BotBook[] = [
           rings, magnetic environment, and moons.
         </>
       ),
-      imageUrl: 'https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/internal_resources/730/Saturn_and_its_rings.jpeg?w=1200&h=857&fit=crop&crop=faces%2Cfocalpoint',
+      imageUrl: '/assets/objects/Saturn-and-its-rings-d4abdfbb.jpeg',
+      caption: "Reach the Ringed Planet",
+      credit: "NASA",
     },
     {
       label: 'Discoveries',
@@ -367,7 +406,9 @@ const BOOKS: BotBook[] = [
           rings and magnetic environment.
         </>,
       ],
-      imageUrl: 'https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/internal_resources/2551/Fuzzy_color_image_of_Jupiter.jpeg?w=640&h=530&fit=clip&crop=faces%2Cfocalpoint',
+      imageUrl: '/assets/objects/Fuzzy-color-image-of-Jupiter-b2622095.jpeg',
+      caption: "Photo of Jupiter taken by Pioneer 11",
+      credit: "NASA",
     },
     {
       label: 'Now',
@@ -380,208 +421,125 @@ const BOOKS: BotBook[] = [
           carrying its message from humanity.
         </>
       ),
-      imageUrl: 'https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/2023/06/ac73-9344_1280.jpg?w=1280&h=894&fit=clip&crop=faces%2Cfocalpoint',
+      imageUrl: '/assets/objects/ac73-9344-1280-ad97a78e.jpg',
+      caption: "Lost Contact",
+      credit: "NASA",
       modelUrl: '', 
     },
   ],
 },
   {
-    id: 'juno',
-    name: 'Juno',
-    place: 'Jupiter',
-    coverImageUrl: 'https://science.nasa.gov/wp-content/uploads/2023/08/567922main-junospacecraft0711-1.jpg',
-    pages: [
-      {
-        label: 'Origin',
-        title: 'A Solar-Powered Mission to Jupiter',
-        text: `The mission’s many discoveries have changed our view of Jupiter’s atmosphere and interior, revolutionizing our understanding of the planet, and of the solar system’s formation.\n  Juno launched in 2011 and arrived at Jupiter in 2016, becoming the first solar-powered spacecraft to operate at such a great distance from the Sun.`,
-        imageUrl: 'https://science.nasa.gov/wp-content/uploads/2023/08/567922main-junospacecraft0711-1.jpg',
-      },
-     {
-  label: 'Goals',
-  title: 'Look Beneath the Clouds',
-  text: ` Because Jupiter preserved much of its original material, studying it helps scientists learn about the early solar system and how planets like Earth formed.\n• Main goal: Discover Jupiter’s origin and evolution.\n• Primary mission: Completed in 2021.\n• Studied: Jupiter’s interior, atmosphere, polar cyclones, auroras, and magnetic field.\n• Extended mission: Explores Jupiter’s faint rings and moons.`,
-  imageUrl: 'https://assets.science.nasa.gov/dynamicimage/assets/science/cds/ciencia/sistema-solar/2026/e-pia25630-europa-ice-cutaway-crop.jpg?w=847&h=900&fit=crop&crop=faces%2Cfocalpoint',
-},
-      {
-        label: 'Discoveries',
-        title: 'What It Found',
-        text: (<>
-    Juno revealed Jupiter’s <strong>massive polar cyclones</strong> and mapped
-    its <strong>powerful magnetic field</strong>.
-  </>),
-        bullets: [
-  <>
-    <strong>Atmosphere & Core:</strong> Belts and zones extend ~3,000 km deep,
-    while Jupiter has a large, partially dissolved “fuzzy” core.
-  </>,
-  <>
-    <strong>Storms & Weather:</strong> Juno revealed complex polar cyclones and
-    found that the Great Red Spot extends ~320 km deep and is shrinking.
-  </>,
-  <>
-    <strong>Magnetic Field & Moons:</strong> It discovered an extremely powerful
-    magnetic field, intense auroras, volcanic activity on Io, and the drifting
-    Great Blue Spot.
-  </>,
-],
-        imageUrl: 'https://images-assets.nasa.gov/image/PIA24308/PIA24308~orig.jpg?w=1536&h=541&fit=crop&crop=faces%2Cfocalpoint',
-      },
-     {
-  label: 'Now',
-  title: 'A Planned Ending',
-  text: (
-    <>
-      <strong>End of Mission:</strong> Juno continued exploring Jupiter, its
-      rings, and moons through September 2025. Its orbit then naturally
-      degraded, allowing Jupiter’s gravity to pull the spacecraft into its
-      atmosphere. This protected Jupiter’s potentially habitable moons from
-      accidental contamination by Earth microbes.
-    </>
-  ),
-  imageUrl: '',
-  modelUrl:'/models/Juno.glb',
-},
-    ],
-  },
-  {
-  id: 'pioneer5',
-  name: 'Pioneer 5',
-  place: 'Solar Orbit',
-  coverImageUrl: 'https://science.nasa.gov/wp-content/uploads/2023/07/pioneer-5.jpg',
+  id: 'viking-1',
+  name: 'Viking 1',
+  place: 'Mars',
+  coverImageUrl: '/assets/objects/viking_lander_model.gif',
   pages: [
     {
       label: 'Origin',
-      title: 'A Pioneer Between Earth and Venus',
-      text: `Pioneer 5 was launched on March 11, 1960, on a direct solar-orbit trajectory. Originally intended for a Venus encounter, the mission was changed to place the spacecraft into heliocentric orbit between Earth and Venus.`,
-      imageUrl: 'https://science.nasa.gov/wp-content/uploads/2023/07/pioneer-5.jpg',
+      title: 'The First Successful Landing on Mars',
+      text: `NASA's Viking 1 made the first truly successful landing on Mars on July 20, 1976. The mission combined an orbiter and a lander to study Mars from space and from its surface.
+
+The Viking orbiters photographed and mapped Mars while the lander studied the atmosphere, soil, weather, and the possibility of life. Together, the two Viking missions returned 52,663 images and mapped about 97 percent of Mars at a resolution of about 300 meters.`,
+      imageUrl: '/assets/objects/viking_lander_model.gif',
+      caption: "The First Successful Landing on Mars",
+      credit: "NSSDC",
     },
     {
       label: 'Goals',
-      title: 'Testing Deep Space Technology',
-      text: `The mission was designed to demonstrate deep-space technologies and create the first map of the interplanetary magnetic field.\n• Objective: Demonstrate deep space technologies.\n• Orbit: Heliocentric orbit between Earth and Venus.\n• Instruments: Magnetometer, ionization chamber, Geiger-Mueller tube, micrometeoroid momentum spectrometer, photoelectric cell aspect indicator, and proportional counter telescope.\n• Technology: Pioneer 5 carried Telebit, the first digital telemetry system operationally used on a U.S. spacecraft.`,
-      imageUrl: 'https://science.nasa.gov/wp-content/uploads/2023/07/pioneer-5.jpg',
+      title: 'Search Mars From Orbit and the Surface',
+      text: `The Viking mission was designed to investigate Mars in unprecedented detail and search for evidence of life.
+
+• Main goal: Study the Martian surface and atmosphere and search for signs of life.
+• Orbiter: Image and map the Martian surface, study atmospheric water vapor, and perform thermal mapping.
+• Lander: Analyze soil, weather, atmosphere, and biological activity.
+• Communications: Use the orbiter as a communications relay between the lander and Earth.
+• Landing site: Chryse Planitia.`,
+      imageUrl: '/assets/objects/Line_drawing_of_Viking_Orbiter-1.jpeg',
+      caption: "Search Mars From Orbit and the Surface",
+      credit: "NASA",
     },
     {
       label: 'Discoveries',
-      title: 'Mapping the Space Between Planets',
+      title: 'A Complex and Unexpected Mars',
       text: (
         <>
-          Pioneer 5 helped reveal the conditions of interplanetary space and
-          confirmed the existence of a <strong>weak interplanetary magnetic field</strong>.
+          Viking 1 transformed our understanding of Mars and performed some of
+          the first detailed experiments on Martian soil.
         </>
       ),
       bullets: [
         <>
-          <strong>Magnetic Field:</strong> The spacecraft confirmed the existence
-          of a previously conjectured weak interplanetary magnetic field.
+          <strong>Martian Geology & Soil:</strong> Viking found soil rich in
+          sulfur and containing significant amounts of silicon, iron, calcium,
+          and other elements.
         </>,
         <>
-          <strong>Deep-Space Communication:</strong> Controllers maintained
-          contact until June 26, 1960, when Pioneer 5 was 22.6 million miles
-          (36.4 million kilometers) from Earth.
+          <strong>The Biology Controversy:</strong> Viking's biological
+          experiments produced some results that appeared consistent with
+          metabolism, but the absence of detected organic compounds in the
+          GCMS experiment made the evidence inconclusive.
         </>,
         <>
-          <strong>Telemetry:</strong> Telebit transmitted information at rates
-          ranging from 1 to 64 bits per second.
+          <strong>Atmosphere & Weather:</strong> The lander measured Martian
+          temperature, pressure, and winds while studying the composition and
+          structure of the atmosphere.
+        </>,
+        <>
+          <strong>Water & Ancient Mars:</strong> Viking observations helped
+          reveal evidence of ancient river channels and flooding, showing that
+          Mars had experienced a wetter past.
         </>,
       ],
-      imageUrl: 'https://science.nasa.gov/wp-content/uploads/2023/07/pioneer-5.jpg',
+      imageUrl: '/assets/objects/nowv1.jpg',
+      caption: "A Complex and Unexpected Mars",
+      credit: "NASA",
     },
     {
       label: 'Now',
-      title: 'Still Circling the Sun',
+      title: 'Silent on the Martian Surface',
       text: (
         <>
-          <strong>End of Mission:</strong> NASA lost contact with Pioneer 5 on
-          June 26, 1960. NASA states that the spacecraft remains a
-          <strong> derelict spacecraft circling the Sun</strong>.
+          <strong>End of Mission:</strong> The Viking 1 orbiter was shut down
+          on August 7, 1980 after running out of attitude-control propellant.
+          The lander continued operating until November 11, 1982, when a faulty
+          command interrupted communications. Attempts to recover contact were
+          unsuccessful.
+          <br /><br />
+          The Viking 1 lander remains at its landing site in Chryse Planitia,
+          while the orbiter remains in the history of Mars exploration as one
+          of the mission's major scientific successes.
         </>
       ),
-      imageUrl: '',
+      imageUrl: '/assets/objects/viking-1.webp',
+      caption: "Launch of Viking 1",
+      credit: "NASA",
     },
   ],
 },
-{
-  id: 'lunarorbiter1',
-  name: 'Lunar Orbiter 1',
-  place: 'Moon',
-  coverImageUrl: 'https://www.nasa.gov/wp-content/uploads/2023/04/lunar-orbiter-render.jpg?w=1024',
-  pages: [
-    {
-      label: 'Origin',
-      title: 'The First U.S. Orbiter of the Moon',
-      text: `Lunar Orbiter 1 was launched on August 10, 1966, as the first U.S. spacecraft to orbit the Moon. It was designed primarily to photograph lunar areas that could serve as safe landing sites for the Surveyor and Apollo missions.`,
-      imageUrl: 'https://www.nasa.gov/wp-content/uploads/2023/04/lunar-orbiter-render.jpg?w=1024',
-    },
-    {
-      label: 'Goals',
-      title: 'Finding Safe Landing Sites',
-      text: `The spacecraft's main purpose was to obtain detailed photographs of potential Apollo landing sites.\n• Primary objective: Lunar orbit.\n• Main instrument: A 150-pound (68-kilogram) Eastman Kodak imaging system.\n• Camera: Wide- and narrow-angle lenses.\n• Additional instruments: Micrometeoroid detectors and radiation dosimeters.\n• Target: Potential Apollo and Surveyor landing areas.`,
-      imageUrl: 'https://www.nasa.gov/wp-content/uploads/2023/04/lunar-orbiter-render.jpg?w=1024',
-    },
-    {
-      label: 'Discoveries',
-      title: 'A New View of the Moon',
-      text: (
-        <>
-          Lunar Orbiter 1 photographed potential landing sites and returned the
-          <strong> first picture of Earth taken from the vicinity of the Moon</strong>.
-        </>
-      ),
-      bullets: [
-        <>
-          <strong>First Orbit:</strong> It became the first U.S. spacecraft to
-          orbit the Moon on August 14, 1966.
-        </>,
-        <>
-          <strong>Landing Sites:</strong> It photographed nine potential Apollo
-          landing sites and additional areas on the far side of the Moon.
-        </>,
-        <>
-          <strong>Earthrise Image:</strong> On August 23, 1966, it captured the
-          first picture of Earth from the vicinity of the Moon.
-        </>,
-        <>
-          <strong>Photography:</strong> NASA's page states that the spacecraft
-          produced 413 high- and moderate-resolution photographs covering large
-          areas of the lunar surface.
-        </>,
-      ],
-      imageUrl: 'https://www.nasa.gov/wp-content/uploads/2023/04/lunar-orbiter-render.jpg?w=1024',
-    },
-    {
-      label: 'Now',
-      title: 'Its Final Orbit',
-      text: (
-        <>
-          <strong>End of Mission:</strong> After its condition deteriorated,
-          ground controllers commanded Lunar Orbiter 1 to crash onto the Moon
-          on October 29, 1966, during its 577th orbit. The impact occurred at
-          6°42′ north latitude and 162° east longitude.
-        </>
-      ),
-      imageUrl: '',
-    },
-  ],
-},
+
+
+
 {
   id: 'mariner2',
   name: 'Mariner 2',
   place: 'Venus',
-  coverImageUrl: 'https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/2023/07/mariner_1_3_artist_impression-1280.jpg?crop=faces%2Cfocalpoint&fit=clip&h=900&w=1280',
+  coverImageUrl: '/assets/objects/mariner-1-3-artist-impression-1280-90a53565.jpg',
   pages: [
     {
       label: 'Origin',
       title: 'The First Successful Planetary Mission',
       text: `Mariner 2 launched on August 27, 1962, becoming humanity's first successful planetary science mission. It traveled to Venus for the first successful close-up scientific study of another planet.`,
-      imageUrl: 'https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/2023/07/mariner_1_3_artist_impression-1280.jpg?crop=faces%2Cfocalpoint&fit=clip&h=900&w=1280',
+      imageUrl: '/assets/objects/mariner-1-3-artist-impression-1280-90a53565.jpg',
+      caption: "The First Successful Planetary Mission",
+      credit: "NASA",
     },
     {
       label: 'Goals',
       title: 'A Close Look at Venus',
       text: `Mariner 2 was designed to study Venus during a planetary flyby.\n• Objective: Venus flyby.\n• Power: Solar.\n• Mass: 449 pounds (203.6 kilograms).\n• Instruments: Microwave radiometer, infrared radiometer, fluxgate magnetometer, cosmic dust detector, solar plasma spectrometer, energetic particle detectors, and ionization chamber.\n• Important limitation: Mariner 2 carried no cameras.`,
-      imageUrl: 'https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/2023/07/mariner_1_3_artist_impression-1280.jpg?crop=faces%2Cfocalpoint&fit=clip&h=900&w=1280',
+      imageUrl: '/assets/objects/p-1-90824865-60-years-ago-the-mariner-2-gave-us--ebaab001.jpg',
+      caption: "A Close Look at Venus",
+      credit: "NASA",
     },
     {
       label: 'Discoveries',
@@ -612,8 +570,13 @@ const BOOKS: BotBook[] = [
           science mission and the first spacecraft to conduct a successful
           close-up study of another planet.
         </>,
+        <>
+        Mariner 2 carried no cameras, but returned plenty of unexpected data from its scan of Venus.NASA/JPL-Caltech
+        </>
       ],
-      imageUrl: 'https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/2023/07/mariner_1_3_artist_impression-1280.jpg?crop=faces%2Cfocalpoint&fit=clip&h=900&w=1280',
+      imageUrl: '/assets/objects/Two-men-displaying-a-25-foot-printout-of-all-the-3a4541c3.jpeg',
+      caption: "A Hot and Hostile Venus",
+      credit: "NASA",
     },
     {
       label: 'Now',
@@ -626,7 +589,9 @@ const BOOKS: BotBook[] = [
           heliocentric orbit.
         </>
       ),
-      imageUrl: '',
+      imageUrl: '/assets/objects/imagesmariner2artists-concept-browse-22f69a3a.jpg',
+      caption: "A Silent Traveler",
+      credit: "NASA",
     },
   ],
 },
@@ -634,19 +599,23 @@ const BOOKS: BotBook[] = [
   id: 'mariner10',
   name: 'Mariner 10',
   place: 'Mercury',
-  coverImageUrl: 'https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/07/mariner10.gif?crop=faces%2Cfocalpoint&fit=clip&h=480&w=640',
+  coverImageUrl: '/assets/objects/mariner10-a3ef4a7a.gif',
   pages: [
     {
       label: 'Origin',
       title: 'The Journey to Mercury',
       text: `Mariner 10 launched on November 3, 1973, becoming the first spacecraft sent to study Mercury. It also became the first mission to explore two planets during a single mission.`,
-      imageUrl: 'https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/07/mariner10.gif?crop=faces%2Cfocalpoint&fit=clip&h=480&w=640',
+      imageUrl: '/assets/objects/mariner10-a3ef4a7a.gif',
+      caption: "The Journey to Mercury",
+      credit: "NASA",
     },
     {
       label: 'Goals',
       title: 'Exploring Mercury and Venus',
       text: `The primary goal of Mariner 10 was to study Mercury's atmosphere, surface, and physical characteristics.\n• Targets: Mercury and Venus.\n• Power: Solar.\n• Mass: 1,100 pounds (502.9 kilograms).\n• Instruments: Two telescopes/cameras, infrared radiometer, ultraviolet spectrometers, magnetometer, charged-particle telescope, and plasma analyzer.\n• Special technique: Venus gravity assist to reach Mercury.`,
-      imageUrl: 'https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/07/mariner10.gif?crop=faces%2Cfocalpoint&fit=clip&h=480&w=640',
+      imageUrl: '/assets/objects/Mariner-10-e787934b.jpeg',
+      caption: "Exploring Mercury and Venus",
+      credit: "NASA",
     },
     {
       label: 'Discoveries',
@@ -676,7 +645,9 @@ const BOOKS: BotBook[] = [
           basin.
         </>,
       ],
-      imageUrl: 'https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/07/mariner10.gif?crop=faces%2Cfocalpoint&fit=clip&h=480&w=640',
+      imageUrl: '/assets/objects/earth-and-moon-in-space-39e167a4.jpeg',
+      caption: "Revealing Mercury",
+      credit: "NASA",
     },
     {
       label: 'Now',
@@ -688,7 +659,9 @@ const BOOKS: BotBook[] = [
           for attitude control.
         </>
       ),
-      imageUrl: '',
+      imageUrl: '/assets/objects/mariner-10-1280x1280-2-77b331a8.jpg',
+      caption: "The Final Signal",
+      credit: "NASA",
     },
   ],
 },
@@ -696,19 +669,23 @@ const BOOKS: BotBook[] = [
   id: 'apollo15',
   name: 'Apollo 15',
   place: 'Moon',
-  coverImageUrl: 'https://images-assets.nasa.gov/image/S71-37963/S71-37963~large.jpg?crop=faces%2Cfocalpoint&fit=clip&h=1477&w=1920',
+  coverImageUrl: '/assets/objects/apollo_15_cm.jpg',
   pages: [
     {
       label: 'Origin',
       title: 'A New Kind of Moon Mission',
       text: `Apollo 15 was a lunar landing mission launched on July 26, 1971. It carried Commander David R. Scott, Command Module Pilot Alfred M. Worden, and Lunar Module Pilot James B. Irwin to the Moon.`,
-      imageUrl: 'https://images-assets.nasa.gov/image/S71-37963/S71-37963~large.jpg?crop=faces%2Cfocalpoint&fit=clip&h=1477&w=1920',
+      imageUrl: '/assets/objects/apollo_15_cm.jpg',
+      caption: "A New Kind of Moon Mission",
+      credit: "NASA",
     },
     {
       label: 'Goals',
       title: 'Exploring Hadley-Apennine',
       text: `Apollo 15 sent Scott and Irwin to explore the Moon's Hadley-Apennine region while Worden remained in lunar orbit in the Command and Service Modules.\n• Mission type: Lunar landing.\n• Landing region: Hadley-Apennine.\n• Crew: David R. Scott, James B. Irwin, Alfred M. Worden.\n• Major capability: First Apollo mission to use a lunar rover.\n• Mission duration: 12 days.`,
-      imageUrl: 'https://images-assets.nasa.gov/image/S71-37963/S71-37963~large.jpg?crop=faces%2Cfocalpoint&fit=clip&h=1477&w=1920',
+      imageUrl: '/assets/objects/as17_147_22526.jpg',
+      caption: "Exploring Hadley-Apennine",
+      credit: "NASA",
     },
     {
       label: 'Discoveries',
@@ -738,7 +715,9 @@ const BOOKS: BotBook[] = [
           4,000 meters (13,124 feet) above the surrounding plain.
         </>,
       ],
-      imageUrl: 'https://images-assets.nasa.gov/image/S71-37963/S71-37963~large.jpg?crop=faces%2Cfocalpoint&fit=clip&h=1477&w=1920',
+      imageUrl: '/assets/objects/apollo_15_lm.jpg',
+      caption: "Exploring the Moon on Wheels",
+      credit: "NASA",
     },
     {
       label: 'Now',
@@ -751,7 +730,997 @@ const BOOKS: BotBook[] = [
           returned to Earth.
         </>
       ),
-      imageUrl: '',
+      imageUrl: '/assets/objects/S71-37963-large-66ce2d79.jpg',
+      caption: "A Mission That Came Home",
+      credit: "NASA",
+    },
+  ],
+},
+
+{
+  id: 'viking-2',
+  name: 'Viking 2',
+  place: 'Mars',
+  coverImageUrl: '/assets/objects/viking-1.webp',
+  pages: [
+    {
+      label: 'Origin',
+      title: "Viking 1's Twin on Mars",
+      text: `Viking 2 was the second NASA Viking spacecraft to reach Mars. Like Viking 1, it consisted of an orbiter and a lander designed to study Mars from orbit and from the surface.
+
+Viking 2 entered orbit around Mars on August 7, 1976. Its lander touched down safely on September 3, 1976, about 4,000 miles (6,460 kilometers) from the Viking 1 landing site.`,
+      imageUrl: '/assets/objects/viking-1.webp',
+      caption: "Viking 1's Twin on Mars",
+      credit: "NASA",
+    },
+    {
+      label: 'Goals',
+      title: 'Study Mars and Search for Life',
+      text: `Viking 2 shared the major scientific objectives of the Viking program.
+
+• Main goal: Orbit and land on Mars.
+• Study: Martian geology, soil, atmosphere, weather, and surface features.
+• Biology: Search for evidence of microbial activity in Martian soil.
+• Orbiter: Photograph and map Mars and study atmospheric and thermal properties.
+• Lander: Analyze soil samples and measure environmental conditions.
+• Communications: Relay information from the lander back to Earth.`,
+      imageUrl: '/assets/objects/sagan_viking.jpg',
+      caption: "Study Mars and Search for Life",
+      credit: "NASA",
+    },
+    {
+      label: 'Discoveries',
+      title: 'A Different Face of Mars',
+      text: (
+        <>
+          Viking 2 landed in Utopia Planitia, providing scientists with a
+          second location from which to study the Martian environment.
+        </>
+      ),
+      bullets: [
+        <>
+          <strong>Martian Soil:</strong> Soil samples produced biological
+          experiment results similar to Viking 1, but scientists could not
+          conclusively determine whether life had ever existed there.
+        </>,
+        <>
+          <strong>Surface Environment:</strong> Viking 2 returned detailed
+          images showing a rockier and flatter landscape than Viking 1's
+          landing site.
+        </>,
+        <>
+          <strong>Atmosphere & Weather:</strong> The lander measured
+          temperature, pressure, and wind while studying the Martian
+          atmosphere.
+        </>,
+        <>
+          <strong>Mars From Orbit:</strong> The Viking 2 orbiter contributed to
+          the enormous global dataset that mapped about 97 percent of Mars and
+          returned tens of thousands of images.
+        </>,
+      ],
+      imageUrl: '/assets/objects/mars.jpg',
+      caption: "A Different Face of Mars",
+      credit: "NASA",
+    },
+    {
+      label: 'Now',
+      title: 'A Long-Quiet Lander',
+      text: (
+        <>
+          <strong>End of Mission:</strong> The Viking 2 orbiter stopped
+          operating on July 24, 1978 after a series of leaks. The lander
+          continued transmitting scientific data until April 12, 1980.
+          <br /><br />
+          The Viking 2 lander remains at its Utopia Planitia landing site,
+          later named the Gerald Soffen Memorial Station.
+        </>
+      ),
+      imageUrl: '/assets/objects/viking_lander_model.gif',
+      caption: "A Long-Quiet Lander",
+      credit: "NASA",
+    },
+  ],
+},
+
+{
+  id: 'mars-global-surveyor',
+  name: 'Mars Global Surveyor',
+  place: 'Mars',
+  coverImageUrl: '/assets/objects/mgs_768.jpg',
+  pages: [
+    {
+      label: 'Origin',
+      title: 'Mapping Mars From Orbit',
+      text: `Mars Global Surveyor was launched on November 7, 1996 and entered orbit around Mars on September 12, 1997.
+
+The spacecraft spent nearly a decade orbiting Mars and became one of the most productive Mars orbiters of its era. It studied the planet from the ionosphere down through the atmosphere and surface and even investigated aspects of its interior.`,
+      imageUrl: '/assets/objects/mgs_768.jpg',
+      caption: "Mapping Mars From Orbit",
+      credit: "NASA",
+    },
+    {
+      label: 'Goals',
+      title: 'Survey the Entire Planet',
+      text: `Mars Global Surveyor was designed as a global mapping and science mission.
+
+• Main goal: Study the entire Martian surface, atmosphere, and interior.
+• Map: Determine Mars' global topography, shape, and gravity.
+• Geology: Study surface features and geological processes.
+• Minerals: Determine the composition and distribution of rocks, minerals, and ice.
+• Weather: Monitor atmospheric conditions and seasonal changes.
+• Magnetism: Study Mars' magnetic field and ancient crustal magnetic signatures.
+• Support: Identify potential landing sites and relay data for other Mars missions.`,
+      imageUrl: '/assets/objects/mars2.jpg',
+      caption: "Survey the Entire Planet",
+      credit: "NASA",
+    },
+    {
+      label: 'Discoveries',
+      title: 'Evidence of Water and a Changing Mars',
+      text: (
+        <>
+          Mars Global Surveyor produced major evidence that water had played a
+          significant role in Mars' history and may still have influenced the
+          surface.
+        </>
+      ),
+      bullets: [
+        <>
+          <strong>Ancient Water:</strong> MGS observations revealed geological
+          features such as ancient channels and sedimentary deposits associated
+          with persistent water in Mars' past.
+        </>,
+        <>
+          <strong>Recent Water Activity:</strong> Repeated imaging revealed
+          changes in some Martian gullies that suggested water-related activity
+          could have occurred relatively recently.
+        </>,
+        <>
+          <strong>Global Topography:</strong> The Mars Orbiter Laser Altimeter
+          created an extremely detailed global topographic map of Mars.
+        </>,
+        <>
+          <strong>Magnetic Mars:</strong> MGS discovered strong crustal
+          magnetic signatures, providing evidence that ancient Mars once had a
+          global magnetic field.
+        </>,
+      ],
+      imageUrl: '/assets/objects/mars-dust-storms-global-pia03170.webp',
+      caption: "Evidence of Water and a Changing Mars",
+      credit: "NASA",
+    },
+    {
+      label: 'Now',
+      title: 'A Decade of Mars Exploration',
+      text: (
+        <>
+          <strong>End of Mission:</strong> Mars Global Surveyor continued
+          returning data until November 2006. A series of events associated
+          with a computer error, likely involving a battery failure, caused the
+          spacecraft to stop communicating.
+          <br /><br />
+          Before going silent, MGS had transformed Mars exploration by mapping
+          the planet in detail and supporting later missions through landing
+          site imaging and communications.
+        </>
+      ),
+      imageUrl: '/assets/objects/ZyIw1.jpg',
+      caption: "A Decade of Mars Exploration",
+      credit: "NASA",
+    },
+  ],
+},
+
+{
+  id: 'mars-pathfinder',
+  name: 'Mars Pathfinder',
+  place: 'Mars',
+  coverImageUrl: '/assets/objects/marspath1.gif',
+  pages: [
+    {
+      label: 'Origin',
+      title: 'The Mission That Sent Sojourner to Mars',
+      text: `Mars Pathfinder launched on December 4, 1996 and successfully landed on Mars on July 4, 1997.
+
+The mission demonstrated a new way to land safely on Mars and delivered Sojourner, the first-ever robotic rover to operate on the Martian surface. Pathfinder landed at Ares Vallis using a parachute and a giant airbag system.`,
+      imageUrl: '/assets/objects/marspath1.gif',
+      caption: "The Mission That Sent Sojourner to Mars",
+      credit: "NASA",
+    },
+    {
+      label: 'Goals',
+      title: 'Prove a New Way to Explore Mars',
+      text: `Mars Pathfinder was primarily a technology demonstration mission, while also carrying scientific instruments.
+
+• Main goal: Demonstrate a low-cost method for landing on Mars.
+• Landing technology: Use parachutes and airbags to survive the final impact.
+• Rover: Deploy and operate Sojourner on the Martian surface.
+• Science: Study Martian rocks, soil, atmosphere, and weather.
+• Engineering: Demonstrate technologies that could support future Mars landers and rovers.`,
+      imageUrl: '/assets/objects/marspath3.gif',
+      caption: "Prove a New Way to Explore Mars",
+      credit: "NASA",
+    },
+    {
+      label: 'Discoveries',
+      title: 'Evidence of a Warmer, Wetter Mars',
+      text: (
+        <>
+          Pathfinder showed that Mars had once been very different from the
+          cold, dry planet seen at the surface today.
+        </>
+      ),
+      bullets: [
+        <>
+          <strong>Running Water:</strong> Rounded pebbles and possible
+          conglomerate rocks suggested that liquid water once flowed across the
+          Ares Vallis region.
+        </>,
+        <>
+          <strong>Ancient Climate:</strong> Geological evidence supported a
+          warmer and wetter early Mars with liquid water at the surface.
+        </>,
+        <>
+          <strong>Dust Devils:</strong> Pathfinder observed and measured dust
+          devils and studied their role in transporting dust through the
+          atmosphere.
+        </>,
+        <>
+          <strong>Atmospheric Science:</strong> The mission measured winds,
+          pressure, temperature, and atmospheric behavior while observing water
+          ice clouds.
+        </>,
+      ],
+      imageUrl: '/assets/objects/marspsite.gif',
+      caption: "Evidence of a Warmer, Wetter Mars",
+      credit: "NASA",
+    },
+    {
+      label: 'Now',
+      title: 'Resting at Ares Vallis',
+      text: (
+        <>
+          <strong>End of Mission:</strong> Mars Pathfinder's final data
+          transmission occurred on September 27, 1997. Communication was
+          eventually lost after the spacecraft's main battery was depleted and
+          attempts to reestablish contact failed.
+          <br /><br />
+          Pathfinder and Sojourner remain at the Ares Vallis landing site,
+          where they became an important milestone in the development of modern
+          Mars rovers.
+        </>
+      ),
+      imageUrl: '/assets/objects/marsrover.gif',
+      caption: "Resting at Ares Vallis",
+      credit: "NASA",
+    },
+  ],
+},
+
+{
+  id: 'phoenix',
+  name: 'Phoenix',
+  place: 'Mars',
+  coverImageUrl: '/assets/objects/phoenix_lander.jpg',
+  pages: [
+    {
+      label: 'Origin',
+      title: 'Digging Into the Martian Arctic',
+      text: `NASA's Phoenix Mars Lander launched on August 4, 2007 and successfully landed in the northern plains of Mars on May 25, 2008.
+
+Phoenix was the first successful stationary soft-lander on Mars since Viking 2. It landed in Vastitas Borealis, a cold region of the Martian arctic, where scientists expected to find water ice beneath the surface.`,
+      imageUrl: '/assets/objects/phoenix_lander.jpg',
+      caption: "Digging Into the Martian Arctic",
+      credit: "NASA",
+    },
+    {
+      label: 'Goals',
+      title: 'Search for Water and Habitability',
+      text: `Phoenix was designed to investigate the Martian arctic and study the history of water on Mars.
+
+• Main goal: Search for evidence of past or present microbial habitability.
+• Water: Search for water ice beneath the Martian surface.
+• Soil: Analyze the chemical and physical properties of Martian soil.
+• Chemistry: Search for complex organic molecules and other chemicals.
+• Environment: Study the Martian atmosphere and weather near the polar region.
+• Technology: Use a robotic arm to dig trenches and deliver samples to onboard laboratories.`,
+      imageUrl: '/assets/objects/phoenix_3352.jpg',
+      caption: "Search for Water and Habitability",
+      credit: "NASA",
+    },
+    {
+      label: 'Discoveries',
+      title: 'Water Ice Beneath the Surface',
+      text: (
+        <>
+          Phoenix directly sampled the Martian arctic and confirmed that
+          water ice exists beneath the surface.
+        </>
+      ),
+      bullets: [
+        <>
+          <strong>Water Ice:</strong> Phoenix dug into an ice-rich layer and
+          confirmed the presence of water ice in the Martian subsurface.
+        </>,
+        <>
+          <strong>Perchlorates:</strong> The lander detected perchlorate salts
+          in Martian soil, chemicals that can affect how scientists interpret
+          organic compounds on Mars.
+        </>,
+        <>
+          <strong>Soil Chemistry:</strong> Phoenix found Martian soil to be
+          alkaline and identified salts including sodium, magnesium, chloride,
+          and potassium.
+        </>,
+        <>
+          <strong>Arctic Weather:</strong> Phoenix returned regular weather
+          observations and studied the atmosphere above the northern plains.
+        </>,
+      ],
+      imageUrl: '/assets/objects/phoenix_440.gif',
+      caption: "Water Ice Beneath the Surface",
+      credit: "NASA",
+    },
+    {
+      label: 'Now',
+      title: 'A Lander Frozen in the Arctic',
+      text: (
+        <>
+          <strong>End of Mission:</strong> Phoenix completed its original
+          three-month mission and continued operating through the Martian
+          summer. Communication was lost as autumn approached and sunlight
+          decreased, leaving the spacecraft unable to maintain sufficient power.
+          <br /><br />
+          The mission officially ended on November 2, 2008. Phoenix remains at
+          its landing site in the northern plains of Mars.
+        </>
+      ),
+      imageUrl: '/assets/objects/sunPhoenix.jpg',
+      caption: "A Lander Frozen in the Arctic",
+      credit: "NASA",
+    },
+  ],
+},
+{
+  id: 'apollo-15-lrv',
+  name: 'Apollo 15 LRV',
+  place: 'Moon',
+  coverImageUrl: '/assets/objects/as17_147_22526.jpg',
+  pages: [
+    {
+      label: 'Origin',
+      title: 'A Rover Built for the Moon',
+      text: `The Lunar Roving Vehicle (LRV) was developed by NASA to allow Apollo astronauts to travel much farther across the lunar surface than they could on foot.
+
+Apollo 15 was the first mission to use the LRV. Astronauts David Scott and James Irwin drove it across the Hadley–Apennine region of the Moon in July and August 1971.
+
+The battery-powered rover was lightweight, foldable, and designed specifically for the harsh lunar environment.`,
+      imageUrl: '/assets/objects/as17_147_22526.jpg',
+      caption: "A Rover Built for the Moon",
+      credit: "NASA",
+    },
+    {
+      label: 'Goals',
+      title: 'Explore Beyond Walking Distance',
+      text: `The LRV was designed to greatly expand the area astronauts could explore during their limited time on the lunar surface.
+
+• Main goal: Transport astronauts and equipment across the lunar surface.
+• Exploration: Reach geological features that were too far to visit on foot.
+• Science: Carry tools, cameras, and scientific equipment.
+• Navigation: Allow astronauts to travel efficiently across uneven lunar terrain.
+• Range: Explore several kilometers away from the Lunar Module while remaining within operational limits.`,
+      imageUrl: '/assets/objects/as17_146_22367.jpg',
+      caption: "Explore Beyond Walking Distance",
+      credit: "NASA",
+    },
+    {
+      label: 'Discoveries',
+      title: 'A New Way to Explore the Moon',
+      text: (
+        <>
+          Apollo 15's LRV allowed astronauts to investigate the Hadley–Apennine
+          region in much greater detail and collect geological samples from
+          locations that would otherwise have been difficult to reach.
+        </>
+      ),
+      bullets: [
+        <>
+          <strong>Hadley Rille:</strong> The rover helped astronauts reach and
+          investigate the edge of the enormous Hadley Rille, a deep
+          sinuous channel near the landing site.
+        </>,
+        <>
+          <strong>Mountain Geology:</strong> The crew explored the Apennine
+          mountains and collected samples that helped scientists study the
+          Moon's geological history.
+        </>,
+        <>
+          <strong>Lunar Samples:</strong> Apollo 15 astronauts collected about
+          77 kilograms of lunar material, including the famous Genesis Rock.
+        </>,
+        <>
+          <strong>Extended Exploration:</strong> The LRV allowed the astronauts
+          to travel much farther from the Lunar Module than previous Apollo
+          crews could safely walk.
+        </>,
+      ],
+      imageUrl: '/assets/objects/lrv_deployment_art.jpg',
+      caption: "A New Way to Explore the Moon",
+      credit: "NASA",
+    },
+    {
+      label: 'Now',
+      title: 'Still Parked on the Moon',
+      text: (
+        <>
+          <strong>End of Mission:</strong> After Apollo 15's astronauts
+          completed their surface operations, they left the Lunar Roving
+          Vehicle at the Hadley–Apennine landing site.
+          <br /><br />
+          The LRV was never designed to return to Earth. It remains exactly
+          where the astronauts parked it in 1971, making it one of the
+          intentionally abandoned human-made vehicles on the Moon.
+          <br /><br />
+          Its location has been photographed from lunar orbit by NASA's Lunar
+          Reconnaissance Orbiter.
+        </>
+      ),
+      imageUrl: '/assets/objects/as15_88_11901.jpg',
+      caption: "Still Parked on the Moon",
+      credit: "NASA",
+    },
+  ],
+},
+{
+  id: 'insight',
+  name: 'InSight',
+  place: 'Mars',
+  coverImageUrl: '/assets/objects/insight.jpg',
+  pages: [
+    {
+      label: 'Origin',
+      title: 'Listening to the Heart of Mars',
+      text: `NASA's InSight lander launched on May 5, 2018 and landed on Mars on November 26, 2018.
+
+Unlike rovers designed mainly to explore the surface, InSight was built to study the deep interior of Mars. It investigated the planet's crust, mantle, and core to understand how rocky planets formed and evolved.`,
+      imageUrl: '/assets/objects/insight.jpg',
+      caption: "Listening to the Heart of Mars",
+      credit: "NASA",
+    },
+    {
+      label: 'Goals',
+      title: 'Look Beneath the Surface',
+      text: `InSight was designed to study the internal structure and evolution of Mars.
+
+• Main goal: Understand the formation and evolution of rocky planets.
+• Seismology: Detect and study marsquakes.
+• Heat flow: Measure heat escaping from the planet's interior.
+• Interior: Determine the structure of Mars from its crust to its core.
+• Rotation: Use precision radio tracking to study the planet's internal structure.
+• Surface environment: Monitor weather and magnetic conditions around the lander.`,
+      imageUrl: '/assets/objects/38686_Mars-InSight-Solar-Panels-Open-pia196641.jpg',
+      caption: "Look Beneath the Surface",
+      credit: "NASA",
+    },
+    {
+      label: 'Discoveries',
+      title: 'The Sounds and Secrets of Mars',
+      text: (
+        <>
+          InSight gave scientists their first detailed measurements of the
+          interior of another rocky planet.
+        </>
+      ),
+      bullets: [
+        <>
+          <strong>Marsquakes:</strong> InSight detected thousands of seismic
+          events, revealing that Mars is still geologically active.
+        </>,
+        <>
+          <strong>Planetary Interior:</strong> Seismic waves allowed scientists
+          to determine important properties of Mars' crust, mantle, and core.
+        </>,
+        <>
+          <strong>Liquid Core:</strong> InSight's seismic measurements provided
+          evidence that Mars has a large liquid iron-rich core.
+        </>,
+        <>
+          <strong>Magnetic Field:</strong> Its magnetometer detected unusually
+          strong magnetic fields near the landing site, helping scientists
+          investigate Mars' ancient magnetic history.
+        </>,
+      ],
+      imageUrl: '/assets/objects/D000M1436_724026330EDR_F0000_0817M_.jpg',
+      caption: "The Sounds and Secrets of Mars",
+      credit: "NASA",
+    },
+    {
+      label: 'Now',
+      title: 'Silent Beneath the Martian Sky',
+      text: (
+        <>
+          <strong>End of Mission:</strong> InSight's mission ended after its
+          solar panels became covered with dust and the spacecraft could no
+          longer generate enough electrical power.
+          <br /><br />
+          NASA received InSight's final communication on December 15, 2022.
+          The stationary lander remains on the surface of Mars in Elysium
+          Planitia.
+        </>
+      ),
+      imageUrl: '/assets/objects/SsGBxVZMFznSQXkiNeeoyM.jpg',
+      caption: "Silent Beneath the Martian Sky",
+      credit: "NASA",
+    },
+  ],
+},
+{
+  id: 'mariner-4',
+  name: 'Mariner 4',
+  place: 'Mars',
+  coverImageUrl: 'public/assets/objects/mariner04.gif',
+  pages: [
+    {
+      label: 'Origin',
+      title: 'The First Close-Up Look at Mars',
+      text: `Mariner 4 launched on November 28, 1964 and became the first spacecraft to successfully fly past Mars.
+
+On July 14, 1965, it passed close to Mars and captured the first close-up photographs of another planet. The spacecraft transformed humanity's understanding of Mars.`,
+      imageUrl: 'public/assets/objects/mariner04.gif',
+      caption: "The First Close-Up Look at Mars",
+      credit: "NASA",
+    },
+    {
+      label: 'Goals',
+      title: 'See Mars Up Close',
+      text: `Mariner 4 was designed to perform the first close scientific investigation of Mars from space.
+
+• Main goal: Study Mars during a close flyby.
+• Imaging: Photograph the Martian surface.
+• Atmosphere: Measure atmospheric pressure and density.
+• Surface: Investigate the physical appearance of Mars.
+• Space environment: Measure radiation, cosmic particles, magnetic fields, and solar plasma.`,
+      imageUrl: '/assets/objects/m04_1_2a.jpg',
+      caption: "See Mars Up Close",
+      credit: "NASA",
+    },
+    {
+      label: 'Discoveries',
+      title: 'A Cratered, Unexpected Mars',
+      text: (
+        <>
+          Mariner 4 completely changed the scientific picture of Mars by
+          showing that its surface was far more cratered and Moon-like than
+          many scientists had expected.
+        </>
+      ),
+      bullets: [
+        <>
+          <strong>First Close-Up Images:</strong> Mariner 4 transmitted 22
+          photographs of Mars, including 21 complete images.
+        </>,
+        <>
+          <strong>Cratered Surface:</strong> The images revealed a heavily
+          cratered, desert-like landscape.
+        </>,
+        <>
+          <strong>Thin Atmosphere:</strong> Radio occultation measurements
+          provided information about the density of Mars' atmosphere.
+        </>,
+        <>
+          <strong>Planetary Science Milestone:</strong> Its observations
+          dramatically changed ideas about the possibility of life on the
+          Martian surface.
+        </>,
+      ],
+      imageUrl: '/assets/objects/38754_Mars-Mariner-4-first-tv-image-color-next-to-black-and-white.jpg',
+      caption: "A Cratered, Unexpected Mars",
+      credit: "NASA",
+    },
+    {
+      label: 'Now',
+      title: 'Drifting Through Solar Orbit',
+      text: (
+        <>
+          <strong>End of Mission:</strong> After its Mars flyby, Mariner 4
+          continued into heliocentric orbit and continued making measurements
+          of the solar environment.
+          <br /><br />
+          All spacecraft operations ended on December 20, 1967 after more than
+          three years in space.
+          <br /><br />
+          Mariner 4 is now an inactive spacecraft orbiting the Sun.
+        </>
+      ),
+      imageUrl: '/assets/objects/6805_Mariner-4-animation-spacecraft-engine-burn-full2.jpg',
+      caption: "Drifting Through Solar Orbit",
+      credit: "NASA",
+    },
+  ],
+},
+
+{
+  id: 'mariner-6',
+  name: 'Mariner 6',
+  place: 'Mars',
+  coverImageUrl: '/assets/objects/mariner06-07.gif',
+  pages: [
+    {
+      label: 'Origin',
+      title: 'A Closer Look at Mars',
+      text: `Mariner 6 launched on February 25, 1969 as part of a pair of Mars flyby missions with Mariner 7.
+
+It flew past Mars on July 31, 1969, passing within about 2,132 miles (3,430 kilometers) of the planet's surface.`,
+      imageUrl: '/assets/objects/mariner06-07.gif',
+      caption: "A Closer Look at Mars",
+      credit: "NASA",
+    },
+    {
+      label: 'Goals',
+      title: 'Study Mars From a Close Flyby',
+      text: `Mariner 6 was designed to investigate Mars at much higher resolution than its predecessor, Mariner 4.
+
+• Main goal: Study the Martian surface and atmosphere.
+• Imaging: Photograph Mars during close and distant encounters.
+• Atmosphere: Measure atmospheric composition and pressure.
+• Surface: Study the geology and physical characteristics of Mars.
+• Technology: Provide experience and scientific data for the Mariner 7 encounter.`,
+      imageUrl: '/assets/objects/Mariner_6_7_solar_orbit.png',
+      caption: "Study Mars From a Close Flyby",
+      credit: "NASA",
+    },
+    {
+      label: 'Discoveries',
+      title: 'A Heavily Cratered Mars',
+      text: (
+        <>
+          Mariner 6 provided a much broader view of Mars than Mariner 4 and
+          revealed important information about its atmosphere and surface.
+        </>
+      ),
+      bullets: [
+        <>
+          <strong>Surface Images:</strong> The spacecraft returned 24
+          near-encounter photographs showing a chaotic and heavily cratered
+          landscape.
+        </>,
+        <>
+          <strong>Atmospheric Pressure:</strong> Radio occultation
+          measurements helped determine that Mars' atmospheric pressure was
+          extremely low compared with Earth's.
+        </>,
+        <>
+          <strong>Polar Region:</strong> Observations helped scientists study
+          Mars' southern polar region and seasonal features.
+        </>,
+        <>
+          <strong>Global Context:</strong> Far-encounter images provided much
+          broader coverage of Mars than Mariner 4.
+        </>,
+      ],
+      imageUrl: '/assets/objects/mariner-6.jpg',
+      caption: "A Heavily Cratered Mars",
+      credit: "NASA",
+    },
+    {
+      label: 'Now',
+      title: 'A Silent Flyby Pioneer',
+      text: (
+        <>
+          <strong>End of Mission:</strong> After its successful Mars flyby,
+          Mariner 6 continued onward into solar orbit.
+          <br /><br />
+          The spacecraft is no longer operational and remains an inactive
+          spacecraft in heliocentric orbit.
+        </>
+      ),
+      imageUrl: '/assets/objects/mariner_1_3_artist_impression-1280.jpg',
+      caption: "A Silent Flyby Pioneer",
+      credit: "NASA",
+    },
+  ],
+},
+
+{
+  id: 'mariner-7',
+  name: 'Mariner 7',
+  place: 'Mars',
+  coverImageUrl: '/assets/objects/Mariner_7_lift-off.jpg',
+  pages: [
+    {
+      label: 'Origin',
+      title: 'The Second Eye on Mars',
+      text: `Mariner 7 launched on March 27, 1969 and followed its twin, Mariner 6, to Mars.
+
+It reached Mars only five days after Mariner 6 and passed within about 2,130 miles (3,430 kilometers) of the planet on August 5, 1969.`,
+      imageUrl: '/assets/objects/Mariner_7_lift-off.jpg',
+      caption: "The Second Eye on Mars",
+      credit: "NASA",
+    },
+    {
+      label: 'Goals',
+      title: 'Build on Mariner 6',
+      text: `Mariner 7 had objectives similar to Mariner 6, but its position and timing allowed scientists to investigate additional regions of Mars.
+
+• Main goal: Study Mars during a close flyby.
+• Imaging: Photograph the surface at high resolution.
+• Atmosphere: Study the Martian atmosphere using radio occultation.
+• Surface: Investigate geological features and dark regions.
+• Follow-up: Use observations from Mariner 6 to improve the Mariner 7 encounter.`,
+      imageUrl: '/assets/objects/Mars_full_disk_approach_view_from_Mariner_7.jpg',
+      caption: "Build on Mariner 6",
+      credit: "NASA",
+    },
+    {
+      label: 'Discoveries',
+      title: 'Mars From the Southern Hemisphere',
+      text: (
+        <>
+          Mariner 7 expanded the observations made by Mariner 6 and captured
+          important images of Mars' southern hemisphere and its moon Phobos.
+        </>
+      ),
+      bullets: [
+        <>
+          <strong>High-Resolution Images:</strong> Mariner 7 recorded 93
+          far-encounter and 33 near-encounter images.
+        </>,
+        <>
+          <strong>Hellas Basin:</strong> Images showed that the center of the
+          huge Hellas basin appeared remarkably free of craters.
+        </>,
+        <>
+          <strong>Phobos:</strong> Mariner 7 captured an image of Mars'
+          irregularly shaped moon, Phobos.
+        </>,
+        <>
+          <strong>Atmospheric Measurements:</strong> Radio occultation
+          experiments helped determine the low surface pressure of Mars.
+        </>,
+      ],
+      imageUrl: '/assets/objects/Mariner_7_far_encounter_from_wide-angle_camera_color_composite.jpg',
+      caption: "Mars From the Southern Hemisphere",
+      credit: "NASA",
+    },
+    {
+      label: 'Now',
+      title: 'Beyond Mars',
+      text: (
+        <>
+          <strong>End of Mission:</strong> After completing its Mars flyby,
+          Mariner 7 continued into heliocentric orbit.
+          <br /><br />
+          The spacecraft is now inactive and continues its journey around the
+          Sun.
+        </>
+      ),
+      imageUrl: '/assets/objects/mariner_1_3_artist_impression-1280.jpg',
+      caption: "Beyond Mars",
+      credit: "NASA",
+    },
+  ],
+},
+
+{
+  id: 'mariner-9',
+  name: 'Mariner 9',
+  place: 'Mars',
+  coverImageUrl: '/assets/objects/mariner09.jpg',
+  pages: [
+    {
+      label: 'Origin',
+      title: 'The First Spacecraft to Orbit Another Planet',
+      text: `Mariner 9 launched on May 30, 1971 and arrived at Mars on November 13, 1971.
+
+It became the first spacecraft ever to enter orbit around another planet, beating the Soviet Mars 2 spacecraft to Mars by several weeks.`,
+      imageUrl: '/assets/objects/mariner09.jpg',
+      caption: "The First Spacecraft to Orbit Another Planet",
+      credit: "NASA",
+    },
+    {
+      label: 'Goals',
+      title: 'Map Mars From Orbit',
+      text: `Mariner 9 inherited the combined scientific objectives of the Mariner 8 and Mariner 9 mission after Mariner 8 failed to reach orbit.
+
+• Main goal: Map the Martian surface from orbit.
+• Surface: Study geological features and surface changes.
+• Atmosphere: Observe atmospheric conditions and seasonal changes.
+• Moons: Photograph Phobos and Deimos.
+• Mapping: Create a much more complete picture of Mars than previous flyby missions.
+• Planetary science: Investigate volcanoes, canyons, polar regions, and other major surface features.`,
+      imageUrl: '/assets/objects/mariner-1971.webp',
+      caption: "Map Mars From Orbit",
+      credit: "NASA",
+    },
+    {
+      label: 'Discoveries',
+      title: 'A Completely Different Mars',
+      text: (
+        <>
+          Mariner 9 transformed Mars from a seemingly simple cratered world
+          into a planet with enormous volcanoes, canyons, weather systems, and
+          complex geological history.
+        </>
+      ),
+      bullets: [
+        <>
+          <strong>Olympus Mons:</strong> Mariner 9 revealed the enormous
+          Martian volcano, later recognized as the largest volcano in the
+          solar system.
+        </>,
+        <>
+          <strong>Valles Marineris:</strong> It photographed the enormous
+          canyon system that stretches thousands of kilometers across Mars.
+        </>,
+        <>
+          <strong>Phobos & Deimos:</strong> It returned the first detailed
+          images of Mars' two moons.
+        </>,
+        <>
+          <strong>Water-Shaped Features:</strong> Mariner 9 revealed channels
+          and canyon structures that provided evidence of a much more complex
+          and wetter geological history.
+        </>,
+      ],
+      imageUrl: '/assets/objects/Underside+boxart.webp',
+      caption: "A Completely Different Mars",
+      credit: "NASA",
+    },
+    {
+      label: 'Now',
+      title: 'Still Circling Mars',
+      text: (
+        <>
+          <strong>End of Mission:</strong> Mariner 9 continued operating until
+          October 1972. Last contact occurred on October 27, 1972, when the
+          spacecraft exhausted its attitude-control nitrogen.
+          <br /><br />
+          Unlike Mariner 4, 6, and 7, Mariner 9 did not continue into solar
+          orbit. It remained in orbit around Mars and is expected to eventually
+          impact the planet.
+        </>
+      ),
+      imageUrl: '/assets/objects/mariner_1_3_artist_impression-1280.jpg',
+      caption: "Still Circling Mars",
+      credit: "NASA",
+    },
+  ],
+},
+  {
+  id: 'pioneer5',
+  name: 'Pioneer 5',
+  place: 'Solar Orbit',
+  coverImageUrl: '/assets/objects/Ready-for-Orbit-0b706a30.jpeg',
+  pages: [
+    {
+      label: 'Origin',
+      title: 'A Pioneer Between Earth and Venus',
+      text: `Pioneer 5 was launched on March 11, 1960, on a direct solar-orbit trajectory. Originally intended for a Venus encounter, the mission was changed to place the spacecraft into heliocentric orbit between Earth and Venus.`,
+      imageUrl: '/assets/objects/Ready-for-Orbit-0b706a30.jpeg',
+      caption: "A Pioneer Between Earth and Venus",
+      credit: "NASA",
+    },
+    {
+      label: 'Goals',
+      title: 'Testing Deep Space Technology',
+      text: `The mission was designed to demonstrate deep-space technologies and create the first map of the interplanetary magnetic field.\n• Objective: Demonstrate deep space technologies.\n• Orbit: Heliocentric orbit between Earth and Venus.\n• Instruments: Magnetometer, ionization chamber, Geiger-Mueller tube, micrometeoroid momentum spectrometer, photoelectric cell aspect indicator, and proportional counter telescope.\n• Technology: Pioneer 5 carried Telebit, the first digital telemetry system operationally used on a U.S. spacecraft.`,
+      imageUrl: '/assets/objects/Pioneer-5-main-6d90f78c.jpg',
+      caption: "Pioneer 5 close up",
+      credit: "NASA",
+    },
+    {
+      label: 'Discoveries',
+      title: 'Mapping the Space Between Planets',
+      text: (
+        <>
+          Pioneer 5 helped reveal the conditions of interplanetary space and
+          confirmed the existence of a <strong>weak interplanetary magnetic field</strong>.
+        </>
+      ),
+      bullets: [
+        <>
+          <strong>Magnetic Field:</strong> The spacecraft confirmed the existence
+          of a previously conjectured weak interplanetary magnetic field.
+        </>,
+        <>
+          <strong>Deep-Space Communication:</strong> Controllers maintained
+          contact until June 26, 1960, when Pioneer 5 was 22.6 million miles
+          (36.4 million kilometers) from Earth.
+        </>,
+        <>
+          <strong>Telemetry:</strong> Telebit transmitted information at rates
+          ranging from 1 to 64 bits per second.
+        </>,
+      ],
+      imageUrl: '/assets/objects/pioneer-5-7de36f84-b7b8-4396-ad04-e3364832dd1-re-73fbd6b5.jpeg',
+      caption: "Mapping the Space Between Planets",
+      credit: "NASA",
+    },
+    {
+      label: 'Now',
+      title: 'Still Circling the Sun',
+      text: (
+        <>
+          <strong>End of Mission:</strong> NASA lost contact with Pioneer 5 on
+          June 26, 1960. NASA states that the spacecraft remains a
+          <strong> derelict spacecraft circling the Sun</strong>.
+        </>
+      ),
+      imageUrl: '/assets/objects/element115-final-pass-385cd01f.jpg',
+      caption: "Still Circling the Sun",
+      credit: "NASA",
+    },
+  ],
+},
+{
+  id: 'lunarorbiter1',
+  name: 'Lunar Orbiter 1',
+  place: 'Moon',
+  coverImageUrl: '/assets/objects/lunar-orbiter-render-93cde28b.jpg',
+  pages: [
+    {
+      label: 'Origin',
+      title: 'The First U.S. Orbiter of the Moon',
+      text: `Lunar Orbiter 1 was launched on August 10, 1966, as the first U.S. spacecraft to orbit the Moon. It was designed primarily to photograph lunar areas that could serve as safe landing sites for the Surveyor and Apollo missions.`,
+      imageUrl: '/assets/objects/lunar-orbiter-render-93cde28b.jpg',
+      caption: "The First U.S. Orbiter of the Moon",
+      credit: "NASA",
+    },
+    {
+      label: 'Goals',
+      title: 'Finding Safe Landing Sites',
+      text: `The spacecraft's main purpose was to obtain detailed photographs of potential Apollo landing sites.\n• Primary objective: Lunar orbit.\n• Main instrument: A 150-pound (68-kilogram) Eastman Kodak imaging system.\n• Camera: Wide- and narrow-angle lenses.\n• Additional instruments: Micrometeoroid detectors and radiation dosimeters.\n• Target: Potential Apollo and Surveyor landing areas.`,
+      imageUrl: '/assets/objects/lunar-orbiter-1-launch-2-spacecraft-2-0d2d5f38.jpg',
+      caption: "Finding Safe Landing Sites",
+      credit: "NASA",
+    },
+    {
+      label: 'Discoveries',
+      title: 'A New View of the Moon',
+      text: (
+        <>
+          Lunar Orbiter 1 photographed potential landing sites and returned the
+          <strong> first picture of Earth taken from the vicinity of the Moon</strong>.
+        </>
+      ),
+      bullets: [
+        <>
+          <strong>First Orbit:</strong> It became the first U.S. spacecraft to
+          orbit the Moon on August 14, 1966.
+        </>,
+        <>
+          <strong>Landing Sites:</strong> It photographed nine potential Apollo
+          landing sites and additional areas on the far side of the Moon.
+        </>,
+        <>
+          <strong>Earthrise Image:</strong> On August 23, 1966, it captured the
+          first picture of Earth from the vicinity of the Moon.
+        </>,
+        <>
+          <strong>Photography:</strong> NASA's page states that the spacecraft
+          produced 413 high- and moderate-resolution photographs covering large
+          areas of the lunar surface.
+        </>,
+      ],
+      imageUrl: '/assets/objects/1272-lunar-orbiter-moon-jf-35b484c0.jpg',
+      caption: "A New View of the Moon",
+      credit: "NASA",
+    },
+    {
+      label: 'Now',
+      title: 'Its Final Orbit',
+      text: (
+        <>
+          <strong>End of Mission:</strong> After its condition deteriorated,
+          ground controllers commanded Lunar Orbiter 1 to crash onto the Moon
+          on October 29, 1966, during its 577th orbit. The impact occurred at
+          6°42′ north latitude and 162° east longitude.
+        </>
+      ),
+      imageUrl: '/assets/objects/1-lunar-orbiter-spacecraft-in-moon-orbit-detlev--5ed48b51.jpg',
+      caption: "Its Final Orbit",
+      credit: "NASA",
     },
   ],
 },
@@ -788,7 +1757,7 @@ const PageMedia: React.FC<{ page: BookPage }> = ({ page }) => {
             <Suspense fallback={null}>
               <GLTFModel url={page.modelUrl} />
             </Suspense>
-            <OrbitControls autoRotate autoRotateSpeed={1} enableZoom enablePan={false} />
+            <OrbitControls autoRotate={!prefersReducedMotion()} autoRotateSpeed={1} enableZoom enablePan={false} />
           </Canvas>
         </ModelErrorBoundary>
       </div>
@@ -797,12 +1766,17 @@ const PageMedia: React.FC<{ page: BookPage }> = ({ page }) => {
 
   if (page.imageUrl) {
     return (
-      <img
-        src={page.imageUrl}
-        alt={page.title}
-        
-        className="h-full w-full rounded-4xl border border-white/10 object-cover object-center"
-      />
+      <figure className="flex h-full w-full min-h-0 flex-col">
+        <img
+          src={page.imageUrl}
+          alt={page.title}
+          className="min-h-0 flex-1 w-full rounded-4xl border border-white/10 object-cover object-center"
+        />
+        <figcaption className="mt-1.5 flex items-center justify-between gap-2 px-1 text-[12px] leading-tight text-[#979899]">
+          <span className="truncate">{page.caption}</span>
+          <span className="shrink-0">{page.credit}</span>
+        </figcaption>
+      </figure>
     );
   }
 

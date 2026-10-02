@@ -40,6 +40,7 @@ import {
 import { signInAnonymously } from 'firebase/auth';
 
 import { auth, db, firebaseEnabled } from './lib/firebase';
+import { prefersReducedMotion } from '../a11y';
 
 
 type TargetId = 'sojourner' | 'lunar' | 'deep-space';
@@ -329,7 +330,7 @@ const MenderScene: React.FC = () => (
           enableZoom={false}
           minPolarAngle={Math.PI * 0.3}
           maxPolarAngle={Math.PI * 0.58}
-          autoRotate
+          autoRotate={!prefersReducedMotion()}
           autoRotateSpeed={0.8}
         />
       </Suspense>
@@ -600,6 +601,12 @@ export const Recovery: React.FC = () => {
   const [submitMessage, setSubmitMessage] = useState<string | null>(null);
   const submittingRef = useRef(false);
   const [commentsBySolution, setCommentsBySolution] = useState<Record<string, CommunityComment[]>>({});
+
+  const solutionsRowRef = useRef<HTMLDivElement>(null);
+  const scrollSolutions = (dir: 1 | -1) => {
+    const el = solutionsRowRef.current;
+    if (el) el.scrollBy({ left: dir * Math.max(280, el.clientWidth * 0.8), behavior: 'smooth' });
+  };
 
   useEffect(() => {
     if (firebaseEnabled && db) {
@@ -1386,22 +1393,6 @@ return onSnapshot(commentsQuery, (snapshot) => {
       </section>
 
       <section className="border-y border-white/10 bg-[#0d0f14] py-20">
-        <style>{`
-          @keyframes mender-marquee {
-            from { transform: translateX(0); }
-            to { transform: translateX(-50%); }
-          }
-          .mender-marquee-track {
-            animation: mender-marquee 45s linear infinite;
-          }
-          .mender-marquee-track:hover {
-            animation-play-state: paused;
-          }
-          @media (max-width: 640px) {
-            .mender-marquee-track { animation-duration: 28s; }
-          }
-        `}</style>
-
         <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionTitle
             eyebrow="10 / WHAT WOULD YOU DO?"
@@ -1527,11 +1518,8 @@ return onSnapshot(commentsQuery, (snapshot) => {
             </p>
           ) : null}
 
-          {/* Scrolling card marquee, right → left, no scrollbar */}
-          <div className="relative mt-12 overflow-hidden">
-            <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-gradient-to-r from-[#0d0f14] to-transparent sm:w-24" />
-            <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-gradient-to-l from-[#0d0f14] to-transparent sm:w-24" />
-
+          {/* Manually scrollable card row: swipe, drag the scrollbar, or use the arrows */}
+          <div className="relative mt-12">
             {solutions.length === 0 ? (
               <div className="flex items-center justify-center rounded-2xl border border-dashed border-white/10 py-10">
                 <p className="font-mono text-xs text-[#5d5959]">
@@ -1539,16 +1527,41 @@ return onSnapshot(commentsQuery, (snapshot) => {
                 </p>
               </div>
             ) : (
-              <div className="flex w-max gap-4 mender-marquee-track">
-                {[...solutions, ...solutions].map((solution, index) => (
-                  <SolutionCard
-                    key={`${solution.id}-${index}`}
-                    solution={solution}
-                    comments={commentsBySolution[solution.id] ?? []}
-                    onAddComment={handleAddComment}
-                  />
-                ))}
-              </div>
+              <>
+                <div className="mb-3 flex justify-end gap-2">
+                  <button
+                    type="button"
+                    onClick={() => scrollSolutions(-1)}
+                    aria-label="Scroll solutions left"
+                    className="h-9 w-9 rounded-full border border-white/15 text-lg text-[#eee9e1] hover:border-white/40"
+                  >
+                    ‹
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => scrollSolutions(1)}
+                    aria-label="Scroll solutions right"
+                    className="h-9 w-9 rounded-full border border-white/15 text-lg text-[#eee9e1] hover:border-white/40"
+                  >
+                    ›
+                  </button>
+                </div>
+                <div
+                  ref={solutionsRowRef}
+                  className="flex gap-4 overflow-x-auto pb-4 snap-x"
+                  style={{ scrollbarWidth: 'thin' }}
+                >
+                  {solutions.map((solution) => (
+                    <div key={solution.id} className="snap-start shrink-0">
+                      <SolutionCard
+                        solution={solution}
+                        comments={commentsBySolution[solution.id] ?? []}
+                        onAddComment={handleAddComment}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </>
             )}
           </div>
         </div>

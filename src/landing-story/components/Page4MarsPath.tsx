@@ -1,11 +1,14 @@
 import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import { OrbitCharacter } from './OrbitCharacter';
 import { SojournerIllustration } from './SojournerIllustration';
+import { VikingIllustration } from './VikingIllustration';
 import { RoverIllustration } from './RoverIllustration';
 import { InterviewChat } from './InterviewChat';
 import { SpaceGlossaryWord } from './SpaceGlossaryWord';
 import { playSceneMusic, playPageTurn, playRoverRoll, playOppyCue } from '../utils/sound';
-import { speakDialogue, getSpeechEnabled, getAutoSpeakEnabled } from '../utils/speech';
+import { speakDialogue, getAutoSpeakEnabled, stopSpeaking } from '../utils/speech';
+
+type OrangeVariant = 'boulder' | 'meridiani' | 'storm' | 'hope';
 
 interface Page4Props {
   onSwitchDestination?: (dest: 'moon' | 'deep_space') => void;
@@ -17,14 +20,49 @@ export const Page4MarsPath: React.FC<Page4Props> = ({ autoSpeak = true }) => {
   const scrollTimeoutRef = useRef<number | null>(null);
 
   const beats = useMemo(() => [
+
+
+  {
+    id: 'mars-viking-1',
+    pageNumber: 13,
+    layout: 'both_oppy',
+    speaker: 'viking1' as const,
+    speakerName: 'Viking 1 & Orbit',
+    isConversation: true,
+    orangeVariant: 'meridiani' as OrangeVariant,
+    leadQuote: "I landed safely on Mars!",
+    bodyComponent: (
+      <span>
+        I was sent to Mars to land safely, study the planet, and search for
+        signs of life. I landed in 1976 and sent back pictures and science data.
+        My mission lasted for years, and my lander is still sitting quietly on
+        Mars.
+      </span>
+    ),
+    speechText:
+      "To land safely, study Mars, and search for signs of life! I landed in 1976 and sent back pictures and science data!",
+    scienceFact:
+      "Viking 1 landed on Mars in 1976 and returned images and scientific measurements from the Martian surface.",
+    interview: [
+      ["Orbit", "Viking 1, why did you go to Mars?"],
+      ["Viking 1", "To land safely, study Mars, and search for signs of life!"],
+      ["Orbit", "Did you make it?"],
+      ["Viking 1", "I landed in 1976 and sent back pictures and science data!"],
+      ["Orbit", "What happened to you?"],
+      ["Viking 1", "I worked for years until my mission finally ended."],
+      ["Orbit", "And now?"],
+      ["Viking 1", "My lander is still sitting quietly on Mars."]
+    ] as [string, string][],
+  },
+
     {
       id: 'mars-sojourner',
-      pageNumber: 13,
+      pageNumber: 14,
       layout: 'both_sojourner',
       speaker: 'sojourner' as const,
       speakerName: 'Sojourner & Orbit',
       isConversation: true,
-      orangeVariant: 'boulder' as const,
+      orangeVariant: 'boulder' as OrangeVariant,
       leadQuote: "Hi! I'm Sojourner!",
       bodyComponent: (
         <span>
@@ -43,34 +81,7 @@ export const Page4MarsPath: React.FC<Page4Props> = ({ autoSpeak = true }) => {
         ["Orbit", "Mission complete, little rover."]
       ] as [string, string][],
     },
-    {
-      id: 'mars-opportunity',
-      pageNumber: 14,
-      layout: 'both_oppy',
-      speaker: 'oppy' as const,
-      speakerName: 'Opportunity (Oppy) & Orbit',
-      isConversation: true,
-      orangeVariant: 'meridiani' as const,
-      leadQuote: "Tiny round blueberries!",
-      bodyComponent: (
-        <span>
-          I found tiny round <SpaceGlossaryWord termKey="blueberries" displayText="blueberries" /> made in water. I was supposed to explore for only 90 sols, but I made it 5,498!
-        </span>
-      ),
-      speechText: "I found tiny round blueberries made in water! I was supposed to explore for 90 sols, but I made it 5,498!",
-      scienceFact: "A huge dust storm covered Opportunity's solar panels in 2018, leaving it unable to recharge.",
-      interview: [
-        ["Orbit", "Oppy, what did you find?"],
-        ["Oppy", "Tiny round {{blueberries|blueberries}}! Made in water."],
-        ["Orbit", "So Mars had water?"],
-        ["Oppy", "Yes! Long, long ago."],
-        ["Orbit", "How long were you supposed to explore?"],
-        ["Oppy", "Only 90 sols. I made it 5,498!"],
-        ["Orbit", "What stopped you?"],
-        ["Oppy", "A huge dust storm covered my solar panels. I couldn't recharge anymore."],
-        ["Orbit", "You're still on Mars, Oppy."]
-      ] as [string, string][],
-    },
+
      {
     id: 'mars-spirit',
     pageNumber: 15,
@@ -78,7 +89,7 @@ export const Page4MarsPath: React.FC<Page4Props> = ({ autoSpeak = true }) => {
     speaker: 'spirit' as const,
     speakerName: 'Spirit & Orbit',
     isConversation: true,
-    orangeVariant: 'boulder' as const,
+    orangeVariant: 'boulder' as OrangeVariant,
     leadQuote: "I found evidence of ancient water!",
     bodyComponent: (
       <span>
@@ -105,39 +116,34 @@ export const Page4MarsPath: React.FC<Page4Props> = ({ autoSpeak = true }) => {
     ] as [string, string][],
   },
 
-
-  {
-    id: 'mars-viking-1',
-    pageNumber: 16,
-    layout: 'both_oppy',
-    speaker: 'viking1' as const,
-    speakerName: 'Viking 1 & Orbit',
-    isConversation: true,
-    orangeVariant: 'meridiani' as const,
-    leadQuote: "I landed safely on Mars!",
-    bodyComponent: (
-      <span>
-        I was sent to Mars to land safely, study the planet, and search for
-        signs of life. I landed in 1976 and sent back pictures and science data.
-        My mission lasted for years, and my lander is still sitting quietly on
-        Mars.
-      </span>
-    ),
-    speechText:
-      "To land safely, study Mars, and search for signs of life! I landed in 1976 and sent back pictures and science data!",
-    scienceFact:
-      "Viking 1 landed on Mars in 1976 and returned images and scientific measurements from the Martian surface.",
-    interview: [
-      ["Orbit", "Viking 1, why did you go to Mars?"],
-      ["Viking 1", "To land safely, study Mars, and search for signs of life!"],
-      ["Orbit", "Did you make it?"],
-      ["Viking 1", "I landed in 1976 and sent back pictures and science data!"],
-      ["Orbit", "What happened to you?"],
-      ["Viking 1", "I worked for years until my mission finally ended."],
-      ["Orbit", "And now?"],
-      ["Viking 1", "My lander is still sitting quietly on Mars."]
-    ] as [string, string][],
-  },
+    {
+      id: 'mars-opportunity',
+      pageNumber: 16,
+      layout: 'both_oppy',
+      speaker: 'oppy' as const,
+      speakerName: 'Opportunity (Oppy) & Orbit',
+      isConversation: true,
+      orangeVariant: 'meridiani' as OrangeVariant,
+      leadQuote: "Tiny round blueberries!",
+      bodyComponent: (
+        <span>
+          I found tiny round <SpaceGlossaryWord termKey="blueberries" displayText="blueberries" /> made in water. I was supposed to explore for only 90 sols, but I made it 5,111!
+        </span>
+      ),
+      speechText: "I found tiny round blueberries made in water! I was supposed to explore for 90 sols, but I made it 5,111!",
+      scienceFact: "A huge dust storm covered Opportunity's solar panels in 2018, leaving it unable to recharge.",
+      interview: [
+        ["Orbit", "Oppy, what did you find?"],
+        ["Oppy", "Tiny round {{blueberries|blueberries}}! Made in water."],
+        ["Orbit", "So Mars had water?"],
+        ["Oppy", "Yes! Long, long ago."],
+        ["Orbit", "How long were you supposed to explore?"],
+        ["Oppy", "Only 90 sols. I made it 5,111!"],
+        ["Orbit", "What stopped you?"],
+        ["Oppy", "A huge dust storm covered my solar panels. I couldn't recharge anymore."],
+        ["Orbit", "You're still on Mars, Oppy."]
+      ] as [string, string][],
+    },
   ], []);
 
 
@@ -150,7 +156,10 @@ export const Page4MarsPath: React.FC<Page4Props> = ({ autoSpeak = true }) => {
       }
     }, 300);
 
-    return () => window.clearTimeout(arrivalVoiceTimer);
+    return () => {
+      window.clearTimeout(arrivalVoiceTimer);
+      stopSpeaking();
+    };
   }, [autoSpeak, beats]);
 
   const handleSpeak = useCallback((beatIdx: number) => {
@@ -346,18 +355,17 @@ export const Page4MarsPath: React.FC<Page4Props> = ({ autoSpeak = true }) => {
 
                      
                       <div className="flex flex-col items-center scale-105 filter drop-shadow-[0_0_20px_rgba(249,115,22,0.5)]">
-                       <RoverIllustration name={
-    beat.speaker === 'spirit'
-      ? 'Spirit'
-      : beat.speaker === 'viking1'
-      ? 'Viking 1'
-      : 'Oppy'
-  }
-  variant="celebrating"
-  size="lg"
-  speechBubble={beat.leadQuote}
-  onClick={() => handleSpeak(idx)}
-/>
+                       {beat.speaker === 'viking1' ? (
+                          <VikingIllustration size="lg" speechBubble={beat.leadQuote} onClick={() => handleSpeak(idx)} />
+                        ) : (
+                          <RoverIllustration
+                            name={beat.speaker === 'spirit' ? 'Spirit' : 'Oppy'}
+                            variant="celebrating"
+                            size="lg"
+                            speechBubble={beat.leadQuote}
+                            onClick={() => handleSpeak(idx)}
+                          />
+                        )}
                         
                       </div>
                     </div>

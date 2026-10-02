@@ -1,0 +1,33 @@
+/* Map view. Markers are real <button>s so they are keyboard reachable. */
+.sb-marker {
+  width: 22px;
+  height: 22px;
+  border-radius: 9999px;
+  border: 2px solid #0b0d12;
+  background: #c1440e;
+  box-shadow: 0 0 0 2px rgba(236, 231, 220, 0.85);
+  cursor: pointer;
+  padding: 0;
+}
+.sb-marker[data-body='moon'] { background: #cfd3d8; }
+.sb-marker[aria-current='true'] { background: #7fd6e8; box-shadow: 0 0 0 3px #ece7dc; }
+.sb-marker:hover { transform: scale(1.15); }
+.sb-marker:focus-visible,
+.sb-map-focus:focus-visible,
+.sb-map .maplibregl-canvas:focus-visible,
+.sb-map .maplibregl-canvas-container:focus-visible {
+  outline: 3px solid #7fd6e8;
+  outline-offset: 3px;
+}
+.sb-map .maplibregl-ctrl button:focus-visible { outline: 3px solid #7fd6e8; outline-offset: -3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sb-marker { transition: none; }
+  .sb-marker:hover { transform: none; }
+}
+
+/* Text shown in English because no reviewed Bangla exists yet. */
+.sb-i18n-fallback {
+  text-decoration: underline dotted;
+  text-underline-offset: 3px;
+}

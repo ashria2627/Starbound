@@ -49,11 +49,11 @@ export const TelemetryHUD: React.FC<TelemetryHUDProps> = ({
           </span>
         </div>
 
-        {/* Center: MOLA / LRO Topography Sensor Indicator */}
+        {/* Center: terrain label. The terrain is procedural, so it is labelled as illustrative, not as MOLA/LOLA data. */}
         <div className="hidden lg:flex items-center gap-2.5 rounded-xl border border-cyan-500/30 bg-[#070d18]/90 px-3.5 py-2 font-mono text-xs text-cyan-200 backdrop-blur-md shadow-xl">
           <span className="h-2 w-2 rounded-full bg-cyan-400" />
           <span>
-            {mission.envType === 'moon' ? 'LRO / LOLA 128 PPD SURFACE TOPOGRAPHY' : 'NASA MGS MOLA HIGH-RES ELEVATION GRID'}
+            ILLUSTRATIVE TERRAIN · PROCEDURAL, NOT SURVEY DATA
           </span>
           <span className="text-[10px] text-cyan-400/70 border-l border-cyan-500/30 pl-2">
             Z: {telemetry.y > 0 ? `+${telemetry.y.toFixed(1)}m` : `${telemetry.y.toFixed(1)}m`} ELEV

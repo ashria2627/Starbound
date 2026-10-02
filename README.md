@@ -2,9 +2,73 @@
 
 ### Abandoned, but not forgotten.
 
-StarBound is an interactive tribute to the robotic explorers that traveled beyond Earth — across the Moon, Mars, and deep space.
+NASA Space Apps Challenge 2026 entry for **Challenge 1: "Abandoned but not Forgotten: Storytelling about NASA's Discarded Equipment on the Moon and Mars."**
 
-These spacecraft may no longer be active, but their missions, discoveries, and data continue to tell stories about the places they explored.
+StarBound is an interactive tribute to the robotic explorers that traveled beyond Earth. It is a **static web app**: no backend is needed for the demo path, and it runs offline.
+
+## What it does
+
+* **Kids Mode (default):** illustrated story, a rover game and "Meet my parts" with a 3D rover.
+* **Adult Mode:** abandoned-equipment stories, a 3D mission console, rover anatomy, and a recovery-ideas page.
+* **Map (Adult Mode):** Moon/Mars map of abandoned objects with a timeline, side panel and citations. Only objects marked `"verified": true` in `data/objects.geojson` are shown.
+* **Bangla (EN/BN) toggle** on the Map view. Untranslated text falls back to English visibly.
+
+## Run it
+
+```bash
+npm install
+cp .env.example .env     # optional; every value can stay empty
+npm run dev              # http://localhost:5173 (or the port Vite prints)
+```
+
+Other scripts:
+
+| Script | What it does |
+| --- | --- |
+| `npm run validate` | Validates `data/objects.geojson` (runs automatically before `build`) |
+| `npm run lint` | Type-check (`tsc --noEmit`) |
+| `npm run build` | Validate, then production build into `dist/` |
+
+Offline demo: open the site with `?offline=1` (for example `/stories?offline=1`). This disables Firebase and replaces third-party embeds with local fallbacks. See `docs/BASEMAPS.md` for the local map tiles and `docs/OFFLINE.md` for offline setup.
+
+## NASA data sources
+
+Only sources actually referenced in the code are listed as "used". Others are listed as planned.
+
+| Dataset | Id | URL | Used for | Status |
+| --- | --- | --- | --- | --- |
+| NASA/JPL Photojournal images | PIA00379, PIA00660, PIA01133, PIA01484, PIA01551, PIA02864, PIA03240, PIA03478, PIA05476, PIA05508, PIA05634, PIA07104, PIA07997, PIA11758, PIA15689, PIA19952, PIA20027, PIA22518, PIA22876, PIA23047, PIA24308, PIA24424, PIA25328 | https://photojournal.jpl.nasa.gov/ | Story and mission-dossier imagery (ids taken from image URLs and captions in code) | Used; images still hotlinked, see `scripts/localize-assets.mjs` |
+| NASA Image and Video Library | per-image ids (for example `S71-37963`) | https://images.nasa.gov/ | Story imagery in Abandoned Stories | Used; images still hotlinked |
+| NASA/JPL Perseverance 3D model | `25042_Perseverance.glb` (file name only) | https://www.jpl.nasa.gov/ | Rover Anatomy, Meet my parts | Used; credit line "NASA/JPL-Caltech" shown in app |
+| NASA models on Sketchfab (Moon, InSight) | see `src/components/Mars.tsx`, `ColdOpen.tsx` | https://sketchfab.com/nasa | Third-party 3D embeds | Used online only; replaced by a local fallback offline |
+| NSSDCA Master Catalog | per object | https://nssdc.gsfc.nasa.gov/nmc/ | `data/objects.geojson` (identity, dates) | Planned |
+| Planetary Data System (PDS) | per object | https://pds.nasa.gov/ | `data/objects.geojson` (coordinates) | Planned |
+| NASA Technical Reports Server (NTRS) | per object | https://ntrs.nasa.gov/ | `data/objects.geojson` (mission facts) | Planned |
+| NASA Trek (Moon) | LRO_WAC_Mosaic_Global_303ppd_v02 | https://trek.nasa.gov/moon/ | Map basemap (`public/tiles/moon.pmtiles`) | Used; credit "NASA/GSFC/Arizona State University" |
+| NASA Trek (Mars) | Mars_Viking_MDIM21_ClrMosaic_global_232m | https://trek.nasa.gov/mars/ | Map basemap (`public/tiles/mars.pmtiles`) | Used; credit "NASA/Viking/USGS" |
+| MOLA / LOLA elevation data | none | n/a | **Not used.** The 3D console terrain is procedural and is labelled "illustrative terrain" | See Phase 5 notes in `docs/OFFLINE.md` |
+| HiRISE (Mars Reconnaissance Orbiter) | per image | https://www.uahirise.org/ | Used: Co-ordinates | Used |
+## Community ideas (Firebase, optional)
+
+The Recovery page can store community ideas in Firebase when the `VITE_FIREBASE_*` variables are set. It is **not** part of the demo path; without the variables (or with `?offline=1`) the app makes no Firebase calls.
+
+## Built with
+
+React, TypeScript, Vite, Tailwind CSS, Three.js / react-three-fiber, framer-motion, MapLibre GL + PMTiles.
+
+## Contributing rules
+
+See `.cursor/rules/project.mdc`. In short: never change existing Kids/Adult pages, never invent coordinates, dates or facts, keep the app static and offline-capable.
+
+## AI use
+
+See [`docs/AI_USE.md`](docs/AI_USE.md).
+
+## License
+
+Apache-2.0. See [`LICENSE`](LICENSE). Third-party media keeps its own credit lines (NASA/JPL-Caltech etc.).
+
+---
 
 ## 🌌 What is StarBound?
 
@@ -56,65 +120,6 @@ The experience combines:
 * Interactive rover conversations
 * Community submissions
 
-## 🛠️ Built With
-
-* React
-* TypeScript
-* Vite
-* Tailwind CSS
-* JavaScript
-* HTML/CSS
-
-## 🚀 Getting Started
-
-Clone the repository:
-
-```bash
-git clone <your-repository-url>
-cd StarBound
-```
-
-Install dependencies:
-
-```bash
-npm install
-```
-
-Start the development server:
-
-```bash
-npm run dev
-```
-
-Open the local URL shown in your terminal.
-
-## 🔐 Environment Variables
-
-Create a `.env` file for private API keys or configuration:
-
-```env
-YOUR_API_KEY=your_key_here
-```
-
-Never commit `.env` files to GitHub.
-
-The repository includes a `.gitignore` that excludes environment files, dependencies, build files, logs, and local configuration.
-
-## 📁 Project Structure
-
-```text
-StarBound/
-├── public/
-├── src/
-│   ├── components/
-│   ├── assets/
-│   └── ...
-├── .gitignore
-├── package.json
-├── README.md
-└── vite.config.ts
-```
-
 ## 🌠 Why StarBound?
 
 Space exploration is often remembered through launches, discoveries, and successful missions.
@@ -124,5 +129,3 @@ StarBound focuses on what remains afterward.
 The explorers that stopped responding, ran out of power, became stranded, or simply reached the end of their missions still contributed valuable science to humanity.
 
 **Their missions ended. Their stories didn't.**
-
-

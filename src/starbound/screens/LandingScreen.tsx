@@ -141,43 +141,6 @@ export const LandingScreen: React.FC<LandingScreenProps> = ({
             </motion.p>
 
             <motion.div
-              className="mt-5 pointer-events-auto flex flex-col items-center gap-1.5"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.32, duration: 0.5 }}
-            >
-              <div className="inline-flex items-center gap-1.5 p-1.5 rounded-2xl bg-[#140A06]/85 backdrop-blur-md border border-amber-300/40 shadow-xl">
-                <button
-                  type="button"
-                  onClick={() => dispatch({ type: 'SET_AUDIENCE_MODE', mode: 'kids' })}
-                  className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold transition-all cursor-pointer flex items-center gap-1.5 ${
-                    state.audienceMode === 'kids'
-                      ? 'bg-gradient-to-r from-amber-400 to-yellow-300 text-[#2B0C04] shadow-md scale-[1.02]'
-                      : 'text-amber-100/80 hover:text-white hover:bg-white/5'
-                  }`}
-                  aria-pressed={state.audienceMode === 'kids'}
-                >
-                  <span>🎈</span>
-                  <span>Kids Version</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => dispatch({ type: 'SET_AUDIENCE_MODE', mode: 'grownup' })}
-                  className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold transition-all cursor-pointer flex items-center gap-1.5 ${
-                    state.audienceMode === 'grownup'
-                      ? 'bg-gradient-to-r from-[#c1440e] to-orange-500 text-white shadow-md scale-[1.02] border border-amber-200/40'
-                      : 'text-amber-100/80 hover:text-white hover:bg-white/5'
-                  }`}
-                  aria-pressed={state.audienceMode === 'grownup'}
-                >
-                  <span>🧑‍🚀</span>
-                  <span>Grown-Up Version</span>
-                </button>
-              </div>
-              
-            </motion.div>
-
-            <motion.div
               className="mt-4 sm:mt-5 pointer-events-auto"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}

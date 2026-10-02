@@ -82,7 +82,7 @@ export const BOT_MISSIONS: BotMission[] = [
         scientificDiscovery:
           'Luna 9 proved the lunar surface is solid rock and compressed dust, not a bottomless quicksand swamp as theorists once feared.',
         mediaType: null,
-        mediaUrl: '',
+        mediaUrl: '/assests/objects/luna9.jpg',
         position: [0, 0, -22],
         beaconColor: '#cbd5e1',
         landmarkLabel: 'Touchdown Spot',
@@ -99,7 +99,7 @@ export const BOT_MISSIONS: BotMission[] = [
           'Its rotating television eye beamed back the first clear close-up images of millimeter-sized lunar pebbles and shallow crater rims.',
         mediaType: 'image',
         mediaUrl:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Luna_9_panorama.jpg/800px-Luna_9_panorama.jpg',
+          '/assets/objects/luna9.jpg',
         position: [-16, 0, -45],
         beaconColor: '#94a3b8',
         landmarkLabel: 'Pebble Field',
@@ -170,7 +170,7 @@ export const BOT_MISSIONS: BotMission[] = [
           'Astronauts drove the rover up Spur Crater to scoop up Sample 15415: an anorthosite white rock that cooled when the young Moon was still an ocean of molten magma.',
         mediaType: 'image',
         mediaUrl:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Genesis_Rock.jpg/800px-Genesis_Rock.jpg',
+          '/assets/objects/800px-Genesis-Rock-6787450c.jpg',
         position: [-14, 0, -25],
         beaconColor: '#f1f5f9',
         landmarkLabel: 'Spur Crater Ridge',
@@ -187,7 +187,7 @@ export const BOT_MISSIONS: BotMission[] = [
           'The rover parked right at the edge of a sheer 300-meter-deep canyon, revealing layered basalt flows from ancient lunar volcanic eruptions.',
         mediaType: 'image',
         mediaUrl:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Hadley_Rille_Apollo_15.jpg/800px-Hadley_Rille_Apollo_15.jpg',
+          '/assets/objects/800px-Hadley-Rille-Apollo-15-6fe71e58.jpg',
         position: [18, 0, -50],
         beaconColor: '#94a3b8',
         landmarkLabel: 'Hadley Rille Gorge',
@@ -258,7 +258,7 @@ export const BOT_MISSIONS: BotMission[] = [
           'When green laser pulses from Earth strike these 100 quartz prisms, they bounce back directly along their exact incoming path with sub-millimeter precision.',
         mediaType: 'image',
         mediaUrl:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Apollo_11_Lunar_Laser_Ranging_Retroreflector.jpg/800px-Apollo_11_Lunar_Laser_Ranging_Retroreflector.jpg',
+          '/assets/objects/800px-Apollo-11-Lunar-Laser-Ranging-Retroreflect-097e23b9.jpg',
         position: [0, 0, -22],
         beaconColor: '#22c55e',
         landmarkLabel: 'Apollo 11 Retro-Array',
@@ -349,7 +349,7 @@ export const BOT_MISSIONS: BotMission[] = [
           'Proved a spacecraft could decelerate from orbital speed through Mars\' paper-thin carbon dioxide atmosphere using a drogue parachute and braking rockets.',
         mediaType: 'image',
         mediaUrl:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Mars_3_lander_and_parachute.jpg/800px-Mars_3_lander_and_parachute.jpg',
+          '/assets/objects/800px-Mars-3-lander-and-parachute-64d844a3.jpg',
         position: [-12, 0, -20],
         beaconColor: '#ea580c',
         landmarkLabel: 'Discarded Parachute',
@@ -448,7 +448,7 @@ export const BOT_MISSIONS: BotMission[] = [
           'Discovered tiny millimeter-sized grey spheres of hematite mineral ("blueberries") embedded in rock that could only precipitate inside calm standing water.',
         mediaType: 'image',
         mediaUrl:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Opportunity_blueberries.jpg/800px-Opportunity_blueberries.jpg',
+          '/assets/objects/800px-Opportunity-blueberries-abdefa5d.jpg',
         position: [-10, 0, -22],
         beaconColor: '#c1440e',
         landmarkLabel: 'Hematite Blueberry Bed',
@@ -535,7 +535,7 @@ export const BOT_MISSIONS: BotMission[] = [
           'Identified layered fine-grained mudstones formed billions of years ago where river water slowed upon entering a prehistoric crater lake.',
         mediaType: 'image',
         mediaUrl:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Jezero_delta_Perseverance_PIA25328.jpg/800px-Jezero_delta_Perseverance_PIA25328.jpg',
+          '/assets/objects/jezero.jpg',
         position: [-14, 0, -24],
         beaconColor: '#ef4444',
         landmarkLabel: 'River Delta Bed',
@@ -568,7 +568,7 @@ export const BOT_MISSIONS: BotMission[] = [
           'Ingenuity demonstrated that counter-rotating carbon fiber blades spinning at 2,400 RPM generate sufficient lift in air that is 99% thinner than Earth’s.',
         mediaType: 'image',
         mediaUrl:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Ingenuity_Flight_24.jpg/800px-Ingenuity_Flight_24.jpg',
+          '/assets/objects/800px-Ingenuity-Flight-24-4305698c.jpg',
         position: [0, 0, -78],
         beaconColor: '#e11d48',
         landmarkLabel: 'Ingenuity Landing Pad',
@@ -744,7 +744,7 @@ export const BOT_MISSIONS: BotMission[] = [
           'Took the iconic portrait of Earth from 6 billion km as a solitary speck in a sunbeam, carrying greetings in 55 languages into deep galactic time.',
         mediaType: 'image',
         mediaUrl:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Pale_Blue_Dot.png/800px-Pale_Blue_Dot.png',
+          '/assets/objects/800px-Pale-Blue-Dot-1496b6e2.png',
         position: [0, 0, -88],
         beaconColor: '#c084fc',
         landmarkLabel: 'Pale Blue Dot Vector',
@@ -799,7 +799,7 @@ export const BOT_MISSIONS: BotMission[] = [
           'Revealed that Pluto\'s giant heart-shaped basin is a churning sea of solid nitrogen ice that bubbles up like a slow lava lamp, proving Pluto is geologically alive.',
         mediaType: 'image',
         mediaUrl:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Pluto_in_True_Color_-_High-Res.jpg/800px-Pluto_in_True_Color_-_High-Res.jpg',
+          '/assets/objects/800px-Pluto-in-True-Color-High-Res-af03f8ae.jpg',
         position: [-15, 0, -25],
         beaconColor: '#38bdf8',
         landmarkLabel: 'Sputnik Planitia Ice Heart',

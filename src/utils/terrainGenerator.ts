@@ -2,8 +2,8 @@ import * as THREE from 'three';
 import { BotMission } from '../types';
 
 /**
- * Procedural heightmap and surface color texture synthesis from real NASA MOLA (Mars) and LOLA (Moon)
- * topographic models.
+ * Procedural (illustrative) heightmap and surface color texture synthesis. This is NOT real
+ * NASA MOLA (Mars) or LOLA (Moon) data.
  * 
  * In production deployment, replace with direct static PNG tile downloads:
  * // TODO: Replace with actual MOLA/LOLA heightmap PNG and surface texture for this bot's landing region,
@@ -151,7 +151,7 @@ export function generateRealTerrainAssets(bot: BotMission): RealTerrainAssets {
   surfaceTexture.wrapT = THREE.ClampToEdgeWrapping;
   surfaceTexture.needsUpdate = true;
 
-  const datasetName = isMars ? 'NASA MOLA (Mars Orbiter Laser Altimeter)' : 'NASA LOLA (Lunar Orbiter Laser Altimeter)';
+  const datasetName = isMars ? 'Illustrative procedural terrain (Mars-toned, not MOLA data)' : 'Illustrative procedural terrain (Moon-toned, not LOLA data)';
   const trekPortal = isMars ? 'NASA Mars Trek' : 'NASA Moon Trek';
 
   return {

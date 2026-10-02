@@ -122,7 +122,7 @@ export const StorybookStateMachine: React.FC<StateMachineProps> = ({
       destinationChapters = [
         {
           id: 'deep-space-p4',
-          title: 'Deep Space: Pioneer & Mariner',
+          title: 'Solar System & Beyond: Pioneer & Mariner',
           shortLabel: 'Pioneer & Mariner',
           pageNumber: 4,
           pageStr: 'P.4',
@@ -132,7 +132,7 @@ export const StorybookStateMachine: React.FC<StateMachineProps> = ({
         },
         {
           id: 'deep-space-p5',
-          title: 'Deep Space: Pioneer 10 & 11',
+          title: 'Solar System & Beyond: Pioneer 10 & 11',
           shortLabel: 'Pioneer 10 & 11',
           pageNumber: 5,
           pageStr: 'P.5',
@@ -142,7 +142,7 @@ export const StorybookStateMachine: React.FC<StateMachineProps> = ({
         },
         {
           id: 'deep-space-p6',
-          title: 'Deep Space: Voyager 1',
+          title: 'Solar System & Beyond: Voyager 1',
           shortLabel: 'Voyager 1',
           pageNumber: 6,
           pageStr: 'P.6',

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { DISCOVERIES, Discovery } from '../data/discoveries';
 import { DiscoveryCard } from './DiscoveryCard';
-import { useGame } from '../state/GameContext';
 
 interface DiscoveryJournalProps {
   discoveredIds: string[];
@@ -13,9 +12,7 @@ export const DiscoveryJournal: React.FC<DiscoveryJournalProps> = ({
   discoveredIds,
   onClose,
 }) => {
-  const { state, dispatch } = useGame();
   const [selectedDiscovery, setSelectedDiscovery] = useState<Discovery | null>(null);
-  const isKids = state.audienceMode === 'kids';
 
   const foundCount = discoveredIds.length;
   const totalCount = DISCOVERIES.length;
@@ -51,30 +48,6 @@ export const DiscoveryJournal: React.FC<DiscoveryJournalProps> = ({
               </div>
 
               <div className="flex items-center gap-2">
-                <div className="flex items-center bg-[#3E1306] p-0.5 rounded-xl border border-amber-300/35">
-                  <button
-                    type="button"
-                    onClick={() => dispatch({ type: 'SET_AUDIENCE_MODE', mode: 'kids' })}
-                    className={`px-2.5 py-1 rounded-lg text-xs font-extrabold transition-all cursor-pointer ${
-                      isKids
-                        ? 'bg-amber-400 text-[#2B0C04]'
-                        : 'text-amber-100/75 hover:text-white'
-                    }`}
-                  >
-                    🎈 Kids
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => dispatch({ type: 'SET_AUDIENCE_MODE', mode: 'grownup' })}
-                    className={`px-2.5 py-1 rounded-lg text-xs font-extrabold transition-all cursor-pointer ${
-                      !isKids
-                        ? 'bg-orange-500 text-white'
-                        : 'text-amber-100/75 hover:text-white'
-                    }`}
-                  >
-                    🔬 Grown-Up
-                  </button>
-                </div>
 
                 <button
                   onClick={onClose}
@@ -111,12 +84,12 @@ export const DiscoveryJournal: React.FC<DiscoveryJournalProps> = ({
                           {item.title}
                         </h3>
                         <p className="text-xs text-[#F2D9A4]/85 mt-1 line-clamp-2">
-                          {isKids ? item.kidsText : item.grownupText}
+                          {item.kidsText}
                         </p>
                       </div>
 
                       <div className="mt-3 pt-2 border-t border-[#F2D9A4]/15 flex items-center justify-between text-[11px] text-[#F2D9A4]/70 font-medium">
-                        <span>{isKids ? 'Tap to see!' : 'Photos · Video · Logs'}</span>
+                        <span>Tap to see!</span>
                         {item.sketchfab && <span className="text-amber-300">3D 🪐</span>}
                       </div>
                     </motion.div>

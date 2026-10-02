@@ -6,6 +6,7 @@ import wheel1 from '../assets/images/wheel1.gif'
 import cam from '../assets/images/cam1.jpg'
 import arm from '../assets/images/arm1.jpg'
 import ant from '../assets/images/ant1.jpg'
+import { prefersReducedMotion } from '../a11y';
 
 const MODEL_PATH = '/models/25042_Perseverance.glb';
 
@@ -78,7 +79,7 @@ const KID_PARTS: KidPart[] = [
     name: 'My Power',
     sentence:
       "I use a special battery charged by a tiny nuclear generator, so I don't even need sunshine to keep going!",
-    imageUrl: 'https://i.stack.imgur.com/2Z0CU.jpg',
+    imageUrl: '/assets/objects.power.jpg',
   },
   {
     id: 'mast',
@@ -177,7 +178,7 @@ export const MeetMyParts: React.FC = () => {
               <Suspense fallback={<CanvasLoadingFallback />}>
                 <RoverModel />
               </Suspense>
-              <OrbitControls autoRotate autoRotateSpeed={0.8} enableZoom enablePan={false} />
+              <OrbitControls autoRotate={!prefersReducedMotion()} autoRotateSpeed={0.8} enableZoom enablePan={false} />
             </Canvas>
           </ModelErrorBoundary>
         )}

@@ -13,6 +13,7 @@ import com1 from '../assets/images/ant1.jpg'
 import com2 from '../assets/images/an2.jpg'
 import pow1 from '../assets/images/pow.jpg'
 import pow2 from '../assets/images/pow2.jpg'
+import { prefersReducedMotion } from '../a11y';
 const MODEL_PATH = '/models/25042_Perseverance.glb';
 
 function RoverModel() {
@@ -151,8 +152,8 @@ const ANATOMY_PARTS: AnatomyPart[] = [
       { label: 'Tube capacity', value: '43 total tubes carried' },
       { label: 'Cache strategy', value: 'Onboard storage + surface depot tubes' },
     ],
-    photoUrl: 'https://mars.nasa.gov/system/resources/detail_files/25005_mars20200602-1041.jpg',
-    diagramUrl: 'https://assets.science.nasa.gov/content/dam/science/psd/mars/downloadable_items/4/4/44902_SCS-16-MAIN.gif',
+    photoUrl: '/assets/objects/25005-mars20200602-1041-49834fe3.jpg',
+    diagramUrl: '/assets/objects/44902-SCS-16-MAIN-d0e31e4d.gif',
   },
   {
     id: 'comms',
@@ -275,7 +276,7 @@ export const RoverAnatomy: React.FC = () => {
               <Suspense fallback={<CanvasLoadingFallback />}>
                 <RoverModel />
               </Suspense>
-              <OrbitControls autoRotate autoRotateSpeed={0.6} enableZoom enablePan={false} />
+              <OrbitControls autoRotate={!prefersReducedMotion()} autoRotateSpeed={0.6} enableZoom enablePan={false} />
             </Canvas>
           </ModelErrorBoundary>
         )}

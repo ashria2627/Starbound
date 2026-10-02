@@ -5,6 +5,7 @@ export interface PlanetaryTerrainData {
   locationTitle: string;
   sourceDataset: string;
   gridDimensions: string;
+  /** Unverified, hand-set range for the procedural terrain. NOT a measured MOLA/LOLA range. */
   elevationMinMaxMeters: [number, number];
   diffuseMap: THREE.CanvasTexture;
   normalMap: THREE.CanvasTexture;
@@ -175,7 +176,10 @@ function generateProceduralRoughnessMap(): THREE.CanvasTexture {
 }
 
 // -----------------------------------------------------------------------------
-// Real NASA MOLA (Mars) and LRO (Moon) Analytical Topography Functions
+// Illustrative PROCEDURAL terrain functions. These are hand-written noise and shape
+// functions, NOT MOLA (Mars) or LOLA (Moon) measurements. Do not label them as such.
+// TODO: to show real terrain, replace with a DEM exported from NASA Mars Trek / Moon Trek
+// and record its dataset id in the README data-sources table.
 // -----------------------------------------------------------------------------
 
 function hash2D(x: number, z: number): number {
@@ -221,7 +225,7 @@ export function getMolaLroTerrain(missionId: string, envType: EnvironmentType): 
 
   if (envType === 'moon') {
     // -------------------------------------------------------------------------
-    // APOLLO 15: Hadley-Apennine LOLA Topography
+    // APOLLO 15: illustrative Hadley-Apennine-style terrain (procedural, not LOLA data)
     // (Mount Hadley Massif, Spur Crater Rim, and 300m Hadley Rille Sinuous Chasm)
     // -------------------------------------------------------------------------
     const sampleHeight = (x: number, z: number): number => {
@@ -270,8 +274,8 @@ export function getMolaLroTerrain(missionId: string, envType: EnvironmentType): 
 
     return {
       locationTitle: 'Hadley-Apennine Region (26.13° N, 3.63° E)',
-      sourceDataset: 'NASA Lunar Reconnaissance Orbiter (LRO) / LOLA GDR Grid',
-      gridDimensions: '128 PPD (240m x 240m Local Sector)',
+      sourceDataset: 'Illustrative procedural terrain (not survey data)',
+      gridDimensions: 'Procedural 240 m x 240 m sector (illustrative)',
       elevationMinMaxMeters: [-300, 4600],
       diffuseMap,
       normalMap,
@@ -284,7 +288,7 @@ export function getMolaLroTerrain(missionId: string, envType: EnvironmentType): 
 
   if (missionId === 'opportunity') {
     // -------------------------------------------------------------------------
-    // OPPORTUNITY: Meridiani Planum MOLA Topography
+    // OPPORTUNITY: illustrative Meridiani-style terrain (procedural, not MOLA data)
     // (Layered Sulfate Outcrops, Eagle Crater Depression, Endurance & Ripples)
     // -------------------------------------------------------------------------
     const sampleHeight = (x: number, z: number): number => {
@@ -334,8 +338,8 @@ export function getMolaLroTerrain(missionId: string, envType: EnvironmentType): 
 
     return {
       locationTitle: 'Meridiani Planum / Eagle Crater (1.95° S, 354.47° E)',
-      sourceDataset: 'NASA MGS MOLA Precision Experiment Data Record (PEDR)',
-      gridDimensions: '1/128° MOLA Digital Elevation Model',
+      sourceDataset: 'Illustrative procedural terrain (not survey data)',
+      gridDimensions: 'Procedural 240 m x 240 m sector (illustrative)',
       elevationMinMaxMeters: [-1450, -1380],
       diffuseMap,
       normalMap,
@@ -348,7 +352,7 @@ export function getMolaLroTerrain(missionId: string, envType: EnvironmentType): 
 
   if (missionId === 'spirit') {
     // -------------------------------------------------------------------------
-    // SPIRIT: Gusev Crater & Columbia Hills MOLA Topography
+    // SPIRIT: illustrative Gusev-style terrain (procedural, not MOLA data)
     // (Basalt Lava Plains transitioning into Husband Hill Rise and Home Plate)
     // -------------------------------------------------------------------------
     const sampleHeight = (x: number, z: number): number => {
@@ -383,8 +387,8 @@ export function getMolaLroTerrain(missionId: string, envType: EnvironmentType): 
 
     return {
       locationTitle: 'Gusev Crater / Columbia Hills (14.57° S, 175.47° E)',
-      sourceDataset: 'NASA Mars Global Surveyor MOLA / HRSC Stereo DEM',
-      gridDimensions: '50m MOLA/HRSC Blended Digital Terrain Model',
+      sourceDataset: 'Illustrative procedural terrain (not survey data)',
+      gridDimensions: 'Procedural 240 m x 240 m sector (illustrative)',
       elevationMinMaxMeters: [-1950, -1820],
       diffuseMap,
       normalMap,
@@ -424,8 +428,8 @@ export function getMolaLroTerrain(missionId: string, envType: EnvironmentType): 
 
   return {
     locationTitle: 'Ares Vallis Outflow Floodplain (19.33° N, 33.55° W)',
-    sourceDataset: 'NASA MOLA / Pathfinder Science Experiment Team Topography',
-    gridDimensions: 'High-Resolution Mars Pathfinder Surface DEM',
+    sourceDataset: 'Illustrative procedural terrain (not survey data)',
+    gridDimensions: 'Procedural 240 m x 240 m sector (illustrative)',
     elevationMinMaxMeters: [-3680, -3620],
     diffuseMap,
     normalMap,

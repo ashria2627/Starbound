@@ -298,7 +298,7 @@ export const ScientificSimulation3D = forwardRef<SimulationHandle, ScientificSim
       scene.add(hemiLight);
     }
 
-    // 3. Load High-Resolution MOLA & LRO Planetary Terrain
+    // 3. Build illustrative procedural terrain (NOT real MOLA/LOLA data)
     let terrainData: PlanetaryTerrainData | null = null;
     let terrainMesh: THREE.Mesh | null = null;
     const TERRAIN_SIZE = 240;

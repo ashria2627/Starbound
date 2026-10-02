@@ -14,7 +14,9 @@ export type AppView =
   | 'still-out-there'
   | 'celestial'
   | 'recovery'
-  | 'abandoned-stories';
+  | 'abandoned-stories'
+  | 'admin'
+  | 'map';
 
 interface NavbarProps {
   currentView: AppView;
@@ -93,6 +95,16 @@ export const Navbar: React.FC<NavbarProps> = ({
           >
             Recovery
           </button>
+          <button
+            onClick={() => onNavigate('map')}
+            className={`whitespace-nowrap text-sm font-medium transition-colors ${
+              currentView === 'map'
+                ? 'text-[#ece7dc] border-b-2 border-[#c1440e] pb-1 font-semibold'
+                : 'text-[#9aa0a6] hover:text-[#ece7dc]'
+            }`}
+          >
+            Map
+          </button>
          
           
         </nav>
@@ -141,6 +153,12 @@ export const Navbar: React.FC<NavbarProps> = ({
           className={`whitespace-nowrap ${currentView === 'anatomy' ? 'text-[#ece7dc] font-semibold' : 'text-[#9aa0a6]'}`}
         >
           Recovery
+        </button>
+        <button
+          onClick={() => onNavigate('map')}
+          className={`whitespace-nowrap ${currentView === 'map' ? 'text-[#ece7dc] font-semibold' : 'text-[#9aa0a6]'}`}
+        >
+          Map
         </button>
         
        
