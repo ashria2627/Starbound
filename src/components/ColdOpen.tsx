@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { ArrowRight, Sparkles, Rocket, ExternalLink } from 'lucide-react';
+import React, { useMemo } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
+import bg from '../assets/images/cold-open-bg.jpg';
 
 interface ColdOpenProps {
   onBegin: () => void;
@@ -8,400 +9,182 @@ interface ColdOpenProps {
   onReturnToKids?: () => void;
 }
 
-type PreviewPlanet = 'mars' | 'moon';
+function rng(seed: number) {
+  return () => {
+    seed |= 0;
+    seed = (seed + 0x6d2b79f5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
 
-const WORLD_PREVIEWS: Record<
-  PreviewPlanet,
-  { name: string; icon: string; modelUrl: string; sketchfabUrl: string; creator: string }
-> = {
-  mars: {
-    name: 'Mars',
-    icon: '🔴',
-    modelUrl: 'https://sketchfab.com/models/50bb6eb0d1104d43bf684d2b0f70de1d/embed?autostart=1&autospin=0.15',
-    sketchfabUrl: 'https://sketchfab.com/3d-models/mars-insight-lander-and-volcanic-regions-50bb6eb0d1104d43bf684d2b0f70de1d',
-    creator: 'Quanta Magazine',
-  },
-  moon: {
-    name: 'Moon',
-    icon: '🌕',
-    modelUrl: 'https://sketchfab.com/models/870de693475d436c8e925ab0bcda4ca4/embed?autostart=1&autospin=0.15',
-    sketchfabUrl: 'https://sketchfab.com/3d-models/moon-870de693475d436c8e925ab0bcda4ca4',
-    creator: 'Mieke Roth',
-  },
-};
+export const ColdOpen: React.FC<ColdOpenProps> = ({ onBegin }) => {
+  const reduced = useReducedMotion();
 
-export const ColdOpen: React.FC<ColdOpenProps> = ({ onBegin, onSelectFrontierDirect, onReturnToKids }) => {
-  const [hoveredNode, setHoveredNode] = useState<string | null>(null);
-  const [previewPlanet, setPreviewPlanet] = useState<PreviewPlanet>('mars');
-  const preview = WORLD_PREVIEWS[previewPlanet];
-
-  const introText = "Across distant Moon craters, red dusty plains, and the starry void, brave robotic explorers are resting now after amazing adventures. Let's remember what they found!";
+  const { stars, sparkles, dust } = useMemo(() => {
+    const r = rng(7);
+    const stars = Array.from({ length: 170 }, () => ({
+      x: r() * 100,
+      y: r() * 100,
+      r: 0.4 + r() * 1.2,
+      o: 0.3 + r() * 0.6,
+      tw: r() < 0.4,
+      d: r() * 6,
+      s: 2.5 + r() * 4,
+    }));
+    const sparkles = Array.from({ length: 11 }, () => ({
+      x: 4 + r() * 92,
+      y: 4 + r() * 70,
+      k: 0.6 + r() * 1.1,
+      d: r() * 6,
+    }));
+    const dust = Array.from({ length: 20 }, () => ({
+      x: 4 + r() * 92,
+      y: 8 + r() * 82,
+      size: 2 + r() * 4,
+      dx: (r() - 0.5) * 90,
+      dy: -20 - r() * 90,
+      dur: 12 + r() * 14,
+      d: -r() * 12,
+      o: 0.3 + r() * 0.5,
+    }));
+    return { stars, sparkles, dust };
+  }, []);
 
   return (
-    <section className="relative flex min-h-[calc(100vh-4rem)] w-full flex-col items-center justify-between px-4 py-8 sm:px-6 md:py-12">
-      {onReturnToKids && (
-        <button
-          onClick={onReturnToKids}
-          className="absolute left-4 top-4 z-20 flex items-center gap-1.5 rounded-full border border-white/15 bg-[#0b0d12]/70 px-4 py-2 text-xs font-medium text-[#9aa0a6] backdrop-blur-sm transition-colors hover:border-[#7fd6e8]/50 hover:text-[#ece7dc] sm:left-6 sm:top-6"
-        >
-          <Sparkles className="h-3.5 w-3.5" />
-          <span>Kids Mode</span>
-        </button>
-      )}
+    <section className="relative isolate flex min-h-[calc(100vh-4rem)] w-full flex-col items-center justify-end overflow-hidden bg-[#02050a] px-4 pb-14 pt-8 sm:pb-20">
+      <style>{`
+        @keyframes ab-twinkle { 0%,100% { opacity: .15 } 50% { opacity: 1 } }
+        @keyframes ab-shoot {
+          0% { opacity: 0; transform: translate(0,0) rotate(-35deg) }
+          3% { opacity: 1 }
+          9% { opacity: 0; transform: translate(-260px,182px) rotate(-35deg) }
+          100% { opacity: 0; transform: translate(-260px,182px) rotate(-35deg) }
+        }
+        @keyframes ab-dust { from { transform: translate(0,0) } to { transform: translate(var(--dx), var(--dy)) } }
+        @keyframes ab-breathe { 0%,100% { opacity: .75 } 50% { opacity: 1 } }
+        @keyframes ab-ping { 0% { transform: scale(1); opacity: .7 } 100% { transform: scale(1.7); opacity: 0 } }
+        .ab-twinkle { animation: ab-twinkle var(--s, 4s) ease-in-out infinite }
+        .ab-shoot { position: absolute; width: 150px; height: 1.5px; opacity: 0; background: linear-gradient(90deg, #fff, rgba(255,255,255,0)); animation: ab-shoot 10s ease-in infinite }
+        .ab-dust { animation: ab-dust var(--dur, 18s) ease-in-out infinite alternate }
+        .ab-nebula { animation: ab-breathe 9s ease-in-out infinite }
+        .ab-ping { animation: ab-ping 2.2s ease-out infinite }
+        @media (prefers-reduced-motion: reduce) {
+          .ab-twinkle, .ab-dust, .ab-nebula, .ab-ping { animation: none }
+          .ab-shoot { display: none }
+        }
+      `}</style>
 
-     
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: 'easeOut' }}
-        className="z-10 mx-auto max-w-3xl text-center"
+      {/* nebula glow behind the photo (shows at the sides on wide screens) */}
+      <div
+        aria-hidden="true"
+        className="ab-nebula absolute inset-0 -z-30"
+        style={{
+          background:
+            'radial-gradient(circle at 10% 28%, rgba(96,80,220,.34), transparent 42%), radial-gradient(circle at 90% 72%, rgba(30,130,230,.3), transparent 44%), radial-gradient(circle at 78% 10%, rgba(190,90,200,.16), transparent 34%)',
+        }}
+      />
+
+      {/* background photo: shown whole, edges fade into the sky */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-y-0 left-1/2 -z-20 h-full -translate-x-1/2"
+        style={{
+          aspectRatio: '1080 / 1350',
+          WebkitMaskImage: 'linear-gradient(to right, transparent, #000 12%, #000 88%, transparent)',
+          maskImage: 'linear-gradient(to right, transparent, #000 12%, #000 88%, transparent)',
+        }}
       >
-        <span className="rounded-full bg-cyan-500/10 px-3.5 py-1 font-sans text-xs font-bold uppercase tracking-widest text-cyan-300 border border-cyan-400/30 shadow-sm">
-          Adventures of Solar System Pioneers
-        </span>
-        <h1 className="mt-4 font-serif text-4xl font-normal tracking-tight text-[#ece7dc] sm:text-5xl md:text-6xl text-balance">
-          Starbound
-        </h1>
-
-        <span>A Tribute to Brave Robot Explorers</span>
-        <div className="mt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
-          <p className="font-sans text-base text-[#ece7dc]/90 sm:text-lg max-w-2xl leading-relaxed">
-            {introText}
-          </p>
-        </div>
-      </motion.div>
-
-      
-      <div className="relative my-16 flex h-[580px] w-full  max-w-4xl items-center justify-center  sm:h-[440px]">
-        <svg
-          viewBox="0 0 1100 500"
-          className="h-full w-full overflow-visible"
-          aria-label="Cosmic map showing paths from Earth to the Moon, Mars, and Deep Space"
-        >
-          <defs>
-            <radialGradient id="earthGlow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.95" />
-              <stop offset="70%" stopColor="#0284c7" stopOpacity="0.8" />
-              <stop offset="100%" stopColor="#0369a1" stopOpacity="0" />
-            </radialGradient>
-
-            <radialGradient id="marsGlow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor="#ff7043" stopOpacity="0.95" />
-              <stop offset="70%" stopColor="#c1440e" stopOpacity="0.8" />
-              <stop offset="100%" stopColor="#c1440e" stopOpacity="0" />
-            </radialGradient>
-
-            <radialGradient id="moonGlow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor="#e5e7eb" stopOpacity="0.9" />
-              <stop offset="70%" stopColor="#9aa0a6" stopOpacity="0.75" />
-              <stop offset="100%" stopColor="#4b5563" stopOpacity="0" />
-            </radialGradient>
-
-            <linearGradient id="deepTrailGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.6" />
-              <stop offset="50%" stopColor="#818cf8" stopOpacity="0.8" />
-              <stop offset="100%" stopColor="#c084fc" stopOpacity="0.95" />
-            </linearGradient>
-
-            <filter id="glowFilter" x="-20%" y="-20%" width="140%" height="140%">
-              <feGaussianBlur stdDeviation="3.5" result="blur" />
-              <feMerge>
-                <feMergeNode in="blur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-          </defs>
-
-          <g className="text-[#ece7dc]">
-            {[
-              { cx: 80, cy: 90, r: 1 },
-              { cx: 160, cy: 220, r: 1.5 },
-              { cx: 280, cy: 60, r: 1.2 },
-              { cx: 340, cy: 180, r: 0.8 },
-              { cx: 490, cy: 70, r: 1.5 },
-              { cx: 620, cy: 130, r: 1.2 },
-              { cx: 780, cy: 80, r: 1.8 },
-              { cx: 830, cy: 240, r: 1 },
-              { cx: 690, cy: 420, r: 1.4 },
-              { cx: 110, cy: 410, r: 1 },
-              { cx: 530, cy: 380, r: 1.2 },
-            ].map((star, i) => (
-              <circle
-                key={i}
-                cx={star.cx}
-                cy={star.cy}
-                r={star.r}
-                fill="currentColor"
-                opacity={0.35 + (i % 3) * 0.2}
-                className={`star-twinkle-${(i % 3) + 1}`}
-              />
-            ))}
-          </g>
-
-          <motion.path
-            d="M 220 280 Q 280 180 390 170"
-            fill="none"
-            stroke="#9aa0a6"
-            strokeWidth="2.5"
-            strokeDasharray="5 5"
-            initial={{ pathLength: 0, opacity: 0 }}
-            animate={{ pathLength: 1, opacity: 0.85 }}
-            transition={{ duration: 2.2, ease: 'easeOut', delay: 0.2 }}
-          />
-
-          <motion.path
-            d="M 220 280 C 340 370 560 390 690 310"
-            fill="none"
-            stroke="#c1440e"
-            strokeWidth="3"
-            strokeDasharray="6 4"
-            initial={{ pathLength: 0, opacity: 0 }}
-            animate={{ pathLength: 1, opacity: 0.95 }}
-            transition={{ duration: 2.6, ease: 'easeOut', delay: 0.5 }}
-          />
-          <motion.path
-            d="M 220 280 C 350 210 580 140 880 70"
-            fill="none"
-            stroke="url(#deepTrailGrad)"
-            strokeWidth="2.5"
-            strokeDasharray="8 6"
-            initial={{ pathLength: 0, opacity: 0 }}
-            animate={{ pathLength: 1, opacity: 0.9 }}
-            transition={{ duration: 3.2, ease: 'easeOut', delay: 0.8 }}
-            filter="url(#glowFilter)"
-          />
-
-          <g transform="translate(220, 280)">
-            <circle r="80" fill="#0369a1" fillOpacity="0.15" />
-            <circle r="68" fill="url(#earthGlow)" filter="url(#glowFilter)" />
-  
-            <path
-              d="M -16 -10 Q -8 -22 8 -16 Q 18 -10 12 10 Q -2 20 -14 12 Z"
-              fill="#065f46"
-              fillOpacity="0.65"
-            />
-            <path
-              d="M -6 4 Q 4 0 10 12 Q 2 24 -8 18 Z"
-              fill="#065f46"
-              fillOpacity="0.55"
-            />
-            <path
-              d="M -16 4 Q 34 0 40 22 Q 62 24 -28 28 Z"
-              fill="#065f46"
-              fillOpacity="0.55"
-            />
-            <circle r="68" fill="none" stroke="#38bdf8" strokeWidth="1.5" strokeOpacity="0.8" />
-            <text
-              y="54"
-              textAnchor="middle"
-              className="fill-[#ece7dc] font-mono text-[19px] font-semibold tracking-wider"
-            >
-              EARTH
-            </text>
-            <text
-              y="68"
-              textAnchor="middle"
-              className="fill-[#cce5ff] font-mono text-[16px]"
-            >
-              Origin
-            </text>
-          </g>
-
-         
-          <g
-            transform="translate(390, 170)"
-            className="cursor-pointer transition-transform hover:scale-105"
-            onClick={() => onSelectFrontierDirect && onSelectFrontierDirect('moon')}
-            onMouseEnter={() => setHoveredNode('moon')}
-            onMouseLeave={() => setHoveredNode(null)}
-          >
-            <circle r="50" fill="#9aa0a6" fillOpacity="0.1" />
-            <circle r="40" fill="url(#moonGlow)" />
-            <circle cx="-10" cy="-4" r="3" fill="#6b7280" fillOpacity="0.5" />
-            <circle cx="10" cy="-10" r="4" fill="#6b7280" fillOpacity="0.4" />
-            <circle cx="2" cy="15" r="5" fill="#6b7280" fillOpacity="0.4" />
-            <circle r="30" fill="none" stroke="#9aa0a6" strokeWidth="1" strokeOpacity="0.9" />
-            <text
-              y="36"
-              textAnchor="middle"
-              className="fill-[#ece7dc] font-mono text-[18px] font-semibold tracking-wider"
-            >
-              THE MOON
-            </text>
-            <text
-              y="50"
-              textAnchor="middle"
-              className="fill-[#f3f8fd] font-mono text-[15px]"
-            >
-              384,400 km
-            </text>
-          </g>
-
-          <g
-            transform="translate(690, 310)"
-            className="cursor-pointer transition-transform hover:scale-102"
-            onClick={() => onSelectFrontierDirect && onSelectFrontierDirect('mars')}
-            onMouseEnter={() => setHoveredNode('mars')}
-            onMouseLeave={() => setHoveredNode(null)}
-          >
-            <circle r="100" fill="#c1440e" fillOpacity="0.15" />
-            <circle r="84" fill="url(#marsGlow)" filter="url(#glowFilter)" />
-            <ellipse cx="0" cy="-22" rx="30" ry="16" fill="#ffffff" fillOpacity="0.8" />
-            <path
-              d="M -16 2 Q -4 14 12 6"
-              fill="none"
-              stroke="#7c2d12"
-              strokeWidth="2"
-              strokeOpacity="0.6"
-            />
-            <circle r="76" fill="none" stroke="#c1440e" strokeWidth="1" strokeOpacity="0.9" />
-            <text
-              y="44"
-              textAnchor="middle"
-              className="fill-[#ece7dc] font-mono text-[18px] font-semibold tracking-wider"
-            >
-              MARS
-            </text>
-            <text
-              y="58"
-              textAnchor="middle"
-              className="fill-[#f5e1d9] font-mono text-[16px]"
-            >
-              225 Million km
-            </text>
-          </g>
-
-          <g
-            transform="translate(920, 75)"
-            className="cursor-pointer transition-transform hover:scale-101"
-            onClick={() => onSelectFrontierDirect && onSelectFrontierDirect('deep')}
-            onMouseEnter={() => setHoveredNode('deep')}
-            onMouseLeave={() => setHoveredNode(null)}
-          >
-            <circle r="180" fill="#818cf8" fillOpacity="0.12" />
-            <circle r="150" fill="#4338ca" fillOpacity="0.5" />
-            <circle r="130" fill="#a5b4fc" filter="url(#glowFilter)" />
-            <circle r="120" fill="none" stroke="#818cf8" strokeWidth="6" strokeDasharray="3 3" />
-            <line x1="-100" y1="0" x2="100" y2="0" stroke="#818cf8" strokeWidth="0.8" strokeOpacity="0.9" />
-            <line x1="0" y1="-100" x2="0" y2="100" stroke="#818cf8" strokeWidth="0.8" strokeOpacity="0.9" />
-            <text
-              x="-10"
-              y="36"
-              textAnchor="middle"
-              className="fill-[#3e0852] font-mono text-[20px] font-semibold tracking-wider"
-            >
-              DEEP SPACE
-            </text>
-            <text
-              x="-10"
-              y="50"
-              textAnchor="middle"
-              className="fill-[#ffffff] font-mono text-[16px]"
-            >
-              Interstellar Void
-            </text>
-          </g>
-        </svg>
-
-        {hoveredNode && (
-          <div className="pointer-events-none absolute bottom-4 rounded-md border border-white/10 bg-[#0b0d12]/95 px-3 py-1.5 font-mono text-xs text-[#ece7dc] shadow-lg">
-            {hoveredNode === 'moon' && 'The Moon · Luna 9, Apollo Rover & Laser Mirrors'}
-            {hoveredNode === 'mars' && 'Mars · Mars 3, Opportunity & Perseverance'}
-            {hoveredNode === 'deep' && 'Deep Space · Pioneer 10, Voyager 1 & New Horizons'}
-          </div>
-        )}
+        <img src={bg} alt="" className="h-full w-full object-cover" />
       </div>
 
-    
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.7, ease: 'easeOut' }}
-        className="z-10 mb-16 w-full max-w-4xl"
-      >
-        <div className="mb-4 flex flex-col items-center gap-3 text-center sm:flex-row sm:justify-between sm:text-left">
-          <div>
-            <p className="font-sans text-xs font-bold uppercase tracking-widest text-cyan-300">
-              Before You Begin
-            </p>
-            <h2 className="mt-1 font-serif text-2xl font-normal text-[#ece7dc] sm:text-3xl">
-              Take a Closer Look
-            </h2>
-          </div>
-
-          <div className="flex items-center gap-1.5 rounded-2xl border border-white/15 bg-white/5 p-1.5">
-            {(Object.keys(WORLD_PREVIEWS) as PreviewPlanet[]).map((key) => (
-              <button
-                key={key}
-                onClick={() => setPreviewPlanet(key)}
-                className={`flex items-center gap-1.5 rounded-xl px-3.5 py-2 font-sans text-xs font-bold transition-all ${
-                  previewPlanet === key
-                    ? 'bg-amber-400 text-black shadow-md scale-105'
-                    : 'text-[#9aa0a6] hover:text-[#ece7dc]'
-                }`}
-              >
-                <span>{WORLD_PREVIEWS[key].icon}</span>
-                {WORLD_PREVIEWS[key].name}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div className="overflow-hidden rounded-3xl border border-white/10 bg-black shadow-2xl">
-          <div className="relative h-[340px] w-full sm:h-[420px]">
-            <iframe
-              key={previewPlanet}
-              title={preview.name}
-              src={preview.modelUrl}
-              className="absolute inset-0 h-full w-full"
-              frameBorder="0"
-              allowFullScreen
-              allow="autoplay; fullscreen; xr-spatial-tracking"
+      {/* stars and sparkles drifting over the photo */}
+      <svg aria-hidden="true" className="absolute inset-0 -z-[15] h-full w-full mix-blend-screen">
+        {stars.map((s, i) => (
+          <circle
+            key={i}
+            cx={`${s.x}%`}
+            cy={`${s.y}%`}
+            r={s.r}
+            fill="#fff"
+            opacity={s.o}
+            className={s.tw ? 'ab-twinkle' : undefined}
+            style={s.tw ? ({ animationDelay: `${s.d}s`, '--s': `${s.s}s` } as React.CSSProperties) : undefined}
+          />
+        ))}
+        {sparkles.map((s, i) => (
+          <svg key={i} x={`${s.x}%`} y={`${s.y}%`} overflow="visible">
+            <path
+              d="M0 -9 L1.6 -1.6 L9 0 L1.6 1.6 L0 9 L-1.6 1.6 L-9 0 L-1.6 -1.6 Z"
+              fill="#dff1ff"
+              transform={`scale(${s.k})`}
+              className="ab-twinkle"
+              style={{ animationDelay: `${s.d}s`, '--s': '5s' } as React.CSSProperties}
             />
-          </div>
-        </div>
+          </svg>
+        ))}
+      </svg>
 
-        <div className="mt-3 flex items-center justify-between font-sans text-xs text-[#9aa0a6]">
-          <span>3D model by {preview.creator} · drag to rotate</span>
-          <a
-            href={preview.sketchfabUrl}
-            target="_blank"
-            rel="nofollow noreferrer"
-            className="flex items-center gap-1 font-medium text-[#1CAAD9] hover:underline"
-          >
-            View on Sketchfab <ExternalLink className="h-3 w-3" />
-          </a>
-        </div>
-      </motion.div>
+      {/* zero-gravity dust floating around the astronaut */}
+      {dust.map((p, i) => (
+        <span
+          key={i}
+          aria-hidden="true"
+          className="ab-dust pointer-events-none absolute -z-[14] rounded-full"
+          style={
+            {
+              left: `${p.x}%`,
+              top: `${p.y}%`,
+              width: p.size,
+              height: p.size,
+              opacity: p.o,
+              background: 'radial-gradient(circle, #fff, rgba(160,210,255,.35) 70%, transparent)',
+              '--dx': `${p.dx}px`,
+              '--dy': `${p.dy}px`,
+              '--dur': `${p.dur}s`,
+              animationDelay: `${p.d}s`,
+            } as React.CSSProperties
+          }
+        />
+      ))}
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
+      {/* shooting stars */}
+      <span aria-hidden="true" className="ab-shoot -z-[13]" style={{ left: '80%', top: '10%', animationDelay: '2s' }} />
+      <span aria-hidden="true" className="ab-shoot -z-[13]" style={{ left: '30%', top: '20%', animationDelay: '6s' }} />
+      <span aria-hidden="true" className="ab-shoot -z-[13]" style={{ left: '95%', top: '42%', animationDelay: '9s' }} />
+
+      {/* readability shading for the title */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-10"
+        style={{ background: 'linear-gradient(to top, rgba(0,0,0,.85) 0%, rgba(0,0,0,.45) 26%, rgba(0,0,0,0) 55%)' }}
+      />
+
+      <motion.h1
+        initial={reduced ? false : { opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.5, ease: 'easeOut' }}
-        className="z-10 flex flex-col items-center gap-6 text-center"
+        transition={{ duration: 1.2, delay: 0.3, ease: 'easeOut' }}
+        className="relative z-20 w-full max-w-5xl text-center"
       >
-        <p className="font-serif text-2xl italic tracking-wide text-amber-300 sm:text-3xl">
-          "Still out there, still amazing!"
-        </p>
-
         <button
+          type="button"
           onClick={onBegin}
-          className="group relative flex items-center gap-3 rounded-2xl border-2 border-amber-400 bg-gradient-to-r from-amber-500 to-orange-500 px-9 py-4 font-sans text-base font-bold text-white shadow-[0_0_40px_-5px_rgba(245,158,11,0.5)] transition-all hover:scale-105 hover:from-amber-400 hover:to-orange-400 cursor-pointer"
+          className="group mx-auto block rounded-xl px-4 py-2 text-[#f1ede4] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-[#7fd6e8]"
         >
-          <Rocket className="h-5 w-5 fill-current" />
-          <span>Start Exploring!</span>
-          <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+          <span
+            className="block font-sans font-light uppercase leading-tight tracking-[0.1em] [text-shadow:0_2px_24px_rgba(0,0,0,0.8)] transition-[text-shadow] duration-300 group-hover:[text-shadow:0_0_30px_rgba(127,196,255,0.65)]"
+            style={{ fontSize: 'clamp(1.35rem, 5.2vw, 4rem)' }}
+          >
+            <span className="mb-2 block text-[0.42em] tracking-[0.5em] opacity-90">Stories of</span>
+            <span className="block text-balance">Abandoned Spacecrafts</span>
+          </span>
+          <span className="relative mx-auto mt-7 grid h-12 w-12 place-items-center rounded-full border border-white/50 bg-black/30 text-white backdrop-blur-sm transition-colors group-hover:bg-white group-hover:text-black">
+            <span aria-hidden="true" className="ab-ping absolute inset-0 rounded-full border border-white/60" />
+            <ArrowRight className="h-5 w-5" aria-hidden="true" />
+          </span>
         </button>
-
-        <div className="flex flex-wrap justify-center items-center gap-2 font-sans text-xs text-[#ece7dc]/70">
-          <span className="rounded-full bg-white/5 px-2.5 py-1">🌕 3 Worlds</span>
-          <span aria-hidden="true">·</span>
-          <span className="rounded-full bg-white/5 px-2.5 py-1">🤖 9 Hero Robots</span>
-          <span aria-hidden="true">·</span>
-          <span className="rounded-full bg-white/5 px-2.5 py-1">🎮 Real 3D Test Drives</span>
-        </div>
-      </motion.div>
+      </motion.h1>
     </section>
   );
 };

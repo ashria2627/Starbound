@@ -117,7 +117,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               className="flex items-center gap-1.5 rounded-full border border-white/15 px-3.5 py-1.5 text-xs font-medium text-[#89cfa6] transition-colors hover:border-[#7fd6e8]/50 hover:text-[#ece7dc]"
             >
               <Sparkles className="h-3.5 w-3.5" />
-              <span className="hidden sm:inline">Kids Mode</span>
+              <span className="hidden sm:inline">Kids</span>
             </button>
           )}
 
