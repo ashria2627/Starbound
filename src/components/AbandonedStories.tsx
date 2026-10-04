@@ -2881,86 +2881,197 @@ const PageMedia: React.FC<{ page: BookPage }> = ({ page }) => {
   );
 };
 
+const SPINE_WIDTHS = [44, 52, 40, 60, 48];
+const SPINE_HEIGHTS = ['78%', '90%', '70%', '96%', '84%'];
+const COVER_WIDTH = 190;
 
-const BookCard: React.FC<{ book: BotBook; onOpen: () => void }> = ({ book, onOpen }) => (
-  <motion.button
-    onClick={onOpen}
-    whileHover={{ y: -6 }}
-    className="group relative flex aspect-[3/4] flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#12151c] text-left shadow-lg transition"
-  >
-    <div className="relative flex-1 overflow-hidden bg-[#0b0d12]">
-      {book.coverImageUrl ? (
-        <img
-          src={book.coverImageUrl}
-          alt={book.name}
-          className="h-full w-full object-cover transition group-hover:scale-105"
-        />
-      ) : (
-        <div className="flex h-full w-full items-center justify-center">
-          <span className="text-5xl">🛰️</span>
+const BookCard: React.FC<{
+  book: BotBook;
+  onOpen: () => void;
+  onEnter: () => void;
+  onLeave: () => void;
+  index: number;
+}> = ({ book, onOpen, onEnter, onLeave, index }) => {
+  const [hovered, setHovered] = useState(false);
+  const spineWidth = SPINE_WIDTHS[index % SPINE_WIDTHS.length];
+  const spineHeight = SPINE_HEIGHTS[index % SPINE_HEIGHTS.length];
+
+  const enter = () => {
+    setHovered(true);
+    onEnter();
+  };
+  const leave = () => {
+    setHovered(false);
+    onLeave();
+  };
+
+  return (
+    <motion.button
+      type="button"
+      layout="position"
+      onClick={onOpen}
+      onHoverStart={enter}
+      onHoverEnd={leave}
+      onFocus={enter}
+      onBlur={leave}
+      aria-label={`Open ${book.name} story`}
+      initial={{ opacity: 0, y: 40 }}
+      animate={{
+        opacity: 1,
+        y: hovered ? -10 : 0,
+        width: hovered ? COVER_WIDTH : spineWidth,
+        height: hovered ? '96%' : spineHeight,
+        rotateY: 0,
+        scale: 1,
+        boxShadow: hovered
+          ? '0 34px 46px -14px rgba(0,0,0,0.9), 0 0 0 1px rgba(255,255,255,0.12)'
+          : '4px 8px 18px rgba(0,0,0,0.6)',
+      }}
+      transition={{
+        opacity: { duration: 0.5, delay: Math.min(index * 0.04, 1) },
+        y: { type: 'spring', stiffness: 240, damping: 24 },
+        width: { type: 'spring', stiffness: 240, damping: 26 },
+        height: { type: 'spring', stiffness: 240, damping: 26 },
+        rotateY: { type: 'spring', stiffness: 200, damping: 22 },
+        scale: { type: 'spring', stiffness: 200, damping: 22 },
+        boxShadow: { duration: 0.3 },
+      }}
+      style={{ transformOrigin: 'bottom center' }}
+      className="relative shrink-0 self-end overflow-hidden rounded-[3px] border border-white/10 bg-neutral-900 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
+    >
+      {/* Spine view: what you see while the book is resting on the shelf. */}
+      <motion.div
+        className="absolute inset-0"
+        animate={{ opacity: hovered ? 0 : 1 }}
+        transition={{ duration: 0.2 }}
+      >
+        {book.coverImageUrl ? (
+          <img src={book.coverImageUrl} alt="" draggable={false} className="absolute inset-0 h-full w-full object-cover" />
+        ) : (
+          <div className="absolute inset-0 bg-neutral-800" />
+        )}
+        <div className="absolute inset-0 bg-black/30" />
+        <div className="absolute inset-y-0 left-0 w-[2px] bg-black/50" />
+        <div className="absolute inset-y-0 right-0 w-[2px] bg-white/30" />
+        <div className="relative flex h-full flex-col items-center justify-between px-1 py-3">
+          <span
+            className="font-serif text-xs font-medium uppercase tracking-[0.12em] text-white drop-shadow-[0_1px_4px_rgba(0,0,0,0.95)] sm:text-[13px]"
+            style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
+          >
+            {book.name}
+          </span>
+          <span className="h-px w-3 bg-white/80" />
+          <span
+            className="font-mono text-[10px] uppercase tracking-[0.14em] text-white/90 drop-shadow-[0_1px_4px_rgba(0,0,0,0.95)] sm:text-[11px]"
+            style={{ writingMode: 'vertical-rl' }}
+          >
+            {book.place}
+          </span>
         </div>
-      )}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
-    </div>
-    <div className="absolute bottom-0 left-0 right-0 p-4">
-      <p className="font-mono text-[10px] uppercase tracking-wide text-[#c1440e]">{book.place}</p>
-      <h3 className="font-serif text-xl text-[#ece7dc]">{book.name}</h3>
-      <p className="mt-1 text-xs text-[#9aa0a6]">Open the book →</p>
-    </div>
-  </motion.button>
-);
+      </motion.div>
 
+      {/* Front view: the cover that comes forward on hover. */}
+      <motion.div
+        className="absolute inset-0 flex flex-col"
+        animate={{ opacity: hovered ? 1 : 0 }}
+        transition={{ duration: 0.3, delay: hovered ? 0.08 : 0 }}
+      >
+        {book.coverImageUrl ? (
+          <img src={book.coverImageUrl} alt={book.name} draggable={false} className="h-full w-full object-cover" />
+        ) : (
+          <div className="h-full w-full bg-neutral-800" />
+        )}
+        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent px-3 pb-3 pt-14">
+          <p className="font-serif text-xl leading-tight text-white">{book.name}</p>
+          <p className="mt-0.5 font-mono text-[11px] uppercase tracking-[0.14em] text-white/75">{book.place}</p>
+        </div>
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-3 bg-gradient-to-r from-black/60 to-transparent" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent" />
+      </motion.div>
+    </motion.button>
+  );
+};
 
 const BookModal: React.FC<{ book: BotBook; onClose: () => void }> = ({ book, onClose }) => {
   const [pageIndex, setPageIndex] = useState(0);
   const wheelLockRef = useRef(false);
-  const touchStartYRef = useRef<number | null>(null);
   const touchLockRef = useRef(false);
+  const touchStartRef = useRef<{ y: number; target: EventTarget | null } | null>(null);
   const page = book.pages[pageIndex];
 
   const goTo = (i: number) => {
     setPageIndex(Math.max(0, Math.min(book.pages.length - 1, i)));
   };
 
+  // Lock background scroll while the story is open.
+  useEffect(() => {
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = previous;
+    };
+  }, []);
+
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
-      if (e.key === 'ArrowDown' || e.key === 'ArrowRight') goTo(pageIndex + 1);
-      if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') goTo(pageIndex - 1);
+      if (e.key === 'ArrowRight') goTo(pageIndex + 1);
+      if (e.key === 'ArrowLeft') goTo(pageIndex - 1);
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
   }, [pageIndex, onClose]);
 
-  const handleWheel = (e: React.WheelEvent) => {
-    if (wheelLockRef.current) return;
-    if (Math.abs(e.deltaY) < 20) return;
-    wheelLockRef.current = true;
-    if (e.deltaY > 0) goTo(pageIndex + 1);
-    else goTo(pageIndex - 1);
-    setTimeout(() => {
-      wheelLockRef.current = false;
-    }, 550);
+  // True when a scrollable element under the pointer can still move in `dir`.
+  // In that case the gesture belongs to that element (a section, slider or the
+  // page text), and the page must not change yet.
+  const innerCanScroll = (target: EventTarget | null, dir: number) => {
+    let node = target instanceof HTMLElement ? target : null;
+    while (node && node !== document.body) {
+      const overflowY = window.getComputedStyle(node).overflowY;
+      if ((overflowY === 'auto' || overflowY === 'scroll') && node.scrollHeight > node.clientHeight + 1) {
+        const atTop = node.scrollTop <= 0;
+        const atBottom = Math.ceil(node.scrollTop + node.clientHeight) >= node.scrollHeight - 1;
+        if (dir > 0 ? !atBottom : !atTop) return true;
+      }
+      node = node.parentElement;
+    }
+    return false;
   };
 
-  const SWIPE_THRESHOLD = 45;
+  const handleWheel = (e: React.WheelEvent) => {
+    if (wheelLockRef.current || Math.abs(e.deltaY) < 20) return;
+    const dir = Math.sign(e.deltaY);
+    if (innerCanScroll(e.target, dir)) return;
+
+    wheelLockRef.current = true;
+    goTo(pageIndex + dir);
+    window.setTimeout(() => {
+      wheelLockRef.current = false;
+    }, 600);
+  };
+
+  const SWIPE_THRESHOLD = 50;
 
   const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartYRef.current = e.touches[0].clientY;
+    touchStartRef.current = { y: e.touches[0].clientY, target: e.target };
   };
 
   const handleTouchEnd = (e: React.TouchEvent) => {
-    if (touchLockRef.current || touchStartYRef.current === null) return;
-    const deltaY = touchStartYRef.current - e.changedTouches[0].clientY;
-    touchStartYRef.current = null;
+    const start = touchStartRef.current;
+    touchStartRef.current = null;
+    if (!start || touchLockRef.current) return;
+
+    const deltaY = start.y - e.changedTouches[0].clientY;
     if (Math.abs(deltaY) < SWIPE_THRESHOLD) return;
+    const dir = Math.sign(deltaY);
+    if (innerCanScroll(start.target, dir)) return;
 
     touchLockRef.current = true;
-    if (deltaY > 0) goTo(pageIndex + 1);
-    else goTo(pageIndex - 1);
-    setTimeout(() => {
+    goTo(pageIndex + dir);
+    window.setTimeout(() => {
       touchLockRef.current = false;
-    }, 550);
+    }, 600);
   };
 
   return (
@@ -2968,74 +3079,72 @@ const BookModal: React.FC<{ book: BotBook; onClose: () => void }> = ({ book, onC
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-3 sm:p-6 xl:px-36"
       onWheel={handleWheel}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
       <button
+        type="button"
         onClick={onClose}
-        className="absolute right-5 top-5 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-[#ece7dc] hover:bg-white/20"
+        className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-[#ece7dc] hover:bg-white/20 sm:right-5 sm:top-5"
         aria-label="Close book"
       >
         <X className="h-5 w-5" />
       </button>
 
-      
-      <div className="absolute left-5 top-1/2 z-10 hidden -translate-y-1/2 flex-col gap-3 sm:flex">
+      <div className="absolute left-5 top-1/2 z-10 hidden -translate-y-1/2 flex-col gap-3 xl:flex">
         {book.pages.map((p, i) => (
           <button
+            type="button"
             key={p.label}
             onClick={() => goTo(i)}
-            className={`flex items-center gap-2 text-xs font-mono uppercase tracking-wide transition ${
+            className={`flex items-center gap-2 font-mono text-xs uppercase tracking-wide transition ${
               i === pageIndex ? 'text-[#c1440e]' : 'text-[#6b7280] hover:text-[#9aa0a6]'
             }`}
           >
-            <span
-              className={`h-2 w-2 rounded-full ${i === pageIndex ? 'bg-[#c1440e]' : 'bg-[#6b7280]'}`}
-            />
+            <span className={`h-2 w-2 rounded-full ${i === pageIndex ? 'bg-[#c1440e]' : 'bg-[#6b7280]'}`} />
             {p.label}
           </button>
         ))}
       </div>
 
-      <div className="relative flex h-[85vh] w-full max-w-4xl flex-col overflow-hidden rounded-3xl border border-white/10 bg-[#12151c] shadow-2xl">
-      
-        <div className="flex items-center justify-between border-b border-white/10 px-6 py-4 sm:px-10">
+      <div className="relative flex h-[90vh] w-full max-w-5xl flex-col overflow-hidden rounded-3xl border border-white/10 bg-[#12151c] shadow-2xl">
+        <div className="flex items-center justify-between border-b border-white/10 px-6 py-5 sm:px-12 sm:py-6">
           <div>
-            <p className="font-mono text-[10px] uppercase tracking-wide text-[#9aa0a6]">{book.place}</p>
-            <h2 className="font-serif text-2xl text-[#ece7dc]">{book.name}</h2>
+            <p className="font-mono text-xs uppercase tracking-wide text-[#9aa0a6]">{book.place}</p>
+            <h2 className="font-serif text-3xl text-[#ece7dc] sm:text-4xl">{book.name}</h2>
           </div>
-          <span className="font-mono text-xs text-[#6b7280]">
+          <span className="font-mono text-sm text-[#6b7280]">
             {pageIndex + 1} / {book.pages.length}
           </span>
         </div>
 
-     
-        <div className="relative flex-1 overflow-hidden" style={{ perspective: 1400 }}>
+        <div className="relative flex min-h-0 flex-1 overflow-hidden" style={{ perspective: 1400 }}>
           <AnimatePresence mode="wait">
             <motion.div
               key={page.label}
-              initial={{ opacity: 0, rotateX: 8, y: 24 }}
-              animate={{ opacity: 1, rotateX: 0, y: 0 }}
-              exit={{ opacity: 0, rotateX: -8, y: -24 }}
-              transition={{ duration: 0.45, ease: 'easeInOut' }}
-              className="grid h-full grid-cols-1 gap-6 overflow-y-auto p-6 sm:grid-cols-2 sm:p-10"
-              style={{ transformOrigin: 'top center' }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.35, ease: 'easeInOut' }}
+              className="grid h-full w-full grid-cols-1 content-start gap-8 overflow-y-auto overscroll-contain p-6 sm:grid-cols-2 sm:gap-12 sm:p-12"
             >
-              <div className="min-h-[260px]">
+              <div className="h-56 sm:h-auto sm:min-h-[320px]">
                 <PageMedia page={page} />
               </div>
               <div>
-                <p className="font-mono text-xs uppercase tracking-wider text-[#c1440e]">{page.label}</p>
-                <h3 className="mt-1 font-serif text-3xl font-normal text-[#ece7dc]">{page.title}</h3>
-                <p className="mt-4 whitespace-pre-line leading-relaxed text-[#ece7dc]/85">
-  {page.text}
-</p>
+                <p className="font-mono text-sm uppercase tracking-wider text-[#c1440e]">{page.label}</p>
+                <h3 className="mt-1 font-serif text-3xl font-normal leading-tight text-[#ece7dc] sm:text-4xl">
+                  {page.title}
+                </h3>
+                <div className="mt-4 whitespace-pre-line text-base leading-relaxed text-[#ece7dc]/85">
+                  {page.text}
+                </div>
                 {page.bullets && (
-                  <ul className="mt-4 space-y-2">
+                  <ul className="mt-5 space-y-3">
                     {page.bullets.map((b, i) => (
-                      <li key={i} className="flex items-start gap-2 text-sm text-[#ece7dc]/80">
+                      <li key={i} className="flex items-start gap-2 text-base text-[#ece7dc]/80">
                         <span className="mt-0.5 text-[#c1440e]">✦</span>
                         <span>{b}</span>
                       </li>
@@ -3047,20 +3156,23 @@ const BookModal: React.FC<{ book: BotBook; onClose: () => void }> = ({ book, onC
           </AnimatePresence>
         </div>
 
-       
         <div className="flex items-center justify-center gap-4 border-t border-white/10 py-3">
           <button
+            type="button"
             onClick={() => goTo(pageIndex - 1)}
             disabled={pageIndex === 0}
-            className="flex items-center gap-1 rounded-full px-3 py-1.5 text-xs font-medium text-[#9aa0a6] disabled:opacity-30 hover:text-[#ece7dc]"
+            className="flex items-center gap-1 rounded-full px-3 py-1.5 text-sm font-medium text-[#9aa0a6] hover:text-[#ece7dc] disabled:opacity-30"
           >
             <ChevronUp className="h-4 w-4" /> Prev
           </button>
-          <span className="font-mono text-[10px] text-[#6b7280]">scroll or swipe to turn pages</span>
+          <span className="hidden font-mono text-xs text-[#6b7280] sm:block">
+            scroll the text, then keep scrolling to turn pages
+          </span>
           <button
+            type="button"
             onClick={() => goTo(pageIndex + 1)}
             disabled={pageIndex === book.pages.length - 1}
-            className="flex items-center gap-1 rounded-full px-3 py-1.5 text-xs font-medium text-[#9aa0a6] disabled:opacity-30 hover:text-[#ece7dc]"
+            className="flex items-center gap-1 rounded-full px-3 py-1.5 text-sm font-medium text-[#9aa0a6] hover:text-[#ece7dc] disabled:opacity-30"
           >
             Next <ChevronDown className="h-4 w-4" />
           </button>
@@ -3070,21 +3182,27 @@ const BookModal: React.FC<{ book: BotBook; onClose: () => void }> = ({ book, onC
   );
 };
 
-
 export const AbandonedStories: React.FC = () => {
   const idFromHash = () => {
     const id = decodeURIComponent(window.location.hash.replace(/^#/, ''));
     return BOOKS.some((b) => b.id === id) ? id : null;
   };
-  const [openBookId, setOpenBookId] = useState<string | null>(idFromHash);
-  const openBook = BOOKS.find((b) => b.id === openBookId) ?? null;
 
-  // Keep the URL (/stories#opportunity) and the open book in sync, so links and Back work.
+  const [openBookId, setOpenBookId] = useState<string | null>(idFromHash);
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const openBook = BOOKS.find((b) => b.id === openBookId) ?? null;
+  const hoveredBook = BOOKS.find((b) => b.id === hoveredId) ?? null;
+
+  const shelfRef = useRef<HTMLDivElement | null>(null);
+  const autoScrollPaused = useRef(false);
+  const resumeTimer = useRef<number | null>(null);
+
   const openById = (id: string | null) => {
     setOpenBookId(id);
     const url = window.location.pathname + window.location.search + (id ? `#${id}` : '');
     window.history.pushState(null, '', url);
   };
+
   useEffect(() => {
     const sync = () => setOpenBookId(idFromHash());
     window.addEventListener('hashchange', sync);
@@ -3095,22 +3213,195 @@ export const AbandonedStories: React.FC = () => {
     };
   }, []);
 
+  const loopRef = useRef(0);
+  const openRef = useRef(false);
+  openRef.current = !!openBook;
+
+  const pauseAutoScroll = () => {
+    if (resumeTimer.current !== null) window.clearTimeout(resumeTimer.current);
+    autoScrollPaused.current = true;
+  };
+
+  const resumeAutoScroll = () => {
+    if (resumeTimer.current !== null) window.clearTimeout(resumeTimer.current);
+    resumeTimer.current = window.setTimeout(() => {
+      autoScrollPaused.current = false;
+      resumeTimer.current = null;
+    }, 700);
+  };
+
+  const pos = useRef(0);
+  const vel = useRef(0);
+  const drag = useRef({ active: false, lastX: 0, lastT: 0, moved: 0 });
+
+  useEffect(() => {
+    const shelf = shelfRef.current;
+    if (!shelf) return;
+
+    const measure = () => {
+      const a = shelf.children[0] as HTMLElement | undefined;
+      const b = shelf.children[BOOKS.length] as HTMLElement | undefined;
+      if (!a || !b) return;
+      const first = loopRef.current === 0;
+      loopRef.current = b.offsetLeft - a.offsetLeft;
+      if (first) pos.current = loopRef.current;
+    };
+    measure();
+    window.addEventListener('resize', measure);
+
+    // Wheel adds momentum instead of jumping.
+    const onWheel = (e: WheelEvent) => {
+      // Only a genuinely horizontal gesture moves the shelf; vertical wheel is left to the page.
+      if (Math.abs(e.deltaX) <= Math.abs(e.deltaY) * 2 || Math.abs(e.deltaX) < 4) return;
+      e.preventDefault();
+      vel.current += e.deltaX * 0.0075;
+    };
+    shelf.addEventListener('wheel', onWheel, { passive: false });
+
+    let frame = 0;
+    let last = performance.now();
+    let auto = 0;
+    const tick = (now: number) => {
+      const dt = Math.min(now - last, 40);
+      last = now;
+      const w = loopRef.current;
+      if (w && !drag.current.active) {
+        const idle = autoScrollPaused.current || openRef.current || prefersReducedMotion();
+        auto += ((idle ? 0 : 0.02) - auto) * Math.min(1, dt * 0.004);
+        vel.current *= Math.pow(0.92, dt / 16);
+        if (Math.abs(vel.current) < 0.001) vel.current = 0;
+        pos.current += (vel.current + auto) * dt;
+      }
+      if (w) {
+        while (pos.current >= 2 * w) pos.current -= w;
+        while (pos.current < w) pos.current += w;
+        shelf.scrollLeft = pos.current;
+      }
+      frame = requestAnimationFrame(tick);
+    };
+    frame = requestAnimationFrame(tick);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener('resize', measure);
+      shelf.removeEventListener('wheel', onWheel);
+    };
+  }, []);
+
+  const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    drag.current = { active: true, lastX: e.clientX, lastT: performance.now(), moved: 0 };
+    vel.current = 0;
+  };
+  const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    const d = drag.current;
+    if (!d.active) return;
+    const now = performance.now();
+    const dx = d.lastX - e.clientX;
+    d.moved += Math.abs(dx);
+    if (d.moved > 6 && !e.currentTarget.hasPointerCapture(e.pointerId)) {
+      e.currentTarget.setPointerCapture(e.pointerId);
+    }
+    pos.current += dx;
+    const dt = Math.max(1, now - d.lastT);
+    vel.current = vel.current * 0.6 + (dx / dt) * 0.4;
+    d.lastX = e.clientX;
+    d.lastT = now;
+  };
+  const endDrag = () => {
+    if (performance.now() - drag.current.lastT > 80) vel.current = 0;
+    drag.current.active = false;
+  };
+
   return (
-    <section className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
-      <div className="mb-10 max-w-2xl">
-        <h2 className="font-serif text-3xl font-normal text-[#ece7dc] sm:text-4xl">
-          Resting, But Not Forgotten
+    <section className="relative w-full overflow-hidden bg-black py-6 text-white sm:py-8">
+      <div className="mx-auto max-w-5xl px-5 text-center sm:px-8">
+        <div className="mb-2 font-mono text-xs uppercase tracking-[0.28em] text-white/50">
+          Resting, but not forgotten
+        </div>
+        <h2 className="font-serif text-[40px] font-medium leading-[0.92] tracking-[-0.03em] text-white sm:text-6xl lg:text-7xl">
+          Abandoned Stories
         </h2>
-        <p className="mt-2 text-[#9aa0a6]">
-          Open a book to read each explorer's story — where it began, what it set out to do,
-          what it found, and where it rests today.
+        <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-white/55 sm:text-base">
+          A visual archive of explorers that changed what we know about other worlds. Hover a volume to read its
+          title, then click to open its story.
         </p>
       </div>
 
-      <div className="grid grid-cols-2 gap-5 sm:grid-cols-3">
-        {BOOKS.map((book) => (
-          <BookCard key={book.id} book={book} onOpen={() => openById(book.id)} />
-        ))}
+      {/* Spotlight: shows the full name and tagline of the hovered volume. */}
+      <div className="relative z-20 mx-auto mt-6 flex h-[110px] max-w-4xl items-center justify-center px-5 text-center sm:h-[124px]">
+        <AnimatePresence mode="wait">
+          {hoveredBook ? (
+            <motion.div
+              key={hoveredBook.id}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.2 }}
+            >
+              <p className="font-mono text-xs uppercase tracking-[0.22em] text-[#c1440e] sm:text-sm">
+                {hoveredBook.place}
+              </p>
+              <h3 className="mt-1 font-serif text-4xl text-white sm:text-5xl">{hoveredBook.name}</h3>
+              <p className="mt-1 text-base text-white/70 sm:text-lg">{hoveredBook.pages[0].title}</p>
+            </motion.div>
+          ) : (
+            <motion.p
+              key="hint"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="font-mono text-xs uppercase tracking-[0.2em] text-white/45 sm:text-sm"
+            >
+              {BOOKS.length} volumes · hover to read the title · click to open
+            </motion.p>
+          )}
+        </AnimatePresence>
+      </div>
+
+      <div className="relative">
+        <div
+          ref={shelfRef}
+          onPointerDown={onPointerDown}
+          onPointerMove={onPointerMove}
+          onPointerUp={endDrag}
+          onPointerCancel={endDrag}
+          onClickCapture={(e) => {
+            if (drag.current.moved > 6) {
+              e.stopPropagation();
+              e.preventDefault();
+              drag.current.moved = 0;
+            }
+          }}
+          onMouseEnter={pauseAutoScroll}
+          onMouseLeave={resumeAutoScroll}
+          onTouchStart={pauseAutoScroll}
+          onTouchEnd={resumeAutoScroll}
+          className="relative z-10 flex h-[300px] w-full items-end gap-2.5 cursor-grab select-none overflow-hidden touch-pan-y active:cursor-grabbing px-6 pb-5 sm:h-[380px] sm:px-10 lg:h-[440px]"
+        >
+          {[0, 1, 2].flatMap((c) => BOOKS.map((book, index) => ({ book, index, c }))).map(({ book, index, c }) => (
+            <BookCard
+              key={`${book.id}-${c}`}
+              book={book}
+              index={index}
+              onOpen={() => openById(book.id)}
+              onEnter={() => {
+                setHoveredId(book.id);
+                pauseAutoScroll();
+              }}
+              onLeave={() => {
+                setHoveredId(null);
+                resumeAutoScroll();
+              }}
+            />
+          ))}
+        </div>
+
+        <div className="pointer-events-none absolute bottom-5 left-0 right-0 z-20 h-px bg-white/15" />
+      </div>
+
+      <div className="mx-auto mt-2 flex max-w-5xl items-center justify-between px-5 font-mono text-[10px] uppercase tracking-[0.16em] text-white/35 sm:px-8 sm:text-xs">
+        <span>{BOOKS.length} volumes</span>
+        <span className="hidden sm:block">drag or swipe</span>
+        <span>click to open</span>
       </div>
 
       <AnimatePresence>
