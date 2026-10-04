@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react'
 import { OrbitCharacter } from './OrbitCharacter';
 import { MissionIllustration } from './MissionIllustration';
 import { ApolloIllustration } from './ApolloIllustration';
+import { REWRITTEN, MOON_EXTRA } from '../storyData';
 import { InterviewChat } from './InterviewChat';
 import { SpaceGlossaryWord } from './SpaceGlossaryWord';
 import { playSceneMusic, playPageTurn, playRoverRoll } from '../utils/sound';
@@ -32,17 +33,7 @@ export const Page5MoonPath: React.FC<Page5Props> = ({ autoSpeak = true }) => {
       ),
       speechText: "I landed softly on the Moon and sent back thousands of pictures and measurements!",
       scienceFact: "Surveyor 1 made the first successful U.S. soft landing on the Moon in 1966.",
-      interview: [
-        ["Orbit", "Surveyor 1, what was your mission?"],
-        ["Surveyor 1", "Land softly on the Moon and see what the surface was really like! 🌕"],
-        ["Orbit", "Did you succeed?"],
-        ["Surveyor 1", "I sure did! I sent back thousands of pictures and measurements."],
-        ["Orbit", "Where are you now?"],
-        ["Surveyor 1", "Right where I landed, in the Ocean of Storms."],
-        ["Orbit", "What happened?"],
-        ["Surveyor 1", "My mission ended after my power and communications became limited."],
-        ["Orbit", "You were the first U.S. soft landing on the Moon! Crazy..."]
-      ] as [string, string][],
+      interview: REWRITTEN['moon-surveyor-1'],
       art: { emoji: '🌕', name: 'Surveyor 1', year: '1966' },
       orbitLine: 'Surveyor 1, tell us about your Moon landing!',
     },
@@ -61,15 +52,7 @@ export const Page5MoonPath: React.FC<Page5Props> = ({ autoSpeak = true }) => {
       ),
       speechText: "Ebb and Flow flew together to map the Moon's gravity!",
       scienceFact: "GRAIL used two spacecraft flying in formation to measure tiny changes in the Moon's gravity.",
-      interview: [
-        ["Orbit", "Ebb, why did you and Flow go to the Moon?"],
-        ["GRAIL-A (Ebb)", "We flew together to map the Moon's gravity!"],
-        ["Orbit", "Like a giant invisible map?"],
-        ["GRAIL-A (Ebb)", "Exactly! We found amazing details hiding beneath the surface."],
-        ["Orbit", "Where are you now?"],
-        ["GRAIL-A (Ebb)", "Still on the Moon. We intentionally crashed there after finishing our mission."],
-        ["Orbit", "You and Flow really went out together."]
-      ] as [string, string][],
+      interview: REWRITTEN['moon-grail-a'],
       art: { emoji: '🛰️', name: 'GRAIL-A — Ebb', year: '2011' },
       orbitLine: 'Ebb, tell us about the gravity map!',
     },
@@ -88,15 +71,7 @@ export const Page5MoonPath: React.FC<Page5Props> = ({ autoSpeak = true }) => {
       ),
       speechText: "I flew beside Ebb and helped map the Moon's gravity. We were the perfect pair!",
       scienceFact: "GRAIL-B, named Flow, worked with Ebb to reveal detailed variations in the Moon's interior.",
-      interview: [
-        ["Orbit", "Flow, what was your job?"],
-        ["GRAIL-B (Flow)", "Fly beside Ebb and help map the Moon's gravity."],
-        ["Orbit", "Did you two make a good team?"],
-        ["GRAIL-B (Flow)", "The perfect pair! Ebb measured tiny changes, and I followed along."],
-        ["Orbit", "And your final journey?"],
-        ["GRAIL-B (Flow)", "After our science was complete, we were sent into a planned impact on the Moon."],
-        ["Orbit", "Mission complete — together."]
-      ] as [string, string][],
+      interview: REWRITTEN['moon-grail-b'],
       art: { emoji: '🛰️', name: 'GRAIL-B — Flow', year: '2011' },
       orbitLine: 'Flow, tell us about working with Ebb!',
     },
@@ -115,17 +90,7 @@ export const Page5MoonPath: React.FC<Page5Props> = ({ autoSpeak = true }) => {
       ),
       speechText: "Apollo 11 landed humans on the Moon and brought them safely home!",
       scienceFact: "Apollo 11 achieved the first crewed landing on the Moon in July 1969.",
-      interview: [
-        ["Orbit", "Apollo 11, why did you go to the Moon?"],
-        ["Apollo 11", "To land humans on the Moon and bring them safely home!"],
-        ["Orbit", "Did you do it?"],
-        ["Apollo 11", "We did! Humans walked on the Moon for the first time."],
-        ["Orbit", "And where are you now?"],
-        ["Apollo 11", "Parts of the mission hardware remain on the Moon."],
-        ["Orbit", "Why didn't you bring everything home?"],
-        ["Apollo 11", "There was no need to. Our mission was to land, explore and return the crew."],
-        ["Orbit", "First footprints, forever remembered."]
-      ] as [string, string][],
+      interview: REWRITTEN['moon-apollo-11'],
       art: { emoji: '🚀', name: 'Apollo 11', year: '1969' },
       orbitLine: 'Apollo 11, tell us about your historic landing!',
     },
@@ -144,18 +109,9 @@ export const Page5MoonPath: React.FC<Page5Props> = ({ autoSpeak = true }) => {
       ),
       speechText: "We explored more of the Moon using a Lunar Roving Vehicle!",
       scienceFact: "Apollo 15's Lunar Roving Vehicle helped astronauts travel across the lunar surface and collect rocks and data.",
-      interview: [
-        ["Orbit", "Apollo 15, what made your journey special?"],
-        ["Apollo 15", "We explored more of the Moon using a Lunar Roving Vehicle!"],
-        ["Orbit", "A car on the Moon?!"],
-        ["Apollo 15", "Yep! We drove across the lunar surface collecting rocks and data."],
-        ["Orbit", "Where is your rover now?"],
-        ["Apollo 15", "Still parked on the Moon, near our landing site."],
-        ["Orbit", "And why did you leave it?"],
-        ["Apollo 15", "Our crew returned to Earth. The rover stayed behind as part of the mission."],
-        ["Orbit", "Moon parking!"]
-      ] as [string, string][],
+      interview: REWRITTEN['moon-apollo-15'],
     },
+    ...MOON_EXTRA,
   ], []);
 
 

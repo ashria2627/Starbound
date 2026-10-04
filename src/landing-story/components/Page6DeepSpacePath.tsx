@@ -3,6 +3,7 @@ import { OrbitCharacter } from './OrbitCharacter';
 import { MissionIllustration } from './MissionIllustration';
 import { PioneerIllustration } from './PioneerIllustration';
 import { VoyagerIllustration } from './VoyagerIllustration';
+import { REWRITTEN, DEEP_EXTRA } from '../storyData';
 import { InterviewChat } from './InterviewChat';
 import { SpaceGlossaryWord } from './SpaceGlossaryWord';
 import { playSceneMusic, playPageTurn, playOrbitCue } from '../utils/sound';
@@ -33,17 +34,7 @@ export const Page6DeepSpacePath: React.FC<Page6Props> = ({ autoSpeak = true }) =
       ),
       speechText: "I studied the Sun and the space between Earth and it, including solar particles and magnetic fields.",
       scienceFact: "Pioneer 5 helped scientists study solar particles and magnetic fields between Earth and the Sun.",
-      interview: [
-        ["Orbit", "Pioneer 5, where were you headed?"],
-        ["Pioneer 5", "Into space to study the Sun and the space between Earth and it!"],
-        ["Orbit", "What did you discover?"],
-        ["Pioneer 5", "I sent back important information about {{solar_particles|solar particles}} and magnetic fields."],
-        ["Orbit", "Where are you now?"],
-        ["Pioneer 5", "I'm still orbiting the Sun!"],
-        ["Orbit", "And why did you stop talking?"],
-        ["Pioneer 5", "My mission and communications eventually ended as my power and signal became too weak."],
-        ["Orbit", "Still circling the Sun after all these years!"]
-      ] as [string, string][],
+      interview: REWRITTEN['deep-pioneer-5'],
       art: { emoji: '☀️', name: 'Pioneer 5', year: '1960' },
       orbitLine: 'Pioneer 5, tell us about your journey!',
     },
@@ -62,18 +53,7 @@ export const Page6DeepSpacePath: React.FC<Page6Props> = ({ autoSpeak = true }) =
       ),
       speechText: "I became the first successful spacecraft to visit another planet: Venus!",
       scienceFact: "Mariner 2 flew past Venus in 1962 and made important measurements of its atmosphere and environment.",
-      interview: [
-        ["Orbit", "Mariner 2, where were you going?"],
-        ["Mariner 2", "To Venus!"],
-        ["Orbit", "Were you the first to make it there?"],
-        ["Mariner 2", "Yes! I became the first successful spacecraft to visit another planet."],
-        ["Orbit", "What did you discover?"],
-        ["Mariner 2", "I measured Venus's hot atmosphere and environment."],
-        ["Orbit", "Where are you now?"],
-        ["Mariner 2", "Still traveling around the Sun."],
-        ["Orbit", "What happened to your mission?"],
-        ["Mariner 2", "Contact was lost after my mission ended in 1963."]
-      ] as [string, string][],
+      interview: REWRITTEN['deep-mariner-2'],
       art: { emoji: '🟡', name: 'Mariner 2', year: '1962' },
       orbitLine: 'Mariner 2, what was Venus like?',
     },
@@ -92,17 +72,7 @@ export const Page6DeepSpacePath: React.FC<Page6Props> = ({ autoSpeak = true }) =
       ),
       speechText: "I visited Mercury three times and used Venus's gravity to help me reach it!",
       scienceFact: "Mariner 10 used a Venus gravity assist to reach Mercury and became the first spacecraft to visit Mercury.",
-      interview: [
-        ["Orbit", "Mariner 10, why were you sent out?"],
-        ["Mariner 10", "To visit Mercury!"],
-        ["Orbit", "Did you get close?"],
-        ["Mariner 10", "Three times! I even used Venus's gravity to help me reach Mercury."],
-        ["Orbit", "That's a clever shortcut!"],
-        ["Mariner 10", "Spacecraft have tricks too."],
-        ["Orbit", "Where are you now?"],
-        ["Mariner 10", "Still orbiting the Sun, but I'm no longer communicating with Earth."],
-        ["Orbit", "Your Mercury adventure lives on!"]
-      ] as [string, string][],
+      interview: REWRITTEN['deep-mariner-10'],
       art: { emoji: '🌑', name: 'Mariner 10', year: '1973' },
       orbitLine: 'Mariner 10, how did you reach Mercury?',
     },
@@ -121,17 +91,7 @@ export const Page6DeepSpacePath: React.FC<Page6Props> = ({ autoSpeak = true }) =
       ),
       speechText: "I visited Jupiter first, then continued far beyond it toward interstellar space.",
       scienceFact: "Pioneer 10 was the first spacecraft to travel through the asteroid belt and make a close encounter with Jupiter.",
-      interview: [
-        ["Orbit", "Pioneer 10, where were you headed?"],
-        ["Pioneer 10", "Jupiter! I was the first spacecraft to travel through the asteroid belt and visit the giant planet."],
-        ["Orbit", "Did you keep going?"],
-        ["Pioneer 10", "Far beyond Jupiter! I became one of the first spacecraft headed toward interstellar space."],
-        ["Orbit", "Where are you now?"],
-        ["Pioneer 10", "Still traveling outward from the Sun."],
-        ["Orbit", "Why did you stop talking?"],
-        ["Pioneer 10", "My last signal reached Earth in 2003. My power had become too weak for communication."],
-        ["Orbit", "Still traveling… just very, very quietly."]
-      ] as [string, string][],
+      interview: REWRITTEN['deep-pioneer-10'],
       art: { emoji: '🛰️', name: 'Pioneer 10', year: '1972' },
       orbitLine: 'Pioneer 10, tell us about going beyond Jupiter!',
     },
@@ -150,17 +110,7 @@ export const Page6DeepSpacePath: React.FC<Page6Props> = ({ autoSpeak = true }) =
       ),
       speechText: "I visited Jupiter, then flew past Saturn and sent back close-up observations.",
       scienceFact: "Pioneer 11 was the first spacecraft to fly past Saturn.",
-      interview: [
-        ["Orbit", "Pioneer 11, what was your big adventure?"],
-        ["Pioneer 11", "First I visited Jupiter, then I flew past Saturn!"],
-        ["Orbit", "Saturn too?!"],
-        ["Pioneer 11", "Yep! I even sent back some of the first close-up observations of Saturn."],
-        ["Orbit", "Where are you now?"],
-        ["Pioneer 11", "I'm still traveling outward from the Sun."],
-        ["Orbit", "Why did you stop talking?"],
-        ["Pioneer 11", "My last contact with Earth was in 1995."],
-        ["Orbit", "Another pioneer heading into the dark."]
-      ] as [string, string][],
+      interview: REWRITTEN['deep-pioneer-11'],
     },
     {
       id: 'deep-voyager-1',
@@ -177,20 +127,9 @@ export const Page6DeepSpacePath: React.FC<Page6Props> = ({ autoSpeak = true }) =
       ),
       speechText: "I studied Jupiter and Saturn and eventually entered interstellar space. I just kept going.",
       scienceFact: "Voyager 1 entered interstellar space in 2012 and continues sending limited science and engineering data.",
-      interview: [
-        ["Orbit", "Voyager 1, where were you supposed to go?"],
-        ["Voyager 1", "Jupiter and Saturn!"],
-        ["Orbit", "And then?"],
-        ["Voyager 1", "I just… kept going."],
-        ["Orbit", "What did you discover?"],
-        ["Voyager 1", "I studied the outer planets and eventually entered interstellar space."],
-        ["Orbit", "Where are you now?"],
-        ["Voyager 1", "Far beyond the planets, traveling through interstellar space."],
-        ["Orbit", "Are you still talking to Earth?"],
-        ["Voyager 1", "I'm still sending what little science and engineering data my aging systems can provide."],
-        ["Orbit", "The little traveler that just won't stop"]
-      ] as [string, string][],
+      interview: REWRITTEN['deep-voyager-1'],
     },
+    ...DEEP_EXTRA,
   ], []);
 
   

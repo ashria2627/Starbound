@@ -3,6 +3,8 @@ import { OrbitCharacter } from './OrbitCharacter';
 import { SojournerIllustration } from './SojournerIllustration';
 import { VikingIllustration } from './VikingIllustration';
 import { RoverIllustration } from './RoverIllustration';
+import { REWRITTEN, MARS_EXTRA } from '../storyData';
+import { MissionIllustration } from './MissionIllustration';
 import { InterviewChat } from './InterviewChat';
 import { SpaceGlossaryWord } from './SpaceGlossaryWord';
 import { playSceneMusic, playPageTurn, playRoverRoll, playOppyCue } from '../utils/sound';
@@ -43,16 +45,7 @@ export const Page4MarsPath: React.FC<Page4Props> = ({ autoSpeak = true }) => {
       "To land safely, study Mars, and search for signs of life! I landed in 1976 and sent back pictures and science data!",
     scienceFact:
       "Viking 1 landed on Mars in 1976 and returned images and scientific measurements from the Martian surface.",
-    interview: [
-      ["Orbit", "Viking 1, why did you go to Mars?"],
-      ["Viking 1", "To land safely, study Mars, and search for signs of life!"],
-      ["Orbit", "Did you make it?"],
-      ["Viking 1", "I landed in 1976 and sent back pictures and science data!"],
-      ["Orbit", "What happened to you?"],
-      ["Viking 1", "I worked for years until my mission finally ended."],
-      ["Orbit", "And now?"],
-      ["Viking 1", "My lander is still sitting quietly on Mars."]
-    ] as [string, string][],
+    interview: REWRITTEN['mars-viking-1'],
   },
 
     {
@@ -71,15 +64,7 @@ export const Page4MarsPath: React.FC<Page4Props> = ({ autoSpeak = true }) => {
       ),
       speechText: "To explore rocks and soil up close! I was supposed to work for 7 Mars days, but I explored for 83!",
       scienceFact: "Sojourner was part of the Mars Pathfinder mission and sent its last signal in 1997.",
-      interview: [
-        ["Orbit", "Sojourner, why were you sent to Mars?"],
-        ["Sojourner", "To explore rocks and soil up close!"],
-        ["Orbit", "And how long were you supposed to work?"],
-        ["Sojourner", "Just 7 Mars days… but I explored for 83!"],
-        ["Orbit", "Wow! Where are you now?"],
-        ["Sojourner", "Still resting near my {{pathfinder|Pathfinder}} home. My last signal came in 1997."],
-        ["Orbit", "Mission complete, little rover."]
-      ] as [string, string][],
+      interview: REWRITTEN['mars-sojourner'],
     },
 
      {
@@ -102,18 +87,7 @@ export const Page4MarsPath: React.FC<Page4Props> = ({ autoSpeak = true }) => {
       "Rocks and clues that water once existed there! I found evidence that ancient water once changed the rocks. I was supposed to explore for just 90 Martian days, but I explored for over 6 years!",
     scienceFact:
       "Spirit became stuck in soft soil in 2009 and eventually lost power. It remains on Mars with its discoveries.",
-    interview: [
-      ["Orbit", "Spirit, what were you looking for on Mars?"],
-      ["Spirit", "Rocks and clues that water once existed there!"],
-      ["Orbit", "Did you find anything?"],
-      ["Spirit", "Yes! I found evidence that ancient water once changed the rocks."],
-      ["Orbit", "How long were you supposed to explore?"],
-      ["Spirit", "Just 90 Martian days… but I explored for over 6 years!"],
-      ["Orbit", "What stopped you?"],
-      ["Spirit", "I got stuck in soft soil and eventually lost power."],
-      ["Orbit", "And now?"],
-      ["Spirit", "I’m still resting on Mars, with my discoveries left behind."]
-    ] as [string, string][],
+    interview: REWRITTEN['mars-spirit'],
   },
 
     {
@@ -132,18 +106,9 @@ export const Page4MarsPath: React.FC<Page4Props> = ({ autoSpeak = true }) => {
       ),
       speechText: "I found tiny round blueberries made in water! I was supposed to explore for 90 sols, but I made it 5,111!",
       scienceFact: "A huge dust storm covered Opportunity's solar panels in 2018, leaving it unable to recharge.",
-      interview: [
-        ["Orbit", "Oppy, what did you find?"],
-        ["Oppy", "Tiny round {{blueberries|blueberries}}! Made in water."],
-        ["Orbit", "So Mars had water?"],
-        ["Oppy", "Yes! Long, long ago."],
-        ["Orbit", "How long were you supposed to explore?"],
-        ["Oppy", "Only 90 sols. I made it 5,111!"],
-        ["Orbit", "What stopped you?"],
-        ["Oppy", "A huge dust storm covered my solar panels. I couldn't recharge anymore."],
-        ["Orbit", "You're still on Mars, Oppy."]
-      ] as [string, string][],
+      interview: REWRITTEN['mars-opportunity'],
     },
+  ...MARS_EXTRA,
   ], []);
 
 
@@ -286,6 +251,8 @@ export const Page4MarsPath: React.FC<Page4Props> = ({ autoSpeak = true }) => {
             const isCenter = beat.layout === 'center';
             const isBothSojourner = beat.layout === 'both_sojourner';
             const isBothOppy = beat.layout === 'both_oppy';
+            const isBothGeneric = beat.layout === 'both_generic';
+            const gen = beat as Partial<(typeof MARS_EXTRA)[number]>;
             const isRight = beat.layout === 'right';
 
             return (
@@ -297,7 +264,49 @@ export const Page4MarsPath: React.FC<Page4Props> = ({ autoSpeak = true }) => {
                 }`}
               >
                 
-                {isBothSojourner ? (
+                {isBothGeneric ? (
+                  <div className="w-full flex flex-col items-center gap-6">
+                    <div className="text-center max-w-3xl px-2">
+                      <div className="text-lg sm:text-2xl text-amber-900/95 leading-relaxed font-bold">
+                        {beat.bodyComponent}
+                      </div>
+                    </div>
+
+                    <div className="w-full flex flex-row items-center justify-around gap-4 sm:gap-12 py-4">
+                      <div className="flex flex-col items-center opacity-85 hover:opacity-100 transition-opacity">
+                        <OrbitCharacter
+                          mood="curious"
+                          size="md"
+                          onClick={() => speakDialogue('orbit', gen.orbitLine || 'Tell us your story!')}
+                        />
+                      </div>
+
+                      <div className="text-orange-800 font-mono text-xs sm:text-sm opacity-75 animate-pulse">
+                        <span>{gen.art?.emoji} ~ ~ ~ 🛰️</span>
+                      </div>
+
+                      <div className="flex flex-col items-center scale-105 filter drop-shadow-[0_0_20px_rgba(249,115,22,0.5)]">
+                        <MissionIllustration
+                          emoji={gen.art?.emoji || '🛰️'}
+                          name={gen.art?.name || ''}
+                          year={gen.art?.year || ''}
+                          dark={false}
+                          isSpeaking={isActive}
+                          speechBubble={beat.leadQuote}
+                          onClick={() => handleSpeak(idx)}
+                        />
+                      </div>
+                    </div>
+
+                    {beat.interview && <InterviewChat lines={beat.interview} dark={false} />}
+
+                    <div className="p-4 sm:p-5 rounded-2xl bg-white/70 backdrop-blur-md border border-orange-500/40 shadow-xl max-w-2xl text-center">
+                      <p className="text-sm sm:text-base font-semibold text-amber-800 leading-snug">
+                        🔴 <strong className="text-amber-950">NASA Discovery:</strong> {beat.scienceFact}
+                      </p>
+                    </div>
+                  </div>
+                ) : isBothSojourner ? (
                   <div className="w-full flex flex-col items-center gap-6">
                     <div className="text-center max-w-3xl px-2">
                      
