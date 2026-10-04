@@ -1259,7 +1259,7 @@ Unlike rovers designed mainly to explore the surface, InSight was built to study
   id: 'mariner-4',
   name: 'Mariner 4',
   place: 'Mars',
-  coverImageUrl: 'public/assets/objects/mariner04.gif',
+  coverImageUrl: '/assets/objects/mariner04.gif',
   pages: [
     {
       label: 'Origin',
@@ -1267,7 +1267,7 @@ Unlike rovers designed mainly to explore the surface, InSight was built to study
       text: `Mariner 4 launched on November 28, 1964 and became the first spacecraft to successfully fly past Mars.
 
 On July 14, 1965, it passed close to Mars and captured the first close-up photographs of another planet. The spacecraft transformed humanity's understanding of Mars.`,
-      imageUrl: 'public/assets/objects/mariner04.gif',
+      imageUrl: '/assets/objects/mariner04.gif',
       caption: "The First Close-Up Look at Mars",
       credit: "NASA",
     },
@@ -1399,9 +1399,9 @@ It flew past Mars on July 31, 1969, passing within about 2,132 miles (3,430 kilo
           broader coverage of Mars than Mariner 4.
         </>,
       ],
-      imageUrl: '/assets/objects/mariner-6.jpg',
-      caption: "A Heavily Cratered Mars",
-      credit: "NASA",
+      imageUrl: '/assets/objects/jupitrtbym7.png',
+      caption: "Mariner 7 far encounter color composite, created using Red, Green and Blue filter images",
+      credit: "Wikipedia",
     },
     {
       label: 'Now',
@@ -1479,9 +1479,9 @@ It reached Mars only five days after Mariner 6 and passed within about 2,130 mil
           experiments helped determine the low surface pressure of Mars.
         </>,
       ],
-      imageUrl: '/assets/objects/Mariner_7_far_encounter_from_wide-angle_camera_color_composite.jpg',
-      caption: "Mars From the Southern Hemisphere",
-      credit: "NASA",
+     imageUrl: '/assets/objects/jupitrtbym7.png',
+      caption: "Mariner 7 far encounter color composite, created using Red, Green and Blue filter images",
+      credit: "Wikipedia",
     },
     {
       label: 'Now',
@@ -1720,6 +1720,1097 @@ It became the first spacecraft ever to enter orbit around another planet, beatin
       ),
       imageUrl: '/assets/objects/1-lunar-orbiter-spacecraft-in-moon-orbit-detlev--5ed48b51.jpg',
       caption: "Its Final Orbit",
+      credit: "NASA",
+    },
+  ],
+},
+{
+  id: 'lunarorbiter2',
+  name: 'Lunar Orbiter 2',
+  place: 'Moon',
+  coverImageUrl: '/assets/objects/lunar_orbiter_render.jpg',
+  pages: [
+    {
+      label: 'Origin',
+      title: 'Mapping the Moon for Apollo',
+      text: `Lunar Orbiter 2 was launched on November 6, 1966, as the second U.S. spacecraft to orbit the Moon. It was designed to photograph potential landing sites for the Apollo and Surveyor missions while also studying the lunar environment.`,
+      imageUrl: '/assets/objects/lunar_orbiter_render.jpg',
+      caption: "Mapping the Moon for Apollo",
+      credit: "NASA",
+    },
+    {
+      label: 'Goals',
+      title: 'Searching for Safe Landing Sites',
+      text: `The spacecraft's main purpose was to photograph potential Apollo and Surveyor landing areas in greater detail.\n• Primary objective: Lunar orbit and photography.\n• Main instrument: Lunar photographic system with high- and medium-resolution cameras.\n• Additional instruments: Selenodesy experiment, meteoroid detectors, and cesium iodide radiation dosimeters.\n• Target: Potential Apollo and Surveyor landing areas.`,
+      imageUrl: 'public/assets/objects/images (3).jpeg',
+      caption: "Searching for Safe Landing Sites",
+      credit: "NASA",
+    },
+    {
+      label: 'Discoveries',
+      title: 'Revealing the Lunar Surface',
+      text: (
+        <>
+          Lunar Orbiter 2 returned detailed photographs of the Moon that helped
+          scientists and mission planners study potential landing areas and
+          lunar surface features.
+        </>
+      ),
+      bullets: [
+        <>
+          <strong>Landing Sites:</strong> It photographed potential Apollo and
+          Surveyor landing sites in detail.
+        </>,
+        <>
+          <strong>Lunar Terrain:</strong> Its photographs revealed detailed
+          views of craters, mountains, and other lunar surface features.
+        </>,
+        <>
+          <strong>Oblique Photography:</strong> It produced striking oblique
+          photographs that provided new views of the Moon's topography.
+        </>,
+        <>
+          <strong>Scientific Data:</strong> Its instruments also collected
+          information about the Moon's gravitational field, radiation
+          environment, and meteoroid impacts.
+        </>,
+      ],
+      imageUrl: '/assets/objects/Disc-copernicus crater.jpg',
+      caption: "Disc-copernicus crater on the Lunar Surface",
+      credit: "NASA",
+    },
+    {
+      label: 'Now',
+      title: 'Its Final Impact',
+      text: (
+        <>
+          <strong>End of Mission:</strong> Lunar Orbiter 2 was eventually
+          commanded to impact the Moon on October 11, 1967. NASA records place
+          the impact at approximately 3.0° north latitude and 119.1° east
+          longitude.
+        </>
+      ),
+      imageUrl: '/assets/objects/Disc-copernicus crater.jpg',
+      caption: "Disc-copernicus crater on the Lunar Surface",
+      credit: "NASA",
+    },
+  ],
+},
+
+{
+  id: 'lunarorbiter3',
+  name: 'Lunar Orbiter 3',
+  place: 'Moon',
+  coverImageUrl: '/assets/objects/lunar_orbiter_render.jpg',
+  pages: [
+    {
+      label: 'Origin',
+      title: 'A Closer Look at the Moon',
+      text: `Lunar Orbiter 3 was launched on February 5, 1967, as the third spacecraft in NASA's Lunar Orbiter series. Its primary mission was to photograph potential Apollo and Surveyor landing sites and gather additional scientific information about the Moon.`,
+      imageUrl: '/assets/objects/lunar_orbiter_render.jpg',
+      caption: "A Closer Look at the Moon",
+      credit: "NASA",
+    },
+    {
+      label: 'Goals',
+      title: 'Finding and Studying Landing Sites',
+      text: `Lunar Orbiter 3 combined detailed photography with measurements of the lunar environment.\n• Primary objective: Photograph potential Apollo and Surveyor landing sites.\n• Imaging: High- and medium-resolution lunar photography.\n• Additional instruments: Selenodesy, meteoroid detectors, and cesium iodide dosimeters.\n• Target: Lunar surface features and candidate landing areas.`,
+      imageUrl: '/assets/objects/lunar_orbiter_program_14_lo_3_launch.jpg',
+      caption: "lunar orbiter program 14 lo 3 launch",
+      credit: "NASA",
+    },
+    {
+      label: 'Discoveries',
+      title: 'Detailed Views of the Moon',
+      text: (
+        <>
+          Lunar Orbiter 3 returned hundreds of high- and medium-resolution
+          photographs, including important views of lunar landing sites and
+          features on both the near and far sides of the Moon.
+        </>
+      ),
+      bullets: [
+        <>
+          <strong>Surveyor 1:</strong> It photographed the Surveyor 1 landing
+          site, helping confirm the spacecraft's location on the lunar surface.
+        </>,
+        <>
+          <strong>Apollo 14 Area:</strong> It photographed the future Apollo 14
+          landing area, including the region around Cone crater.
+        </>,
+        <>
+          <strong>Far Side:</strong> It returned detailed views of the lunar
+          far side, including Tsiolkovsky crater.
+        </>,
+        <>
+          <strong>Photography:</strong> NASA's archive contains Lunar Orbiter 3
+          photographic data and experiments covering lunar photography,
+          selenodesy, meteoroids, and radiation.
+        </>,
+      ],
+      imageUrl: '/assets/objects/tsiolkovsky crater.jpg',
+      caption: "Tsiolkovsky crater of the Moon",
+      credit: "NASA",
+    },
+    {
+      label: 'Now',
+      title: 'Its Final Orbit',
+      text: (
+        <>
+          <strong>End of Mission:</strong> After completing its mission,
+          Lunar Orbiter 3 was used for tracking purposes until it was commanded
+          to impact the Moon on October 9, 1967. NASA records place the impact
+          at approximately 14.3° north latitude and 92.7° west longitude.
+        </>
+      ),
+      imageUrl: 'public/assets/objects/tsiolkovsky crater.jpg',
+      caption: "Its Final Orbit",
+      credit: "NASA",
+    },
+  ],
+},
+
+{
+  id: 'lunarorbiter4',
+  name: 'Lunar Orbiter 4',
+  place: 'Moon',
+  coverImageUrl: '/assets/objects/lunar_orbiter_render.jpg',
+  pages: [
+    {
+      label: 'Origin',
+      title: 'Mapping Almost the Entire Moon',
+      text: `Lunar Orbiter 4 was launched on May 4, 1967, as the fourth spacecraft in NASA's Lunar Orbiter program. Unlike the earlier missions, which focused heavily on landing-site selection, Lunar Orbiter 4 was designed primarily to photograph and map the Moon on a much broader scale.`,
+      imageUrl: '/assets/objects/lunar_orbiter_render.jpg',
+      caption: "Mapping Almost the Entire Moon",
+      credit: "NASA",
+    },
+    {
+      label: 'Goals',
+      title: 'A Global Survey of the Moon',
+      text: `The mission expanded NASA's photographic coverage of the lunar surface.\n• Primary objective: Broad lunar mapping and photography.\n• Imaging: High- and medium-resolution cameras.\n• Coverage: Extensive imaging of the lunar near side and selected far-side regions.\n• Additional instruments: Selenodesy, meteoroid detectors, and radiation dosimeters.`,
+      imageUrl: '/assets/objects/lunar_orbiter_program_17_lo_4_launch.jpg',
+      caption: "lunar orbiter program 17 lo 4 launch",
+      credit: "NASA",
+    },
+    {
+      label: 'Discoveries',
+      title: 'A New Map of the Moon',
+      text: (
+        <>
+          Lunar Orbiter 4 greatly expanded knowledge of the Moon's surface,
+          photographing large areas that had not previously been mapped in
+          comparable detail.
+        </>
+      ),
+      bullets: [
+        <>
+          <strong>Near-Side Coverage:</strong> It photographed approximately
+          99 percent of the Moon's near side.
+        </>,
+        <>
+          <strong>South Pole:</strong> It provided some of the first detailed
+          photographic views of the lunar south polar region.
+        </>,
+        <>
+          <strong>Far Side:</strong> It also photographed important areas of
+          the previously less-explored lunar far side.
+        </>,
+        <>
+          <strong>Surface Features:</strong> Its images captured features such
+          as Mare Orientale, Aristarchus crater, and Vallis Schröteri.
+        </>,
+      ],
+      imageUrl: '/assets/objects/Mare_Orientale.jpg',
+      caption: "Mare Orientale of the Moon",
+      credit: "NASA",
+    },
+    {
+      label: 'Now',
+      title: 'Its Final Descent',
+      text: (
+        <>
+          <strong>End of Mission:</strong> Lunar Orbiter 4 remained in lunar
+          orbit after its photographic mission. Its orbit eventually decayed,
+          and the spacecraft impacted the Moon in 1967.
+        </>
+      ),
+       imageUrl: '/assets/objects/Mare_Orientale.jpg',
+      caption: "Mare Orientale of the Moon",
+      credit: "NASA",
+    },
+  ],
+},
+
+{
+  id: 'lunarorbiter5',
+  name: 'Lunar Orbiter 5',
+  place: 'Moon',
+  coverImageUrl: '/assets/objects/lunar_orbiter_render.jpg',
+  pages: [
+    {
+      label: 'Origin',
+      title: 'The Final Lunar Orbiter',
+      text: `Lunar Orbiter 5 was launched on August 1, 1967, as the fifth and final spacecraft of NASA's Lunar Orbiter program. It was designed to complete photographic coverage of the Moon, including previously unphotographed areas of the far side.`,
+      imageUrl: '/assets/objects/lunar_orbiter_render.jpg',
+      caption: "The Final Lunar Orbiter",
+      credit: "NASA",
+    },
+    {
+      label: 'Goals',
+      title: 'Completing the Lunar Survey',
+      text: `The final Lunar Orbiter mission focused on completing lunar photographic coverage while continuing scientific measurements.\n• Primary objective: Photograph previously uncovered lunar regions.\n• Secondary objective: Additional Apollo and Surveyor landing-site photography.\n• Additional instruments: Selenodesy, meteoroid detectors, and cesium iodide radiation dosimeters.\n• Operational role: Tracking and orbit-determination support.`,
+      imageUrl: '/assets/objects/lunar_orbiter_program_20_lo_5_launch.jpg',
+      caption: "Completing the Lunar Survey",
+      credit: "NASA",
+    },
+    {
+      label: 'Discoveries',
+      title: 'Completing the Picture of the Moon',
+      text: (
+        <>
+          Lunar Orbiter 5 completed the photographic work of the Lunar Orbiter
+          program and brought the combined coverage of the five spacecraft to
+          more than 99 percent of the Moon's surface.
+        </>
+      ),
+      bullets: [
+        <>
+          <strong>Photographic Coverage:</strong> It returned 633 high-resolution
+          and 211 medium-resolution frames, with resolution down to about 2
+          meters.
+        </>,
+        <>
+          <strong>Global Survey:</strong> Its images increased the combined
+          Lunar Orbiter photographic coverage to better than 99 percent of the
+          Moon.
+        </>,
+        <>
+          <strong>Far Side:</strong> It photographed previously uncovered areas
+          of the lunar far side.
+        </>,
+        <>
+          <strong>Science:</strong> Its instruments collected data on lunar
+          gravity, radiation, and micrometeoroid impacts.
+        </>,
+      ],
+      imageUrl: '/assets/objects/OIP.jpg',
+      caption: "First Image of Farside of the Moon",
+      credit: "NASA",
+    },
+    {
+      label: 'Now',
+      title: 'The Final Impact',
+      text: (
+        <>
+          <strong>End of Mission:</strong> After completing its photographic
+          mission, Lunar Orbiter 5 continued to provide tracking and scientific
+          data. It was commanded to impact the Moon on January 31, 1968, at
+          approximately 2.79° south latitude and 83.04° west longitude.
+        </>
+      ),
+      imageUrl: '/assets/objects/OIP.jpg',
+       caption: "First Image of Farside of the Moon",
+      credit: "NASA",
+    },
+  ],
+},
+{
+  id: 'grail-a',
+  name: 'GRAIL',
+  place: 'Moon',
+  coverImageUrl: 'public/assets/objects/grail.jpg',
+  pages: [
+    {
+      label: 'Origin',
+      title: 'Listening to the Moon’s Gravity',
+      text: `GRAIL-A was launched on September 10, 2011, as one of two spacecraft in NASA's Gravity Recovery and Interior Laboratory mission. Working together with GRAIL-B, it was designed to create a highly accurate map of the Moon's gravitational field and reveal the structure of its interior.`,
+      imageUrl: '/assets/objects/grail.jpg',
+      caption: "Listening to the Moon’s Gravity",
+      credit: "NASA",
+    },
+    {
+      label: 'Goals',
+      title: 'Mapping the Moon from Within',
+      text: `GRAIL-A and GRAIL-B flew in formation around the Moon and precisely measured the distance between them.\n• Primary objective: Map the Moon's gravity field.\n• Main measurement: Changes in the distance between the two spacecraft.\n• Science target: Lunar interior structure and composition.\n• Additional goal: Improve understanding of the Moon's thermal evolution and geological history.`,
+      imageUrl: '/assets/objects/grail.jpg',
+      caption: "Mapping the Moon from Within",
+      credit: "NASA",
+    },
+    {
+      label: 'Discoveries',
+      title: 'Seeing Inside the Moon',
+      text: (
+        <>
+          GRAIL created the highest-resolution gravitational map of any
+          planetary body, revealing important details about the Moon's crust
+          and interior.
+        </>
+      ),
+      bullets: [
+        <>
+          <strong>Gravity Map:</strong> The mission produced an extremely
+          detailed map of variations in the Moon's gravitational field.
+        </>,
+        <>
+          <strong>Hidden Structures:</strong> Gravity measurements revealed
+          buried geological structures, including ancient impact features.
+        </>,
+        <>
+          <strong>Crust:</strong> GRAIL measurements helped scientists
+          determine that the Moon's crust is more fractured and less uniform
+          than previously thought.
+        </>,
+        <>
+          <strong>Interior:</strong> The data provided new information about
+          the Moon's internal structure and thermal evolution.
+        </>,
+      ],
+      imageUrl: '/assets/objects/grail_2.jpg',
+      caption: "Seeing Inside the Moon",
+      credit: "NASA",
+    },
+    {
+      label: 'Now',
+      title: 'Its Final Descent',
+      text: (
+        <>
+          <strong>End of Mission:</strong> GRAIL-A was deliberately directed
+          into the Moon after completing its scientific mission. It impacted
+          on December 17, 2012, at approximately 75.6088° north latitude and
+          26.5940° west longitude.
+        </>
+      ),
+      imageUrl: '/assets/objects/grail_2.jpg',
+      caption: "Its Final Descent",
+      credit: "NASA",
+    },
+  ],
+},
+
+{
+  id: 'ladee',
+  name: 'LADEE',
+  place: 'Moon',
+  coverImageUrl: '/assets/objects/ladee.jpg',
+  pages: [
+    {
+      label: 'Origin',
+      title: 'Exploring the Moon’s Thin Atmosphere',
+      text: `The Lunar Atmosphere and Dust Environment Explorer, or LADEE, was launched on September 6, 2013. It was designed to study the extremely thin atmosphere surrounding the Moon and investigate the lunar dust environment.`,
+      imageUrl: '/assets/objects/ladee.jpg',
+      caption: "Exploring the Moon’s Thin Atmosphere",
+      credit: "NASA",
+    },
+    {
+      label: 'Goals',
+      title: 'Studying the Lunar Atmosphere',
+      text: `LADEE investigated the Moon's tenuous atmosphere and the mysterious dust that can exist above its surface.\n• Primary objective: Study the lunar exosphere.\n• Dust investigation: Search for and characterize lunar dust.\n• Instruments: Ultraviolet/visible spectrometer, neutral mass spectrometer, and lunar dust experiment.\n• Technology: Demonstrate high-speed laser communications from lunar orbit.`,
+      imageUrl: '/assets/objects/201309060009HQ~large.jpg',
+      caption: "Studying the Lunar Atmosphere",
+      credit: "NASA",
+    },
+    {
+      label: 'Discoveries',
+      title: 'A Closer Look at the Lunar Exosphere',
+      text: (
+        <>
+          LADEE provided detailed measurements of the Moon's extremely thin
+          atmosphere and helped scientists understand how material moves
+          around the lunar surface.
+        </>
+      ),
+      bullets: [
+        <>
+          <strong>Exosphere:</strong> LADEE identified and measured several
+          components of the Moon's tenuous atmosphere.
+        </>,
+        <>
+          <strong>Dust:</strong> The mission investigated whether dust is
+          naturally lofted above the lunar surface.
+        </>,
+        <>
+          <strong>Atmospheric Processes:</strong> Its measurements helped
+          scientists understand how the lunar exosphere interacts with the
+          surface and space environment.
+        </>,
+        <>
+          <strong>Laser Communications:</strong> LADEE successfully
+          demonstrated high-speed laser communication from lunar orbit,
+          establishing a new way to transmit large amounts of data from space.
+        </>,
+      ],
+      imageUrl: '/assets/objects/ladee-lunar-orbit.png',
+      caption: "A Closer Look at the Lunar Exosphere",
+      credit: "NASA",
+    },
+    {
+      label: 'Now',
+      title: 'Its Final Impact',
+      text: (
+        <>
+          <strong>End of Mission:</strong> After completing its scientific and
+          technology demonstrations, LADEE was deliberately directed to impact
+          the Moon. It struck the lunar surface on April 18, 2014, at
+          approximately 11.8494° north latitude and 93.2494° west longitude.
+        </>
+      ),
+      imageUrl: '/assets/objects/201309060009HQ~large.jpg',
+      caption: "Its Final Impact",
+      credit: "NASA",
+    },
+  ],
+},
+
+{
+  id: 'mariner5',
+  name: 'Mariner 5',
+  place: 'Venus',
+  coverImageUrl: '/assets/objects/mariner05.gif',
+  pages: [
+    {
+      label: 'Origin',
+      title: 'A Close Encounter with Venus',
+      text: `Mariner 5 was launched on June 14, 1967, as NASA's fifth Mariner spacecraft. Originally built as a backup for Mariner 4, it was modified for a mission to Venus and became the second successful U.S. spacecraft to visit the planet.`,
+      imageUrl: '/assets/objects/mariner05.gif',
+      caption: "A Close Encounter with Venus",
+      credit: "NASA",
+    },
+    {
+      label: 'Goals',
+      title: 'Revealing Venus from Space',
+      text: `Mariner 5 was designed to study Venus during a close flyby and investigate the planet's atmosphere, surface environment, and magnetic surroundings.\n• Primary objective: Venus flyby.\n• Atmospheric studies: Measure temperature, pressure, and atmospheric composition.\n• Science: Study Venus's magnetic field, charged particles, and solar wind interaction.\n• Radio occultation: Use changes in radio signals to investigate the Venusian atmosphere.`,
+      imageUrl: '/assets/objects/KSC-67PC-0184.jpg',
+      caption: "Launch of Mariner 5",
+      credit: "NASA",
+    },
+    {
+      label: 'Discoveries',
+      title: 'A Hot, Dense World',
+      text: (
+        <>
+          Mariner 5 provided some of the first detailed measurements of Venus's
+          atmosphere and environment, revealing a world far hotter and denser
+          than Earth.
+        </>
+      ),
+      bullets: [
+        <>
+          <strong>Atmosphere:</strong> Radio occultation measurements provided
+          information about Venus's atmospheric pressure, density, and
+          temperature.
+        </>,
+        <>
+          <strong>Temperature:</strong> Measurements confirmed the extremely
+          high temperatures near the Venusian surface.
+        </>,
+        <>
+          <strong>Magnetic Environment:</strong> The spacecraft studied
+          Venus's magnetic field and its interaction with the solar wind.
+        </>,
+        <>
+          <strong>Radio Science:</strong> The mission demonstrated how radio
+          signals passing through an atmosphere can reveal its physical
+          properties.
+        </>,
+      ],
+      imageUrl: '/assets/objects/KSC-67PC-0184.jpg',
+      caption: "Launch of Mariner 5",
+      credit: "NASA",
+    },
+    {
+      label: 'Now',
+      title: 'The Mission Continues in Silence',
+      text: (
+        <>
+          <strong>End of Mission:</strong> Mariner 5 completed its Venus
+          encounter on October 19, 1967. The spacecraft continued transmitting
+          scientific data after the flyby, but contact was eventually lost in
+          November 1967. It remains in a heliocentric orbit around the Sun.
+        </>
+      ),
+      imageUrl: '/assets/objects/mariner05.gif',
+      caption: "The Mission Continues in Silence",
+      credit: "NASA",
+    },
+  ],
+},
+{
+  id: 'surveyor1',
+  name: 'Surveyor 1',
+  place: 'Moon',
+  coverImageUrl: '/assets/objects/surveyor_beach.jpg',
+  pages: [
+    {
+      label: 'Origin',
+      title: 'The First U.S. Soft Landing',
+      text: `Surveyor 1 was launched on May 30, 1966, as the first spacecraft in NASA's Surveyor program. It successfully made the first true soft landing by a U.S. spacecraft on the Moon and demonstrated the technology needed for future human lunar landings.`,
+      imageUrl: '/assets/objects/surveyor_beach.jpg',
+      caption: "The First U.S. Soft Landing",
+      credit: "NASA",
+    },
+    {
+      label: 'Goals',
+      title: 'Proving the Moon Could Be Landed On',
+      text: `Surveyor 1 was designed to test a controlled soft landing and examine the lunar surface at close range.\n• Primary objective: Demonstrate a soft landing on the Moon.\n• Main instrument: Television camera.\n• Surface study: Photograph the lunar terrain and landing site.\n• Engineering goal: Determine whether the lunar surface could safely support future crewed spacecraft.`,
+      imageUrl: '/assets/objects/images (5).jpeg',
+      caption: "Proving the Moon Could Be Landed On",
+      credit: "NASA",
+    },
+    {
+      label: 'Discoveries',
+      title: 'The Moon Up Close',
+      text: (
+        <>
+          Surveyor 1 provided the first detailed, close-range views of the
+          lunar surface from a U.S. spacecraft sitting on the Moon.
+        </>
+      ),
+      bullets: [
+        <>
+          <strong>First U.S. Soft Landing:</strong> It successfully landed in
+          Oceanus Procellarum on June 2, 1966.
+        </>,
+        <>
+          <strong>Surface Images:</strong> It returned more than 11,000
+          photographs, including the first color photographs taken from the
+          lunar surface by a U.S. spacecraft.
+        </>,
+        <>
+          <strong>Landing Site:</strong> Its cameras examined the terrain and
+          its own footpads to help characterize the lunar soil.
+        </>,
+        <>
+          <strong>Engineering:</strong> The successful mission demonstrated
+          that a spacecraft could land, communicate, and operate on the Moon's
+          surface.
+        </>,
+      ],
+      imageUrl: 'public/assets/objects/surv1_lro_thumb.png',
+      caption: "The Moon Up Close",
+      credit: "NASA",
+    },
+    {
+      label: 'Now',
+      title: 'Its Final Silence',
+      text: (
+        <>
+          <strong>End of Mission:</strong> Surveyor 1 completed its primary
+          mission on July 14, 1966. After surviving its first lunar night,
+          it briefly resumed operations, but intermittent contact finally
+          ended on January 7, 1967.
+        </>
+      ),
+      imageUrl: '/assets/objects/images (4).jpeg',
+      caption: "Its Final Silence",
+      credit: "NASA",
+    },
+  ],
+},
+
+{
+  id: 'surveyor3',
+  name: 'Surveyor 3',
+  place: 'Moon',
+  coverImageUrl: '/assets/objects/surveyor_nasm.jpg',
+  pages: [
+    {
+      label: 'Origin',
+      title: 'Testing the Lunar Soil',
+      text: `Surveyor 3 was launched on April 17, 1967, as the third successful Surveyor mission. It expanded the program beyond imaging by carrying a surface sampler capable of digging into and mechanically testing the lunar soil.`,
+      imageUrl: '/assets/objects/surveyor_nasm.jpg',
+      caption: "Testing the Lunar Soil",
+      credit: "NASA",
+    },
+    {
+      label: 'Goals',
+      title: 'Digging Into the Moon',
+      text: `Surveyor 3 was designed to study the lunar surface in greater detail and test whether lunar soil could support future crewed landings.\n• Primary objective: Soft landing and surface investigation.\n• Main instrument: Television camera.\n• Surface sampler: Dig trenches and perform bearing and impact tests.\n• Target: Oceanus Procellarum and its lunar soil.`,
+      imageUrl: '/assets/objects/as12-48-7134_1280.jpg',
+      caption: "Digging Into the Moon",
+      credit: "NASA",
+    },
+    {
+      label: 'Discoveries',
+      title: 'Soil Strong Enough to Land',
+      text: (
+        <>
+          Surveyor 3's experiments showed that the lunar surface had enough
+          strength to support the Apollo Lunar Module.
+        </>
+      ),
+      bullets: [
+        <>
+          <strong>Surface Images:</strong> It transmitted 6,326 television
+          pictures of its surroundings.
+        </>,
+        <>
+          <strong>Soil Sampling:</strong> Its scoop dug four trenches and
+          performed bearing and impact tests on lunar soil.
+        </>,
+        <>
+          <strong>Soil Properties:</strong> Scientists found the lunar soil
+          had a consistency similar to wet sand, with sufficient bearing
+          strength to support an Apollo Lunar Module.
+        </>,
+        <>
+          <strong>Apollo 12:</strong> More than two years later, Apollo 12
+          astronauts landed nearby and recovered parts of Surveyor 3 for
+          examination on Earth.
+        </>,
+      ],
+      imageUrl: '/assets/objects/as12-48-7134_1280.jpg',
+      caption: "Soil Strong Enough to Land",
+      credit: "NASA",
+    },
+    {
+      label: 'Now',
+      title: 'Visited by Apollo 12',
+      text: (
+        <>
+          <strong>End of Mission:</strong> Surveyor 3's last contact with
+          Earth was on May 4, 1967, shortly after lunar night began. The
+          inactive lander remained on the Moon until Apollo 12 astronauts
+          visited it in November 1969 and recovered several components.
+        </>
+      ),
+      imageUrl: '/assets/objects/detail_as12-48-7121_orig.jpg',
+      caption: "Visited by Apollo 12",
+      credit: "NASA",
+    },
+  ],
+},
+
+{
+  id: 'surveyor5',
+  name: 'Surveyor 5',
+  place: 'Moon',
+  coverImageUrl: '/assets/objects/first chemistry set on moon.jpg',
+  pages: [
+    {
+      label: 'Origin',
+      title: 'Analyzing the Moon’s Chemistry',
+      text: `Surveyor 5 was launched on September 8, 1967, and landed in Mare Tranquillitatis on September 11. It introduced an important new capability to the Surveyor program: direct chemical analysis of lunar material.`,
+      imageUrl: '/assets/objects/first chemistry set on moon.jpg',
+      caption: "Analyzing the Moon’s Chemistry",
+      credit: "NASA",
+    },
+    {
+      label: 'Goals',
+      title: 'What Is the Moon Made Of?',
+      text: `Surveyor 5 combined surface imaging with instruments designed to study the physical and chemical properties of lunar material.\n• Primary objective: Soft landing and lunar surface investigation.\n• Main instrument: Television camera.\n• Chemical analysis: Alpha-scattering instrument.\n• Additional experiment: Magnet on a footpad to investigate magnetic material in the soil.`,
+      imageUrl: '/assets/objects/su5_67_h_1340.gif',
+      caption: "Surveyor 5 image of the footpad resting in the lunar soil",
+      credit: "NASA",
+    },
+    {
+      label: 'Discoveries',
+      title: 'Reading the Lunar Soil',
+      text: (
+        <>
+          Surveyor 5 directly measured the composition and physical properties
+          of lunar material in Mare Tranquillitatis.
+        </>
+      ),
+      bullets: [
+        <>
+          <strong>Chemical Composition:</strong> The alpha-scattering
+          instrument found lunar soil containing more than half oxygen along
+          with significant amounts of silicon and aluminum.
+        </>,
+        <>
+          <strong>Photography:</strong> Surveyor 5 transmitted a total of
+          20,018 pictures of the lunar surface.
+        </>,
+        <>
+          <strong>Magnetic Material:</strong> A magnet attached to a footpad
+          helped investigate magnetic material in the lunar soil.
+        </>,
+        <>
+          <strong>Engine Test:</strong> Controllers briefly fired the main
+          engine to study the effects of disturbing the lunar surface.
+        </>,
+      ],
+      imageUrl: '/assets/objects/surveyor_beach.jpg',
+      caption: "Reading the Lunar Soil",
+      credit: "NASA",
+    },
+    {
+      label: 'Now',
+      title: 'Its Final Transmission',
+      text: (
+        <>
+          <strong>End of Mission:</strong> Surveyor 5 survived several lunar
+          days and continued returning photographs after its initial mission.
+          Contact with the spacecraft was finally lost on December 16, 1967.
+        </>
+      ),
+      imageUrl: '/assets/objects/as12-48-7134_1280.jpg',
+      caption: "Its Final Transmission",
+      credit: "NASA",
+    },
+  ],
+},
+
+{
+  id: 'surveyor6',
+  name: 'Surveyor 6',
+  place: 'Moon',
+  coverImageUrl: '/assets/objects/webp.webp',
+  pages: [
+    {
+      label: 'Origin',
+      title: 'A Lander That Moved',
+      text: `Surveyor 6 was launched on November 7, 1967, and landed in Sinus Medii on November 10. It continued the Surveyor program's work of evaluating lunar landing sites while demonstrating that a spacecraft could reposition itself after landing.`,
+      imageUrl: '/assets/objects/webp.webp',
+      caption: "A Lander That Moved",
+      credit: "NASA",
+    },
+    {
+      label: 'Goals',
+      title: 'Studying the Moon from the Ground',
+      text: `Surveyor 6 was designed to photograph and analyze the lunar surface while continuing investigations relevant to future Apollo landings.\n• Primary objective: Lunar soft landing and surface investigation.\n• Main instrument: Television camera.\n• Chemical analysis: Alpha-scattering instrument.\n• Additional experiment: Footpad magnet for studying magnetic material.\n• Mobility test: Demonstrate a controlled movement after landing.`,
+      imageUrl: '/assets/objects/surveyor_beach.jpg',
+      caption: "Studying the Moon from the Ground",
+      credit: "NASA",
+    },
+    {
+      label: 'Discoveries',
+      title: 'The First Lunar Hop',
+      text: (
+        <>
+          Surveyor 6 became the first spacecraft to launch itself from the
+          surface of another world, allowing scientists to compare the terrain
+          from two nearby positions.
+        </>
+      ),
+      bullets: [
+        <>
+          <strong>Surface Chemistry:</strong> Its alpha-scattering instrument
+          collected about 30 hours of data on the chemical composition of the
+          lunar surface.
+        </>,
+        <>
+          <strong>Nearly 30,000 Images:</strong> It returned approximately
+          30,000 photographs of the lunar surface and its surroundings.
+        </>,
+        <>
+          <strong>Lunar Hop:</strong> On November 17, 1967, its thrusters fired
+          for 2.5 seconds, lifting the spacecraft about 10 feet and moving it
+          roughly 8 feet west.
+        </>,
+        <>
+          <strong>Soil Mechanics:</strong> Cameras examined the original
+          landing area and footprints to study the mechanical properties of
+          the lunar soil.
+        </>,
+      ],
+      imageUrl: '/assets/objects/images (7).jpeg',
+      caption: "The First Lunar Hop",
+      credit: "NASA",
+    },
+    {
+      label: 'Now',
+      title: 'Its Final Contact',
+      text: (
+        <>
+          <strong>End of Mission:</strong> Surveyor 6 entered hibernation
+          during the lunar night after November 26, 1967. Controllers briefly
+          regained contact on December 14, but primary operations had already
+          ended and the mission was terminated that day.
+        </>
+      ),
+      imageUrl: '/assets/objects/images (7).jpeg',
+      caption: "Its Final Contact",
+      credit: "NASA",
+    },
+  ],
+},
+
+{
+  id: 'surveyor7',
+  name: 'Surveyor 7',
+  place: 'Moon',
+  coverImageUrl: '/assets/objects/surveyor_beach.jpg',
+  pages: [
+    {
+      label: 'Origin',
+      title: 'The Scientific Surveyor',
+      text: `Surveyor 7 was launched on January 7, 1968, as the final successful Surveyor mission. By this point, earlier Surveyors had already demonstrated that lunar landing sites could support future Apollo missions, so Surveyor 7 was sent to the scientifically different highland region near Tycho crater.`,
+      imageUrl: '/assets/objects/surveyor_beach.jpg',
+      caption: "The Scientific Surveyor",
+      credit: "NASA",
+    },
+    {
+      label: 'Goals',
+      title: 'Exploring the Lunar Highlands',
+      text: `Surveyor 7 carried the most extensive scientific instrument set of the original Surveyor series.\n• Primary objective: Scientific study of the lunar highlands.\n• Imaging: Television camera and stereoscopic imaging equipment.\n• Surface study: Soil mechanics surface sampler.\n• Chemistry: Alpha-scattering surface analyzer.\n• Additional studies: Magnetic material, dust, and Earth-Moon laser ranging.`,
+      imageUrl: '/assets/objects/surveyor_7_landing_site.png',
+      caption: "surveyor_7_landing_site",
+      credit: "NASA",
+    },
+    {
+      label: 'Discoveries',
+      title: 'A Different Side of the Moon',
+      text: (
+        <>
+          Surveyor 7 explored lunar highlands rather than the flatter maria,
+          revealing a scientifically different environment near Tycho crater.
+        </>
+      ),
+      bullets: [
+        <>
+          <strong>Highlands:</strong> It was the only Surveyor to land in the
+          lunar highland region, near the outer rim of Tycho crater.
+        </>,
+        <>
+          <strong>Soil Chemistry:</strong> Its alpha-scattering instrument
+          analyzed lunar material at several locations and found lower iron
+          concentrations than at maria landing sites.
+        </>,
+        <>
+          <strong>Soil Mechanics:</strong> The surface sampler dug trenches
+          and performed at least 16 bearing tests.
+        </>,
+        <>
+          <strong>Photography:</strong> It returned approximately 21,274
+          photographs during its two lunar days of operation.
+        </>,
+      ],
+      imageUrl: '/assets/objects/surveyortycho.gif',
+      caption: "Tycho Crater panaroma",
+      credit: "NASA",
+    },
+    {
+      label: 'Now',
+      title: 'The Final Surveyor',
+      text: (
+        <>
+          <strong>End of Mission:</strong> Surveyor 7 survived its first lunar
+          night and resumed operations during a second lunar day. Operations
+          continued until February 21, 1968, marking the end of the original
+          Surveyor program.
+        </>
+      ),
+         imageUrl: '/assets/objects/Tycho crater.jpg',
+      caption: "Tycho Crater",
+      credit: "NASA",
+    },
+  ],
+},
+{
+  id: 'ranger7',
+  name: 'Ranger 7',
+  place: 'Moon',
+  coverImageUrl: '/assets/objects/ranger.gif',
+  pages: [
+    {
+      label: 'Origin',
+      title: 'The First Successful Close-Up',
+      text: `Ranger 7 was launched on July 28, 1964, as the first completely successful mission of NASA's Ranger program. It was designed to photograph the Moon at close range during its final descent before deliberately impacting the lunar surface.`,
+      imageUrl: '/assets/objects/ranger.gif',
+      caption: "The First Successful Close-Up",
+      credit: "NASA",
+    },
+    {
+      label: 'Goals',
+      title: 'Seeing the Moon Before Impact',
+      text: `Ranger 7 was built to obtain high-resolution photographs of the lunar surface immediately before impact.\n• Primary objective: Lunar photography.\n• Imaging system: Six television vidicon cameras.\n• Camera system: Two independent channels containing wide- and narrow-angle cameras.\n• Target: Mare Cognitum and surrounding lunar terrain.\n• Purpose: Improve lunar surface knowledge and support Apollo landing-site planning.`,
+      imageUrl: '/assets/objects/ra7_b001.gif',
+      caption: "the first picture of the Moon by a U.S. spacecraft, on 31 July 1964",
+      credit: "NASA",
+    },
+    {
+      label: 'Discoveries',
+      title: 'The Moon in Unprecedented Detail',
+      text: (
+        <>
+          Ranger 7 transformed knowledge of the lunar surface by returning
+          thousands of close-up photographs during its final minutes of flight.
+        </>
+      ),
+      bullets: [
+        <>
+          <strong>First Success:</strong> Ranger 7 became the first U.S.
+          spacecraft to successfully transmit close-up photographs of the
+          Moon before impact.
+        </>,
+        <>
+          <strong>Photography:</strong> It returned 4,316 photographs during
+          its final descent.
+        </>,
+        <>
+          <strong>Resolution:</strong> The final images reached approximately
+          0.5-meter resolution.
+        </>,
+        <>
+          <strong>Apollo Planning:</strong> The photographs greatly reduced
+          uncertainty about the lunar surface and helped support future
+          Apollo landing-site selection.
+        </>,
+      ],
+      imageUrl: '/assets/objects/ranger7pn199.gif',
+      caption: "Images by ranger 7 before impact",
+      credit: "NASA",
+    },
+    {
+      label: 'Now',
+      title: 'Its Final Descent',
+      text: (
+        <>
+          <strong>End of Mission:</strong> Ranger 7 impacted the Moon on
+          July 31, 1964, at 13:25:49 UT. NASA's NSSDCA gives the impact
+          location as approximately 10.70° south latitude and 339.33° east
+          longitude in Mare Cognitum.
+        </>
+      ),
+      imageUrl: '/assets/objects/ra7_b100.gif',
+      caption: "Ranger 7 B-camera image of Guericke crater",
+      credit: "NASA",
+    },
+  ],
+},
+
+{
+  id: 'ranger8',
+  name: 'Ranger 8',
+  place: 'Moon',
+  coverImageUrl: '/assets/objects/ranger.gif',
+  pages: [
+    {
+      label: 'Origin',
+      title: 'Searching for Apollo Landing Ground',
+      text: `Ranger 8 was launched on February 17, 1965, as the eighth spacecraft in NASA's Ranger program. Following Ranger 7's success, it was sent toward the Moon to photograph another region considered important for future Apollo landings.`,
+      imageUrl: '/assets/objects/ranger.gif',
+      caption: "Searching for Apollo Landing Ground",
+      credit: "NASA",
+    },
+    {
+      label: 'Goals',
+      title: 'Photographing Mare Tranquillitatis',
+      text: `Ranger 8 was designed to photograph the lunar surface during its final approach and impact.\n• Primary objective: High-resolution lunar photography.\n• Imaging system: Six television vidicon cameras.\n• Camera system: Two independent channels with wide- and narrow-angle cameras.\n• Target: Mare Tranquillitatis, the Sea of Tranquility.\n• Purpose: Characterize terrain relevant to future Apollo landing missions.`,
+      imageUrl: '/assets/objects/ra8_a030.gif',
+      caption: "Ritter and Sabine craters on the Moon",
+      credit: "NASA",
+    },
+    {
+      label: 'Discoveries',
+      title: 'A Safer Landing Site',
+      text: (
+        <>
+          Ranger 8 produced thousands of detailed images of Mare Tranquillitatis,
+          providing important information about the terrain later chosen for
+          the first human landing on the Moon.
+        </>
+      ),
+      bullets: [
+        <>
+          <strong>Photography:</strong> Ranger 8 returned thousands of
+          high-resolution photographs during its final descent.
+        </>,
+        <>
+          <strong>Landing Site:</strong> Its target region was Mare
+          Tranquillitatis, an area later selected as the Apollo 11 landing
+          site.
+        </>,
+        <>
+          <strong>Surface Study:</strong> The images revealed craters,
+          ridges, and other terrain features at increasingly close range.
+        </>,
+        <>
+          <strong>Apollo:</strong> The mission helped demonstrate that the
+          lunar maria contained terrain suitable for crewed landing operations.
+        </>,
+      ],
+      imageUrl: '/assets/objects/ra8_b045.gif',
+      caption: "Ranger 8 image of the Mare Tranquillitatis (Sea of Tranquillity) ",
+      credit: "NASA",
+    },
+    {
+      label: 'Now',
+      title: 'Its Final Impact',
+      text: (
+        <>
+          <strong>End of Mission:</strong> Ranger 8 impacted the Moon on
+          February 20, 1965, at 09:57:37 UT. NASA's NSSDCA lists the impact
+          at approximately 2.71° north latitude and 24.81° east longitude
+          in Mare Tranquillitatis.
+        </>
+      ),
+      imageUrl: '/assets/objects/ra8_b001.gif',
+      caption: "Ptolemaeus and Alphonsus craters on the Moon",
+      credit: "NASA",
+    },
+  ],
+},
+
+{
+  id: 'ranger9',
+  name: 'Ranger 9',
+  place: 'Moon',
+  coverImageUrl: '/assets/objects/ranger.gif',
+  pages: [
+    {
+      label: 'Origin',
+      title: 'The Final Ranger',
+      text: `Ranger 9 was launched on March 21, 1965, as the final spacecraft of NASA's Ranger program. Unlike Rangers 7 and 8, which targeted relatively smooth lunar maria, Ranger 9 was sent to the geologically interesting Alphonsus crater in the lunar highlands.`,
+      imageUrl: '/assets/objects/ranger.gif',
+      caption: "The Final Ranger",
+      credit: "NASA",
+    },
+    {
+      label: 'Goals',
+      title: 'Looking Into Alphonsus Crater',
+      text: `Ranger 9 was designed to photograph the lunar highlands and investigate the scientifically interesting Alphonsus crater during its final descent.\n• Primary objective: High-resolution lunar photography.\n• Imaging system: Six television cameras.\n• Target: Alphonsus crater.\n• Scientific interest: Investigate a region suspected of possible relatively recent volcanic activity.\n• Public demonstration: Transmit images that could be viewed in near real time on television.`,
+      imageUrl: '/assets/objects/ra9_a060.gif',
+      caption: " The upraised area at lower center is the central peak of Alphonsus crater floor",
+      credit: "NASA",
+    },
+    {
+      label: 'Discoveries',
+      title: 'A Final Look at the Lunar Highlands',
+      text: (
+        <>
+          Ranger 9 provided an exceptionally detailed final view of Alphonsus
+          crater and became the last successful lunar impact mission of the
+          Ranger program.
+        </>
+      ),
+      bullets: [
+        <>
+          <strong>Photography:</strong> It transmitted 5,814 photographs
+          during its final descent.
+        </>,
+        <>
+          <strong>Alphonsus:</strong> The images provided detailed views of
+          the crater floor, central peak, and surrounding terrain.
+        </>,
+        <>
+          <strong>Live Television:</strong> Many of its images were converted
+          for near-real-time television viewing, allowing millions of people
+          to watch the spacecraft approach the Moon.
+        </>,
+        <>
+          <strong>Final Ranger:</strong> Ranger 9 completed the successful
+          Ranger series of lunar photographic impact missions.
+        </>,
+      ],
+      imageUrl: '/assets/objects/ra9_b001.gif',
+      caption: "Ptolemaeus, Alphonsus, and Albategnius craters on the Moon",
+      credit: "NASA",
+    },
+    {
+      label: 'Now',
+      title: 'Its Final Image',
+      text: (
+        <>
+          <strong>End of Mission:</strong> Ranger 9 impacted the Moon on
+          March 24, 1965, at 14:08:20 UT inside Alphonsus crater. NASA lists
+          the impact at approximately 12.91° south latitude and 357.62° east
+          longitude.
+        </>
+      ),
+      imageUrl: '/assets/objects/ra9_p012.gif',
+      caption: "Final two images taken by Ranger 9 before impact",
       credit: "NASA",
     },
   ],
@@ -1981,8 +3072,28 @@ const BookModal: React.FC<{ book: BotBook; onClose: () => void }> = ({ book, onC
 
 
 export const AbandonedStories: React.FC = () => {
-  const [openBookId, setOpenBookId] = useState<string | null>(null);
+  const idFromHash = () => {
+    const id = decodeURIComponent(window.location.hash.replace(/^#/, ''));
+    return BOOKS.some((b) => b.id === id) ? id : null;
+  };
+  const [openBookId, setOpenBookId] = useState<string | null>(idFromHash);
   const openBook = BOOKS.find((b) => b.id === openBookId) ?? null;
+
+  // Keep the URL (/stories#opportunity) and the open book in sync, so links and Back work.
+  const openById = (id: string | null) => {
+    setOpenBookId(id);
+    const url = window.location.pathname + window.location.search + (id ? `#${id}` : '');
+    window.history.pushState(null, '', url);
+  };
+  useEffect(() => {
+    const sync = () => setOpenBookId(idFromHash());
+    window.addEventListener('hashchange', sync);
+    window.addEventListener('popstate', sync);
+    return () => {
+      window.removeEventListener('hashchange', sync);
+      window.removeEventListener('popstate', sync);
+    };
+  }, []);
 
   return (
     <section className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
@@ -1998,12 +3109,12 @@ export const AbandonedStories: React.FC = () => {
 
       <div className="grid grid-cols-2 gap-5 sm:grid-cols-3">
         {BOOKS.map((book) => (
-          <BookCard key={book.id} book={book} onOpen={() => setOpenBookId(book.id)} />
+          <BookCard key={book.id} book={book} onOpen={() => openById(book.id)} />
         ))}
       </div>
 
       <AnimatePresence>
-        {openBook && <BookModal book={openBook} onClose={() => setOpenBookId(null)} />}
+        {openBook && <BookModal book={openBook} onClose={() => openById(null)} />}
       </AnimatePresence>
     </section>
   );

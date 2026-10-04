@@ -49,3 +49,13 @@ export function destinationFromHash(hash: string): DestinationChoice | null {
 export function hashForDestination(dest: DestinationChoice): string {
   return dest === 'deep_space' ? '#space' : `#${dest}`;
 }
+
+/** Story links: /stories#opportunity opens that book in Abandoned Stories. */
+export function pathForStory(storyId: string): string {
+  return `/stories#${encodeURIComponent(storyId)}`;
+}
+
+export function storyIdFromHash(hash: string): string | null {
+  const id = decodeURIComponent(hash.replace(/^#/, ''));
+  return id || null;
+}

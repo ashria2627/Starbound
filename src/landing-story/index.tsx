@@ -20,6 +20,7 @@ import {
   setAccent,
   Accent,
   CharacterVoice,
+  primeSpeech,
 } from './utils/speech';
 
 export interface StorybookProps {
@@ -77,6 +78,7 @@ export const LandingStory: React.FC<StorybookProps> = ({
   }, [selectedDestination]);
 
   const handleSoundToggle = () => {
+    primeSpeech();
     const next = !soundOn;
     setSoundOn(next);
     setSoundEnabled(next);
@@ -84,18 +86,28 @@ export const LandingStory: React.FC<StorybookProps> = ({
     if (next) {
       playBloop(520);
     } else {
+      // Audio off means no voice at all, so Auto-Voice must reflect that.
+      setAutoSpeak(false);
+      setAutoSpeakEnabled(false);
       stopSpeaking();
     }
   };
 
   const handleToggleAutoSpeak = () => {
+    primeSpeech();
     const next = !autoSpeak;
-    setAutoSpeak(next);
-    setAutoSpeakEnabled(next);
-    if (!next) {
-      stopSpeaking();
-    } else {
+    if (next) {
+      // Auto-Voice needs audio. Turn speech on here so it works without a second click.
+      setSoundOn(true);
+      setSoundEnabled(true);
+      setSpeechEnabled(true);
+      setAutoSpeak(true);
+      setAutoSpeakEnabled(true);
       playBloop(640);
+    } else {
+      setAutoSpeak(false);
+      setAutoSpeakEnabled(false);
+      stopSpeaking();
     }
   };
 
@@ -110,13 +122,13 @@ export const LandingStory: React.FC<StorybookProps> = ({
       className={`relative w-full min-h-screen bg-[#fff1dc] text-amber-900 selection:bg-orange-500 selection:text-white font-sans ${className}`}
     >
      
-      <header className="fixed top-[6.75rem] left-3 right-3 z-40 flex items-center justify-between pointer-events-none">
+      <header className="fixed top-[5.75rem] left-3 right-3 z-40 flex items-center justify-between gap-2 pointer-events-none">
 
-        <div className="pointer-events-auto flex items-center gap-2">
+        <div className="pointer-events-auto flex items-center gap-1.5 shrink-0">
            
           <button
             onClick={handleSoundToggle}
-            className={`px-2.5 py-1 rounded-sm border text-[11px] font-mono font-bold flex items-center gap-1.5 transition-all shadow-md cursor-pointer ${
+            className={`px-2 sm:px-2.5 py-1 rounded-sm border text-[11px] font-mono font-bold flex items-center gap-1.5 whitespace-nowrap transition-all shadow-md cursor-pointer ${
               soundOn
                 ? 'bg-orange-950/80 border-orange-500/60 text-orange-300 hover:border-orange-400'
                 : 'bg-slate-900/80 border-slate-700 text-slate-400'
@@ -130,39 +142,21 @@ export const LandingStory: React.FC<StorybookProps> = ({
       
           <button
             onClick={handleToggleAutoSpeak}
-            className={`px-2.5 py-1 rounded-sm border text-[11px] font-mono font-bold flex items-center gap-1.5 transition-all shadow-md cursor-pointer ${
+            className={`px-2 sm:px-2.5 py-1 rounded-sm border text-[11px] font-mono font-bold flex items-center gap-1.5 whitespace-nowrap transition-all shadow-md cursor-pointer ${
               autoSpeak
                 ? 'bg-orange-800 border-orange-400 text-orange-200 hover:border-orange-300 shadow-[0_0_12px_rgba(56,189,248,0.3)]'
                 : 'bg-slate-900/80 border-slate-700 text-slate-400'
             }`}
             title={autoSpeak ? 'Auto-Voice is active! Characters read as you explore' : 'Auto-Voice is OFF. Tap to activate'}
           >
-            <span>{autoSpeak ? '🗣️ Auto-Voice ON' : '🔇 Auto-Voice OFF'}</span>
+            <span>{autoSpeak ? '🗣️' : '🔇'}<span className="hidden sm:inline">{autoSpeak ? ' Auto-Voice ON' : ' Auto-Voice OFF'}</span><span className="sm:hidden">{autoSpeak ? ' Auto' : ' Off'}</span></span>
           </button>
 
-          <label className="flex items-center gap-1 px-2 py-1 rounded-sm border border-slate-700 bg-slate-900/80 text-[11px] font-mono font-bold text-slate-300 shadow-md">
-            <span aria-hidden="true">🗣️</span>
-            <span className="sr-only">Voice accent</span>
-            <select
-              value={accent}
-              onChange={(e) => {
-                const a = e.target.value as Accent;
-                setAccentState(a);
-                setAccent(a);
-                stopSpeaking();
-              }}
-              className="bg-transparent text-slate-200 outline-none cursor-pointer"
-              title="Voice accent (depends on voices installed in your browser)"
-            >
-              {ACCENT_OPTIONS.map((o) => (
-                <option key={o.value} value={o.value} className="text-black">{o.label}</option>
-              ))}
-            </select>
-          </label>
+        
         </div>
 
         
-        <div className="pointer-events-auto flex items-center gap-1">
+        <div className="pointer-events-auto flex items-center gap-1 min-w-0">
           <StorybookStateMachine
             selectedDestination={selectedDestination}
             onSelectDestination={(dest) => setSelectedDestination(dest)}

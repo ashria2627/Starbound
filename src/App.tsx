@@ -1,8 +1,7 @@
-
 import React, { useState, useEffect, useCallback, lazy, Suspense } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Navbar, AppView } from './components/Navbar';
-import { routeFromPathname, pathForView, destinationFromHash } from './routes';
+import { routeFromPathname, pathForView, destinationFromHash, pathForStory } from './routes';
 import { KidsNavbar } from './components/KidsNavbar';
 import { EntryScreen } from './components/EntryScreen';
 import { LandingStory as OppyStory } from './landing-story';
@@ -155,6 +154,12 @@ export default function App() {
     setIsDetailOpen(false);
   };
 
+  // Map "Read story" -> /stories#<book id>, which opens that book.
+  const handleOpenStory = (storyId: string) => {
+    setCurrentView('abandoned-stories');
+    navigate(pathForStory(storyId));
+  };
+
   const handleToggleMode = () => {
     if (mode === 'adult') {
       setMode('kids');
@@ -252,7 +257,7 @@ export default function App() {
         {currentView === 'abandoned-stories' && <AbandonedStories />}
         {currentView === 'map' && (
           <Suspense fallback={<p className="p-8 text-center text-[#9aa0a6]">Loading map…</p>}>
-            <MapView onOpenStory={() => navigateToView('abandoned-stories')} />
+            <MapView onOpenStory={handleOpenStory} />
           </Suspense>
         )}
       </main>
@@ -275,14 +280,22 @@ export default function App() {
               <span>A Tribute to Brave Robot Explorers · Still Out There, Still Amazing!</span>
             </div>
             <div className="flex items-center gap-3">
-              <span>NASA JPL & International Science Archive</span>
+              <span>NASA JPL, NSSDC & International Science Archive</span>
               <span>·</span>
               <button
-                onClick={() => navigateToView('live-archive')}
+                onClick={() => navigateToView('abandoned-stories')}
                 className="text-amber-400 font-semibold hover:underline cursor-pointer"
               >
                 Active Telemetry Console
               </button>
+              <span>·</span>
+               <button
+          onClick={() => navigateToView('admin')}
+          className="whitespace-nowrap flex items-center gap-1.5 text-[#9aa0a6] hover:text-amber-200"
+        >
+          <span>Admin</span>
+        </button>
+
             </div>
           </div>
         </footer>

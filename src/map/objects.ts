@@ -4,7 +4,7 @@ import type { ObjectCollection, ObjectBody, VerifiedObject } from '../types/obje
 
 const collection = JSON.parse(raw) as ObjectCollection;
 
-/** Only records that pass the verified gate may reach the map. */
+
 export const VERIFIED_OBJECTS: VerifiedObject[] = collection.features
   .map((f) => f.properties)
   .filter(isVerifiedObject);

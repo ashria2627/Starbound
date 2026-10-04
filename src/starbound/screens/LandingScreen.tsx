@@ -17,7 +17,6 @@ export const LandingScreen: React.FC<LandingScreenProps> = ({
 }) => {
   const { state, dispatch } = useGame();
   const [isTopBarOpen, setIsTopBarOpen] = React.useState(true);
-
   const prefersReduced =
     typeof window !== 'undefined' &&
     window.matchMedia('(prefers-reduced-motion: reduce)').matches;

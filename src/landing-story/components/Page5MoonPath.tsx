@@ -172,7 +172,18 @@ export const Page5MoonPath: React.FC<Page5Props> = ({ autoSpeak = true }) => {
       window.clearTimeout(arrivalVoiceTimer);
       stopSpeaking();
     };
-  }, [autoSpeak, beats]);
+  }, [beats]);
+
+  // Auto-voice switched on while already on a segment: narrate the current one now.
+  const prevAutoSpeakRef = useRef(autoSpeak);
+  useEffect(() => {
+    if (prevAutoSpeakRef.current === autoSpeak) return;
+    prevAutoSpeakRef.current = autoSpeak;
+    if (autoSpeak && getAutoSpeakEnabled()) {
+      const beat = beats[activeBeat];
+      speakDialogue(beat.speaker, beat.speechText, { skipSoundCue: true });
+    }
+  }, [autoSpeak, beats, activeBeat]);
 
   const handleSpeak = useCallback((beatIdx: number) => {
     const beat = beats[beatIdx];
@@ -200,6 +211,7 @@ export const Page5MoonPath: React.FC<Page5Props> = ({ autoSpeak = true }) => {
 
       if (closestIdx !== activeBeat) {
         setActiveBeat(closestIdx);
+        stopSpeaking(); // leaving a segment ends its narration immediately
         playPageTurn();
         const beat = beats[closestIdx];
 

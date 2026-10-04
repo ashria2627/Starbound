@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import { OrbitCharacter } from './OrbitCharacter';  
 import { SpaceGlossaryWord } from './SpaceGlossaryWord';  
 import { playSceneMusic, playPageTurn } from '../utils/sound';  
-import { speakDialogue, getSpeechEnabled, getAutoSpeakEnabled } from '../utils/speech';  
+import { speakDialogue, getSpeechEnabled, getAutoSpeakEnabled, stopSpeaking } from '../utils/speech';  
   
 interface Page1Props {  
   autoSpeak?: boolean;  
@@ -286,6 +286,17 @@ export const Page1SolarSystem: React.FC<Page1Props> = ({ autoSpeak = true }) => 
     };  
   }, []);  
   
+  // Auto-voice switched on while already on a segment: narrate the current one now.
+  const prevAutoSpeakRef = useRef(autoSpeak);
+  useEffect(() => {
+    if (prevAutoSpeakRef.current === autoSpeak) return;
+    prevAutoSpeakRef.current = autoSpeak;
+    if (autoSpeak && getAutoSpeakEnabled()) {
+      const beat = beats[activeBeat];
+      speakDialogue(beat.speaker, beat.speechText, { skipSoundCue: true });
+    }
+  }, [autoSpeak, beats, activeBeat]);
+
   const handleSpeakBeat = useCallback((beatIdx: number) => {  
     const beat = beats[beatIdx];  
     speakDialogue('orbit', beat.speechText, { skipSoundCue: false, manualTrigger: true });  
@@ -328,6 +339,7 @@ export const Page1SolarSystem: React.FC<Page1Props> = ({ autoSpeak = true }) => 
   
       if (closestIdx !== activeBeat) {  
         setActiveBeat(closestIdx);  
+        stopSpeaking(); // leaving a segment ends its narration immediately
         playPageTurn();  
         const beat = beats[closestIdx];  
         stateRef.current.targetCamPos.copy(beat.cameraPos);  

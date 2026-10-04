@@ -405,35 +405,6 @@ const MissionStep: React.FC<{
   </div>
 );
 
-const TargetCard: React.FC<{
-  target: Target;
-  selected: boolean;
-  onClick: () => void;
-}> = ({ target, selected, onClick }) => (
-  <motion.button
-    type="button"
-    onClick={onClick}
-    whileHover={{ y: -4 }}
-    className={`w-full rounded-2xl border p-5 text-left transition ${
-      selected
-        ? 'border-[#d57a4b]/60 bg-[#d57a4b]/10'
-        : 'border-white/10 bg-white/[0.035] hover:border-white/20'
-    }`}
-  >
-    <div className="flex items-start justify-between gap-4">
-      <div>
-        <p className="font-mono text-[9px] tracking-[0.2em] text-[#d57a4b]">{target.eyebrow}</p>
-        <h3 className="mt-2 text-lg font-medium text-[#eee9e1]">{target.name}</h3>
-      </div>
-      <span className="text-2xl">{target.icon}</span>
-    </div>
-    <div className="mt-4 flex flex-wrap gap-2 text-[10px] font-mono uppercase tracking-wide text-[#8f8a8a]">
-      <span className="rounded-full border border-white/10 px-2 py-1">{target.location}</span>
-      <span className="rounded-full border border-white/10 px-2 py-1">{target.status}</span>
-    </div>
-  </motion.button>
-);
-
 const ActionButton: React.FC<{
   action: Action;
   label: string;
@@ -577,6 +548,68 @@ const SolutionCard: React.FC<{
           </div>
         ) : null}
       </div>
+    </div>
+  );
+};
+
+type Pillar = { label: string; icon: React.ReactNode; content: React.ReactNode };
+
+const PillarTabs: React.FC<{ pillars: Pillar[] }> = ({ pillars }) => {
+  const [active, setActive] = useState(0);
+  const current = pillars[active];
+
+  return (
+    <div>
+      <div className="grid grid-cols-3 gap-3 sm:gap-6">
+        {pillars.map((pillar, index) => (
+          <button
+            key={pillar.label}
+            type="button"
+            aria-pressed={index === active}
+            onClick={() => setActive(index)}
+            className={`border-t-2 pt-4 text-left transition ${
+              index === active ? 'border-[#d57a4b]' : 'border-white/10 hover:border-white/30'
+            }`}
+          >
+            <span className="font-mono text-[10px] tracking-[0.2em] text-[#d57a4b]">0{index + 1}</span>
+            <span className="mt-2 flex items-center gap-2 text-xs text-[#d4ceca] sm:text-sm">
+              {pillar.icon}
+              {pillar.label}
+            </span>
+          </button>
+        ))}
+      </div>
+      <motion.div key={active} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="mt-10">
+        {current.content}
+      </motion.div>
+    </div>
+  );
+};
+
+const OrbitDiagram: React.FC = () => {
+  const nodes: { label: string; icon: LucideIcon; pos: string }[] = [
+    { label: 'REPAIR', icon: Wrench, pos: 'left-1/2 top-[12%]' },
+    { label: 'PRESERVE', icon: Shield, pos: 'left-[88%] top-1/2' },
+    { label: 'INSPECT', icon: Search, pos: 'left-1/2 top-[88%]' },
+    { label: 'LEAVE', icon: Info, pos: 'left-[12%] top-1/2' },
+  ];
+
+  return (
+    <div className="relative mx-auto aspect-square w-full max-w-[460px]">
+      <div className="absolute inset-[12%] rounded-full border border-white/10" />
+      <div className="absolute inset-[24%] rounded-full border border-white/10" />
+      <div className="absolute inset-[36%] rounded-full border border-white/10" />
+      <div className="absolute left-1/2 top-1/2 flex h-28 w-28 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-[#d57a4b]/40 bg-[#d57a4b]/10">
+        <span className="font-mono text-xs tracking-[0.25em] text-[#eee9e1]">MENDER</span>
+      </div>
+      {nodes.map(({ label, icon: Icon, pos }) => (
+        <div key={label} className={`absolute flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-2 ${pos}`}>
+          <div className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-[#111319] text-[#d57a4b]">
+            <Icon className="h-4 w-4" />
+          </div>
+          <span className="whitespace-nowrap font-mono text-[9px] tracking-[0.2em] text-[#aaa3a1]">{label}</span>
+        </div>
+      ))}
     </div>
   );
 };
@@ -881,8 +914,22 @@ return onSnapshot(commentsQuery, (snapshot) => {
 
   return (
     <main className="min-h-screen overflow-hidden bg-[#08090c] text-[#eee9e1]">
-     
-      <section className="relative mx-auto w-full max-w-7xl px-4 pb-20 pt-14 sm:px-6 lg:px-8 lg:pt-20">
+      <header className="relative z-20 mx-auto flex w-full max-w-7xl items-center justify-between px-4 pt-6 sm:px-6 lg:px-8">
+        <a href="#top" className="flex items-center gap-3">
+          <span className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-lg">🤖</span>
+          <span className="font-mono text-xs tracking-[0.3em] text-[#eee9e1]">MENDER</span>
+        </a>
+        <nav aria-label="Sections" className="hidden gap-7 font-mono text-[10px] uppercase tracking-[0.2em] text-[#9e9999] md:flex">
+          <a href="#mender" className="hover:text-[#eee9e1]">Concept</a>
+          <a href="#why" className="hover:text-[#eee9e1]">Why</a>
+          <a href="#universe" className="hover:text-[#eee9e1]">Cases</a>
+          <a href="#how" className="hover:text-[#eee9e1]">How it works</a>
+          <a href="#simulation" className="hover:text-[#eee9e1]">Simulation</a>
+          <a href="#community" className="hover:text-[#eee9e1]">Community</a>
+        </nav>
+      </header>
+
+      <div id="top"><section className="relative mx-auto w-full max-w-7xl px-4 pb-20 pt-14 sm:px-6 lg:px-8 lg:pt-20">
         <div className="absolute left-1/2 top-0 -z-0 h-[520px] w-[720px] -translate-x-1/2 rounded-full bg-[#d57a4b]/10 blur-[120px]" />
         <div className="relative grid items-center gap-10 lg:grid-cols-[1.05fr_.95fr]">
           <div>
@@ -917,194 +964,283 @@ return onSnapshot(commentsQuery, (snapshot) => {
 
           <MenderScene />
         </div>
+      </section></div>
+
+      <section id="mender" className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+        <div className="grid items-center gap-12 lg:grid-cols-[.9fr_1.1fr]">
+          <div>
+            <p className="font-mono text-5xl font-light text-[#d57a4b]/30">01</p>
+            <h2 className="mt-2 font-serif text-3xl leading-tight text-[#eee9e1] sm:text-5xl">
+              The explorer after the exploration.
+            </h2>
+            <p className="mt-5 max-w-md leading-7 text-[#d4ceca]">
+              MENDER is a concept, not an existing spacecraft. Its role is to explore what a future
+              recovery mission could look like when the first mission has already ended.
+            </p>
+            <p className="mt-4 max-w-md text-sm leading-6 text-[#9e9999]">
+              A conceptual autonomous system for interacting with humanity&apos;s robotic legacy. It
+              locates inactive explorers, inspects their condition, and helps decide whether to repair,
+              preserve, document or leave them undisturbed.
+            </p>
+            <a
+              href="#why"
+              className="mt-7 inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-[#d57a4b] hover:text-[#e08a5c]"
+            >
+              Why go back <ArrowDown className="h-3.5 w-3.5" />
+            </a>
+          </div>
+
+          <div className="rounded-[2rem] border border-white/10 bg-[#101218] p-7 sm:p-9">
+            <div className="flex items-center gap-3">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#d57a4b]/10 text-2xl">🤖</div>
+              <div>
+                <h3 className="text-2xl font-medium text-[#eee9e1]">MENDER</h3>
+                <p className="font-mono text-[10px] leading-5 text-[#d4ceca]">
+                  Mission Exploration, Navigation, Diagnostics &amp; Emergency Recovery Robot
+                </p>
+              </div>
+            </div>
+            <div className="mt-7 grid grid-cols-2 gap-3">
+              {[
+                ['LOCATE', MapPin],
+                ['DIAGNOSE', Cpu],
+                ['DECIDE', Gauge],
+                ['PRESERVE', Shield],
+              ].map(([label, IconComponent]) => {
+                const Icon = IconComponent as React.ComponentType<{ className?: string }>;
+                return (
+                  <div key={String(label)} className="rounded-xl border border-white/10 p-4">
+                    <Icon className="h-4 w-4 text-[#d57a4b]" />
+                    <p className="mt-2 font-mono text-[9px] tracking-widest text-[#aaa3a1]">{String(label)}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
       </section>
 
-   
-      <section id="mender" className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="grid items-center gap-10 lg:grid-cols-[.8fr_1.2fr]">
-          <div className="order-2 lg:order-1">
-            <div className="rounded-[2rem] border border-white/10 bg-[#101218] p-7 sm:p-9">
-              <div className="flex items-center gap-3">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#d57a4b]/10 text-2xl">
-                  🤖
-                </div>
-                <div>
-                  <h2 className="text-2xl font-medium text-[#eee9e1]">MENDER</h2>
-                </div>
-              </div>
-              <p className="mt-7 font-mono text-sm font-extrabold leading-6 text-[#d4ceca]">
-                Mission Exploration, Navigation, Diagnostics &amp; Emergency Recovery Robot
-              </p>
-              <p className="mt-2 text-sm text-[#9e9999]">
-                A conceptual autonomous system for interacting with humanity&apos;s robotic legacy.
-                It locates inactive explorers, inspects their condition, and helps decide whether
-                to repair, preserve, document or leave them undisturbed.
-              </p>
-              <div className="mt-7 grid grid-cols-2 gap-3">
-  {[
-    ['LOCATE', MapPin],
-    ['DIAGNOSE', Cpu],
-    ['DECIDE', Gauge],
-    ['PRESERVE', Shield],
-  ].map(([label, IconComponent]) => {
-    const Icon = IconComponent as React.ComponentType<{
-      className?: string;
-    }>;
+      <section id="why" className="relative overflow-hidden border-y border-white/10 bg-[#0c0a0d]">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(213,122,75,.16),transparent_55%)]" />
+        <div className="relative mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+          <div className="grid gap-10 lg:grid-cols-[.8fr_1.2fr] lg:items-end">
+            <div>
+              <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#d57a4b]">02 / WHY GO BACK?</p>
+              <h2 className="mt-3 font-serif text-3xl leading-tight text-[#eee9e1] sm:text-5xl">
+                Because a mission can end without its story ending.
+              </h2>
+            </div>
+            <p className="leading-7 text-[#9e9999]">
+              Inactive spacecraft are more than old hardware. Some are records of engineering decisions,
+              scientific milestones and the environments they survived. A future servicing mission would need
+              a clear reason to return, not an assumption that every object should be recovered.
+            </p>
+          </div>
+          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <WhyCard icon={<Wrench className="h-5 w-5" />} title="PRESERVE">
+              Some spacecraft represent important milestones in exploration and may deserve careful documentation or preservation.
+            </WhyCard>
+            <WhyCard icon={<Search className="h-5 w-5" />} title="LEARN">
+              Older machines can help us understand how hardware changes after years in harsh environments.
+            </WhyCard>
+            <WhyCard icon={<Radio className="h-5 w-5" />} title="RECONNECT">
+              Some inactive spacecraft may have faults that are theoretically diagnosable or, in a future mission, potentially recoverable.
+            </WhyCard>
+            <WhyCard icon={<Globe2 className="h-5 w-5" />} title="REDUCE FUTURE FOOTPRINT">
+              Future exploration can be designed with the full mission lifecycle in mind, including what happens to hardware after operations end.
+            </WhyCard>
+          </div>
+          <div className="mt-14 flex flex-col items-start justify-between gap-5 border-t border-white/10 pt-8 sm:flex-row sm:items-center">
+            <p className="font-serif text-2xl text-[#eee9e1]">Are you ready?</p>
+            <a
+              href="#simulation"
+              className="inline-flex items-center gap-2 rounded-full bg-[#d57a4b] px-6 py-3 text-sm font-semibold text-[#101115] transition hover:bg-[#e08a5c]"
+            >
+              Run the simulation <ArrowRight className="h-4 w-4" />
+            </a>
+          </div>
+        </div>
+      </section>
 
-    return (
-      <div
-        key={String(label)}
-        className="rounded-xl border border-white/10 p-3"
-      >
-        <Icon className="h-4 w-4 text-[#d57a4b]" />
-
-        <p className="mt-2 font-mono text-[9px] tracking-widest text-[#aaa3a1]">
-          {String(label)}
-        </p>
-      </div>
-    );
-  })}
-</div>
+      <section id="universe" className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+        <div className="grid gap-14 lg:grid-cols-[1.1fr_.9fr] lg:items-center">
+          <div>
+            <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#d57a4b]">03 / NOT EVERYTHING NEEDS TO BE RECOVERED</p>
+            <h2 className="mt-3 font-serif text-3xl leading-tight text-[#eee9e1] sm:text-5xl">
+              Should we recover every machine we leave behind?
+            </h2>
+            <p className="mt-4 max-w-md leading-7 text-[#9e9999]">MENDER treats recovery as a decision, not a default outcome.</p>
+            <div className="mt-10">
+              <OrbitDiagram />
             </div>
           </div>
 
-          <SectionTitle
-            eyebrow="01 / A DIFFERENT KIND OF MISSION"
-            title="The explorer after the exploration."
-            text="MENDER is a concept, not an existing spacecraft. Its role is to explore what a future recovery mission could look like when the first mission has already ended."
-          />
-        </div>
-      </section>
+          <div>
+            <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#7f7979]">CHOOSE YOUR TARGET</p>
+            <h3 className="mt-3 font-serif text-2xl text-[#eee9e1] sm:text-3xl">Recovery depends on the situation.</h3>
+            <div className="mt-6 divide-y divide-white/10 border-y border-white/10">
+              {TARGETS.map((target) => (
+                <button
+                  key={target.id}
+                  type="button"
+                  aria-pressed={target.id === selectedTargetId}
+                  onClick={() => setSelectedTargetId(target.id)}
+                  className={`flex w-full items-start justify-between gap-4 py-4 text-left transition ${
+                    target.id === selectedTargetId ? 'text-[#d57a4b]' : 'text-[#d4ceca] hover:text-white'
+                  }`}
+                >
+                  <span>
+                    <span className="block font-mono text-[9px] tracking-[0.2em] text-[#8f8a8a]">{target.eyebrow}</span>
+                    <span className="mt-1 block text-sm">{target.name}</span>
+                  </span>
+                  <span className="text-lg">{target.icon}</span>
+                </button>
+              ))}
+            </div>
 
-      <section className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-        <SectionTitle
-          eyebrow="02 / WHY GO BACK?"
-          title="Because a mission can end without its story ending."
-          text="Inactive spacecraft are more than old hardware. Some are records of engineering decisions, scientific milestones and the environments they survived. A future servicing mission would need a clear reason to return  not an assumption that every object should be recovered."
-        />
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <WhyCard icon={<Wrench className="h-5 w-5" />} title="PRESERVE">
-            Some spacecraft represent important milestones in exploration and may deserve careful documentation or preservation.
-          </WhyCard>
-          <WhyCard icon={<Search className="h-5 w-5" />} title="LEARN">
-            Older machines can help us understand how hardware changes after years in harsh environments.
-          </WhyCard>
-          <WhyCard icon={<Radio className="h-5 w-5" />} title="RECONNECT">
-            Some inactive spacecraft may have faults that are theoretically diagnosable or, in a future mission, potentially recoverable.
-          </WhyCard>
-          <WhyCard icon={<Globe2 className="h-5 w-5" />} title="REDUCE FUTURE FOOTPRINT">
-            Future exploration can be designed with the full mission lifecycle in mind, including what happens to hardware after operations end.
-          </WhyCard>
-        </div>
-      </section>
-
-      <section className="border-y border-white/10 bg-[#0d0f14]">
-        <div className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-          <SectionTitle
-            eyebrow="03 / NOT EVERYTHING NEEDS TO BE RECOVERED"
-            title="Should we recover every machine we leave behind?"
-            text="MENDER treats recovery as a decision, not a default outcome."
-          />
-          <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            {[
-              ['🟢', 'REPAIR', 'A problem may be technically addressable.'],
-              ['🔵', 'PRESERVE', 'The object may have scientific or historical value and should remain undisturbed.'],
-              ['🟡', 'INSPECT', 'We do not know its condition. Send a robot to investigate.'],
-              ['⚪', 'LEAVE', 'Recovery may be too risky, expensive, impossible, or unnecessary.'],
-            ].map(([icon, title, text]) => (
+            <AnimatePresence mode="wait">
               <motion.div
-                key={title}
-                whileHover={{ y: -5 }}
-                className="rounded-2xl border border-white/10 bg-[#12141a] p-3"
+                key={selectedTarget.id}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                className="mt-6"
               >
-                <div className="text-2xl">{icon}</div>
-                <h3 className="mt-2 text-lg font-medium text-[#eee9e1]">{title}</h3>
-                <p className="mt-1 text-sm leading-6 text-[#9e9999]">{text}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      
-      <section className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-        <SectionTitle
-          eyebrow="04 / HOW MENDER WORKS"
-          title="Six steps. One careful decision."
-          text="The recovery mission is a loop of observation, diagnosis and restraint with intervention only when the evidence supports it."
-        />
-        <div className="mx-auto mt-14 max-w-3xl">
-          <MissionStep number="01" icon={<MapPin className="h-3.5 w-3.5" />} title="LOCATE">
-            Find the target using known mission coordinates, mapping and onboard sensors.
-          </MissionStep>
-          <MissionStep number="02" icon={<Eye className="h-3.5 w-3.5" />} title="IDENTIFY">
-            Confirm what the object is and determine its current physical condition.
-          </MissionStep>
-          <MissionStep number="03" icon={<Cpu className="h-3.5 w-3.5" />} title="DIAGNOSE">
-            Assess power, communication, mobility, structural condition and other relevant systems.
-          </MissionStep>
-          <MissionStep number="04" icon={<Gauge className="h-3.5 w-3.5" />} title="DECIDE">
-            Determine whether intervention is technically feasible, justified and safe.
-          </MissionStep>
-          <MissionStep number="05" icon={<Wrench className="h-3.5 w-3.5" />} title="INTERVENE">
-            Attempt a limited repair, communication recovery or another predefined operation.
-          </MissionStep>
-          <MissionStep number="06" icon={<Shield className="h-3.5 w-3.5" />} title="PRESERVE" last>
-            If recovery is not possible, document the condition and leave the site undisturbed.
-          </MissionStep>
-        </div>
-      </section>
-
-      <section className="border-y border-white/10 bg-[#0d0f14]">
-        <div className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-          <SectionTitle
-            eyebrow="05 / CHOOSE YOUR TARGET"
-            title="Recovery depends on the situation."
-            text="Three fictionalized scenarios, inspired by real types of mission situations. The right response changes with location, condition, historical value and physical accessibility."
-          />
-          <div className="mt-12 grid gap-4 lg:grid-cols-3">
-            {TARGETS.map((target) => (
-              <TargetCard
-                key={target.id}
-                target={target}
-                selected={target.id === selectedTargetId}
-                onClick={() => setSelectedTargetId(target.id)}
-              />
-            ))}
-          </div>
-
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={selectedTarget.id}
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              className="mt-6 grid gap-6 rounded-[2rem] border border-white/10 bg-[#111319] p-6 sm:p-8 lg:grid-cols-[.7fr_1.3fr]"
-            >
-              <div>
-                <p className="font-mono text-[9px] uppercase tracking-[0.25em] text-[#d57a4b]">SELECTED TARGET</p>
-                <h3 className="mt-2 font-serif text-4xl text-[#eee9e1]">{selectedTarget.name}</h3>
-                <p className="mt-4 text-sm leading-7 text-[#9e9999]">{selectedTarget.description}</p>
-              </div>
-              <div>
-                <p className="font-mono text-[9px] uppercase tracking-[0.25em] text-[#7f7979]">POSSIBLE RESPONSES</p>
-                <div className="mt-4 grid gap-3 sm:grid-cols-3">
+                <p className="text-sm leading-7 text-[#9e9999]">{selectedTarget.description}</p>
+                <p className="mt-6 font-mono text-[9px] uppercase tracking-[0.25em] text-[#7f7979]">POSSIBLE RESPONSES</p>
+                <div className="mt-3 grid gap-2">
                   {selectedTarget.choices.map((choice, index) => (
-                    <div key={choice} className="rounded-xl border border-white/10 bg-white/[0.025] p-4">
+                    <div key={choice} className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.025] px-4 py-3 text-sm text-[#d2cdca]">
                       <span className="font-mono text-[9px] text-[#d57a4b]">0{index + 1}</span>
-                      <p className="mt-2 text-sm text-[#d2cdca]">{choice}</p>
+                      {choice}
                     </div>
                   ))}
                 </div>
-              </div>
-            </motion.div>
-          </AnimatePresence>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </div>
+      </section>
+
+      <section id="how" className="border-y border-white/10 bg-[#0d0f14]">
+        <div className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+          <SectionTitle
+            eyebrow="04 / HOW MENDER WORKS"
+            title="Six steps. One careful decision."
+            text="The recovery mission is a loop of observation, diagnosis and restraint, with intervention only when the evidence supports it."
+          />
+          <div className="mt-14">
+            <PillarTabs
+              pillars={[
+                {
+                  label: 'The hard part',
+                  icon: <CircleAlert className="h-4 w-4 text-[#d57a4b]" />,
+                  content: (
+                    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                      <div className="rounded-2xl border border-white/10 bg-[#111319] p-6">
+                        <span className="text-2xl">🌡️</span>
+                        <h3 className="mt-4 text-base font-medium text-[#eee9e1]">Harsh environments</h3>
+                        <p className="mt-2 text-sm leading-6 text-[#8f8988]">Extreme temperatures, dust, radiation and other environmental conditions can affect hardware.</p>
+                      </div>
+<div className="rounded-2xl border border-white/10 bg-[#111319] p-6">
+                        <span className="text-2xl">📡</span>
+                        <h3 className="mt-4 text-base font-medium text-[#eee9e1]">Communication</h3>
+                        <p className="mt-2 text-sm leading-6 text-[#8f8988]">A recovery robot must communicate with Earth and potentially with an inactive spacecraft.</p>
+                      </div>
+<div className="rounded-2xl border border-white/10 bg-[#111319] p-6">
+                        <span className="text-2xl">⚡</span>
+                        <h3 className="mt-4 text-base font-medium text-[#eee9e1]">Power</h3>
+                        <p className="mt-2 text-sm leading-6 text-[#8f8988]">A dead spacecraft may have no usable power source.</p>
+                      </div>
+<div className="rounded-2xl border border-white/10 bg-[#111319] p-6">
+                        <span className="text-2xl">🧭</span>
+                        <h3 className="mt-4 text-base font-medium text-[#eee9e1]">Navigation</h3>
+                        <p className="mt-2 text-sm leading-6 text-[#8f8988]">Finding and approaching an old spacecraft autonomously is a major challenge.</p>
+                      </div>
+<div className="rounded-2xl border border-white/10 bg-[#111319] p-6">
+                        <span className="text-2xl">🔧</span>
+                        <h3 className="mt-4 text-base font-medium text-[#eee9e1]">Unknown damage</h3>
+                        <p className="mt-2 text-sm leading-6 text-[#8f8988]">A spacecraft may have failed in a way that cannot be diagnosed from outside.</p>
+                      </div>
+<div className="rounded-2xl border border-white/10 bg-[#111319] p-6">
+                        <span className="text-2xl">💰</span>
+                        <h3 className="mt-4 text-base font-medium text-[#eee9e1]">Mission cost</h3>
+                        <p className="mt-2 text-sm leading-6 text-[#8f8988]">Launching another spacecraft simply to recover old hardware may not always make sense.</p>
+                      </div>
+<div className="rounded-2xl border border-white/10 bg-[#111319] p-6">
+                        <span className="text-2xl">⚖️</span>
+                        <h3 className="mt-4 text-base font-medium text-[#eee9e1]">Preservation</h3>
+                        <p className="mt-2 text-sm leading-6 text-[#8f8988]">Some historical artifacts may be more valuable where they are than after being moved.</p>
+                      </div>
+                    </div>
+                  ),
+                },
+                {
+                  label: 'Six steps',
+                  icon: <Cpu className="h-4 w-4 text-[#d57a4b]" />,
+                  content: (
+                    <div className="mx-auto max-w-3xl">
+                      <MissionStep number="01" icon={<MapPin className="h-3.5 w-3.5" />} title="LOCATE">
+                        Find the target using known mission coordinates, mapping and onboard sensors.
+                      </MissionStep>
+                      <MissionStep number="02" icon={<Eye className="h-3.5 w-3.5" />} title="IDENTIFY">
+                        Confirm what the object is and determine its current physical condition.
+                      </MissionStep>
+                      <MissionStep number="03" icon={<Cpu className="h-3.5 w-3.5" />} title="DIAGNOSE">
+                        Assess power, communication, mobility, structural condition and other relevant systems.
+                      </MissionStep>
+                      <MissionStep number="04" icon={<Gauge className="h-3.5 w-3.5" />} title="DECIDE">
+                        Determine whether intervention is technically feasible, justified and safe.
+                      </MissionStep>
+                      <MissionStep number="05" icon={<Wrench className="h-3.5 w-3.5" />} title="INTERVENE">
+                        Attempt a limited repair, communication recovery or another predefined operation.
+                      </MissionStep>
+                      <MissionStep number="06" icon={<Shield className="h-3.5 w-3.5" />} title="PRESERVE" last>
+                        If recovery is not possible, document the condition and leave the site undisturbed.
+                      </MissionStep>
+                    </div>
+                  ),
+                },
+                {
+                  label: 'Reality check',
+                  icon: <Info className="h-4 w-4 text-[#d57a4b]" />,
+                  content: (
+                    <div className="mx-auto grid max-w-4xl gap-6 lg:grid-cols-2">
+                      <div className="rounded-[2rem] border border-[#d57a4b]/20 bg-[#d57a4b]/5 p-7">
+                        <p className="font-mono text-[9px] uppercase tracking-[0.25em] text-[#d57a4b]">REALITY CHECK</p>
+                        <h3 className="mt-2 font-serif text-3xl text-[#eee9e1]">Real missions. Future concept.</h3>
+                        <p className="mt-4 text-sm leading-7 text-[#b1aaa8]">
+                          MENDER is a Starbound concept, not an existing NASA recovery mission. Its purpose is to
+                          explore what future robotic servicing of inactive spacecraft could look like.
+                        </p>
+                      </div>
+                      <div className="space-y-5 rounded-[2rem] border border-white/10 bg-[#101218] p-7">
+                        {[
+                          ['🟢', 'REAL', 'Mission history / documented data'],
+                          ['🟣', 'STARBOUND CONCEPT', 'MENDER'],
+                          ['⚪', 'FUTURE POSSIBILITY', 'Proposed scenarios'],
+                        ].map(([dot, title, description]) => (
+                          <div key={title} className="flex items-center gap-3">
+                            <span>{dot}</span>
+                            <div>
+                              <p className="font-mono text-[9px] tracking-widest text-[#d4ceca]">{title}</p>
+                              <p className="mt-0.5 text-xs text-[#777272]">{description}</p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ),
+                },
+              ]}
+            />
+          </div>
         </div>
       </section>
 
       <section id="simulation" className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <SectionTitle
-          eyebrow="06 / MENDER SIMULATION"
+          eyebrow="05 / MENDER SIMULATION"
           title="You found something. Now decide what to do."
           text="Start with a scan. Then choose an action. The simulation deliberately allows uncertain and unsuccessful outcomes."
         />
@@ -1237,73 +1373,10 @@ return onSnapshot(commentsQuery, (snapshot) => {
         </div>
       </section>
 
-      <section className="mx-auto w-full max-w-7xl px-4 pb-20 sm:px-6 lg:px-8">
-        <div className="grid gap-5 lg:grid-cols-[1.2fr_.8fr]">
-          <div className="rounded-[2rem] border border-[#d57a4b]/20 bg-[#d57a4b]/5 p-7 sm:p-9">
-            <div className="flex items-start gap-4">
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#d57a4b]/10">
-                <Info className="h-5 w-5 text-[#d57a4b]" />
-              </div>
-              <div>
-                <p className="font-mono text-[9px] uppercase tracking-[0.25em] text-[#d57a4b]">REALITY CHECK</p>
-                <h2 className="mt-2 font-serif text-3xl text-[#eee9e1]">Real missions. Future concept.</h2>
-                <p className="mt-4 max-w-2xl text-sm leading-7 text-[#b1aaa8]">
-                  MENDER is a Starbound concept, not an existing NASA recovery mission. Its purpose is to explore what future robotic servicing of inactive spacecraft could look like.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="rounded-[2rem] border border-white/10 bg-[#101218] p-7">
-            <div className="space-y-4">
-              {[
-                ['🟢', 'REAL', 'Mission history / documented data'],
-                ['🟣', 'STARBOUND CONCEPT', 'MENDER'],
-                ['⚪', 'FUTURE POSSIBILITY', 'Proposed scenarios'],
-              ].map(([dot, title, description]) => (
-                <div key={title} className="flex items-center gap-3">
-                  <span>{dot}</span>
-                  <div>
-                    <p className="font-mono text-[9px] tracking-widest text-[#d4ceca]">{title}</p>
-                    <p className="mt-0.5 text-xs text-[#777272]">{description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="border-y border-white/10 bg-[#0d0f14]">
-        <div className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-          <SectionTitle
-            eyebrow="07 / THE HARD PART"
-            title="Why isn't this easy?"
-            text="A recovery robot would inherit almost every difficulty of planetary exploration ; and add the uncertainty of encountering hardware whose failure mode may be unknown."
-          />
-          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {[
-              ['🌡️', 'Harsh environments', 'Extreme temperatures, dust, radiation and other environmental conditions can affect hardware.'],
-              ['📡', 'Communication', 'A recovery robot must communicate with Earth and potentially with an inactive spacecraft.'],
-              ['⚡', 'Power', 'A dead spacecraft may have no usable power source.'],
-              ['🧭', 'Navigation', 'Finding and approaching an old spacecraft autonomously is a major challenge.'],
-              ['🔧', 'Unknown damage', 'A spacecraft may have failed in a way that cannot be diagnosed from outside.'],
-              ['💰', 'Mission cost', 'Launching another spacecraft simply to recover old hardware may not always make sense.'],
-              ['⚖️', 'Preservation', 'Some historical artifacts may be more valuable where they are than after being moved.'],
-            ].map(([icon, title, description]) => (
-              <div key={title} className="rounded-2xl border border-white/10 bg-[#111319] p-6">
-                <span className="text-2xl">{icon}</span>
-                <h3 className="mt-4 text-base font-medium text-[#eee9e1]">{title}</h3>
-                <p className="mt-2 text-sm leading-6 text-[#8f8988]">{description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <div className="grid items-center gap-10 lg:grid-cols-[.8fr_1.2fr]">
           <div>
-            <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#d57a4b]">08 / MENDER ASSESSMENT</p>
+            <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#d57a4b]">06 / MENDER ASSESSMENT</p>
             <h2 className="mt-3 font-serif text-4xl text-[#eee9e1] sm:text-5xl">No fake recovery score.</h2>
             <p className="mt-5 leading-7 text-[#9e9999]">
               Instead of claiming something is “80% recoverable,” MENDER presents a feasibility profile. Each dimension can carry uncertainty, and the recommended action can remain conservative.
@@ -1347,7 +1420,7 @@ return onSnapshot(commentsQuery, (snapshot) => {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(213,122,75,.08),transparent_45%)]" />
         <div className="relative mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
           <SectionTitle
-            eyebrow="09 / FROM FIRST LIFE → SECOND LIFE"
+            eyebrow="07 / FROM FIRST LIFE → SECOND LIFE"
             title="You just met an explorer at the end of its mission."
             text="Earlier, you saw what it accomplished. Now you saw what a future mission might encounter when it finds it again."
           />
@@ -1392,10 +1465,10 @@ return onSnapshot(commentsQuery, (snapshot) => {
         </div>
       </section>
 
-      <section className="border-y border-white/10 bg-[#0d0f14] py-20">
+      <section id="community" className="border-y border-white/10 bg-[#0d0f14] py-20">
         <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionTitle
-            eyebrow="10 / WHAT WOULD YOU DO?"
+            eyebrow="08 / WHAT WOULD YOU DO?"
             title="Add your own solution."
             text="No account is required. Share an idea anonymously, or add a name if you want your contribution credited. New submissions are reviewed before they become public."
           />
@@ -1567,7 +1640,6 @@ return onSnapshot(commentsQuery, (snapshot) => {
         </div>
       </section>
 
-      {/* END */}
       <section className="mx-auto w-full max-w-5xl px-4 py-24 text-center sm:px-6 lg:px-8">
         <p className="font-mono text-[10px] uppercase tracking-[0.35em] text-[#d57a4b]">THE QUESTION REMAINS</p>
         <h2 className="mt-5 font-serif text-5xl font-normal leading-[1.02] text-[#eee9e1] sm:text-7xl">
@@ -1592,6 +1664,13 @@ return onSnapshot(commentsQuery, (snapshot) => {
           KEEP EXPLORING
         </div>
       </section>
+
+      <footer className="border-t border-white/10 px-4 py-8 sm:px-6 lg:px-8">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 font-mono text-[10px] uppercase tracking-[0.2em] text-[#777272] sm:flex-row">
+          <span>MENDER · Starbound concept</span>
+          <span>Not an existing NASA recovery mission</span>
+        </div>
+      </footer>
     </main>
   );
 };

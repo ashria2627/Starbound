@@ -1,7 +1,7 @@
 
 class StarboundAudioController {
   private ctx: AudioContext | null = null;
-
+  private bgMusic: HTMLAudioElement | null = null;
 
   private ambientEnabled = true;
   private roverEffectsEnabled = true;
@@ -43,26 +43,46 @@ class StarboundAudioController {
     }
   }
 
-  public setAudioSettings(ambientEnabled: boolean, roverEffectsEnabled: boolean) {
-    const ambientChanged = this.ambientEnabled !== ambientEnabled;
-    const roverChanged = this.roverEffectsEnabled !== roverEffectsEnabled;
+public setAudioSettings(ambientEnabled: boolean, roverEffectsEnabled: boolean) {
+  const ambientChanged = this.ambientEnabled !== ambientEnabled;
+  const roverChanged = this.roverEffectsEnabled !== roverEffectsEnabled;
 
-    this.ambientEnabled = ambientEnabled;
-    this.roverEffectsEnabled = roverEffectsEnabled;
+  this.ambientEnabled = ambientEnabled;
+  this.roverEffectsEnabled = roverEffectsEnabled;
 
-    if (ambientChanged) {
-      if (ambientEnabled) {
-        this.startAmbientSpace();
-      } else {
-        this.stopAmbientSpace();
-      }
-    }
-
-    if (roverChanged && !roverEffectsEnabled) {
-      this.stopRoverDrive();
-      this.stopCharging();
+  if (ambientChanged) {
+    if (ambientEnabled) {
+      this.startAmbientSpace();
+      this.startBackgroundMusic();
+    } else {
+      this.stopAmbientSpace();
+      this.stopBackgroundMusic();
     }
   }
+
+  if (roverChanged && !roverEffectsEnabled) {
+    this.stopRoverDrive();
+    this.stopCharging();
+  }
+}
+  public startBackgroundMusic() {
+  if (!this.ambientEnabled) return;
+
+  if (!this.bgMusic) {
+    this.bgMusic = new Audio('/assets/sounds/game.mp3');
+    this.bgMusic.loop = true;
+    this.bgMusic.volume = 0.35;
+  }
+
+  this.bgMusic.play().catch(() => {});
+}
+
+public stopBackgroundMusic() {
+  if (!this.bgMusic) return;
+
+  this.bgMusic.pause();
+  this.bgMusic.currentTime = 0;
+}
 
   public startAmbientSpace() {
     if (!this.ambientEnabled) return;

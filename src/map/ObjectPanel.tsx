@@ -50,13 +50,13 @@ export const ObjectPanel: React.FC<Props> = ({ object: o, onClose, onOpenStory }
       </div>
 
       <figure className="mt-3">
-        <img src={o.image} alt={o.name} loading="lazy" className="max-h-56 w-full rounded-lg object-cover" />
+        <img src={o.image} alt={o.name} loading="lazy" className="max-h-96 w-full rounded-lg object-cover object-center" />
         <figcaption className="mt-1 text-xs text-[#9aa0a6]">
           <T k="map.credit" />: {o.image_credit}
         </figcaption>
       </figure>
 
-      <dl className="mt-4 grid grid-cols-[auto_1fr] gap-x-3 gap-y-2 text-sm">
+      <dl className="mt-4 grid grid-cols-[auto_1fr] gap-x-3 gap-y-2 ">
         <dt className="text-[#9aa0a6]"><T k="map.mission" /></dt>
         <dd>{o.mission}</dd>
         <dt className="text-[#9aa0a6]"><T k="map.agency" /></dt>

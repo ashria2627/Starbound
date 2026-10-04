@@ -3,7 +3,7 @@ import { OrbitCharacter } from './OrbitCharacter';
 import { SputnikIllustration } from './SputnikIllustration';
 import { SpaceGlossaryWord } from './SpaceGlossaryWord';
 import { playSceneMusic, playPageTurn, playRadioBeep } from '../utils/sound';
-import { speakDialogue, getSpeechEnabled, getAutoSpeakEnabled } from '../utils/speech';
+import { speakDialogue, getSpeechEnabled, getAutoSpeakEnabled, stopSpeaking } from '../utils/speech';
 
 interface Page2Props {
   autoSpeak?: boolean;
@@ -96,6 +96,17 @@ export const Page2Sputnik: React.FC<Page2Props> = ({ autoSpeak = true }) => {
     playSceneMusic('sputnik');
   }, []);
 
+  // Auto-voice switched on while already on a segment: narrate the current one now.
+  const prevAutoSpeakRef = useRef(autoSpeak);
+  useEffect(() => {
+    if (prevAutoSpeakRef.current === autoSpeak) return;
+    prevAutoSpeakRef.current = autoSpeak;
+    if (autoSpeak && getAutoSpeakEnabled()) {
+      const beat = dialogueBeats[activeBeat];
+      speakDialogue(beat.speaker, beat.speechText, { skipSoundCue: true });
+    }
+  }, [autoSpeak, dialogueBeats, activeBeat]);
+
   const handleSpeak = useCallback((beatIdx: number) => {
     const beat = dialogueBeats[beatIdx];
     speakDialogue(beat.speaker, beat.speechText, { manualTrigger: true });
@@ -122,6 +133,7 @@ export const Page2Sputnik: React.FC<Page2Props> = ({ autoSpeak = true }) => {
 
       if (closestIdx !== activeBeat) {
         setActiveBeat(closestIdx);
+        stopSpeaking(); // leaving a segment ends its narration immediately
         playPageTurn();
         const beat = dialogueBeats[closestIdx];
 

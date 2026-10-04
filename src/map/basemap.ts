@@ -16,10 +16,9 @@ export function registerPmtiles() {
   protocolRegistered = true;
 }
 
-/** True only if the URL really serves a PMTiles archive (a dev/SPA server may answer 200 with HTML). */
 async function looksLikePmtiles(url: string): Promise<boolean> {
   try {
-    const res = await fetch(url, { headers: { Range: 'bytes=0-6' } });
+    const res = await fetch(url, { headers: { Range: 'bytes=0-6' }, cache: 'no-store' });
     if (!res.ok || !res.body) return false;
     const reader = res.body.getReader();
     const { value } = await reader.read();
@@ -42,10 +41,11 @@ function imageLoads(url: string): Promise<boolean> {
 
 export async function detectBasemap(body: ObjectBody): Promise<BasemapInfo> {
   registerPmtiles();
-  const pm = `${window.location.origin}/tiles/${body}.pmtiles`;
-  if (await looksLikePmtiles(pm)) return { kind: 'pmtiles', url: pm };
+  // Prefer the plain image: it needs no range requests, which the browser cache can block.
   const img = `/tiles/${body}-mercator.jpg`;
   if (await imageLoads(img)) return { kind: 'image', url: img };
+  const pm = `${window.location.origin}/tiles/${body}.pmtiles`;
+  if (await looksLikePmtiles(pm)) return { kind: 'pmtiles', url: pm };
   return { kind: 'none' };
 }
 

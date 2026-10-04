@@ -264,6 +264,19 @@ export const setAccent = (a: Accent) => {
   try { window.localStorage.setItem('sb-accent', a); } catch { /* ignore */ }
 };
 
+// Mobile browsers only let speech start from a direct tap. Calling this inside a
+// button handler "unlocks" later automatic narration.
+export const primeSpeech = () => {
+  if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
+  try {
+    const u = new SpeechSynthesisUtterance(' ');
+    u.volume = 0;
+    window.speechSynthesis.speak(u);
+  } catch {
+    /* ignore */
+  }
+};
+
 export const setSpeechEnabled = (enabled: boolean) => {
   speechEnabled = enabled;
   if (!enabled) {
@@ -380,6 +393,20 @@ const cleanSpeechText = (rawText: string): string => {
 };
 
 
+const waitForSynthIdle = (synth: SpeechSynthesis, onIdle: () => void, startedAt = Date.now()) => {
+  if (!synth.speaking && !synth.pending) {
+    onIdle();
+    return;
+  }
+  if (Date.now() - startedAt > 1500) {
+    // Some browsers keep reporting "speaking" after cancel(); stop waiting.
+    try { synth.cancel(); } catch { /* ignore */ }
+    onIdle();
+    return;
+  }
+  window.setTimeout(() => waitForSynthIdle(synth, onIdle, startedAt), 30);
+};
+
 export const speakDialogue = (
   character: CharacterVoice,
   text: string,
@@ -390,25 +417,24 @@ export const speakDialogue = (
   if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
 
   const synth = window.speechSynthesis;
-
-
   if (synth.paused) {
     synth.resume();
   }
 
-
+  // Every request (and every stopSpeaking) bumps speakId. Anything still holding an
+  // older id is stale and must not touch shared state or start audio.
   const myId = ++speakId;
+  const isCurrent = () => myId === speakId;
 
   if (pendingSpeakTimer) {
     window.clearTimeout(pendingSpeakTimer);
     pendingSpeakTimer = null;
   }
 
-
   try {
     synth.cancel();
   } catch {
-  
+    /* ignore */
   }
 
   if (resumeInterval) {
@@ -416,11 +442,9 @@ export const speakDialogue = (
     resumeInterval = null;
   }
 
-
   pendingSpeakTimer = window.setTimeout(() => {
     pendingSpeakTimer = null;
-
-    if (myId !== speakId) return;
+    if (!isCurrent()) return;
     if (!speechEnabled) return;
     if (!options.manualTrigger && !autoSpeakEnabled) return;
 
@@ -436,9 +460,6 @@ export const speakDialogue = (
 
     const profile = VOICE_PROFILES[character] || VOICE_PROFILES.orbit;
     const utterance = new SpeechSynthesisUtterance(cleanedText);
-    activeUtterance = utterance;
-  
-    (window as unknown as { __activeUtterance?: SpeechSynthesisUtterance }).__activeUtterance = utterance;
 
     utterance.pitch = profile.pitch;
     utterance.rate = profile.rate;
@@ -450,6 +471,7 @@ export const speakDialogue = (
     }
 
     utterance.onstart = () => {
+      if (!isCurrent()) return;
       notifyListeners(true, character);
       if (options.onStart) options.onStart();
       if (resumeInterval) window.clearInterval(resumeInterval);
@@ -467,6 +489,9 @@ export const speakDialogue = (
     };
 
     const handleFinish = () => {
+      // A cancelled or superseded utterance can still fire onend in some browsers.
+      // Ignore it so it cannot start the next line of an interview or notify the UI.
+      if (!isCurrent()) return;
       if (resumeInterval) {
         window.clearInterval(resumeInterval);
         resumeInterval = null;
@@ -484,15 +509,21 @@ export const speakDialogue = (
       handleFinish();
     };
 
-    try {
-      synth.cancel(); // make sure nothing else is queued, so two voices never overlap
-      synth.speak(utterance);
-      if (synth.paused) {
-        synth.resume();
+    // Start only once the browser has really stopped the previous voice, so two
+    // voices never play at the same time.
+    waitForSynthIdle(synth, () => {
+      if (!isCurrent() || !speechEnabled) return;
+      activeUtterance = utterance;
+      (window as unknown as { __activeUtterance?: SpeechSynthesisUtterance }).__activeUtterance = utterance;
+      try {
+        synth.speak(utterance);
+        if (synth.paused) {
+          synth.resume();
+        }
+      } catch {
+        handleFinish();
       }
-    } catch {
-      handleFinish();
-    }
+    });
   }, 25);
 };
 

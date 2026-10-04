@@ -1,4 +1,4 @@
-// Pure helpers for the timeline scrubber. Kept free of React/DOM so they can be unit-tested.
+
 export interface HasYear {
   left_behind: number;
 }
@@ -14,7 +14,6 @@ export function yearBounds(items: HasYear[]): { min: number; max: number } | nul
   return { min, max };
 }
 
-/** Objects left behind in or before `year`. A null year means "show everything". */
 export function filterByYear<T extends HasYear>(items: T[], year: number | null): T[] {
   return year === null ? items.slice() : items.filter((it) => it.left_behind <= year);
 }

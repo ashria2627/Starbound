@@ -1,5 +1,6 @@
 import React from 'react';
-import { Award, Play, Sparkles, Rocket } from 'lucide-react';
+import { Award, Play, Sparkles, Rocket,Bot,MapPinned,LibraryBig,Bone } from 'lucide-react';
+
 export type AppView =
   | 'entry'
   | 'kids-home'
@@ -49,13 +50,14 @@ export const Navbar: React.FC<NavbarProps> = ({
           
          <button
             onClick={() => onNavigate('abandoned-stories')}
-            className={`whitespace-nowrap text-sm font-medium transition-colors ${
+            className={`whitespace-nowrap text-sm font-medium transition-colors flex items-center gap-1.5 ${
               currentView === 'abandoned-stories'
-                ? 'text-[#ece7dc] border-b-2 border-[#c1440e] pb-1 font-semibold'
-                : 'text-[#9aa0a6] hover:text-[#ece7dc]'
+                ? 'text-[#ff8a65] border-b-2 border-[#c1440e] pb-1 font-semibold'
+                : 'text-[#9aa0a6] hover:text-[#ff8a65]'
             }`}
           >
-            Abandoned Stories
+            <LibraryBig className="h-5 w-4  text-[#9aa0a6]"/>
+           <span> Abandoned Stories</span>
           </button>
 
           <button
@@ -70,41 +72,40 @@ export const Navbar: React.FC<NavbarProps> = ({
             <span>3D Mission POV</span>
           </button>
 
-          
-
-          
-          
-
           <button
             onClick={() => onNavigate('anatomy')}
-            className={`whitespace-nowrap text-sm font-medium transition-colors ${
+            className={`whitespace-nowrap text-sm font-medium transition-colors flex items-center gap-1.5 ${
               currentView === 'anatomy'
-                ? 'text-[#ece7dc] border-b-2 border-[#c1440e] pb-1 font-semibold'
-                : 'text-[#9aa0a6] hover:text-[#ece7dc]'
+                ?  'text-[#ff8a65] border-b-2 border-[#c1440e] pb-1 font-semibold'
+                : 'text-[#9aa0a6] hover:text-[#ff8a65]'
             }`}
           >
+            <Bone className="h-5 w-4  text-[#9aa0a6]"/> 
             Rover Anatomy
+          </button>
+           <button
+            onClick={() => onNavigate('map')}
+            className={`whitespace-nowrap text-sm font-medium transition-colors flex items-center gap-1.5 ${
+              currentView === 'map'
+                ? 'text-[#ff8a65] border-b-2 border-[#c1440e] pb-1 font-semibold'
+                : 'text-[#9aa0a6] hover:text-[#ff8a65]'
+            }`}
+          >
+            <MapPinned className="h-5 w-4  text-[#9aa0a6]"/>
+          <span>Map</span>  
           </button>
           <button
             onClick={() => onNavigate('recovery')}
-            className={`whitespace-nowrap text-sm font-medium transition-colors ${
-              currentView === 'anatomy'
-                ? 'text-[#ece7dc] border-b-2 border-[#c1440e] pb-1 font-semibold'
-                : 'text-[#9aa0a6] hover:text-[#ece7dc]'
+            className={`whitespace-nowrap text-sm font-medium transition-colors flex items-center text-[#9aa0a6] gap-5${
+              currentView === 'recovery'
+                ? 'text-[#ff8a65] border-b-2 border-[#c1440e] pb-1 font-semibold'
+                : 'text-[#9aa0a6] hover:text-[#ff8a65]'
             }`}
           >
-            Recovery
+            <Bot className="h-5 w-4 mr-1 text-[#9aa0a6]"/>
+          <span className='text-[#9aa0a6]'>Recovery</span>  
           </button>
-          <button
-            onClick={() => onNavigate('map')}
-            className={`whitespace-nowrap text-sm font-medium transition-colors ${
-              currentView === 'map'
-                ? 'text-[#ece7dc] border-b-2 border-[#c1440e] pb-1 font-semibold'
-                : 'text-[#9aa0a6] hover:text-[#ece7dc]'
-            }`}
-          >
-            Map
-          </button>
+         
          
           
         </nav>
@@ -113,7 +114,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           {onSwitchToKids && (
             <button
               onClick={onSwitchToKids}
-              className="flex items-center gap-1.5 rounded-full border border-white/15 px-3.5 py-1.5 text-xs font-medium text-[#9aa0a6] transition-colors hover:border-[#7fd6e8]/50 hover:text-[#ece7dc]"
+              className="flex items-center gap-1.5 rounded-full border border-white/15 px-3.5 py-1.5 text-xs font-medium text-[#89cfa6] transition-colors hover:border-[#7fd6e8]/50 hover:text-[#ece7dc]"
             >
               <Sparkles className="h-3.5 w-3.5" />
               <span className="hidden sm:inline">Kids Mode</span>
@@ -148,18 +149,19 @@ export const Navbar: React.FC<NavbarProps> = ({
         >
           Anatomy
         </button>
-        <button
-          onClick={() => onNavigate('recovery')}
-          className={`whitespace-nowrap ${currentView === 'anatomy' ? 'text-[#ece7dc] font-semibold' : 'text-[#9aa0a6]'}`}
-        >
-          Recovery
-        </button>
-        <button
+         <button
           onClick={() => onNavigate('map')}
           className={`whitespace-nowrap ${currentView === 'map' ? 'text-[#ece7dc] font-semibold' : 'text-[#9aa0a6]'}`}
         >
           Map
         </button>
+        <button
+          onClick={() => onNavigate('recovery')}
+          className={`whitespace-nowrap ${currentView === 'recovery' ? 'text-[#ece7dc] font-semibold' : 'text-[#9aa0a6]'}`}
+        >
+          <Bot className={`h-5 w-5 text-[#9aa0a6] ${currentView === 'recovery' ? 'text-[#ece7dc] font-semibold' : 'text-[#9aa0a6]'}`}/>
+        </button>
+       
         
        
      

@@ -295,19 +295,19 @@ export const StorybookStateMachine: React.FC<StateMachineProps> = ({
   }, [currentChapter]);
 
   return (
-    <div ref={dropdownRef} className="relative z-50">
+    <div ref={dropdownRef} className="relative z-50 min-w-0">
     
       <button
         onClick={() => {
           playBloop(500);
           setIsOpen(!isOpen);
         }}
-        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-yellow-400/60 bg-[#fff8ee]/90 backdrop-blur-md text-amber-900 hover:text-amber-950 hover:border-yellow-300 font-mono text-xs shadow-lg transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-yellow-400/50"
+        className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg border border-yellow-400/60 bg-[#fff8ee]/90 backdrop-blur-md text-amber-900 hover:text-amber-950 hover:border-yellow-300 font-mono text-xs shadow-lg transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-yellow-400/50"
         title="Open Chapter Selection"
       >
         <span className="text-yellow-400 text-sm">📖</span>
-        <span className="font-semibold tracking-tight">{truncatedTitle}</span>
-        <span className="text-amber-800">·</span>
+        <span className="hidden sm:inline font-semibold tracking-tight">{truncatedTitle}</span>
+        <span className="hidden sm:inline text-amber-800">·</span>
         <span className="font-bold text-amber-800">Page {currentChapter.pageNumber}</span>
         <span className={`text-[10px] text-yellow-700 ml-0.5 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}>
           ▼
@@ -316,7 +316,7 @@ export const StorybookStateMachine: React.FC<StateMachineProps> = ({
 
       
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl border border-yellow-700 bg-[#fff1dc]/95 backdrop-blur-2xl shadow-2xl p-3 text-amber-900 animate-in fade-in zoom-in-95 duration-150">
+        <div className="absolute right-0 mt-2 w-[min(24rem,calc(100vw-1.5rem))] rounded-2xl border border-yellow-700 bg-[#fff1dc]/95 backdrop-blur-2xl shadow-2xl p-3 text-amber-900 animate-in fade-in zoom-in-95 duration-150">
        
           <div className="flex items-center justify-between px-2 pt-1 pb-2 border-b border-yellow-900/50">
             <span className="text-[10px] font-mono font-bold tracking-widest text-yellow-800 uppercase">

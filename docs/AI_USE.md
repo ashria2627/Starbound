@@ -8,7 +8,7 @@ team's behalf.
 
 | Tool | Used for |
 | --- | --- |
-| Claude (Anthropic) | Repo hygiene, data schema and validator, map view, i18n, offline/accessibility work (Phases 1-5 below) |
+| Claude (Anthropic) | Repo hygiene, data schema and validator, map view, i18n, offline/accessibility work (Phases 1-5 below). Also basemap documentation, PMTiles inspection, and fixes to the Storybook landing page (see "Later work") |
 | Cursor | A `.cursor/rules/project.mdc` file exists in the repo. **TODO (team):** confirm whether Cursor was used and for what |
 | Other tools | **TODO (team):** list any other AI tools used for code, images, text, audio or 3D assets |
 
@@ -24,11 +24,27 @@ Work done with Claude in the Phase 1-5 session:
 
 Exact files per phase are listed in the hand-off notes for each phase.
 
+### Later work
+
+- **Basemap documentation (`docs/BASEMAPS.md`, `public/tiles/README.md`):**
+  AI looked up candidate NASA/USGS global mosaics and their catalogue names and
+  credit lines. It did not download or build any tiles. AI also read the headers
+  and metadata of the uploaded `moon.pmtiles` and `mars.pmtiles` files to record
+  their format, zoom range and bounds. The source names in these documents came
+  from the USGS Astropedia catalogue search and have not been checked against the
+  download links. The Moon source named in the tiles README differs from the one in
+  `docs/BASEMAPS.md`; the team has not yet confirmed which is correct.
+- **Storybook landing page (`landing-story`):** AI rewrote speech-engine and
+  auto-voice code, changed the mobile header, and tried to replace the synthesized
+  scene music with an MP3 before reverting that change at the team's request.
+  The team has not yet confirmed that auto-voice works on their devices.
+
 ## What we did ourselves
 
 **TODO (team):** describe what the team wrote, designed, researched and verified
 by hand (story writing, illustrations, mission research, testing, fact-checking
-against NASA sources, Bangla review, etc.).
+against NASA sources, Bangla review, building and checking the basemap tiles,
+etc.).
 
 ## Rules we follow
 
@@ -37,3 +53,5 @@ against NASA sources, Bangla review, etc.).
 - Science text is not machine-translated into Bangla without review; untranslated
   strings fall back to English visibly and log `TODO_REVIEW`.
 - Third-party media keeps its credit line.
+- AI-looked-up dataset names and credit lines are checked against the source
+  catalogue before they are written into a README or credit line.
