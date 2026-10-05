@@ -52,4 +52,5 @@ coverage/
 # Local configuration
 
 *.local
-/scripts/resolve-missing-images.mjs
+./scripts/resolve-missing-images.mjs
+
