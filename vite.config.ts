@@ -6,8 +6,6 @@ import crypto from 'crypto';
 import {defineConfig} from 'vite';
 
 
-// Fills public/sw.js with the build's app-shell file list (JS, CSS, HTML, SVG).
-// Fonts, images, models and tiles are cached at runtime by the worker instead.
 function serviceWorkerManifest() {
   return {
     name: 'starbound-sw-manifest',

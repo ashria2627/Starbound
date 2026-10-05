@@ -1,7 +1,5 @@
 # Local map basemaps
 
-This folder holds the local basemaps for the Map view (`/map`). See
-`docs/BASEMAPS.md` for how they are built.
 
 ## Files
 

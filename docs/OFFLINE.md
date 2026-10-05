@@ -62,7 +62,7 @@ The file name `molaLroTerrain.ts` and the `terrainDataset` type in `src/types.ts
 names; renaming them would touch existing code for no visible gain. To show real terrain, replace it
 with a DEM exported from NASA Moon/Mars Trek and record the dataset id in the README.
 
-## Accessibility (what changed)
+## Accessibility
 
 - Map view: real `<button>` markers with labels, keyboard-reachable list of the same objects,
   panel takes focus on open, Escape closes it and focus returns to what opened it, visible focus rings.
