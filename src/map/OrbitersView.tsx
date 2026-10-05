@@ -16,7 +16,6 @@ interface PlanetDef {
   rings?: boolean;
 }
 
-// Order: Mercury -> Saturn. Add Earth/Moon here (and to Anchor) if you ever need them.
 const PLANETS: PlanetDef[] = [
   { key: 'mercury', label: 'Mercury', size: 0.8, base: '#8b8379', accents: ['#5f5a53', '#b3aa9d'], glow: '#b3aa9d', style: 'craters' },
   { key: 'venus', label: 'Venus', size: 1.05, base: '#d8b26a', accents: ['#e9d29b', '#c48f45', '#f0dfb4'], glow: '#f0c878', style: 'bands' },
@@ -117,6 +116,17 @@ interface Craft {
   speed: number;
 }
 
+function Field({ label, text }: { label: string; text?: string }) {
+  const value = text?.trim();
+  if (!value) return null;
+  return (
+    <section className="mt-4 border-t border-white/10 pt-3">
+      <h5 className="text-xs font-semibold text-[#9aa0a6]">{label}</h5>
+      <p className="mt-1 break-words text-sm leading-relaxed text-[#ece7dc]">{value}</p>
+    </section>
+  );
+}
+
 interface Props {
   onOpenStory?: (storyId: string) => void;
 }
@@ -125,6 +135,8 @@ export default function OrbitersView({ onOpenStory }: Props) {
   const [planetKey, setPlanetKey] = useState<Anchor>('mars');
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [noGl, setNoGl] = useState(false);
+  // ids whose image file failed to load, so we can show a message instead of nothing
+  const [badImages, setBadImages] = useState<Record<string, boolean>>({});
 
   const mountRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
@@ -358,6 +370,7 @@ export default function OrbitersView({ onOpenStory }: Props) {
   }, [planet, items]);
 
   const storyId = selected?.story?.trim();
+  const imageSrc = selected?.image?.trim();
 
   return (
     <div className="rounded-xl border border-white/10 bg-black text-[#ece7dc]">
@@ -427,14 +440,13 @@ export default function OrbitersView({ onOpenStory }: Props) {
               className="h-full w-full"
             />
             <p className="pointer-events-none absolute bottom-3 left-4 right-4 flex flex-wrap gap-x-4 gap-y-1 text-xs text-[#9aa0a6] lg:left-2 lg:right-auto">
-            <span><span style={{ color: '#7fd6e8' }}>●</span> Orbiter</span>
-            <span><span style={{ color: '#f5b942' }}>●</span> Flyby</span>
-            <span>Not to scale</span>
-          </p>
+              <span><span style={{ color: '#7fd6e8' }}>●</span> Orbiter</span>
+              <span><span style={{ color: '#f5b942' }}>●</span> Flyby</span>
+              <span>Not to scale</span>
+            </p>
           </div>
           {noGl && <p role="status" className="px-4 pb-4 text-sm text-[#9aa0a6]">3D view needs WebGL. The list still works.</p>}
           <div ref={tipRef} className="pointer-events-none absolute z-20 hidden rounded bg-[#11151f] px-2 py-1 text-xs text-[#ece7dc] shadow" />
-
 
           {selected && (
             <aside
@@ -460,10 +472,33 @@ export default function OrbitersView({ onOpenStory }: Props) {
                   <X className="h-4 w-4" aria-hidden="true" />
                 </button>
               </div>
+
+              {/* Image block: shown when an image is set; if the file can't be loaded, say so instead of hiding it */}
+              {imageSrc && !badImages[selected.id] && (
+                <figure className="mt-3">
+                  <img
+                    key={selected.id}
+                    src={imageSrc}
+                    alt={selected.name}
+                    loading="lazy"
+                    onError={() => {
+                      console.warn('OrbitersView: image failed to load:', imageSrc);
+                      setBadImages((prev) => ({ ...prev, [selected.id]: true }));
+                    }}
+                    className="aspect-video w-full rounded-lg border border-white/10 bg-black object-cover"
+                  />
+                </figure>
+              )}
+              {imageSrc && badImages[selected.id] && (
+                <p role="status" className="mt-3 rounded-lg border border-dashed border-white/20 p-3 text-xs text-[#9aa0a6]">
+                  Image not found: <span className="break-all">{imageSrc}</span>
+                </p>
+              )}
+
               <h4 ref={headingRef} tabIndex={-1} className="mt-3 font-serif text-2xl outline-none focus-visible:ring-2 focus-visible:ring-[#7fd6e8]">
                 {selected.name}
               </h4>
-              <dl className="mt-4 grid grid-cols-[auto_1fr] gap-x-3 gap-y-3 text-sm">
+              <dl className="mt-4 grid grid-cols-[5.5rem_1fr] gap-x-3 gap-y-2 text-sm">
                 <dt className="text-[#9aa0a6]">Kind</dt>
                 <dd>{selected.kind}</dd>
                 <dt className="text-[#9aa0a6]">Target</dt>
@@ -471,6 +506,11 @@ export default function OrbitersView({ onOpenStory }: Props) {
                 <dt className="text-[#9aa0a6]">Last contact</dt>
                 <dd className="break-words">{selected.last_contact.trim()}</dd>
               </dl>
+
+              <Field label="Hardware" text={selected.hardware} />
+              <Field label="Current status" text={selected.current_status} />
+              <Field label="Why it was left" text={selected.why_left} />
+              <Field label="Science enabled" text={selected.science_enabled} />
               {storyId && (
                 <button
                   type="button"
@@ -480,14 +520,16 @@ export default function OrbitersView({ onOpenStory }: Props) {
                   <T k="map.story" />
                 </button>
               )}
-              <a
-                href={selected.sourceUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-3 block w-fit text-sm text-[#7fd6e8] underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#7fd6e8]"
-              >
-                Read the NASA record (NSSDCA)
-              </a>
+              {selected.sourceUrl && (
+                <a
+                  href={selected.sourceUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-3 block w-fit text-sm text-[#7fd6e8] underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#7fd6e8]"
+                >
+                  Read the NASA record (NSSDCA)
+                </a>
+              )}
             </aside>
           )}
         </div>

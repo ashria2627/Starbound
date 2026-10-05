@@ -15,6 +15,22 @@ import { T, useLang, useT } from '../i18n';
 const LANDER_SVG =
   '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 10a4 4 0 0 1 8 0v3H8z"/><path d="M7 21l2-8M17 21l-2-8M10 17h4"/></svg>';
 
+const STATUS_LABEL: Record<string, string> = {
+  'left-behind': 'Left behind',
+  silent: 'Silent',
+  'ended-by-design': 'Ended by design',
+  'deliberate-impact': 'Deliberate impact',
+  operating: 'Operating',
+};
+
+const STATUS_STYLE: Record<string, string> = {
+  'left-behind': 'bg-[#c1440e]/25 text-[#f3a07e]',
+  silent: 'bg-white/10 text-[#c9cdd3]',
+  'ended-by-design': 'bg-[#7fd6e8]/15 text-[#7fd6e8]',
+  'deliberate-impact': 'bg-[#f5b942]/15 text-[#f5b942]',
+  operating: 'bg-emerald-400/15 text-emerald-300',
+};
+
 function shortCoord(lat: number, lon: number) {
   return `${Math.abs(lat).toFixed(1)}°${lat >= 0 ? 'N' : 'S'} ${Math.abs(lon).toFixed(1)}°${lon >= 0 ? 'E' : 'W'}`;
 }
@@ -154,7 +170,6 @@ export default function MapView({ onOpenStory }: Props) {
       else el.removeAttribute('aria-current');
     });
   }, [selectedId, ready, visible]);
-
 
   useEffect(() => {
     markersRef.current.forEach(({ id, el }) => {
@@ -344,16 +359,40 @@ export default function MapView({ onOpenStory }: Props) {
                         onBlur={() => setHoverId(null)}
                         className={`flex w-full items-center gap-3 rounded-2xl border border-transparent bg-[#222639] p-3 text-left hover:border-white/20 aria-[current=true]:border-[#c1440e] ${btn}`}
                       >
-                        <img src={o.image} alt="" loading="lazy" className="h-20 w-24 shrink-0 rounded-xl object-cover" />
+                        <img src={o.image} alt="" loading="lazy" className="h-20 w-24 shrink-0 self-start rounded-xl object-cover" />
                         <span className="min-w-0 flex-1">
-                          <span className="block truncate font-semibold text-[#ece7dc]">{o.name}</span>
+                          <span className="flex items-start justify-between gap-2">
+                            <span className="min-w-0 flex-1 truncate font-semibold text-[#ece7dc]">{o.name}</span>
+                            {o.status && (
+                              <span className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] ${STATUS_STYLE[o.status] ?? 'bg-white/10 text-[#c9cdd3]'}`}>
+                                {STATUS_LABEL[o.status] ?? o.status}
+                              </span>
+                            )}
+                          </span>
                           <span className="block truncate text-xs text-[#9aa0a6]">{o.mission} · {o.agency}</span>
+
+                          {o.hardware && (
+                            <span className="mt-1.5 block line-clamp-2 text-xs text-[#c9cdd3]">
+                              <span className="text-[#8d93a6]">Hardware: </span>{o.hardware}
+                            </span>
+                          )}
+                          {o.current_status && (
+                            <span className="mt-1 block line-clamp-2 text-xs text-[#c9cdd3]">
+                              <span className="text-[#8d93a6]">Status: </span>{o.current_status}
+                            </span>
+                          )}
+                          {o.last_known_location && (
+                            <span className="mt-1 block line-clamp-2 text-xs text-[#c9cdd3]">
+                              <span className="text-[#8d93a6]">Last known: </span>{o.last_known_location}
+                            </span>
+                          )}
+
                           <span className="mt-2 flex flex-wrap gap-1.5">
                             <span className="rounded-full bg-[#c1440e]/25 px-2 py-0.5 text-[11px] text-[#f3a07e]">{o.left_behind}</span>
                             <span className="rounded-full bg-white/10 px-2 py-0.5 text-[11px] text-[#c9cdd3]">{shortCoord(o.lat, o.lon)}</span>
                           </span>
                         </span>
-                        <ChevronRight className="h-5 w-5 shrink-0 text-[#8d93a6]" aria-hidden="true" />
+                        <ChevronRight className="h-5 w-5 shrink-0 self-center text-[#8d93a6]" aria-hidden="true" />
                       </button>
                     </li>
                   ))}

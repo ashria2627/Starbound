@@ -523,13 +523,13 @@ The Viking orbiters photographed and mapped Mars while the lander studied the at
   id: 'mariner2',
   name: 'Mariner 2',
   place: 'Venus',
-  coverImageUrl: '/assets/objects/mariner-1-3-artist-impression-1280-90a53565.jpg',
+  coverImageUrl: '/assets/objects/mariner02.gif',
   pages: [
     {
       label: 'Origin',
       title: 'The First Successful Planetary Mission',
       text: `Mariner 2 launched on August 27, 1962, becoming humanity's first successful planetary science mission. It traveled to Venus for the first successful close-up scientific study of another planet.`,
-      imageUrl: '/assets/objects/mariner-1-3-artist-impression-1280-90a53565.jpg',
+      imageUrl: '/assets/objects/mariner02.gif',
       caption: "The First Successful Planetary Mission",
       credit: "NASA",
     },
@@ -589,7 +589,7 @@ The Viking orbiters photographed and mapped Mars while the lander studied the at
           heliocentric orbit.
         </>
       ),
-      imageUrl: '/assets/objects/imagesmariner2artists-concept-browse-22f69a3a.jpg',
+      imageUrl: '/assets/objects/mariner-1-3-artist-impression-1280-90a53565.jpg',
       caption: "A Silent Traveler",
       credit: "NASA",
     },

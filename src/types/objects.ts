@@ -1,5 +1,5 @@
 
-export type ObjectBody = 'moon' | 'mars';
+export type ObjectBody = 'moon' | 'mars'|'solar system';
 
 export interface ObjectProps {
   id: string;
@@ -21,6 +21,11 @@ export interface ObjectProps {
   story_id?: string | null;
   image_source_url:string | null;
   coordinates_source_url: string |null;
+  status:string;
+  location_state:string;
+  last_known_location:string;
+  hardware:string;
+  current_status:string;
 }
 
 export interface ObjectFeature {

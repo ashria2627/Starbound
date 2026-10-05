@@ -1,14 +1,4 @@
-#!/usr/bin/env node
-// Validates data/objects.geojson. Exit code 1 on any problem.
-//
-// Rules:
-//  - every required property key must exist on every feature
-//  - unverified features may have null lat/lon/dates/etc. but must carry a
-//    non-empty "todo" list and a "source_hint"
-//  - verified:true requires source_url, dataset_id, numeric lat/lon in range,
-//    a matching Point geometry, and every content field filled
-//  - lat/lon must be in range whenever they are numbers
-//  - image (when set) must exist under public/
+
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -22,6 +12,8 @@ const VERIFIED_NON_NULL = [
   'agency', 'left_behind', 'last_contact', 'why_left', 'science_enabled',
   'image', 'image_credit', 'source_url', 'dataset_id',
 ];
+// Keep in sync with ObjectBody in the TypeScript types.
+const BODIES = ['moon', 'mars', 'solar system'];
 const isBlank = (v) => v === null || v === undefined || (typeof v === 'string' && v.trim() === '');
 
 export function validate(fc, { publicDir }) {
@@ -46,7 +38,7 @@ export function validate(fc, { publicDir }) {
     else seen.add(p.id);
     if (isBlank(p.name)) err(id, 'name is empty');
     if (isBlank(p.mission)) err(id, 'mission is empty');
-    if (p.body !== 'moon' && p.body !== 'mars') err(id, 'body must be "moon" or "mars"');
+    if (!BODIES.includes(p.body)) err(id, `body must be one of: ${BODIES.join(', ')}`);
     if (typeof p.verified !== 'boolean') err(id, 'verified must be true or false');
 
     // coordinates
@@ -76,8 +68,13 @@ export function validate(fc, { publicDir }) {
 
     if (p.verified === true) {
       for (const k of VERIFIED_NON_NULL) if (isBlank(p[k])) err(id, `verified:true requires "${k}"`);
-      if (!latSet || !lonSet) err(id, 'verified:true requires numeric lat and lon');
-      if (!g) err(id, 'verified:true requires a Point geometry [lon, lat]');
+      if (!latSet && !lonSet && !g) {
+        // No single map point (e.g. destroyed in the air): allowed if the text says where it was last known.
+        if (isBlank(p.last_known_location)) err(id, 'verified:true without coordinates requires "last_known_location"');
+      } else {
+        if (!latSet || !lonSet) err(id, 'verified:true requires numeric lat and lon');
+        if (!g) err(id, 'verified:true requires a Point geometry [lon, lat]');
+      }
     } else if (p.verified === false) {
       if (!Array.isArray(p.todo) || p.todo.length === 0) err(id, 'unverified features need a non-empty "todo" list');
       if (isBlank(p.source_hint)) err(id, 'unverified features need a "source_hint"');

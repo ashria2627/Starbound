@@ -1,4 +1,3 @@
-// React-free i18n core so it can be unit-tested with plain node.
 import strings from './strings.json' with { type: 'json' };
 
 export type Lang = 'en' | 'bn';
