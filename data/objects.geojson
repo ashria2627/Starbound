@@ -27,7 +27,7 @@
         "last_known_location": "Moon surface; draft coordinates 0.67416, 23.47314",
         "hardware": "Lunar Module descent stage",
         "current_status": "Inactive hardware left on the surface by the crew.",
-        "source_url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C"
+        "source_url": "https://www.nasa.gov/mission/apollo-11/"
       }
     },
     {
@@ -55,7 +55,7 @@
         "last_known_location": "Moon surface; draft coordinates -3.0128, -23.4219",
         "hardware": "Lunar Module descent stage",
         "current_status": "Inactive hardware left on the surface by the crew.",
-        "source_url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099C"
+        "source_url": "https://www.nasa.gov/mission/apollo-12/"
       }
     },
     {
@@ -83,7 +83,7 @@
         "last_known_location": "Moon surface; draft coordinates -3.64589, -17.47194",
         "hardware": "Lunar Module descent stage",
         "current_status": "Inactive hardware left on the surface by the crew.",
-        "source_url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1971-008C"
+        "source_url": "https://www.nasa.gov/missions/apollo/apollo-14-mission-details/"
       }
     },
     {
@@ -111,7 +111,7 @@
         "last_known_location": "Moon surface; draft coordinates 26.13239, 3.6333",
         "hardware": "Lunar Module descent stage",
         "current_status": "Inactive hardware left on the surface by the crew.",
-        "source_url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1971-063C"
+        "source_url": "https://www.nasa.gov/missions/apollo/apollo-15-mission-details/"
       }
     },
     {
@@ -139,7 +139,7 @@
         "last_known_location": "Moon surface; draft coordinates -8.9734, 15.5011",
         "hardware": "Lunar Module descent stage",
         "current_status": "Inactive hardware left on the surface by the crew.",
-        "source_url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1972-031C"
+        "source_url": "https://www.nasa.gov/missions/apollo/apollo-16-mission-details/"
       }
     },
     {
@@ -167,7 +167,7 @@
         "last_known_location": "Moon surface; draft coordinates 20.1911, 30.7723",
         "hardware": "Lunar Module descent stage",
         "current_status": "Inactive hardware left on the surface by the crew.",
-        "source_url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1972-096C"
+        "source_url": "https://www.nasa.gov/missions/apollo/apollo-17-mission-details/"
       }
     },
     {
@@ -195,7 +195,7 @@
         "last_known_location": "Moon surface; draft coordinates 26.1311, 3.63972",
         "hardware": "Lunar roving vehicle",
         "current_status": "Inactive hardware left on the surface by the crew.",
-        "source_url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/apollo_lrv.html"
+        "source_url": "https://www.nasa.gov/missions/apollo/apollo-15-mission-details/"
       }
     },
     {
@@ -223,7 +223,7 @@
         "last_known_location": "Moon surface; draft coordinates -3.01, -23.34",
         "hardware": "Lander",
         "current_status": "Not communicating; no active mission operations.",
-        "source_url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/surveyor.html"
+        "source_url": "https://science.nasa.gov/mission/surveyor-3/"
       }
     },
     {
@@ -251,7 +251,7 @@
         "last_known_location": "Moon surface; draft coordinates -2.4745, -43.3398",
         "hardware": "Lander",
         "current_status": "Not communicating; no active mission operations.",
-        "source_url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1966-045A"
+        "source_url": "https://science.nasa.gov/mission/surveyor-1/"
       }
     },
     {
@@ -279,7 +279,7 @@
         "last_known_location": "Moon surface; draft coordinates 1.4551, 23.1943",
         "hardware": "Lander",
         "current_status": "Not communicating; no active mission operations.",
-        "source_url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1967-084A"
+        "source_url": "https://science.nasa.gov/mission/surveyor-5/"
       }
     },
     {
@@ -307,7 +307,7 @@
         "last_known_location": "Moon surface; draft coordinates 0.4742, -1.4275",
         "hardware": "Lander",
         "current_status": "Not communicating; no active mission operations.",
-        "source_url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1967-112A"
+        "source_url": "https://science.nasa.gov/mission/surveyor-6/"
       }
     },
     {
@@ -335,7 +335,7 @@
         "last_known_location": "Moon surface; draft coordinates -40.9812, -11.5127",
         "hardware": "Lander",
         "current_status": "Not communicating; no active mission operations.",
-        "source_url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1968-001A"
+        "source_url": "https://science.nasa.gov/mission/surveyor-7/"
       }
     },
     {
@@ -363,7 +363,7 @@
         "last_known_location": "Mars surface; draft coordinates 22.27, -47.95",
         "hardware": "Lander",
         "current_status": "Not communicating; no active mission operations.",
-        "source_url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1975-075C"
+        "source_url": "https://science.nasa.gov/mission/viking/"
       }
     },
     {
@@ -391,7 +391,7 @@
         "last_known_location": "Mars surface; draft coordinates 47.6673, 134.2809",
         "hardware": "Lander",
         "current_status": "Not communicating; no active mission operations.",
-        "source_url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1975-083C"
+        "source_url": "https://science.nasa.gov/mission/viking/"
       }
     },
     {
@@ -419,7 +419,7 @@
         "last_known_location": "Mars surface; draft coordinates 19.33, -33.55",
         "hardware": "Sojourner rover and Pathfinder lander",
         "current_status": "Not communicating; no active mission operations.",
-        "source_url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1996-068A"
+        "source_url": "https://science.nasa.gov/mission/mars-pathfinder/"
       }
     },
     {
@@ -503,7 +503,7 @@
         "last_known_location": "Mars surface; draft coordinates 4.5, 136",
         "hardware": "Lander",
         "current_status": "Not communicating; no active mission operations.",
-        "source_url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2018-042A"
+        "source_url": "https://science.nasa.gov/mission/insight/"
       }
     },
     {
@@ -531,7 +531,7 @@
         "last_known_location": "Mars surface; draft coordinates 68.15, -125.9",
         "hardware": "Lander",
         "current_status": "Not communicating; no active mission operations.",
-        "source_url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2007-034A"
+        "source_url": "https://science.nasa.gov/mission/mars-phoenix/"
       }
     },
     {
@@ -559,7 +559,7 @@
         "last_known_location": "Moon surface; draft coordinates -10.634, -20.677",
         "hardware": "Lunar impact imaging probe",
         "current_status": "Destroyed by planned impact or atmospheric entry.",
-        "source_url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1964-041A"
+        "source_url": "https://science.nasa.gov/mission/ranger-7/"
       }
     },
     {
@@ -587,7 +587,7 @@
         "last_known_location": "Moon surface; draft coordinates 2.6376, 24.7881",
         "hardware": "Lunar impact imaging probe",
         "current_status": "Destroyed by planned impact or atmospheric entry.",
-        "source_url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1965-010A"
+        "source_url": "https://science.nasa.gov/mission/ranger-8/"
       }
     },
     {
@@ -615,7 +615,7 @@
         "last_known_location": "Moon surface; draft coordinates -12.8281, -2.3884",
         "hardware": "Lunar impact imaging probe",
         "current_status": "Destroyed by planned impact or atmospheric entry.",
-        "source_url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1965-023A"
+        "source_url": "https://science.nasa.gov/mission/ranger-9/"
       }
     },
     {
@@ -643,7 +643,7 @@
         "last_known_location": "Moon surface; draft coordinates 6.35, 160.71",
         "hardware": "Orbiter, ended by impact or atmospheric entry",
         "current_status": "Destroyed by planned impact or atmospheric entry.",
-        "source_url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1966-073A"
+        "source_url": "https://science.nasa.gov/mission/lunar-orbiter-1/"
       }
     },
     {
@@ -671,7 +671,7 @@
         "last_known_location": "Moon surface; draft coordinates 3.0, 119.1",
         "hardware": "Orbiter, ended by impact or atmospheric entry",
         "current_status": "Destroyed by planned impact or atmospheric entry.",
-        "source_url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1966-100A"
+        "source_url": "https://science.nasa.gov/mission/lunar-orbiter-2/"
       }
     },
     {
@@ -699,7 +699,7 @@
         "last_known_location": "Moon surface; draft coordinates 14.3, -92.7",
         "hardware": "Orbiter, ended by impact or atmospheric entry",
         "current_status": "Destroyed by planned impact or atmospheric entry.",
-        "source_url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1967-008A"
+        "source_url": "https://science.nasa.gov/mission/lunar-orbiter-3/"
       }
     },
     {
@@ -727,7 +727,7 @@
         "last_known_location": "Impacted the Moon in 1967; the impact location is unknown.",
         "hardware": "Orbiter, ended by impact or atmospheric entry",
         "current_status": "Destroyed by planned impact or atmospheric entry.",
-        "source_url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1967-041A"
+        "source_url": "https://science.nasa.gov/mission/lunar-orbiter-4/"
       }
     },
     {
@@ -755,7 +755,7 @@
         "last_known_location": "Moon surface; draft coordinates -2.79, -83.04",
         "hardware": "Orbiter, ended by impact or atmospheric entry",
         "current_status": "Destroyed by planned impact or atmospheric entry.",
-        "source_url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1967-075A"
+        "source_url": "https://science.nasa.gov/mission/lunar-orbiter-5/"
       }
     },
     {
@@ -783,7 +783,7 @@
         "last_known_location": "Moon surface; draft coordinates 75.6088, -26.594",
         "hardware": "Orbiter, ended by impact or atmospheric entry",
         "current_status": "Destroyed by planned impact or atmospheric entry.",
-        "source_url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2011-046A"
+        "source_url": "https://science.nasa.gov/mission/grail/"
       }
     },
     {
@@ -811,7 +811,7 @@
         "last_known_location": "Moon surface; draft coordinates 75.6508, -26.8341",
         "hardware": "Orbiter, ended by impact or atmospheric entry",
         "current_status": "Destroyed by planned impact or atmospheric entry.",
-        "source_url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2011-046A"
+        "source_url": "https://science.nasa.gov/mission/grail/"
       }
     },
     {
@@ -839,7 +839,7 @@
         "last_known_location": "Moon surface; draft coordinates 11.8494, -93.2494",
         "hardware": "Orbiter, ended by impact or atmospheric entry",
         "current_status": "Destroyed by planned impact or atmospheric entry.",
-        "source_url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2013-047A"
+        "source_url": "https://science.nasa.gov/mission/ladee/"
       }
     },
     {
@@ -867,7 +867,7 @@
         "last_known_location": "Approximate Saturn atmospheric entry at 9.4 degrees north, 53 degrees west; not a solid-surface wreck location.",
         "hardware": "Orbiter, ended by impact or atmospheric entry",
         "current_status": "Destroyed by planned impact or atmospheric entry.",
-        "source_url": "https://nssdc.gsfc.nasa.gov/planetary/cassini.html"
+        "source_url": "https://science.nasa.gov/mission/cassini/"
       }
     },
     {
@@ -886,7 +886,7 @@
         "why_left": "A failed correction thruster caused an uncontrolled spin; contact ended during descent.",
         "science_enabled": "Returned no lunar surface science. The failed descent supplied engineering experience for the continuing Surveyor program.",
         "image": "/assets/objects/surveyor-3.gif",
-        "image_credit": "NSSDC",
+        "image_credit": "NSSDCA",
         "dataset_id": "NSSDCA/COSPAR 1966-084A",
         "verified": true,
         "story_id": null,
@@ -895,7 +895,7 @@
         "last_known_location": "Historically reported approximate lunar impact area southeast of Copernicus; no located wreck is claimed.",
         "hardware": "Lander",
         "current_status": "Not communicating; no active mission operations.",
-        "source_url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1966-084A"
+        "source_url": "https://science.nasa.gov/mission/surveyor-2/"
       }
     },
     {
@@ -914,7 +914,7 @@
         "why_left": "Radio stopped during descent; a retro-rocket explosion was suspected, not conclusively established.",
         "science_enabled": "No surface pictures or soil measurements were returned. Its loss highlighted descent-system risks for subsequent missions.",
         "image": "/assets/objects/surveyor-3.gif",
-        "image_credit": "NSSDC",
+        "image_credit": "NSSDCA",
         "dataset_id": "NSSDCA/COSPAR 1967-068A",
         "verified": true,
         "story_id": null,
@@ -923,7 +923,7 @@
         "last_known_location": "Approximate intended descent/impact area at Sinus Medii; NASA lists the actual impact location as unknown.",
         "hardware": "Lander",
         "current_status": "Not communicating; no active mission operations.",
-        "source_url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1967-068A"
+        "source_url": "https://science.nasa.gov/mission/surveyor-4/"
       }
     },
     {
@@ -942,7 +942,7 @@
         "why_left": "Intentionally crashed into a shadowed south-polar crater after its mapping mission, seeking an observable water signal.",
         "science_enabled": "Neutron measurements found polar hydrogen consistent with water ice; gravity and elemental maps improved understanding of the Moon. The impact produced no detected water plume.",
         "image": "assets/objects/lunarprosp.gif",
-        "image_credit": "NSSDC",
+        "image_credit": "NSSDCA",
         "dataset_id": "NSSDCA/COSPAR 1998-001A",
         "verified": true,
         "story_id": null,
@@ -951,7 +951,7 @@
         "last_known_location": "Approximate south-polar lunar impact position.",
         "hardware": "Orbiter, ended by impact or atmospheric entry",
         "current_status": "Destroyed by planned impact or atmospheric entry.",
-        "source_url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1998-001A"
+        "source_url": "https://science.nasa.gov/mission/lunar-prospector/"
       }
     },
     {
@@ -970,7 +970,7 @@
         "why_left": "Likely crashed after landing-leg signals were mistaken for touchdown and the engines shut down early; the failure was not directly observed.",
         "science_enabled": "No surface science returned. The loss led to changes in testing and landing-system design.",
         "image": "assets/objects/mars_polar_lander.jpg",
-        "image_credit": "NSSDC",
+        "image_credit": "NSSDCA",
         "dataset_id": "NSSDCA/COSPAR 1999-001A",
         "verified": true,
         "story_id": null,
@@ -979,7 +979,7 @@
         "last_known_location": "Approximate intended landing/search area: 76 degrees south, 195 degrees west (165 degrees east). Actual crash location remains unconfirmed.",
         "hardware": "Lander",
         "current_status": "Not communicating; no active mission operations.",
-        "source_url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1999-001A"
+        "source_url": "https://science.nasa.gov/mission/mars-polar-lander-deep-space-2/"
       }
     },
     {
@@ -998,7 +998,7 @@
         "why_left": "NASA ended funded operations and scientific data reception after years of extended service. Passive laser reflectors were separate and were not switched off.",
         "science_enabled": "Long-term measurements of moonquakes and the lunar environment helped scientists study the Moon’s interior; archived measurements support later reanalysis.",
         "image": "/assets/objects/apollo12_lunar_module.jpg",
-        "image_credit": "NSSDC",
+        "image_credit": "NSSDCA",
         "dataset_id": "NASA ALSEP archive / Apollo 12",
         "verified": true,
         "story_id": null,
@@ -1007,7 +1007,7 @@
         "last_known_location": "Approximate Apollo 12 landing area; the science station was deployed separately near the lunar module.",
         "hardware": "Lunar surface science station",
         "current_status": "Routine mission operations ended by command or planned retirement.",
-        "source_url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099C&ex=5"
+        "source_url": "https://www.nasa.gov/mission/apollo-12/"
       }
     },
      {
@@ -1026,7 +1026,7 @@
         "why_left": "NASA ended funded operations and scientific data reception after years of extended service. Passive laser reflectors were separate and were not switched off.",
         "science_enabled": "Long-term measurements of moonquakes and the lunar environment helped scientists study the Moon’s interior; archived measurements support later reanalysis.",
         "image": "/assets/objects/apollo_14_lm.jpg",
-        "image_credit": "NSSDC",
+        "image_credit": "NSSDCA",
         "dataset_id": "NASA ALSEP archive / Apollo 14",
         "verified": true,
         "story_id": null,
@@ -1035,7 +1035,7 @@
         "last_known_location": "Approximate Apollo 14 landing area; the science station was deployed separately near the lunar module.",
         "hardware": "Lunar surface science station",
         "current_status": "Routine mission operations ended by command or planned retirement.",
-        "source_url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1971-008C&ex=6"
+        "source_url": "https://www.nasa.gov/missions/apollo/apollo-14-mission-details/"
       }
     },
       {
@@ -1054,7 +1054,7 @@
         "why_left": "NASA ended funded operations and scientific data reception after years of extended service. Passive laser reflectors were separate and were not switched off.",
         "science_enabled": "Long-term measurements of moonquakes and the lunar environment helped scientists study the Moon’s interior; archived measurements support later reanalysis.",
         "image": "/assets/objects/apollo_15_lm.jpg",
-        "image_credit": "NSSDC",
+        "image_credit": "NSSDCA",
         "dataset_id": "NASA ALSEP archive / Apollo 15",
         "verified": true,
         "story_id": null,
@@ -1063,7 +1063,7 @@
         "last_known_location": "Approximate Apollo 15 landing area; the science station was deployed separately near the lunar module.",
         "hardware": "Lunar surface science station",
         "current_status": "Routine mission operations ended by command or planned retirement.",
-        "source_url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1971-063C&ex=5"
+        "source_url": "https://www.nasa.gov/missions/apollo/apollo-15-mission-details/"
       }
     },
     {
@@ -1091,7 +1091,7 @@
     "last_known_location": "Moon surface, Descartes highlands; ALSEP central station at 8.9754 S, 15.4981 E, near where the lunar module landed (8.9730 S, 15.5002 E).",
     "hardware": "ALSEP science station (central station with SNAP-27 radioisotope generator, passive and active seismometers, magnetometer, heat flow experiment)",
     "current_status": "Routine mission operations ended by command or planned retirement.",
-    "source_url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1972-031C"
+    "source_url": "https://www.nasa.gov/missions/apollo/apollo-16-mission-details/"
   }
 },
 {
@@ -1119,7 +1119,7 @@
     "last_known_location": "Moon surface, Taurus-Littrow valley; ALSEP central station at 20.1921 N, 30.7649 E, near where the lunar module landed (20.1911 N, 30.7723 E).",
     "hardware": "ALSEP science station (central station with SNAP-27 radioisotope generator, heat flow experiment, gravimeter, mass spectrometer, seismic profiling and ejecta experiments)",
     "current_status": "Routine mission operations ended by command or planned retirement.",
-    "source_url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1972-096C"
+    "source_url": "https://www.nasa.gov/missions/apollo/apollo-17-mission-details/"
   }
 }
  ]

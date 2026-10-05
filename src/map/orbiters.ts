@@ -20,8 +20,6 @@ export interface OrbiterItem {
   sourceUrl?: string;
 }
 
-const N = (id: string) => `https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=${id}`;
-
 export const ORBITERS: OrbiterItem[] = [
   // 1. Viking 1 Orbiter
   {
@@ -40,7 +38,7 @@ export const ORBITERS: OrbiterItem[] = [
     story: 'viking-1',
     verified: false,
     image: '/assets/objects/viking-1-lander.jpg',
-    sourceUrl: N('1975-075A'),
+    sourceUrl: "https://science.nasa.gov/mission/viking/",
   },
 
   // 2. Viking 2 Orbiter
@@ -60,7 +58,7 @@ export const ORBITERS: OrbiterItem[] = [
     story: 'viking-2',
     verified: false,
     image: '/assets/objects/viking-1-lander.jpg',
-    sourceUrl: N('1975-083A'),
+    sourceUrl: "https://science.nasa.gov/mission/viking/",
   },
 
   // 3. Mars Global Surveyor
@@ -80,7 +78,7 @@ export const ORBITERS: OrbiterItem[] = [
     story: 'mars-global-surveyor',
     verified: false,
     image: '/assets/objects/mars_global_surveyor.jpg',
-    sourceUrl: N('1996-062A'),
+    sourceUrl: "https://science.nasa.gov/mission/mars-global-surveyor/",
   },
 
   // 4. Mariner 4
@@ -100,7 +98,7 @@ export const ORBITERS: OrbiterItem[] = [
     story: 'mariner-4',
     verified: false,
     image: '/assets/objects/mariner04.gif',
-    sourceUrl: N('1964-077A'),
+    sourceUrl: "https://science.nasa.gov/mission/mariner-4/",
   },
 
   // 5. Mariner 6
@@ -120,7 +118,7 @@ export const ORBITERS: OrbiterItem[] = [
     story: 'mariner-6',
     verified: false,
     image: '/assets/objects/mariner06-07.gif',
-    sourceUrl: N('1969-014A'),
+    sourceUrl: "https://science.nasa.gov/mission/mariner-6/",
   },
 
   // 6. Mariner 7
@@ -140,7 +138,7 @@ export const ORBITERS: OrbiterItem[] = [
     story: 'mariner-7',
     verified: false,
     image: '/assets/objects/mariner06-07.gif',
-    sourceUrl: N('1969-030A'),
+    sourceUrl: "https://science.nasa.gov/mission/mariner-7/",
   },
 
   // 7. Mariner 2
@@ -160,7 +158,7 @@ export const ORBITERS: OrbiterItem[] = [
     story: 'mariner2',
     verified: false,
     image: '/assets/objects/mariner02.gif',
-    sourceUrl: N('1962-041A'),
+    sourceUrl: "https://science.nasa.gov/mission/mariner-2/",
   },
 
   // 8. Mariner 5
@@ -180,7 +178,7 @@ export const ORBITERS: OrbiterItem[] = [
     story: 'mariner5',
     verified: false,
     image: '/assets/objects/mariner05.gif',
-    sourceUrl: N('1967-060A'),
+    sourceUrl: "https://science.nasa.gov/mission/mariner-5/",
   },
 
   // 9. Mariner 10
@@ -200,7 +198,7 @@ export const ORBITERS: OrbiterItem[] = [
     story: 'mariner10',
     verified: false,
     image: '/assets/objects/mariner10-a3ef4a7a.gif',
-    sourceUrl: N('1973-085A'),
+    sourceUrl: "https://science.nasa.gov/mission/mariner-10/",
   },
 
   // 10. Pioneer 10
@@ -220,7 +218,7 @@ export const ORBITERS: OrbiterItem[] = [
     story: 'pioneer10',
     verified: false,
     image: '/assets/objects/jupiter-pioneer-10-art-jpg-20ff5cb4.webp',
-    sourceUrl: N('1972-012A'),
+    sourceUrl: "https://science.nasa.gov/mission/pioneer-10/",
   },
 
   // 11. Pioneer 11
@@ -240,7 +238,7 @@ export const ORBITERS: OrbiterItem[] = [
     story: 'pioneer11',
     verified: false,
     image: '/assets/objects/Pioneer11-1600-fb0b5cbf.jpg',
-    sourceUrl: N('1973-019A'),
+    sourceUrl: "https://science.nasa.gov/mission/pioneer-11/",
   },
 
   // 12. Mariner 9
@@ -260,7 +258,7 @@ export const ORBITERS: OrbiterItem[] = [
     story: 'mariner-9',
     verified: false,
     image: '/assets/objects/mariner09.jpg',
-    sourceUrl: N('1971-051A'),
+    sourceUrl: "https://science.nasa.gov/mission/mariner-9/",
   },
 
   // 13. Deep Space 1
@@ -281,7 +279,7 @@ export const ORBITERS: OrbiterItem[] = [
     story: '',
     verified: false,
     image: '/assets/objects/nm_ds_1.gif',
-    sourceUrl: N('1998-061A'),
+    sourceUrl: "https://science.nasa.gov/mission/deep-space-1/",
   },
 
   // 14. Mars Observer
@@ -323,6 +321,6 @@ export const ORBITERS: OrbiterItem[] = [
     story: '',
     verified: true,
     image: '/assets/objects/apollo10_cm_as10_27_3873.jpg',
-    sourceUrl: N('1969-043A'),
+    sourceUrl: "https://www.nasa.gov/missions/apollo/apollo-10-mission-details/",
   },
 ];
