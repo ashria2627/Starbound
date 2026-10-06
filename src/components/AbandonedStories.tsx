@@ -415,7 +415,7 @@ Its arrival began a sustained investigation of the surface. While its partner su
       {
         label: "Goals",
         title: "Search Mars From Orbit and the Surface",
-        imageUrl: "/assets/objects/Line_drawing_of_Viking_Orbiter-1.jpeg",
+        imageUrl: "/assets/objects/viking.jpg",
         caption: "Search Mars From Orbit and the Surface",
         credit: "NASA",
         text: `The orbiter mapped Mars and measured temperatures and atmospheric water vapor.
@@ -431,7 +431,7 @@ The mission connected global observations with close soil and environmental test
       {
         label: "Discoveries",
         title: "A Complex and Unexpected Mars",
-        imageUrl: "/assets/objects/nowv1.jpg",
+        imageUrl: "/assets/objects/v1.jpg",
         caption: "A Complex and Unexpected Mars",
         credit: "NASA",
         text: `Viking 1 documented a cold, rocky landscape, changing weather, and sulfur-rich soil containing elements such as silicon, iron, and calcium.
@@ -445,7 +445,7 @@ The mission supplied discoveries—and scientific questions that remained unreso
       {
         label: "Now",
         title: "Silent on the Martian Surface",
-        imageUrl: "/assets/objects/viking-1.webp",
+        imageUrl: "/assets/objects/bk1.jpg",
         caption: "Launch of Viking 1",
         credit: "NASA",
         text: `Viking 1's lander remains in Chryse Planitia.
@@ -771,8 +771,8 @@ Remaining in orbit let the spacecraft revisit locations, investigating both endu
       {
         label: "Goals",
         title: "Survey the Entire Planet",
-        imageUrl: "/assets/objects/mars2.jpg",
-        caption: "Survey the Entire Planet",
+        imageUrl: "/assets/objects/Mars_Observer_preparations.jpg",
+        caption: "Mars_Observer_preparations",
         credit: "NASA",
         text: `A camera investigated landforms, and a laser altimeter measured heights.
 
@@ -1591,7 +1591,7 @@ Planners required evidence about specific locations, including the terrain and h
       {
         label: "Goals",
         title: "Searching for Safe Landing Sites",
-        imageUrl: "public/assets/objects/images (3).jpeg",
+        imageUrl: "/assets/objects/images (3).jpeg",
         caption: "Searching for Safe Landing Sites",
         credit: "NASA",
         text: `Like Lunar Orbiter 1, it carried a dual-lens camera, onboard film processing, and a scanner for radio transmission.
@@ -1699,7 +1699,7 @@ Its observations helped prepare a human journey whose safety depended on careful
       {
         label: "Now",
         title: "Its Final Orbit",
-        imageUrl: "public/assets/objects/tsiolkovsky crater.jpg",
+        imageUrl: "/assets/objects/tsiolkovsky crater.jpg",
         caption: "Its Final Orbit",
         credit: "NASA",
         text: `Controllers sent Lunar Orbiter 3 into the Moon on October 9, 1967, after its photography and tracking work.
@@ -1874,7 +1874,7 @@ Its photographs remained on Earth, preserving the work of a robotic program that
     id: "grail-a",
     name: "GRAIL",
     place: "Moon",
-    coverImageUrl: "public/assets/objects/grail.jpg",
+    coverImageUrl: "/assets/objects/grail.jpg",
     recordIds: ["grail-a"],
     sourceUrls: ["https://science.nasa.gov/mission/grail/"],
     pages: [
@@ -1929,8 +1929,8 @@ The mission gave scientists a way to investigate the interior without directly s
       {
         label: "Now",
         title: "Its Final Descent",
-        imageUrl: "/assets/objects/grail_2.jpg",
-        caption: "Its Final Descent",
+        imageUrl: "/assets/objects/GRAIL_s_Final_Resting_Spot.jpg",
+        caption: "GRAIL_s_Final_Resting_Spot",
         credit: "NASA",
         text: `Ebb and Flow deliberately impacted a mountain near the north pole on December 17, 2012.
 
@@ -2138,7 +2138,7 @@ Its pictures and engineering measurements answered practical questions about bot
       {
         label: "Discoveries",
         title: "The Moon Up Close",
-        imageUrl: "public/assets/objects/surv1_lro_thumb.png",
+        imageUrl: "/assets/objects/surv1_lro_thumb.png",
         caption: "The Moon Up Close",
         credit: "NASA",
         text: `Surveyor 1 returned more than 11,000 images.
@@ -2732,7 +2732,7 @@ One investigated a fixed place directly; the other surveyed wider regions and he
       {
         label: "Goals",
         title: "The Work It Was Built to Do",
-        imageUrl: "/assets/objects/viking-1-lander.jpg",
+        imageUrl: "/assets/objects/viking.jpg",
         caption: "Viking 1 Orbiter",
         credit: "NASA",
         text: `Two television cameras mapped terrain and inspected landing sites.
@@ -2750,7 +2750,7 @@ Repeated orbits allowed observations of lasting landforms and changing condition
       {
         label: "Discoveries",
         title: "What Its Journey Made Possible",
-        imageUrl: "/assets/objects/viking-1-lander.jpg",
+        imageUrl: "/assets/objects/v1.jpg",
         caption: "Viking 1 Orbiter",
         credit: "NASA",
         text: `The orbiter photographed landforms associated with ancient flowing water and surveyed large parts of Mars.
@@ -2766,7 +2766,7 @@ Returning repeatedly let scientists study changes rather than rely on one brief 
       {
         label: "Now",
         title: "Where Its Story Ended",
-        imageUrl: "/assets/objects/viking-1-lander.jpg",
+        imageUrl: "/assets/objects/bk1.jpg",
         caption: "Viking 1 Orbiter",
         credit: "NASA",
         text: `Viking 1 Orbiter was shut down on August 7, 1980, after more than four years and 1,488 Mars orbits.
@@ -2810,7 +2810,7 @@ The partnership connected a local investigation of soil and weather with a much 
       {
         label: "Goals",
         title: "The Work It Was Built to Do",
-        imageUrl: "/assets/objects/viking-1-lander.jpg",
+        imageUrl: "/assets/objects/v2.webp",
         caption: "Viking 2 Orbiter",
         credit: "NASA",
         text: `Two television cameras photographed terrain.
@@ -2828,7 +2828,7 @@ Adjusting its route was part of the scientific planning, helping the spacecraft 
       {
         label: "Discoveries",
         title: "What Its Journey Made Possible",
-        imageUrl: "/assets/objects/viking-1-lander.jpg",
+        imageUrl: "/assets/objects/v2.jpg",
         caption: "Viking 2 Orbiter",
         credit: "NASA",
         text: `Viking 2 Orbiter added images and measurements to Viking's extensive survey.
@@ -2890,7 +2890,7 @@ The extended journey let useful equipment do more than prove it could work: it c
       {
         label: "Goals",
         title: "The Work It Was Built to Do",
-        imageUrl: "/assets/objects/nm_ds_1.gif",
+        imageUrl: "/assets/objects/ds1.tif",
         caption: "Deep Space 1",
         credit: "NASA",
         text: `The spacecraft tested twelve technologies, including ion propulsion, autonomous optical navigation, a solar-power concentrator, and compact instruments.
@@ -2906,7 +2906,7 @@ Engineers could study actual deep-space performance rather than depend only on t
       {
         label: "Discoveries",
         title: "What Its Journey Made Possible",
-        imageUrl: "/assets/objects/nm_ds_1.gif",
+        imageUrl: "/assets/objects/ds1.jpg",
         caption: "Deep Space 1",
         credit: "NASA",
         text: `Ion propulsion and onboard navigation demonstrated useful capabilities.
@@ -2922,7 +2922,7 @@ Its record included difficulties and successful recovery, helping later teams un
       {
         label: "Now",
         title: "Where Its Story Ended",
-        imageUrl: "/assets/objects/nm_ds_1.gif",
+        imageUrl: "public/assets/objects/ds1(1).jpg",
         caption: "Deep Space 1",
         credit: "NASA",
         text: `Deep Space 1 was retired on December 18, 2001, after its extended mission, with pointing fuel low.
@@ -2966,7 +2966,7 @@ The spacecraft had carried its instruments nearly to their destination, but the 
       {
         label: "Goals",
         title: "The Work It Was Built to Do",
-        imageUrl: "/assets/objects/mars_observer.jpg",
+        imageUrl: "/assets/objects/Mars_Observer_-_m1.gif",
         caption: "Mars Observer",
         credit: "NASA",
         text: `A camera, laser altimeter, and thermal emission spectrometer would map landforms, heights, and minerals.
@@ -2982,7 +2982,7 @@ Together, the instruments were designed for a global orbital investigation beyon
       {
         label: "Discoveries",
         title: "What Its Journey Made Possible",
-        imageUrl: "/assets/objects/mars_observer.jpg",
+        imageUrl: "/assets/objects/Mars_Observer_preparations.jpg",
         caption: "Mars Observer",
         credit: "NASA",
         text: `Mars Observer returned none of its intended orbital mapping.
@@ -3000,7 +3000,7 @@ The distinction matters: scientific purpose and completed scientific results are
       {
         label: "Now",
         title: "Where Its Story Ended",
-        imageUrl: "/assets/objects/mars_observer.jpg",
+        imageUrl: "/assets/objects/Mars_Observer_-_spacecraft_diagram_-rev2.png",
         caption: "Mars Observer",
         credit: "NASA",
         text: `Contact was lost shortly before orbit insertion in August 1993.
@@ -3044,7 +3044,7 @@ The mission rehearsed much of Apollo 11's journey, testing equipment and procedu
       {
         label: "Goals",
         title: "The Work It Was Built to Do",
-        imageUrl: "/assets/objects/apollo10_cm_as10_27_3873.jpg",
+        imageUrl: "/assets/objects/apollo10 (1).webp",
         caption: "Apollo 10 Snoopy ascent stage",
         credit: "NASA",
         text: `The lunar module carried descent and ascent engines, landing radar, guidance, life support, and radios.
@@ -3060,7 +3060,7 @@ This was a rehearsal in the actual environment, checking systems and procedures 
       {
         label: "Discoveries",
         title: "What Its Journey Made Possible",
-        imageUrl: "/assets/objects/apollo10_cm_as10_27_3873.jpg",
+        imageUrl: "/assets/objects/apollo10 (3).jpg",
         caption: "Apollo 10 Snoopy ascent stage",
         credit: "NASA",
         text: `Apollo 10 returned measurements and photographs useful to Apollo 11.
@@ -3078,7 +3078,7 @@ Snoopy's successful rehearsal supplied experience that calculations and ground t
       {
         label: "Now",
         title: "Where Its Story Ended",
-        imageUrl: "/assets/objects/apollo10_cm_as10_27_3873.jpg",
+        imageUrl: "/assets/objects/apollo10 (1).jpg",
         caption: "Apollo 10 Snoopy ascent stage",
         credit: "NASA",
         text: `After the astronauts returned to Charlie Brown, Snoopy's ascent stage was separated and sent into solar orbit in May 1969.
@@ -3126,7 +3126,7 @@ Cassini continued orbital exploration, returning to destinations where new findi
       {
         label: "Goals",
         title: "The Work It Was Built to Do",
-        imageUrl: "/assets/objects/1-pia18410-cassini-titan-crop.webp",
+        imageUrl: "/assets/objects/cassini (1).jfif",
         caption: "Cassini",
         credit: "NASA/JPL",
         text: `Radioisotope generators supplied electricity far from the Sun.
@@ -3142,7 +3142,7 @@ Repeated encounters allowed comparisons over time, connecting different kinds of
       {
         label: "Discoveries",
         title: "What Its Journey Made Possible",
-        imageUrl: "/assets/objects/1-pia18410-cassini-titan-crop.webp",
+        imageUrl: "/assets/objects/cassini (1).jpg",
         caption: "Cassini",
         credit: "NASA/JPL",
         text: `Cassini discovered water-rich plumes from Enceladus and supplied evidence for a global ocean beneath its ice.
@@ -3158,7 +3158,7 @@ Years of observations created a detailed archive, allowing scientists to investi
       {
         label: "Now",
         title: "Where Its Story Ended",
-        imageUrl: "/assets/objects/1-pia18410-cassini-titan-crop.webp",
+        imageUrl: "/assets/objects/cassini (2).jpg",
         caption: "Cassini",
         credit: "NASA/JPL",
         text: `With fuel running low, controllers directed Cassini into Saturn's atmosphere on September 15, 2017.
@@ -3202,8 +3202,8 @@ A lander built to operate on the ground had lost the stable flight needed to rea
       {
         label: "Goals",
         title: "The Work It Was Built to Do",
-        imageUrl: "/assets/objects/surveyor-3.gif",
-        caption: "Surveyor 2",
+        imageUrl: "/assets/objects/Surveyor_2_launch.jpg",
+        caption: "Surveyor 2 launch",
         credit: "NSSDCA",
         text: `Surveyor 2 carried a television camera, descent radar, a braking rocket, vernier engines, and engineering sensors.
 
@@ -3220,7 +3220,7 @@ The scientific opportunity depended first on a safe arrival.`,
       {
         label: "Discoveries",
         title: "What Its Journey Made Possible",
-        imageUrl: "/assets/objects/surveyor-3.gif",
+        imageUrl: "/assets/objects/s2 (2).jpg",
         caption: "Surveyor 2",
         credit: "NSSDCA",
         text: `Surveyor 2 returned no surface photographs or soil observations.
@@ -3236,7 +3236,7 @@ Its instruments explain what the mission was meant to do, while the failed appro
       {
         label: "Now",
         title: "Where Its Story Ended",
-        imageUrl: "/assets/objects/surveyor-3.gif",
+        imageUrl: "/assets/objects/s2 (1).jfif",
         caption: "Surveyor 2",
         credit: "NSSDCA",
         text: `Contact ended on September 22, 1966. Surveyor 2 impacted the Moon on September 23.
@@ -3278,7 +3278,7 @@ The team never received confirmation of a safe landing, and the surface investig
       {
         label: "Goals",
         title: "The Work It Was Built to Do",
-        imageUrl: "/assets/objects/surveyor-3.gif",
+        imageUrl: "/assets/objects/Surveyor_4_launch.jpg",
         caption: "Surveyor 4",
         credit: "NSSDCA",
         text: `A television camera would photograph the site, while a surface sampler dug and tested soil.
@@ -3296,7 +3296,7 @@ Communication failed before the stage of the mission where those tools could inv
       {
         label: "Discoveries",
         title: "What Its Journey Made Possible",
-        imageUrl: "/assets/objects/surveyor-3.gif",
+        imageUrl: "/assets/objects/s4(1).jpg",
         caption: "Surveyor 4",
         credit: "NSSDCA",
         text: `Surveyor 4 returned no surface images or soil measurements.
@@ -3358,7 +3358,7 @@ Signals measured from orbit could reveal clues hidden from ordinary images, help
       {
         label: "Goals",
         title: "The Work It Was Built to Do",
-        imageUrl: "assets/objects/lunarprosp.gif",
+        imageUrl: "/assets/objects/Lunar_Prospector_in_Clean_Room_-_GPN-2000-001543.jpg",
         caption: "Lunar Prospector",
         credit: "NSSDCA",
         text: `Gamma-ray, neutron, and alpha-particle spectrometers examined particles associated with the surface and environment.
@@ -3374,8 +3374,8 @@ Scientists interpreted signals from repeated passes, comparing regions and build
       {
         label: "Discoveries",
         title: "What Its Journey Made Possible",
-        imageUrl: "assets/objects/lunarprosp.gif",
-        caption: "Lunar Prospector",
+        imageUrl: "public/assets/objects/Lunar_prospectus_concentrations.jpg",
+        caption: "Lunar_prospectus_concentrations",
         credit: "NSSDCA",
         text: `Neutron measurements detected extra hydrogen near both poles, consistent with water ice mixed into the ground.
 
@@ -3390,7 +3390,7 @@ Its observations identified promising questions and destinations, showing how us
       {
         label: "Now",
         title: "Where Its Story Ended",
-        imageUrl: "assets/objects/lunarprosp.gif",
+        imageUrl: "/assets/objects/Lunar_Prospector_transparent.png",
         caption: "Lunar Prospector",
         credit: "NSSDCA",
         text: `Controllers deliberately impacted Lunar Prospector into a permanently shadowed area of Shoemaker Crater on July 31, 1999.
@@ -3441,7 +3441,7 @@ The journey had reached the planet, but not the confirmed safe landing required 
       {
         label: "Goals",
         title: "The Work It Was Built to Do",
-        imageUrl: "assets/objects/mars_polar_lander.jpg",
+        imageUrl: "/assets/objects/maars polar lander (2).jpg",
         caption: "Mars Polar Lander",
         credit: "NSSDCA",
         text: `A robotic arm delivered soil to a thermal and evolved-gas analyzer, which heated samples and examined released gases.
@@ -3457,7 +3457,7 @@ The mission connected local polar material and conditions with larger questions 
       {
         label: "Discoveries",
         title: "What Its Journey Made Possible",
-        imageUrl: "assets/objects/mars_polar_lander.jpg",
+        imageUrl: "/assets/objects/maars polar lander (1).jpg",
         caption: "Mars Polar Lander",
         credit: "NSSDCA",
         text: `The lander and both small probes returned no planned surface science.
@@ -3475,7 +3475,7 @@ Its scientific questions remained for other explorers, while the failure helped 
       {
         label: "Now",
         title: "Where Its Story Ended",
-        imageUrl: "assets/objects/mars_polar_lander.jpg",
+        imageUrl: "public/assets/objects/maars polar lander (1).png",
         caption: "Mars Polar Lander",
         credit: "NSSDCA",
         text: `The final communication came before atmospheric entry on December 3, 1999.
@@ -3611,7 +3611,7 @@ It supported a short human expedition and the deployment of a station built for 
       {
         label: "Discoveries",
         title: "What Its Journey Made Possible",
-        imageUrl: "/assets/objects/apollo-12-descent-stage.jpg",
+        imageUrl: "/assets/objects/apollo12_lunar_module.jpg",
         caption: "Apollo 12 descent stage",
         credit: "NASA (image via NSSDCA)",
         text: `Conrad and Bean collected about 34 kilograms of samples and returned roughly ten kilograms of Surveyor 3 parts, including its camera.
@@ -3905,7 +3905,7 @@ The descent stage brought the rover, supplies, and instruments needed for the cr
       {
         label: "Goals",
         title: "The Work It Was Built to Do",
-        imageUrl: "/assets/objects/apollo-17-descent-stage.jpg",
+        imageUrl: "public/assets/objects/apollo_17_lm.jpg",
         caption: "Apollo 17 descent stage",
         credit: "NASA (image via NSSDCA)",
         text: `The lower stage carried the engine, propellant, legs, rover, and equipment bays.
@@ -4406,8 +4406,8 @@ Its central measurement required the companion, turning formation flight into a 
       {
         label: "Discoveries",
         title: "What Its Journey Made Possible",
-        imageUrl: "/assets/objects/grail_2.jpg",
-        caption: "GRAIL-B (Flow)",
+        imageUrl: "public/assets/objects/GRAIL_s_gravity_map_of_the_moon.jpg",
+        caption: "GRAIL_s_gravity_map_of_the_moon",
         credit: "NASA (GRAIL spacecraft illustration; attribution awaiting owner review)",
         text: `Flow and Ebb produced a detailed gravity map revealing a heavily fractured crust and buried structures.
 
@@ -4422,8 +4422,8 @@ Their motion supplied evidence about the interior, giving scientists another way
       {
         label: "Now",
         title: "Where Its Story Ended",
-        imageUrl: "/assets/objects/grail_2.jpg",
-        caption: "GRAIL-B (Flow)",
+        imageUrl: "/assets/objects/GRAIL_s_Final_Resting_Spot.jpg",
+        caption: "GRAIL_s_Final_Resting_Spot",
         credit: "NASA (GRAIL spacecraft illustration; attribution awaiting owner review)",
         text: `Flow and Ebb ended their extended mission with deliberate impacts near the north pole on December 17, 2012.
 
